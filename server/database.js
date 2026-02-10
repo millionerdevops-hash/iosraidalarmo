@@ -17,6 +17,7 @@ async function setupDb() {
             security_token TEXT,
             fcm_token TEXT,
             onesignal_id TEXT,
+            platform TEXT,
             last_login DATETIME DEFAULT CURRENT_TIMESTAMP
         );
 

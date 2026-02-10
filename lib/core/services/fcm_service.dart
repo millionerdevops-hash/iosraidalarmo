@@ -38,6 +38,7 @@ class FcmService {
           'steam_id': cred.steamId,
           'steam_token': cred.steamToken,
           'onesignal_id': onesignalId,
+          'platform': defaultTargetPlatform.name.toLowerCase(),
         }),
       );
 

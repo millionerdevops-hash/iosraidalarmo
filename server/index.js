@@ -20,27 +20,28 @@ app.get('/api/status', (req, res) => {
 
 // 2. Register User (Steam Login -> Full Server-Side Rust+ Setup)
 app.post('/api/register', async (req, res) => {
-    const { steam_id, steam_token, onesignal_id } = req.body;
+    const { steam_id, steam_token, onesignal_id, platform } = req.body;
 
     if (!steam_id || !steam_token || !onesignal_id) {
         return res.status(400).json({ error: 'Missing required fields (steam_id, steam_token, onesignal_id)' });
     }
 
     try {
-        console.log(`[API] 👤 Registering user: ${steam_id}`);
+        console.log(`[API] 👤 Registering user: ${steam_id} (${platform || 'unknown'})`);
 
         // Perform the heavy lifting on the server
         const mcsCredentials = await performFullRegistration(steam_token);
 
         await db.run(`
-            INSERT INTO users (steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO users (steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id, platform)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(steam_id) DO UPDATE SET
                 steam_token = excluded.steam_token,
                 android_id = excluded.android_id,
                 security_token = excluded.security_token,
                 fcm_token = excluded.fcm_token,
                 onesignal_id = excluded.onesignal_id,
+                platform = excluded.platform,
                 last_login = CURRENT_TIMESTAMP
         `, [
             steam_id,
@@ -48,7 +49,8 @@ app.post('/api/register', async (req, res) => {
             mcsCredentials.android_id.toString(),
             mcsCredentials.security_token.toString(),
             mcsCredentials.fcm_token,
-            onesignal_id
+            onesignal_id,
+            platform
         ]);
 
         const user = await db.get('SELECT * FROM users WHERE steam_id = ?', [steam_id]);
