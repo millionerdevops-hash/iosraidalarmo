@@ -1,21 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../services/database_service.dart';
+import 'database_service.dart';
 import 'package:isar/isar.dart';
 import '../../data/models/fcm_credential.dart';
+import '../../data/models/server_info.dart';
 import '../../services/onesignal_service.dart';
 
 class FcmService {
-  // TODO: Move this to a config or .env
-  static const String serverUrl = 'https://raidalarm-server.onrender.com';
+  static const String serverUrl = 'https://raidalarmioscuk.onrender.com';
 
   /// Check if we have existing valid credentials
   Future<FcmCredential?> getExistingCredentials() async {
     try {
       final dbService = DatabaseService();
       final isar = await dbService.db;
-      final cred = await isar.fcmCredentials.get(1);
+      final cred = await isar.collection<FcmCredential>().get(1);
       return cred;
     } catch (e) {
       return null;
@@ -63,7 +63,7 @@ class FcmService {
       
       if (cred == null || cred.steamId == null) return;
 
-      final servers = await isar.serverInfos.where().findAll();
+      final servers = await isar.collection<ServerInfo>().where().findAll();
       
       final serverList = servers.map((s) => {
         'ip': s.ip,

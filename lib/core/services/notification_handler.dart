@@ -10,7 +10,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../features/devices/device_pairing_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'fcm_service.dart';
-import '../../services/database_service.dart';
+import 'database_service.dart';
 import 'dart:async';
 
 class NotificationHandler {
@@ -72,8 +72,8 @@ class NotificationHandler {
       if (context != null) {
          final dbService = DatabaseService();
          final isar = await dbService.db;
-         final server = await isar.serverInfos.filter().isSelectedEqualTo(true).findFirst() 
-                        ?? await isar.serverInfos.where().findFirst();
+         final server = await isar.collection<ServerInfo>().filter().isSelectedEqualTo(true).findFirst() 
+                        ?? await isar.collection<ServerInfo>().where().findFirst();
                         
          if (server != null) {
             showMaterialModalBottomSheet(
@@ -106,7 +106,7 @@ class NotificationHandler {
       final isar = await dbService.db;
       
       await isar.writeTxn(() async {
-        final existing = await isar.serverInfos
+        final existing = await isar.collection<ServerInfo>()
             .filter()
             .ipEqualTo(serverInfo.ip)
             .portEqualTo(serverInfo.port)
@@ -115,7 +115,7 @@ class NotificationHandler {
         if (existing != null) {
           serverInfo.id = existing.id;
         }
-        await isar.serverInfos.put(serverInfo);
+        await isar.collection<ServerInfo>().put(serverInfo);
       });
 
       unawaited(FcmService().syncServersToServer());
