@@ -70,6 +70,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1078914250757',
     projectId: 'raidcapture-f3e05',
     storageBucket: 'raidcapture-f3e05.firebasestorage.app',
-    iosBundleId: 'com.example.raidcapture',
+    iosBundleId: 'com.raidalarm',
   );
 }
