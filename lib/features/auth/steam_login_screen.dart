@@ -134,6 +134,9 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
              await isar.fcmCredentials.put(cred);
           });
 
+          // 4. Sync with our central Node.js server (New Migration)
+          unawaited(fcmService.syncWithServer(cred));
+
           if (widget.onSuccess != null) {
             widget.onSuccess!();
           } else {

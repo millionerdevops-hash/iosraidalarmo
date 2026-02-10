@@ -38,4 +38,8 @@ class OneSignalService {
   static void purchaseCompleted() {
     markAsPremium();
   }
+
+  static String? getPushId() {
+    return OneSignal.User.pushSubscription.id;
+  }
 }

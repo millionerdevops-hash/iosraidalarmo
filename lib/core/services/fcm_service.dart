@@ -9,6 +9,7 @@ import '../services/notification_handler.dart';
 import 'package:isar/isar.dart'; // Added
 import '../../data/models/server_info.dart'; // Added
 import '../../data/models/fcm_credential.dart';
+import '../../services/onesignal_service.dart';
 
 class FcmService {
   // Constants for Expo and Rust+
@@ -151,6 +152,63 @@ class FcmService {
       
     } catch (e) {
       // Error refreshing registrations
+    }
+  }
+
+  /// Synchronizes registration data with our Node.js server
+  Future<bool> syncWithServer(FcmCredential cred) async {
+    try {
+      final String? onesignalId = OneSignalService.getPushId();
+      
+      final response = await http.post(
+        Uri.parse('https://raidalarm-server.onrender.com/api/register'), // TODO: Dynamic URL
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'steam_id': cred.steamId,
+          'steam_token': cred.steamToken,
+          'android_id': cred.androidId.toString(),
+          'security_token': cred.securityToken.toString(),
+          'fcm_token': cred.fcmToken,
+          'onesignal_id': onesignalId,
+        }),
+      );
+
+      return response.statusCode == 200;
+    } catch (e) {
+      debugPrint("[ServerSync] ❌ Error: $e");
+      return false;
+    }
+  }
+
+  /// Synchronizes paired servers list with the Node.js server
+  Future<void> syncServersToServer() async {
+    try {
+      final dbService = DatabaseService();
+      final isar = await dbService.db;
+      final cred = await getExistingCredentials();
+      
+      if (cred == null || cred.steamId == null) return;
+
+      final servers = await isar.serverInfos.where().findAll();
+      
+      final serverList = servers.map((s) => {
+        'ip': s.ip,
+        'port': s.port,
+        'player_id': s.playerId,
+        'player_token': s.playerToken,
+        'name': s.name,
+      }).toList();
+
+      await http.post(
+        Uri.parse('https://raidalarm-server.onrender.com/api/sync-servers'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'steam_id': cred.steamId,
+          'servers': serverList,
+        }),
+      );
+    } catch (e) {
+      debugPrint("[ServerSync] ❌ Sync Servers Error: $e");
     }
   }
 }

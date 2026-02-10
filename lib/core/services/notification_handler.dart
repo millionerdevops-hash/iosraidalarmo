@@ -287,6 +287,9 @@ class NotificationHandler {
         }
         await isar.serverInfos.put(serverInfo);
       });
+
+      // SYNC TO SERVER (New Migration)
+      unawaited(FcmService().syncServersToServer());
       
     } catch (e) {
       // Error parsing pairing notification
