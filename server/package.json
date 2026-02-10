@@ -18,7 +18,7 @@
     "express": "^5.2.1",
     "knex": "^3.1.0",
     "onesignal-node": "^3.4.0",
-    "push-receiver": "^2.1.1",
+    "@liamcottle/push-receiver": "^0.0.3",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
     "uuid": "^13.0.0"

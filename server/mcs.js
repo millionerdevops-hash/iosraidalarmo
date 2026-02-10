@@ -1,5 +1,5 @@
-const { listen } = require('push-receiver');
-const { register, checkIn } = require('push-receiver/src/gcm');
+const PushReceiverClient = require('@liamcottle/push-receiver/src/client');
+const AndroidFCM = require('@liamcottle/push-receiver/src/android/fcm');
 const { sendPushNotification } = require('./notifications');
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
@@ -24,23 +24,24 @@ async function performFullRegistration(steamToken) {
     try {
         console.log('[Register] 📦 Starting official app emulated registration...');
 
-        // 1. Check-in (Generates a unique virtual "device" for the user)
-        const checkinResponse = await checkIn(); // Corrected function name
-        const androidId = checkinResponse.androidId;
-        const securityToken = checkinResponse.securityToken;
-        console.log(`[Register] ✅ Device Check-in complete (Android ID: ${androidId})`);
+        // 1. GCM/FCM Register using @liamcottle/push-receiver (Handles checkin internally)
+        const fcmCredentials = await AndroidFCM.register(
+            RUSTPLUS_CONFIG.apiKey,
+            RUSTPLUS_CONFIG.projectId,
+            RUSTPLUS_CONFIG.gcmSenderId,
+            RUSTPLUS_CONFIG.gmsAppId,
+            RUSTPLUS_CONFIG.androidPackageName,
+            RUSTPLUS_CONFIG.androidPackageCert
+        );
 
-        // 2. GCM/FCM Register - This must SPOOF the official Rust+ App Identity
-        const fcmResponse = await register({
-            androidId,
-            securityToken,
-            appId: RUSTPLUS_CONFIG.gcmSenderId, // Authorized entity for Facepunch
-            apiKey: RUSTPLUS_CONFIG.apiKey
-        });
-        const fcmToken = fcmResponse.token;
+        const fcmToken = fcmCredentials.fcm.token;
+        const androidId = fcmCredentials.gcm.androidId;
+        const securityToken = fcmCredentials.gcm.securityToken;
+
+        console.log(`[Register] ✅ GCM Registration complete (Android ID: ${androidId})`);
         console.log('[Register] ✅ Emulated FCM Token acquired');
 
-        // 3. Get Expo Push Token (Facepunch uses Expo for push delivery)
+        // 2. Get Expo Push Token (Facepunch uses Expo for push delivery)
         const expoResponse = await axios.post('https://exp.host/--/api/v2/push/getExpoPushToken', {
             type: 'fcm',
             deviceId: uuidv4(), // Unique virtual device ID for Expo
@@ -57,7 +58,7 @@ async function performFullRegistration(steamToken) {
         const expoToken = expoResponse.data.data.expoPushToken;
         console.log('[Register] ✅ Expo Token acquired');
 
-        // 4. Register with Facepunch (The "Pairing" Link)
+        // 3. Register with Facepunch (The "Pairing" Link)
         // We identify as 'rustplus.js' as per documentation examples
         const fpResponse = await axios.post('https://companion-rust.facepunch.com:443/api/push/register', {
             AuthToken: steamToken,
@@ -89,38 +90,42 @@ async function startMcsForUser(user) {
         return;
     }
 
-    const credentials = {
-        fcm: {
-            token: user.fcm_token,
-        },
-        gcm: {
-            androidId: user.android_id,
-            securityToken: user.security_token,
-        }
-    };
-
     console.log(`[MCS] 🔌 Connecting for user: ${user.steam_id}`);
 
     try {
-        const listener = await listen(credentials, ({ tag, data }) => {
-            if (tag === 8) { // DataMessageStanza
-                handleNotification(user, data);
-            }
+        const client = new PushReceiverClient(
+            user.android_id,
+            user.security_token,
+            [] // persistentIds
+        );
+
+        client.on('ON_NOTIFICATION_RECEIVED', (notification) => {
+            const data = notification.data || {};
+            // Convert data to our format if needed
+            handleNotification(user, { appData: Object.entries(data).map(([key, value]) => ({ key, value })) });
         });
 
-        activeClients.set(user.id, listener);
+        // Listen for data messages (Rust+ typically sends data messages)
+        client.on('ON_DATA_RECEIVED', (data) => {
+            // rustplus.js CLI structure: data is the message object
+            const appData = Object.keys(data).map(key => ({ key, value: data[key] }));
+            handleNotification(user, { appData });
+        });
 
-        listener.on('error', (err) => {
+        client.on('error', (err) => {
             console.error(`[MCS] ❌ Error for user ${user.id}:`, err);
             activeClients.delete(user.id);
             setTimeout(() => startMcsForUser(user), 5000);
         });
 
-        listener.on('close', () => {
+        client.on('close', () => {
             console.log(`[MCS] ⚠️ Connection closed for user ${user.id}`);
             activeClients.delete(user.id);
             setTimeout(() => startMcsForUser(user), 5000);
         });
+
+        await client.connect();
+        activeClients.set(user.id, client);
 
     } catch (e) {
         console.error(`[MCS] ❌ Connection failed for user ${user.id}:`, e);
