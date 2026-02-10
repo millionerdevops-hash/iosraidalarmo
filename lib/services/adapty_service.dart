@@ -22,8 +22,14 @@ class AdaptyService {
     if (_initialized) return;
 
     try {
+      final apiKey = dotenv.env['ADAPTY_PUBLIC_SDK_KEY'];
+      if (apiKey == null || apiKey.isEmpty) {
+        debugPrint("[Adapty] ❌ API Key is missing! Skipping activation.");
+        return;
+      }
+      
       await Adapty().activate(
-        configuration: AdaptyConfiguration(apiKey: dotenv.env['ADAPTY_PUBLIC_SDK_KEY']!)
+        configuration: AdaptyConfiguration(apiKey: apiKey)
           ..withLogLevel(AdaptyLogLevel.verbose)
           ..withObserverMode(false),
       );
