@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:raidalarm/app.dart';
 import 'package:raidalarm/core/theme/rust_colors.dart'; // Fixed path
 import 'package:raidalarm/data/database/app_database.dart';
@@ -49,34 +48,7 @@ const List<Locale> _supportedLocales = [
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase with FACEPUNCH credentials (to receive Rust+ pairing notifications)
-  // This is critical - we MUST use Facepunch's Firebase project to receive notifications
-  try {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: 'AIzaSyB5y2y-Tzqb4-I4Qnlsh_9naYv_TD8pCvY',
-        appId: '1:976529667804:android:d6f1ddeb4403b338fea619',
-        messagingSenderId: '976529667804',
-        projectId: 'rust-companion-app',
-      ),
-    );
-    debugPrint("[Main] ✅ Firebase initialized successfully");
-  } catch (e) {
-    // If app already exists (hot reload), that's OK - continue
-    if (e.toString().contains('duplicate-app')) {
-      debugPrint("[Main] ℹ️ Firebase app already exists (hot reload) - continuing...");
-    } else {
-      debugPrint("[Main] ❌ Firebase Init Error: $e");
-      rethrow;
-    }
-  }
-  
-  // ALWAYS initialize notification handler, even if Firebase was already initialized
-  try {
-    await NotificationHandler.initialize();
-  } catch (e) {
-    debugPrint("[Main] ❌ Notification Handler Init Error: $e");
-  }
+  await NotificationHandler.initialize();
 
   // Initialize Database
   final dbService = DatabaseService();

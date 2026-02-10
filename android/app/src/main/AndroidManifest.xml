@@ -135,16 +135,7 @@
             android:enabled="true"
             android:exported="false" />
             
-        <!-- FCM Background Message Handler -->
-        <service
-            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false" />
-            
-        <!-- FCM Default Notification Channel -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="rust_plus_channel" />
+        <!-- OneSignal will handle notifications autonomously -->
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

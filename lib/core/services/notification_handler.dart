@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import '../services/database_service.dart';
 import '../../core/router/app_router.dart';
 import 'package:isar/isar.dart';
-import '../../data/models/fcm_credential.dart';
+import '../../data/models/server_info.dart';
 import '../../data/models/smart_device.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../features/devices/device_pairing_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'fcm_service.dart';
+import '../../services/database_service.dart';
+import 'dart:async';
 
 class NotificationHandler {
   static final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
@@ -26,22 +26,8 @@ class NotificationHandler {
         initSettings,
       );
       
-      // 2. Request Firebase Permission (Still needed for some services)
-      await FirebaseMessaging.instance.requestPermission(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-
-      // 3. Setup Firebase Messaging Handlers (Fallback)
-      FirebaseMessaging.onMessage.listen((message) {
-        _handleData(message.data);
-      });
-
-      // 4. Setup OneSignal Handlers (Primary)
+      // 2. Setup OneSignal Handlers (Primary)
       OneSignal.Notifications.addForegroundWillDisplayListener((event) {
-        // Prevent default display if we handle it manually or just let it show
-        // and process the data
         _handleData(event.notification.additionalData);
       });
 
@@ -49,7 +35,7 @@ class NotificationHandler {
         _handleData(result.notification.additionalData);
       });
 
-      // 5. Initial Sync (optional)
+      // 3. Initial Sync
       unawaited(FcmService().syncServersToServer());
 
     } catch (e) {
@@ -60,7 +46,6 @@ class NotificationHandler {
   static Future<void> _handleData(Map<String, dynamic>? data) async {
     if (data == null) return;
     
-    // Normalize data (handle stringified body if sent as push)
     final Map<String, dynamic> normalizedData = Map.from(data);
     if (normalizedData.containsKey('body')) {
       try {
@@ -71,12 +56,8 @@ class NotificationHandler {
       } catch (e) {}
     }
     
-    if (normalizedData.containsKey('entityId')) {
-      if (normalizedData.containsKey('entityType')) {
-         await _handleDevicePairing(normalizedData);
-      } else {
-         // Show local alert or just rely on push
-      }
+    if (normalizedData.containsKey('entityId') && normalizedData.containsKey('entityType')) {
+      await _handleDevicePairing(normalizedData);
     } else if (normalizedData.containsKey('ip') && normalizedData.containsKey('playerToken')) {
       await _handlePairingNotification(normalizedData);
     }
@@ -95,7 +76,6 @@ class NotificationHandler {
                         ?? await isar.serverInfos.where().findFirst();
                         
          if (server != null) {
-            // Show pairing sheet
             showMaterialModalBottomSheet(
               context: context,
               backgroundColor: Colors.transparent,
@@ -138,7 +118,6 @@ class NotificationHandler {
         await isar.serverInfos.put(serverInfo);
       });
 
-      // Sync updated server list to central server
       unawaited(FcmService().syncServersToServer());
       
     } catch (e) {

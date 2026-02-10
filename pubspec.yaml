@@ -46,8 +46,6 @@ dependencies:
   isar_flutter_libs: ^3.1.0
   protobuf: ^6.0.0
   web_socket_channel: ^3.0.0
-  firebase_core: ^3.1.0
-  firebase_messaging: ^15.0.1
   device_info_plus: ^10.1.0
   permission_handler: ^11.3.1
   google_fonts: ^6.2.1
