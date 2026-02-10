@@ -19,6 +19,7 @@
     "onesignal-node": "^3.4.0",
     "push-receiver": "^2.1.1",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "uuid": "^13.0.0"
   }
 }

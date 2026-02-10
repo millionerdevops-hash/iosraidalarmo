@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { setupDb } = require('./database');
-const { startMcsForUser } = require('./mcs');
+const { startMcsForUser, performFullRegistration } = require('./mcs');
 require('dotenv').config();
 
 const app = express();
@@ -18,15 +18,20 @@ app.get('/api/status', (req, res) => {
     res.json({ status: 'online', clients: 'active' });
 });
 
-// 2. Register User (Steam Login + MCS Creds)
+// 2. Register User (Steam Login -> Full Server-Side Rust+ Setup)
 app.post('/api/register', async (req, res) => {
-    const { steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id } = req.body;
+    const { steam_id, steam_token, onesignal_id } = req.body;
 
-    if (!steam_id || !steam_token || !android_id || !security_token) {
-        return res.status(400).json({ error: 'Missing required fields' });
+    if (!steam_id || !steam_token || !onesignal_id) {
+        return res.status(400).json({ error: 'Missing required fields (steam_id, steam_token, onesignal_id)' });
     }
 
     try {
+        console.log(`[API] 👤 Registering user: ${steam_id}`);
+
+        // Perform the heavy lifting on the server
+        const mcsCredentials = await performFullRegistration(steam_token);
+
         await db.run(`
             INSERT INTO users (steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id)
             VALUES (?, ?, ?, ?, ?, ?)
@@ -37,17 +42,24 @@ app.post('/api/register', async (req, res) => {
                 fcm_token = excluded.fcm_token,
                 onesignal_id = excluded.onesignal_id,
                 last_login = CURRENT_TIMESTAMP
-        `, [steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id]);
+        `, [
+            steam_id,
+            steam_token,
+            mcsCredentials.android_id.toString(),
+            mcsCredentials.security_token.toString(),
+            mcsCredentials.fcm_token,
+            onesignal_id
+        ]);
 
         const user = await db.get('SELECT * FROM users WHERE steam_id = ?', [steam_id]);
 
         // Start MCS listener for this user
         startMcsForUser(user);
 
-        res.json({ success: true, user_id: user.id });
+        res.json({ success: true, user_id: user.id, message: 'Full registration completed on server' });
     } catch (e) {
-        console.error('[API] ❌ Registration error:', e);
-        res.status(500).json({ error: 'Database error' });
+        console.error('[API] ❌ Registration error:', e.message);
+        res.status(500).json({ error: e.message || 'Server-side registration failed' });
     }
 });
 

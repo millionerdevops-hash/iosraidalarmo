@@ -19,6 +19,8 @@ This server handles 24/7 background notifications for the Raidalarm Flutter app.
    - `PORT`: 3000 (Default)
 
 ## API Endpoints
-- `POST /api/register`: Register user credentials.
+- `POST /api/register`: Handles full Rust+ registration (GCM check-in, Expo token, Facepunch registration).
+  - Body: `{ steam_id, steam_token, onesignal_id }`
 - `POST /api/sync-servers`: Sync paired servers from the app.
+  - Body: `{ steam_id, servers: [...] }`
 - `GET /api/status`: Health check.

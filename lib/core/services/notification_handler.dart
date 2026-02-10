@@ -2,128 +2,21 @@ import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import '../../data/models/server_info.dart';
 import '../services/database_service.dart';
 import '../../core/router/app_router.dart';
 import 'package:isar/isar.dart';
 import '../../data/models/fcm_credential.dart';
 import '../../data/models/smart_device.dart';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import '../services/mcs/gcm_service.dart';
-import '../services/mcs/mcs_client.dart';
-import 'fcm_service.dart'; // Added missing import
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../features/devices/device_pairing_screen.dart';
-
-
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'fcm_service.dart';
 
 class NotificationHandler {
   static final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
-  static McsClient? _mcsClient;
-  static String? customToken; // Exposed for FcmService
-
-  static Future<void> _startMcsClient() async {
-    try {
-
-      
-      // 1. Check for existing MCS credentials
-      final dbService = DatabaseService();
-      final isar = await dbService.db;
-      final existingCred = await isar.fcmCredentials.get(1);
-      
-      int androidId;
-      int securityToken;
-      String token;
-
-      if (existingCred != null && existingCred.androidId != null && existingCred.securityToken != null) {
-
-        androidId = existingCred.androidId!;
-        securityToken = existingCred.securityToken!;
-        token = existingCred.fcmToken; // Assuming this is still valid
-        
-
-      } else {
-
-         final gcm = GcmService();
-         
-         // 1. Check-in (Get Android ID)
-         final checkinData = await gcm.checkIn();
-         androidId = checkinData['androidId'];
-         securityToken = checkinData['securityToken'];
-         
-         // 2. Register (Get Token)
-         token = await gcm.register(androidId, securityToken);
-
-         
-         // SAVE CREDENTIALS IMMEDIATELY
-         await isar.writeTxn(() async {
-            final cred = existingCred ?? FcmCredential(); // Update or Create
-            cred.androidId = androidId;
-            cred.securityToken = securityToken;
-            cred.fcmToken = token;
-            await isar.fcmCredentials.put(cred);
-         });
-         debugPrint("[MCS] 💾 Credentials Saved to Isar for next launch.");
-      }
-      
-      customToken = token; // Store globally
-      
-      // 3. Connect to MCS (Listen for notifications)
-      _mcsClient = McsClient(androidId, securityToken);
-      await _mcsClient!.connect();
-      
-      _mcsClient!.onMessage.listen((stanza) {
-
-
-        
-        // Convert AppData to Map
-        final data = <String, dynamic>{};
-        for (var entry in stanza.appData) {
-          data[entry.key] = entry.value;
-        }
-        
-        // Handle Body Json (Issue #75)
-        if (data.containsKey('body') && !data.containsKey('ip') && !data.containsKey('entityId')) {
-           try {
-             final bodyJson = jsonDecode(data['body']);
-             data.addAll(bodyJson);
-           } catch(e) {}
-        }
-        
-        // REUSE LOGIC:
-        // CRITICAL: Check for entityId FIRST
-        if (data.containsKey('entityId')) {
-          if (data.containsKey('entityType')) {
-
-             _handleDevicePairing(data);
-          } else {
-
-             _showAlarmNotification(null, data); 
-          }
-        } else if (data.containsKey('ip') && data.containsKey('playerToken')) {
-
-          _handlePairingNotification(data);
-        }
-      });
-      
-      // REFRESH REGISTRATIONS (CRITICAL FOR SAVED SERVERS)
-      // Now that we have the valid customToken, we must tell Rust+ to send to it.
-
-      await FcmService().refreshServerRegistrations();
-
-      
-    } catch (e) {
-      // MCS Client Failed
-    }
-  }
 
   static Future<void> initialize() async {
-
-    
-    // Start MCS Client (Custom FCM)
-    _startMcsClient();
-    
     try {
       // 1. Initialize Local Notifications
       const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -131,146 +24,103 @@ class NotificationHandler {
       
       await _localNotifications.initialize(
         initSettings,
-        onDidReceiveNotificationResponse: (details) {
-
-          // Handle navigation if needed
-        },
       );
       
-      // 2. Request Permission
-
-      final settings = await FirebaseMessaging.instance.requestPermission(
+      // 2. Request Firebase Permission (Still needed for some services)
+      await FirebaseMessaging.instance.requestPermission(
         alert: true,
         badge: true,
         sound: true,
       );
 
-
-      // 3. Setup Handlers
-
-      
+      // 3. Setup Firebase Messaging Handlers (Fallback)
       FirebaseMessaging.onMessage.listen((message) {
-
-        _handleMessage(message);
+        _handleData(message.data);
       });
-      
 
-    } catch (e, stackTrace) {
-      // Error initializing notification handler
+      // 4. Setup OneSignal Handlers (Primary)
+      OneSignal.Notifications.addForegroundWillDisplayListener((event) {
+        // Prevent default display if we handle it manually or just let it show
+        // and process the data
+        _handleData(event.notification.additionalData);
+      });
 
-      rethrow;
+      OneSignal.Notifications.addClickListener((result) {
+        _handleData(result.notification.additionalData);
+      });
+
+      // 5. Initial Sync (optional)
+      unawaited(FcmService().syncServersToServer());
+
+    } catch (e) {
+      debugPrint("[NotificationHandler] ❌ Init Error: $e");
     }
   }
 
-  static Future<void> _handleMessage(RemoteMessage message) async {
-    Map<String, dynamic> data = Map.from(message.data);
+  static Future<void> _handleData(Map<String, dynamic>? data) async {
+    if (data == null) return;
     
-    if (data.containsKey('body') && !data.containsKey('ip') && !data.containsKey('entityId')) {
+    // Normalize data (handle stringified body if sent as push)
+    final Map<String, dynamic> normalizedData = Map.from(data);
+    if (normalizedData.containsKey('body')) {
       try {
-        final bodyJson = jsonDecode(data['body'] as String);
+        final bodyJson = jsonDecode(normalizedData['body'] as String);
         if (bodyJson is Map<String, dynamic>) {
-          data.addAll(bodyJson);
+          normalizedData.addAll(bodyJson);
         }
       } catch (e) {}
     }
     
-    if (data.containsKey('entityId')) {
-      if (data.containsKey('entityType')) {
-
-         await _handleDevicePairing(data);
+    if (normalizedData.containsKey('entityId')) {
+      if (normalizedData.containsKey('entityType')) {
+         await _handleDevicePairing(normalizedData);
       } else {
-
-         await _showAlarmNotification(message, data);
+         // Show local alert or just rely on push
       }
-    } else if (data.containsKey('ip') && data.containsKey('playerToken')) {
-
-      await _handlePairingNotification(data);
-      
-    } else {
-
+    } else if (normalizedData.containsKey('ip') && normalizedData.containsKey('playerToken')) {
+      await _handlePairingNotification(normalizedData);
     }
-  }
-  
-  static Future<void> _showAlarmNotification(RemoteMessage? message, Map<String, dynamic> data) async {
-    final title = message?.notification?.title ?? "Smart Alarm";
-    final body = message?.notification?.body ?? "Alarm triggered!";
-        
-    const androidDetails = AndroidNotificationDetails(
-      'rust_alarm_channel',
-      'Smart Alarms',
-      importance: Importance.max,
-      priority: Priority.high,
-      color: Colors.red,
-      playSound: true,
-    );
-    
-    await _localNotifications.show(
-      DateTime.now().millisecond,
-      title,
-      body,
-      const NotificationDetails(android: androidDetails),
-      payload: data['entityId'],
-    );
   }
   
   static Future<void> _handleDevicePairing(Map<String, dynamic> data) async {
     try {
-      final int entityId = int.parse(data['entityId']);
-      final int entityType = int.parse(data['entityType']);
+      final int entityId = int.parse(data['entityId'].toString());
+      final int entityType = int.parse(data['entityType'].toString());
       
       final context = AppRouter.router.routerDelegate.navigatorKey.currentContext;
       if (context != null) {
          final dbService = DatabaseService();
          final isar = await dbService.db;
          final server = await isar.serverInfos.filter().isSelectedEqualTo(true).findFirst() 
-                        ?? await isar.serverInfos.where().findFirst(); // Using .findFirst because we know it works for ID 
+                        ?? await isar.serverInfos.where().findFirst();
                         
          if (server != null) {
-           final existing = await isar.smartDevices
-               .filter()
-               .serverIdEqualTo(server.id)
-               .entityIdEqualTo(entityId)
-               .findFirst();
-
-           if (existing != null) {
-
-             return; // Skip navigating to pairing screen
-           }
-
-           // Use modal_bottom_sheet to show the pairing screen
-           showMaterialModalBottomSheet(
-             context: context,
-             backgroundColor: Colors.transparent,
-             builder: (context) => DevicePairingScreen(
-               serverId: server.id,
-               entityId: entityId,
-               entityType: entityType,
-               initialName: data['name'], // Pass name if available (e.g. from smart switch notification body if parsed)
-             ),
-           );
-         } else {
-
+            // Show pairing sheet
+            showMaterialModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (context) => DevicePairingScreen(
+                serverId: server.id,
+                entityId: entityId,
+                entityType: entityType,
+                initialName: data['name'],
+              ),
+            );
          }
       }
     } catch (e) {
-      // Error handling device pairing
+      debugPrint("[NotificationHandler] ❌ Pairing Error: $e");
     }
   }
   
   static Future<void> _handlePairingNotification(Map<String, dynamic> data) async {
     try {
-      final String ip = data['ip'];
-      final String port = data['port'].toString();
-      final String playerId = data['playerId'];
-      final String playerToken = data['playerToken'];
-      final String? name = data['name']; 
-      
       final serverInfo = ServerInfo()
-        ..ip = ip
-        ..port = port
-        ..playerId = playerId
-        ..playerToken = playerToken
-        ..name = name ?? "New Server ($ip)";
+        ..ip = data['ip']
+        ..port = data['port'].toString()
+        ..playerId = data['playerId']
+        ..playerToken = data['playerToken']
+        ..name = data['name'] ?? "New Server (${data['ip']})";
 
       final dbService = DatabaseService();
       final isar = await dbService.db;
@@ -278,8 +128,8 @@ class NotificationHandler {
       await isar.writeTxn(() async {
         final existing = await isar.serverInfos
             .filter()
-            .ipEqualTo(ip)
-            .portEqualTo(port)
+            .ipEqualTo(serverInfo.ip)
+            .portEqualTo(serverInfo.port)
             .findFirst();
             
         if (existing != null) {
@@ -288,12 +138,11 @@ class NotificationHandler {
         await isar.serverInfos.put(serverInfo);
       });
 
-      // SYNC TO SERVER (New Migration)
+      // Sync updated server list to central server
       unawaited(FcmService().syncServersToServer());
       
     } catch (e) {
-      // Error parsing pairing notification
+      debugPrint("[NotificationHandler] ❌ Server Pairing Error: $e");
     }
   }
-
 }

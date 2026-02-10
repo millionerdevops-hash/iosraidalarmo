@@ -1,7 +1,66 @@
 const { listen, register, checkin } = require('push-receiver');
 const { sendPushNotification } = require('./notifications');
+const axios = require('axios');
+const { v4: uuidv4 } = require('uuid');
 
 const activeClients = new Map();
+
+// Facepunch / Expo Constants
+const RUST_APP_ID = 'com.facepunch.rust.companion';
+const EXPO_PROJECT_ID = '49451aca-a822-41e6-ad59-955718d0ff9c';
+
+async function performFullRegistration(steamToken) {
+    try {
+        console.log('[Register] 📦 Starting full registration on server...');
+
+        // 1. Check-in (Android ID / Security Token)
+        const checkinResponse = await checkin();
+        const androidId = checkinResponse.androidId;
+        const securityToken = checkinResponse.securityToken;
+        console.log('[Register] ✅ Check-in complete');
+
+        // 2. GCM Register (FCM Token)
+        const fcmResponse = await register({ androidId, securityToken, appId: 'com.google.android.gms' });
+        const fcmToken = fcmResponse.token;
+        console.log('[Register] ✅ GCM Register complete');
+
+        // 3. Get Expo Push Token
+        const expoResponse = await axios.post('https://exp.host/--/api/v2/push/getExpoPushToken', {
+            type: 'fcm',
+            deviceId: uuidv4(),
+            development: false,
+            appId: RUST_APP_ID,
+            deviceToken: fcmToken,
+            projectId: EXPO_PROJECT_ID,
+        });
+
+        const expoToken = expoResponse.data.data.expoPushToken;
+        console.log('[Register] ✅ Expo Token acquired');
+
+        // 4. Register with Facepunch
+        const fpResponse = await axios.post('https://companion-rust.facepunch.com:443/api/push/register', {
+            AuthToken: steamToken,
+            DeviceId: 'rustplus.js',
+            PushKind: 3,
+            PushToken: expoToken,
+        });
+
+        if (fpResponse.status !== 200) {
+            throw new Error(`Facepunch registration failed: ${fpResponse.status}`);
+        }
+        console.log('[Register] ✅ Facepunch Registration complete');
+
+        return {
+            android_id: androidId,
+            security_token: securityToken,
+            fcm_token: fcmToken,
+            expo_token: expoToken
+        };
+    } catch (e) {
+        console.error('[Register] ❌ Full registration failed:', e.message);
+        throw e;
+    }
+}
 
 async function startMcsForUser(user) {
     if (activeClients.has(user.id)) {
@@ -33,7 +92,6 @@ async function startMcsForUser(user) {
         listener.on('error', (err) => {
             console.error(`[MCS] ❌ Error for user ${user.id}:`, err);
             activeClients.delete(user.id);
-            // Reconnect after delay
             setTimeout(() => startMcsForUser(user), 5000);
         });
 
@@ -49,9 +107,6 @@ async function startMcsForUser(user) {
 }
 
 function handleNotification(user, data) {
-    console.log(`[MCS] 🔔 New notification for user ${user.id}`);
-
-    // Convert data to a more usable format
     const payload = {};
     if (data.appData) {
         data.appData.forEach(entry => {
@@ -59,7 +114,6 @@ function handleNotification(user, data) {
         });
     }
 
-    // Handle body JSON if present (Rust+ standard)
     if (payload.body) {
         try {
             const bodyJson = JSON.parse(payload.body);
@@ -67,7 +121,6 @@ function handleNotification(user, data) {
         } catch (e) { }
     }
 
-    // Determine notification title/body based on Rust+ content
     let title = "Rust+ Notification";
     let body = "New event detected";
 
@@ -91,4 +144,4 @@ function handleNotification(user, data) {
     });
 }
 
-module.exports = { startMcsForUser };
+module.exports = { startMcsForUser, performFullRegistration };

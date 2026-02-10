@@ -7,6 +7,7 @@ import '../../core/services/fcm_service.dart';
 import '../../core/services/database_service.dart';
 import '../../data/models/fcm_credential.dart';
 import '../../core/theme/rust_colors.dart';
+import 'dart:async';
 
 class SteamLoginScreen extends StatefulWidget {
   final VoidCallback? onSuccess;
@@ -19,8 +20,8 @@ class SteamLoginScreen extends StatefulWidget {
 class _SteamLoginScreenState extends State<SteamLoginScreen> {
   late final WebViewController _controller;
   bool _isLoading = true;
-  bool _hasClickedButton = false; // Track button click to avoid repeated JS execution
-  final _dbService = DatabaseService(); // Reuse instance
+  bool _hasClickedButton = false; 
+  final _dbService = DatabaseService(); 
 
   @override
   void initState() {
@@ -28,12 +29,11 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setUserAgent("Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36")
-      ..setBackgroundColor(const Color(0xFF1B2838)) // Steam dark color for seamless loading
-      ..enableZoom(false) // Disable zoom for better UX
+      ..setBackgroundColor(const Color(0xFF1B2838))
+      ..enableZoom(false)
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (progress) {
-            // Only execute once when progress reaches threshold
             if (progress > 30 && !_hasClickedButton) {
               _hasClickedButton = true;
               _controller.runJavaScript("""
@@ -45,12 +45,9 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
             }
           },
           onPageStarted: (url) {
-            // Only update state if needed to avoid unnecessary rebuilds
             if (!_isLoading) {
               setState(() => _isLoading = true);
             }
-            
-            // Inject CSS to hide the Facepunch page content immediately
             if (url.contains('companion-rust.facepunch.com/login')) {
                _controller.runJavaScript("document.documentElement.style.display = 'none';");
             }
@@ -85,74 +82,39 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
       final String token = data['Token'];
       final String steamId = data['SteamId'];
       
-      // Perform Registration
       final fcmService = FcmService();
+      final isar = await _dbService.db;
       
-      // Check if we already have valid credentials
-      final existingCred = await fcmService.getExistingCredentials();
+      final cred = FcmCredential()
+        ..steamId = steamId
+        ..steamToken = token;
+
+      // 1. Save Basic Credentials Locally
+      await isar.writeTxn(() async {
+          await isar.fcmCredentials.clear();
+          await isar.fcmCredentials.put(cred);
+      });
+
+      // 2. Hand off full registration to Server
+      final success = await fcmService.syncWithServer(cred);
       
-      String fcmToken;
-      String expoToken;
-      
-      if (existingCred != null && existingCred.fcmToken != null && existingCred.expoPushToken != null) {
-        // Reuse existing credentials
-        fcmToken = existingCred.fcmToken!;
-        expoToken = existingCred.expoPushToken!;
-      } else {
-        // Generate new credentials
-        
-        // 1. Get FCM Token
-        fcmToken = await fcmService.getFcmToken() ?? '';
-        if (fcmToken.isEmpty) {
-          throw "Connection Error";
-        }
-        
-        // 2. Get Expo Push Token
-        expoToken = await fcmService.getExpoPushToken(fcmToken) ?? '';
-        if (expoToken.isEmpty) {
-          throw "Connection Error";
-        }
-      }
-      
-      // 3. Register with API (always register with latest Steam token)
-      bool registered = await fcmService.registerWithRustPlus(token, expoToken);
-      
-      if (registered) {
+      if (success) {
         if (mounted) {
-          // Save Credentials to Isar (using reused instance)
-          final isar = await _dbService.db;
-          await isar.writeTxn(() async {
-             // Clear old
-             await isar.fcmCredentials.clear();
-             
-             final cred = FcmCredential()
-               ..fcmToken = fcmToken
-               ..expoPushToken = expoToken
-               ..steamId = steamId
-               ..steamToken = token;
-             
-             await isar.fcmCredentials.put(cred);
-          });
-
-          // 4. Sync with our central Node.js server (New Migration)
-          unawaited(fcmService.syncWithServer(cred));
-
           if (widget.onSuccess != null) {
             widget.onSuccess!();
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Steam login successful. Go in-game and pair server now.")),
+              const SnackBar(content: Text("Steam login successful. Server is setting up your notifications...")),
             );
             context.go('/');
           }
         }
       } else {
-         throw "Connection Error";
+         throw "Server Registration Failed";
       }
 
-
     } catch (e) {
-      _isProcessingSuccess = false; // Allow retry
+      _isProcessingSuccess = false;
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
            SnackBar(content: Text("Error: $e"), backgroundColor: RustColors.error),
@@ -166,14 +128,13 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF171A21), // Official Steam Header Color
+      backgroundColor: const Color(0xFF171A21),
       body: SafeArea(
         child: Stack(
           children: [
-            // The WebView - use Visibility instead of Opacity for better performance
             Visibility(
               visible: !_isLoading,
-              maintainState: true, // Keep WebView alive even when hidden
+              maintainState: true,
               child: WebViewWidget(controller: _controller),
             ),
             if (_isLoading)
