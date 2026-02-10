@@ -3,6 +3,7 @@ import 'package:adapty_flutter/adapty_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:raidalarm/services/onesignal_service.dart';
 import 'package:raidalarm/data/database/app_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final adaptyServiceProvider = Provider((ref) => AdaptyService());
