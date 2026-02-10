@@ -9,6 +9,13 @@ const activeClients = new Map();
 const RUST_APP_ID = 'com.facepunch.rust.companion';
 const EXPO_PROJECT_ID = '49451aca-a822-41e6-ad59-955718d0ff9c';
 
+// Official Rust+ FCM Config
+const FCM_CONFIG = {
+    apiKey: "AIzaSyB5y2y-Tzqb4-I4Qnlsh_9naYv_TD8pCvY",
+    projectId: "rust-companion-app",
+    gcmSenderId: "976529667804",
+};
+
 async function performFullRegistration(steamToken) {
     try {
         console.log('[Register] 📦 Starting full registration on server...');
@@ -19,8 +26,13 @@ async function performFullRegistration(steamToken) {
         const securityToken = checkinResponse.securityToken;
         console.log('[Register] ✅ Check-in complete');
 
-        // 2. GCM Register (FCM Token)
-        const fcmResponse = await register({ androidId, securityToken, appId: 'com.google.android.gms' });
+        // 2. GCM Register (FCM Token) - Using Official Parameters
+        const fcmResponse = await register({
+            androidId,
+            securityToken,
+            appId: FCM_CONFIG.gcmSenderId, // Facepunch Sender ID
+            apiKey: FCM_CONFIG.apiKey
+        });
         const fcmToken = fcmResponse.token;
         console.log('[Register] ✅ GCM Register complete');
 
