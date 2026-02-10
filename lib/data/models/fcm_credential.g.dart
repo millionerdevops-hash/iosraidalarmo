@@ -22,7 +22,7 @@ const FcmCredentialSchema = CollectionSchema(
     r'androidId': PropertySchema(
       id: 0,
       name: r'androidId',
-      type: IsarType.long,
+      type: IsarType.string,
     ),
     r'expoPushToken': PropertySchema(
       id: 1,
@@ -37,7 +37,7 @@ const FcmCredentialSchema = CollectionSchema(
     r'securityToken': PropertySchema(
       id: 3,
       name: r'securityToken',
-      type: IsarType.long,
+      type: IsarType.string,
     ),
     r'steamId': PropertySchema(
       id: 4,
@@ -71,12 +71,29 @@ int _fcmCredentialEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.androidId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.expoPushToken;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.fcmToken.length * 3;
+  {
+    final value = object.fcmToken;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.securityToken;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.steamId;
     if (value != null) {
@@ -98,10 +115,10 @@ void _fcmCredentialSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.androidId);
+  writer.writeString(offsets[0], object.androidId);
   writer.writeString(offsets[1], object.expoPushToken);
   writer.writeString(offsets[2], object.fcmToken);
-  writer.writeLong(offsets[3], object.securityToken);
+  writer.writeString(offsets[3], object.securityToken);
   writer.writeString(offsets[4], object.steamId);
   writer.writeString(offsets[5], object.steamToken);
 }
@@ -113,11 +130,11 @@ FcmCredential _fcmCredentialDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = FcmCredential();
-  object.androidId = reader.readLongOrNull(offsets[0]);
+  object.androidId = reader.readStringOrNull(offsets[0]);
   object.expoPushToken = reader.readStringOrNull(offsets[1]);
-  object.fcmToken = reader.readString(offsets[2]);
+  object.fcmToken = reader.readStringOrNull(offsets[2]);
   object.id = id;
-  object.securityToken = reader.readLongOrNull(offsets[3]);
+  object.securityToken = reader.readStringOrNull(offsets[3]);
   object.steamId = reader.readStringOrNull(offsets[4]);
   object.steamToken = reader.readStringOrNull(offsets[5]);
   return object;
@@ -131,13 +148,13 @@ P _fcmCredentialDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
@@ -262,49 +279,58 @@ extension FcmCredentialQueryFilter
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
-      androidIdEqualTo(int? value) {
+      androidIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'androidId',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       androidIdGreaterThan(
-    int? value, {
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'androidId',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       androidIdLessThan(
-    int? value, {
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'androidId',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       androidIdBetween(
-    int? lower,
-    int? upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -313,6 +339,77 @@ extension FcmCredentialQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      androidIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'androidId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      androidIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'androidId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      androidIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'androidId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      androidIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'androidId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      androidIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'androidId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      androidIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'androidId',
+        value: '',
       ));
     });
   }
@@ -472,8 +569,26 @@ extension FcmCredentialQueryFilter
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      fcmTokenIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'fcmToken',
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      fcmTokenIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'fcmToken',
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       fcmTokenEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -487,7 +602,7 @@ extension FcmCredentialQueryFilter
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       fcmTokenGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -503,7 +618,7 @@ extension FcmCredentialQueryFilter
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       fcmTokenLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -519,8 +634,8 @@ extension FcmCredentialQueryFilter
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       fcmTokenBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -680,49 +795,58 @@ extension FcmCredentialQueryFilter
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
-      securityTokenEqualTo(int? value) {
+      securityTokenEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'securityToken',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       securityTokenGreaterThan(
-    int? value, {
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'securityToken',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       securityTokenLessThan(
-    int? value, {
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'securityToken',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
       securityTokenBetween(
-    int? lower,
-    int? upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -731,6 +855,77 @@ extension FcmCredentialQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      securityTokenStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'securityToken',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      securityTokenEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'securityToken',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      securityTokenContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'securityToken',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      securityTokenMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'securityToken',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      securityTokenIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'securityToken',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<FcmCredential, FcmCredential, QAfterFilterCondition>
+      securityTokenIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'securityToken',
+        value: '',
       ));
     });
   }
@@ -1228,9 +1423,10 @@ extension FcmCredentialQuerySortThenBy
 
 extension FcmCredentialQueryWhereDistinct
     on QueryBuilder<FcmCredential, FcmCredential, QDistinct> {
-  QueryBuilder<FcmCredential, FcmCredential, QDistinct> distinctByAndroidId() {
+  QueryBuilder<FcmCredential, FcmCredential, QDistinct> distinctByAndroidId(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'androidId');
+      return query.addDistinctBy(r'androidId', caseSensitive: caseSensitive);
     });
   }
 
@@ -1249,10 +1445,11 @@ extension FcmCredentialQueryWhereDistinct
     });
   }
 
-  QueryBuilder<FcmCredential, FcmCredential, QDistinct>
-      distinctBySecurityToken() {
+  QueryBuilder<FcmCredential, FcmCredential, QDistinct> distinctBySecurityToken(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'securityToken');
+      return query.addDistinctBy(r'securityToken',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -1279,7 +1476,7 @@ extension FcmCredentialQueryProperty
     });
   }
 
-  QueryBuilder<FcmCredential, int?, QQueryOperations> androidIdProperty() {
+  QueryBuilder<FcmCredential, String?, QQueryOperations> androidIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'androidId');
     });
@@ -1292,13 +1489,14 @@ extension FcmCredentialQueryProperty
     });
   }
 
-  QueryBuilder<FcmCredential, String, QQueryOperations> fcmTokenProperty() {
+  QueryBuilder<FcmCredential, String?, QQueryOperations> fcmTokenProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fcmToken');
     });
   }
 
-  QueryBuilder<FcmCredential, int?, QQueryOperations> securityTokenProperty() {
+  QueryBuilder<FcmCredential, String?, QQueryOperations>
+      securityTokenProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'securityToken');
     });

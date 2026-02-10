@@ -6,12 +6,12 @@ part 'fcm_credential.g.dart';
 class FcmCredential {
   Id id = Isar.autoIncrement;
 
-  late String fcmToken;
+  String? fcmToken;
   String? expoPushToken;
   String? steamId;
   String? steamToken;
   
   // Custom MCS Fields
-  int? androidId;
-  int? securityToken;
+  String? androidId;
+  String? securityToken;
 }
