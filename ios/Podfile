@@ -1,28 +1,40 @@
 platform :ios, '13.0'
 
-# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+# CocoaPods analytics sends network stats
 ENV['COCOAPODS_DISABLE_STATS'] = '1'
 
-project 'Runner', {
-  'Debug' => :debug,
-  'Release' => :release,
-  'Profile' => :profile,
-}
+# 1. Robust FLUTTER_ROOT resolution
+def find_flutter_root
+  # Priority 1: Environment variable (Set by Codemagic/CI)
+  return ENV['FLUTTER_ROOT'] if ENV['FLUTTER_ROOT'] && !ENV['FLUTTER_ROOT'].empty?
 
-def flutter_root
+  # Priority 2: Parse Generated.xcconfig
   generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
-  unless File.exist?(generated_xcode_build_settings_path)
-    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get has been executed."
+  if File.exist?(generated_xcode_build_settings_path)
+    File.foreach(generated_xcode_build_settings_path) do |line|
+      if line =~ /FLUTTER_ROOT=(.*)/
+        path = $1.strip.gsub('\\', '/')
+        # Ignore Windows paths if we are on a Unix system (like Codemagic/macOS)
+        if Gem.win_platform? || !path.match?(/^[A-Z]:\//)
+          return path
+        end
+      end
+    end
   end
-
-  File.foreach(generated_xcode_build_settings_path) do |line|
-    matches = line.match(/\AFLUTTER_ROOT=(.*)\z/)
-    return matches[1] if matches
-  end
-  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig and regenerate it by running flutter pub get."
+  
+  # Fallback: Common paths or error
+  raise "FLUTTER_ROOT not found. Please ensure 'flutter pub get' has run."
 end
 
-require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'xcode_backend.rb'), flutter_root)
+flutter_root = find_flutter_root
+
+# 2. Load podhelper.rb (This defines flutter_install_all_ios_pods)
+podhelper_path = File.expand_path(File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'podhelper.rb'))
+unless File.exist?(podhelper_path)
+  # Debug: show where we looked
+  raise "podhelper.rb not found at #{podhelper_path}. Check your FLUTTER_ROOT."
+end
+load podhelper_path
 
 target 'Runner' do
   use_frameworks!
@@ -35,9 +47,8 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
-      # Force iOS 13.0 for all pods to fix compatibility issues
+      # Fix deployment target warnings
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
-      # Disable Bitcode for modern build systems
       config.build_settings['ENABLE_BITCODE'] = 'NO'
     end
   end
