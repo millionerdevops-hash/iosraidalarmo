@@ -1,4 +1,5 @@
-const { listen, register, checkin } = require('push-receiver');
+const { listen } = require('push-receiver');
+const { register, checkIn } = require('push-receiver/src/gcm');
 const { sendPushNotification } = require('./notifications');
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
@@ -24,7 +25,7 @@ async function performFullRegistration(steamToken) {
         console.log('[Register] 📦 Starting official app emulated registration...');
 
         // 1. Check-in (Generates a unique virtual "device" for the user)
-        const checkinResponse = await checkin();
+        const checkinResponse = await checkIn(); // Corrected function name
         const androidId = checkinResponse.androidId;
         const securityToken = checkinResponse.securityToken;
         console.log(`[Register] ✅ Device Check-in complete (Android ID: ${androidId})`);
