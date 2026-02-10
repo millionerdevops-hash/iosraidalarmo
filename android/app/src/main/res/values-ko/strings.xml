@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm 활성</string>
+    <string name="notification_service_active_text">공격 알림이 활성화되었습니다</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm 서비스 비활성화</string>
+    <string name="notification_service_disabled_text">알림 수신 서비스가 비활성화되었습니다. 공격 알림을 받으려면 서비스를 활성화하세요.</string>
+    <string name="notification_service_disabled_big_text">알림 수신 서비스가 비활성화되었습니다. 공격 알림을 받으려면 서비스를 활성화하세요.\n\n설정을 탭하여 서비스를 활성화합니다.</string>
+    <string name="notification_service_disabled_action">설정</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">중지</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">알람 트리거 중...</string>
+    <string name="alarm_playing">알람 재생 중 - 탭하여 중지</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">기지 공격 감지됨</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">_Raid Alarm 활성</string>
+    <string name="channel_name_service_status">서비스 현황</string>
+    <string name="channel_name_attack_detected">공격 탐지</string>
+    <string name="channel_name_alarm_service">알람 서비스</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Raid Alarm 활성 알림 채널</string>
+    <string name="channel_description_service_status">_Raid Alarm 서비스 상태 알림</string>
+    <string name="channel_description_service_status_headsup">_Raid Alarm 서비스 상태 알림(초기 표시)</string>
+    <string name="channel_description_attack_detected">공격 알림이 감지되면 표시되는 알림</string>
+    <string name="channel_description_alarm_service">알람 포그라운드 서비스 알림 채널</string>
+    <!-- Fake Call -->
+    <string name="text_accept">수락</string>
+    <string name="text_decline">거절</string>
+    <string name="fake_call_channel_name">가짜 전화</string>
+    <string name="fake_call_channel_description">가짜 전화 알림 수신</string>
+    <string name="channel_name_player_tracking">플레이어 추적</string>
+    <string name="channel_description_player_tracking">추적된 플레이어 상태 변경</string>
+    <string name="player_status_online">온라인</string>
+    <string name="player_status_offline">오프라인</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s 님이 %2$s 에 접속했습니다</string>
+    <string name="player_status_left_body">%1$s 님이 %2$s 에서 나갔습니다</string>
+    <string name="unknown_server">알 수 없는 서버</string>
+    <string name="default_server_name">서버</string>
+    <string name="alarm_stop_button_full">알람 중지</string>
+</resources>

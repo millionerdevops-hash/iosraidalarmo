@@ -1,0 +1,930 @@
+{
+    "common": {
+        "subscription_required": "보호를 활성화하려면 구독이 필요합니다",
+        "error_service_not_enabled": "알림 서비스가 활성화되지 않았습니다.",
+        "no_internet": "No internet connection. Please check your network.",
+        "errors": {
+            "no_internet": "No internet connection. Please check your network."
+        },
+        "million_suffix": "M",
+        "loading": "로딩 중...",
+        "fauna_guide": "동물 가이드",
+        "select_species": "종 선택",
+        "thousand_suffix": "K"
+    },
+    "tools": {
+        "section_utilities": "도구",
+        "raid_cost": {
+            "title": "비용",
+            "subtitle": "폭발물 & 유황"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "모뉴먼트 카메라"
+        },
+        "tea_guide": {
+            "title": "차",
+            "subtitle": "버프 & 레시피"
+        },
+        "diesel_calc": {
+            "title": "디젤 계산기",
+            "subtitle": "굴착기 및 채석장"
+        },
+        "animal_guide": {
+            "title": "동물",
+            "subtitle": "사냥 및 자원"
+        },
+        "match_game": {
+            "title": "매치",
+            "subtitle": "기억력 게임",
+            "earned_coins": "{} 코인을 획득했습니다!",
+            "not_enough_scrap": "코인이 부족합니다",
+            "victory": "승리의",
+            "defeat": "패배",
+            "net_result": "순 결과",
+            "play_again": "다시 플레이",
+            "return_to_menu": "메뉴로 돌아가기",
+            "timer": "타이머",
+            "potential": "잠재적인",
+            "memorize": "암기하다!",
+            "menu_title": "매치 게임",
+            "menu_subtitle": "짝을 찾아 스크랩을 늘리세요.\n고위험, 고수익.",
+            "play_action": "플레이 (-{} 스크랩)",
+            "entry": "참가비",
+            "pairs_count": "{} 쌍",
+            "exit_warning_title": "게임을 종료하시겠습니까?",
+            "exit_warning_message": "지금 종료하면 베팅 금액을 잃게 됩니다. 계속하시겠습니까?",
+            "yes": "예",
+            "no": "아니오"
+        },
+        "code_raider": {
+            "title": "도어 락",
+            "subtitle": "코드 락 해킹",
+            "battery_level": "배터리 잔량",
+            "correct": "정답",
+            "wrong_spot": "위치 틀림",
+            "invalid": "유효하지 않음",
+            "waiting_input": "입력 대기 중...",
+            "access_granted": "액세스 허용",
+            "system_lockout": "시스템 잠금",
+            "reward_scrap": "보상: +{} 스크랩",
+            "code_changed": "코드 변경됨",
+            "hack_another": "다른 해킹",
+            "retry_hack": "재시도",
+            "open": "열기",
+            "clear": "지우기",
+            "enter": "입력",
+            "code_lock": "도어_락"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "차 레시피",
+            "mixing_table_recipe": "혼합 테이블",
+            "select_tier": "티어 선택"
+        },
+        "stats": {
+            "rad_res": "방사능 저항",
+            "hydration": "수분",
+            "temp": "온도",
+            "max_temp": "최고 온도",
+            "min_temp": "최저 온도",
+            "quality": "품질",
+            "yield": "수확량",
+            "hot": "HoT (지속 치유)",
+            "inst_hp": "즉시 회복 HP",
+            "max_hp": "최대 HP"
+        },
+        "durations": {
+            "instant": "즉시",
+            "30m": "30분",
+            "20m": "20분",
+            "45m": "45분",
+            "1h": "1시간",
+            "3m_20s": "3분 20초",
+            "5m": "5분",
+            "6m_40s": "6분 40초"
+        },
+        "categories": {
+            "Ore": "광석",
+            "Wood": "나무",
+            "Scrap": "스크랩",
+            "Harvesting": "수확",
+            "MaxHealth": "최대 HP",
+            "Healing": "치유",
+            "Rad": "방사능",
+            "Cooling": "냉각",
+            "Warming": "보온",
+            "Crafting": "제작"
+        },
+        "tiers": {
+            "Basic": "기",
+            "Advanced": "고",
+            "Pure": "순"
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "기 방사능 차",
+                "desc": "기본 등급 방사능 저항 차."
+            },
+            "Rad_adv": {
+                "name": "고 방사능 차",
+                "desc": "고급 등급 방사능 저항 차."
+            },
+            "Rad_pure": {
+                "name": "순 방사능 차",
+                "desc": "순수 등급 방사능 저항 차."
+            },
+            "Cooling_basic": {
+                "name": "기 냉각 차",
+                "desc": "기본 등급 냉각 차."
+            },
+            "Cooling_adv": {
+                "name": "고 냉각 차",
+                "desc": "고급 등급 냉각 차."
+            },
+            "Cooling_pure": {
+                "name": "순 냉각 차",
+                "desc": "순수 등급 냉각 차."
+            },
+            "Crafting_basic": {
+                "name": "기 제작 차",
+                "desc": "기본 등급 제작 차."
+            },
+            "Crafting_adv": {
+                "name": "고 제작 차",
+                "desc": "고급 등급 제작 차."
+            },
+            "Crafting_pure": {
+                "name": "순 제작 차",
+                "desc": "순수 등급 제작 차."
+            },
+            "Harvesting_basic": {
+                "name": "기 수확 차",
+                "desc": "기본 등급 수확 차."
+            },
+            "Harvesting_adv": {
+                "name": "고 수확 차",
+                "desc": "고급 등급 수확 차."
+            },
+            "Harvesting_pure": {
+                "name": "순 수확 차",
+                "desc": "순수 등급 수확 차."
+            },
+            "Healing_basic": {
+                "name": "기 치유 차",
+                "desc": "기본 등급 치유 차."
+            },
+            "Healing_adv": {
+                "name": "고 치유 차",
+                "desc": "고급 등급 치유 차."
+            },
+            "Healing_pure": {
+                "name": "순 치유 차",
+                "desc": "순수 등급 치유 차."
+            },
+            "MaxHealth_basic": {
+                "name": "기 최대 HP 차",
+                "desc": "기본 등급 최대 HP 차."
+            },
+            "MaxHealth_adv": {
+                "name": "고 최대 HP 차",
+                "desc": "고급 등급 최대 HP 차."
+            },
+            "MaxHealth_pure": {
+                "name": "순 최대 HP 차",
+                "desc": "순수 등급 최대 HP 차."
+            },
+            "Ore_basic": {
+                "name": "기 광석 차",
+                "desc": "기본 등급 광석 차."
+            },
+            "Ore_adv": {
+                "name": "고 광석 차",
+                "desc": "고급 등급 광석 차."
+            },
+            "Ore_pure": {
+                "name": "순 광석 차",
+                "desc": "순수 등급 광석 차."
+            },
+            "Scrap_basic": {
+                "name": "기 스크랩 차",
+                "desc": "기본 등급 스크랩 차."
+            },
+            "Scrap_adv": {
+                "name": "고 스크랩 차",
+                "desc": "고급 등급 스크랩 차."
+            },
+            "Scrap_pure": {
+                "name": "순 스크랩 차",
+                "desc": "순수 등급 스크랩 차."
+            },
+            "Warming_basic": {
+                "name": "기 보온 차",
+                "desc": "기본 등급 보온 차."
+            },
+            "Warming_adv": {
+                "name": "고 보온 차",
+                "desc": "고급 등급 보온 차."
+            },
+            "Warming_pure": {
+                "name": "순 보온 차",
+                "desc": "순수 등급 보온 차."
+            },
+            "Wood_basic": {
+                "name": "기 나무 차",
+                "desc": "기본 등급 나무 차."
+            },
+            "Wood_adv": {
+                "name": "고 나무 차",
+                "desc": "고급 등급 나무 차."
+            },
+            "Wood_pure": {
+                "name": "순 나무 차",
+                "desc": "순수 등급 나무 차."
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "빨간 베리",
+            "Blue_Berry": "파란 베리",
+            "Green_Berry": "초록 베리",
+            "Yellow_Berry": "노란 베리",
+            "White_Berry": "하얀 베리",
+            "Basic_Rad_Tea": "기 방사능 차",
+            "Adv_Rad_Tea": "고 방사능 차",
+            "Basic_Cooling_Tea": "기 냉각 차",
+            "Adv_Cooling_Tea": "고 냉각 차",
+            "Basic_Crafting_Tea": "기 제작 차",
+            "Adv_Crafting_Tea": "고 제작 차",
+            "Basic_Harvesting_Tea": "기 수확 차",
+            "Adv_Harvesting_Tea": "고 수확 차",
+            "Basic_Healing_Tea": "기 치유 차",
+            "Adv_Healing_Tea": "고 치유 차",
+            "Basic_MaxHealth_Tea": "기 MaxHP 차",
+            "Adv_MaxHealth_Tea": "고 MaxHP 차",
+            "Basic_Ore_Tea": "기 광석 차",
+            "Adv_Ore_Tea": "고 광석 차",
+            "Basic_Scrap_Tea": "기 스크랩 차",
+            "Adv_Scrap_Tea": "고 스크랩 차",
+            "Basic_Warming_Tea": "기 보온 차",
+            "Adv_Warming_Tea": "고 보온 차",
+            "Basic_Wood_Tea": "기 나무 차",
+            "Adv_Wood_Tea": "고 나무 차"
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "CCTV 코드",
+            "no_signal": "신호 없음",
+            "copied": "복사됨",
+            "randomized": "무작위 코드",
+            "rec": "녹화 중"
+        },
+        "categories": {
+            "all": "모든 카메라",
+            "large_oil": "대형 오일리그",
+            "small_oil": "소형 오일리그",
+            "cargo": "카고 쉽",
+            "silo": "미사일 사일로",
+            "airfield": "에어필드",
+            "labs": "수중 연구소",
+            "outpost": "아웃포스트",
+            "bandit": "밴딧 캠프",
+            "dome": "돔",
+            "radtown": "방사능 구역",
+            "ferry": "페리 터미널",
+            "town": "마을"
+        },
+        "labels": {
+            "dock": "선착장",
+            "exhaust": "배기구",
+            "helipad": "헬기장",
+            "level_1": "레벨 1",
+            "level_2": "레벨 2",
+            "level_3": "레벨 3",
+            "level_3a": "레벨 3A",
+            "level_3b": "레벨 3B",
+            "level_4": "레벨 4",
+            "level_5": "레벨 5",
+            "level_6a": "레벨 6A",
+            "level_6b": "레벨 6B",
+            "level_6c": "레벨 6C",
+            "level_6d": "레벨 6D",
+            "deck": "갑판",
+            "bridge": "함교",
+            "stern": "선미",
+            "hold_1": "화물칸 1",
+            "hold_2": "화물칸 2",
+            "exit_1": "출구 1",
+            "exit_2": "출구 2",
+            "missile": "미사일",
+            "tower": "타워",
+            "shipping": "선적",
+            "casino": "카지노",
+            "chill_zone": "휴식 구역",
+            "crude_oil": "원유",
+            "music": "음악",
+            "street": "거리",
+            "logistics": "물류",
+            "parking": "주차장",
+            "utilities": "유틸리티",
+            "apartments": "아파트",
+            "house": "주택",
+            "sbl": "SBL",
+            "dome_1": "돔 1",
+            "top": "꼭대기",
+            "weapons": "무기",
+            "lab": "연구실",
+            "security": "보안"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "플레이어 검색",
+            "search_hint": "플레이어 이름 또는 ID...",
+            "loading_text": "BATTLEMETRICS 조회 중...",
+            "error_title": "검색 실패",
+            "retry_button": "재시도",
+            "empty_state": "플레이어를 찾을 수 없습니다.",
+            "error_snackbar": "오류: {}",
+            "global": "전체",
+            "player_id": "플레이어 ID"
+        },
+        "details": {
+            "tracking_id": "추적 중",
+            "current_state": "현재 상태",
+            "online": "온라인",
+            "offline": "오프라인",
+            "last_seen": "마지막 접속",
+            "unknown": "알 수 없음",
+            "alert_triggers": "알림 트리거:",
+            "update_tracking": "플레이어 팔로우"
+        },
+        "list_item": {
+            "playing_on": "플레이 중인 서버:",
+            "not_in_server": "서버에 없음"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "공격 통계",
+            "total_attacks": "총 공격 횟수",
+            "last_attack": "마지막 공격",
+            "recent_alerts": "최근 알림",
+            "no_notification": "알림이 없습니다.",
+            "unknown_source": "알 수 없는 출처",
+            "time_ago": {
+                "just_now": "방금",
+                "minutes": "{}분 전",
+                "hours": "{}시간 전",
+                "days": "{}일 전",
+                "months": "{}개월 전"
+            }
+        },
+        "traffic": {
+            "title": "공격 트래픽",
+            "ranges": {
+                "day": "일간",
+                "week": "주간",
+                "month": "월간"
+            }
+        },
+        "overlay": {
+            "premium_data": "프리미엄 데이터",
+            "upgrade_button": "업그레이드하여 보기"
+        },
+        "alarm": {
+            "stop": "알람 중지"
+        },
+        "notifications": {
+            "base_attack": "기지가 공격받고 있습니다!"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "효과 없음",
+            "total_required": "총 필요량",
+            "cannot_damage": "피해를 줄 수 없음",
+            "loot_only": "전리품 전용",
+            "raw_sulfur": "유황"
+        },
+        "materials": {
+            "charcoal": "목탄",
+            "fragments": "금속 조각",
+            "stones": "돌",
+            "wood": "나무",
+            "bone": "뼈",
+            "low_grade_fuel": "저급 연료",
+            "cloth": "천",
+            "rope": "로프",
+            "pipe": "파이프",
+            "tech_trash": "기술 쓰레기",
+            "sulfur": "Sulfur"
+        },
+        "categories": {
+            "construction": "건축",
+            "door": "문",
+            "placeable": "설치물",
+            "item": "함정"
+        },
+        "explosives": {
+            "c4": "C4",
+            "rocket": "로켓",
+            "satchel": "가방 폭탄",
+            "beancan": "깡통 수류탄",
+            "explo556": "5.56 폭발탄",
+            "he_grenade": "F1 수류탄",
+            "he_grenade_40mm": "40mm 유탄",
+            "molotov": "화염병",
+            "hv_rocket": "고속 로켓",
+            "incen_rocket": "소이 로켓",
+            "homing_rocket": "유도 미사일",
+            "mlrs_rocket": "MLRS 로켓",
+            "survey_charge": "지질 탐사 폭약",
+            "propane_bomb": "프로판 가스통",
+            "ammo_rifle": "5.56 탄약",
+            "ammo_rifle_hv": "5.56 고속탄",
+            "ammo_rifle_incen": "5.56 소이탄",
+            "ammo_pistol": "권총 탄약",
+            "ammo_pistol_hv": "권총 고속탄",
+            "ammo_pistol_incen": "권총 소이탄",
+            "ammo_buckshot": "벅샷",
+            "ammo_slug": "슬러그 탄",
+            "ammo_incen_shell": "소이 샷건 탄",
+            "ammo_handmade": "수제 탄약",
+            "arrow_fire": "불 화살",
+            "arrow_bone": "뼈 화살",
+            "arrow_wooden": "나무 화살",
+            "arrow_hv": "고속 화살"
+        },
+        "calculator": {
+            "title": "레이드 계산기",
+            "select_target": "타겟 선택",
+            "materials_breakdown": "재료 내역",
+            "total_sulfur": "총 필요 유황",
+            "min_cost": "최소 비용",
+            "best_for_sulfur": "최고 유황 효율",
+            "custom_plan": "커스텀 레이드 플랜",
+            "clear_all": "모두 지우기"
+        },
+        "targets": {
+            "wood_wall": "나무 벽",
+            "stone_wall": "돌 벽",
+            "metal_wall": "금속 벽",
+            "hqm_wall": "고급 금속 벽",
+            "wood_foundation": "나무 토대",
+            "stone_foundation": "돌 토대",
+            "metal_foundation": "금속 토대",
+            "hqm_foundation": "고급 금속 토대",
+            "wood_floor": "나무 바닥",
+            "stone_floor": "돌 바닥",
+            "metal_floor": "금속 바닥",
+            "hqm_floor": "고급 금속 바닥",
+            "ext_wood_wall": "나무 외벽",
+            "ext_stone_wall": "돌 외벽",
+            "ext_gate_wood": "나무 외벽 문",
+            "ext_gate_stone": "돌 외벽 문",
+            "wood_door": "나무 문",
+            "metal_door": "금속 문",
+            "garage_door": "차고 문",
+            "armored_door": "장갑 문",
+            "ladder_hatch": "사다리 해치",
+            "triangle_ladder_hatch": "삼각 사다리 해치",
+            "wood_bars": "나무 창살",
+            "metal_bars": "금속 창살",
+            "strengthened_glass": "강화 유리 창",
+            "reinforced_glass": "방탄 유리 창",
+            "shutter_wood": "나무 셔터",
+            "metal_shop_front": "금속 상점",
+            "vending_machine": "자판기",
+            "tc": "도구 함",
+            "small_box": "작은 상자",
+            "large_box": "큰 상자",
+            "sleeping_bag": "침낭",
+            "bed": "침대",
+            "furnace_small": "화로",
+            "furnace_large": "대형 용광로",
+            "refinery": "정유기",
+            "autoturret": "자동 포탑",
+            "flame_turret": "화염 포탑",
+            "shotgun_trap": "산탄총 함정",
+            "sam_site": "SAM 사이트",
+            "tesla_coil": "테슬라 코일",
+            "landmine": "지뢰",
+            "beartrap": "곰 덫",
+            "windmill": "풍력 발전기",
+            "solar_panel": "태양광 패널",
+            "battery_small": "소형 배터리",
+            "battery_medium": "중형 배터리",
+            "battery_large": "대형 배터리",
+            "locker": "사물함",
+            "fridge": "냉장고",
+            "hearth": "난로",
+            "search_light": "탐조등",
+            "drop_box": "드롭 박스",
+            "mailbox": "우편함",
+            "sub_all_shapes": "모든 형태",
+            "cctv_camera": "CCTV 카메라",
+            "workbench_level1": "1단계 작업대",
+            "workbench_level2": "2단계 작업대",
+            "workbench_level3": "3단계 작업대",
+            "cooking_workbench": "조리대",
+            "engineering_workbench": "엔지니어링 작업대",
+            "planter": "화분",
+            "sleepingbag": "침낭",
+            "wicker_barrel": "갈대 드럼통",
+            "wooden_ladder": "나무 사다리",
+            "wood_shelter": "나무 피난처"
+        }
+    },
+    "subscription": {
+        "free_tier": "무료 등급",
+        "limited_features": "제한된 기능",
+        "lifetime_license": "평생 라이선스 활성",
+        "duration": "기간",
+        "forever_free": "무료",
+        "lifetime": "평생",
+        "status": "상태",
+        "locked": "잠김",
+        "active": "활성",
+        "upgrade_button": "업그레이드하여 잠금 해제"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "프리미엄 기능",
+            "description": "고급 제어 기능을 잠금 해제하려면 업그레이드하세요",
+            "unlock_button": "지금 잠금 해제"
+        },
+        "ui": {
+            "title": "설정",
+            "guides_setup": "가이드 & 설정",
+            "how_it_works": "사용 방법",
+            "setup_config": "설치 구성",
+            "legal": "법적 정보",
+            "tos": "약관",
+            "privacy": "개인정보",
+            "version": "RAID ALARM V{}"
+        },
+        "common": {
+            "error": "오류",
+            "durations": {
+                "sec_30": "30초",
+                "min_1": "1분",
+                "min_3": "3분",
+                "min_5": "5분",
+                "sec_short": "{}초",
+                "min_short": "{}분",
+                "hour_short": "{}시간"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "없음",
+                "alarm_1": "알람 1",
+                "alarm_2": "알람 2",
+                "alarm_3": "알람 3",
+                "alarm_4": "알람 4",
+                "alarm_5": "알람 5",
+                "alarm_6": "알람 6",
+                "custom_label": "사용자 지정",
+                "pick_custom": "사용자 지정..."
+            }
+        },
+        "alarm_mode": {
+            "title": "레이드 알람",
+            "subtitle": "지속적인 큰 소리의 알림",
+            "sound": "알람 소리",
+            "infinite_loop": "무한 반복",
+            "duration": "알람 지속 시간"
+        },
+        "fake_call": {
+            "title": "가짜 전화",
+            "subtitle": "수신 전화 시뮬레이션",
+            "caller_name": "발신자 이름",
+            "show_number": "번호 표시",
+            "background": "통화 배경",
+            "background_options": {
+                "default": "기본",
+                "gallery": "갤러리"
+            },
+            "sound": "벨소리",
+            "duration": "통화 시간",
+            "infinite_loop": "무한 반복"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "온라인",
+            "offline": "오프라인",
+            "official": "공식",
+            "modded": "모드",
+            "community": "커뮤니티"
+        },
+        "monitor": {
+            "title": "서버 모니터",
+            "select_server": "서버 선택"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "서버 찾기",
+                "subtitle": "탐색 & 초기화 추적"
+            },
+            "find_player": {
+                "title": "플레이어 찾기",
+                "subtitle": "이름 & 접속 상태"
+            }
+        },
+        "map": {
+            "info_unavailable": "이 서버에 대한 지도 정보를 사용할 수 없습니다",
+            "failed_load": "지도 로드 실패",
+            "check_connection": "네트워크 연결을 확인해주세요",
+            "loading": "지도 로딩 중...",
+            "open_browser": "브라우저에서 열기",
+            "procedural": "절차적 생성",
+            "retry": "재시도"
+        },
+        "live": {
+            "auto_refresh_active": "자동 새로고침 활성",
+            "auto_refresh_desc": "피드는 15초마다 갱신됩니다.",
+            "activity_title": "플레이어 활동",
+            "no_signal": "신호 없음",
+            "fetching_data": "플레이어 데이터 가져오는 중..."
+        },
+        "overview": {
+            "population": "플레이어",
+            "map": "지도",
+            "fps": "FPS",
+            "uptime": "가동 시간",
+            "next_wipe": "다음 초기화",
+            "last_wipe": "지난 초기화",
+            "wipe_notification": "초기화 알림",
+            "alert_me_before": "미리 알림:",
+            "force_refresh": "강제 새로고침",
+            "unknown": "알 수 없음",
+            "overdue": "기한 지남",
+            "size_label": "크기:",
+            "seed_label": "시드:",
+            "active": "활성",
+            "disabled": "비활성",
+            "na": "N/A",
+            "time_ago_days": "{}일 {}시간",
+            "time_ago_hours": "{}시간"
+        },
+        "notifications": {
+            "wipe_alert_title": "Wipe 알림: {}",
+            "wipe_alert_body": "서버가 {}분 후에 초기화됩니다! 준비하세요."
+        },
+        "wipe": {
+            "next_wipe_in": "다음 초기화까지",
+            "wipe_alarm": "초기화 알람"
+        },
+        "targets": {
+            "enter_player_name": "정확한 플레이어 이름을 입력...",
+            "no_targets": "추적 중인 타겟 없음.",
+            "go_to_live": "실시간 피드로 이동",
+            "title": "관심 목록",
+            "active_badge": "활성",
+            "empty": "현재 추적 중인 플레이어가 없습니다.",
+            "search_link": "플레이어 검색",
+            "online_now": "현재 온라인",
+            "stop_tracking": {
+                "title": "추적을 중지하시겠습니까?",
+                "confirm": "정말 {} 님의 추적을 중지하시겠습니까?",
+                "button": "추적 중지",
+                "cancel": "취소"
+            }
+        },
+        "featured": {
+            "title": "인기 커뮤니티"
+        },
+        "search": {
+            "title": "서버 검색",
+            "tabs": {
+                "search": "검색",
+                "favorites": "즐겨찾기",
+                "featured": "추천"
+            },
+            "placeholder": "서버 이름 검색...",
+            "searching": "검색 중...",
+            "no_results": "\"{}\" 에 대한 서버를 찾을 수 없습니다",
+            "no_favorites": "저장된 즐겨찾기가 없습니다.",
+            "favorites_help": "서버를 검색하고 별표를 눌러 여기서 추적하세요.",
+            "results_label": "검색 결과",
+            "official_section": {
+                "title": "공식 서버",
+                "desc": "공식 서버는 매월 초기화되며 높은 신뢰성을 제공합니다."
+            },
+            "sort": {
+                "title": "정렬 기준",
+                "relevance": "관련성",
+                "high_pop": "인구 높음",
+                "low_pop": "인구 낮음",
+                "just_wiped": "방금 초기화됨"
+            },
+            "error": {
+                "title": "검색 실패",
+                "retry": "검색 재시도"
+            }
+        },
+        "active_widget": {
+            "select": "활성 서버 선택",
+            "wiped": "초기화됨"
+        },
+        "logs": {
+            "connected": "연결됨",
+            "disconnected": "연결 끊김",
+            "recently": "최근",
+            "just_now": "방금"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "개요",
+                "map": "지도",
+                "live": "라이브",
+                "targets": "타겟",
+                "wipe": "초기화"
+            },
+            "errors": {
+                "unstable": "연결이 불안정합니다. 데이터가 오래되었을 수 있습니다.",
+                "signal_lost": "신호 손실. 재시도 중...",
+                "connection": "연결 오류. 다시 시도해주세요."
+            },
+            "tracking": {
+                "max_limit": "최대 3명의 플레이어를 추적할 수 있습니다",
+                "not_found_exact": "정확한 이름 \"{}\" 을(를) 가진 플레이어를 찾을 수 없습니다",
+                "not_found_on_server": "이 서버에서 플레이어를 찾을 수 없습니다.",
+                "select_player": "플레이어 선택"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "연료 계산기",
+        "input_amount": "수량",
+        "runtime": "{} 시간",
+        "select_machine": "기계 선택",
+        "total_output": "총 산출량",
+        "estimated_yield": "추정 수확량",
+        "per_barrel": "배럴당: {}",
+        "per_lgf": "LGF당: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "디젤",
+            "low_grade": "저급 연료"
+        },
+        "machines": {
+            "excavator": "대형 굴착기",
+            "hqm_quarry": "고품질 채굴기",
+            "sulfur_quarry": "유황 채굴기",
+            "stone_quarry": "돌 채굴기",
+            "pump_jack": "채유기",
+            "deploy_pump_jack": "이동식 채유기",
+            "deploy_quarry": "이동식 채굴기",
+            "types": {
+                "monument": "마뉴먼트",
+                "static": "고정형",
+                "deployable": "이동식"
+            }
+        },
+        "resources": {
+            "diesel": "디젤 연료",
+            "sulfur": "유황 광석",
+            "hqm": "고급 금속 광석",
+            "metal_frags": "금속 조각",
+            "stones": "돌",
+            "metal_ore": "금속 광석",
+            "crude_oil": "원유",
+            "low_grade": "저급 연료"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "개인정보 처리방침",
+            "last_updated": "최종 업데이트: {year}",
+            "contact_title": "문의",
+            "contact_email": "개인정보 관련 질문, 데이터 요청 또는 권리 행사에 대해서는 다음으로 연락하십시오:\n\n이메일: alcstackdev@gmail.com",
+            "section1_title": "1. 수집하는 정보",
+            "section1_content": "Raid Alarm은 앱 기능에 필요한 최소한의 데이터만 수집합니다: 라이선스 확인을 위한 익명화된 기기 ID, Rust+ 앱의 특정 공격 알림, 평생 라이선스 상태(Google Play Billing을 통해 처리), 기기에 로컬로 저장된 앱 설정. 개인 이름, 이메일 주소, 전화번호, 위치 데이터, 생체 데이터 또는 결제 카드 정보를 수집하지 않습니다.",
+            "section2_title": "2. 처리의 법적 근거",
+            "section2_content": "당사는 다음 법적 근거에 따라 귀하의 개인 데이터를 처리합니다:\n\n• 계약 이행: 귀하가 요청한 앱 서비스를 제공하기 위해 필요한 처리\n• 정당한 이익: 앱 기능 및 개선을 위한 처리\n• 동의: 명시적으로 요구되는 경우, 처리 전에 귀하의 동의를 얻습니다",
+            "section3_title": "3. 알림 데이터 처리",
+            "section3_content": "당사는 Rust+ 앱의 특정 공격 알림만 처리합니다. 알림 데이터는 귀하의 기기에서 전적으로 처리되며 로컬에 저장됩니다. 당사는 다른 앱의 알림에 접근하지 않습니다. 당사는 귀하의 명시적 동의하에 Android의 표준 NotificationListenerService API를 사용합니다. 당사는 Rust+ 앱, Facepunch Studios Limited 또는 관련 법인과 제휴하지 않았습니다.",
+            "section4_title": "4. 권한",
+            "section4_content": "Raid Alarm은 필요한 최소한의 권한만 요청합니다: Rust+ 앱의 알림을 모니터링하기 위한 알림 접근, 백그라운드 작업을 위한 배터리 최적화 예외, 알람을 울리기 위한 알람 권한.",
+            "section5_title": "5. 정보 사용 방법",
+            "section5_content": "수집된 데이터는 알람 시스템 운영, 라이선스 검증 및 앱 개선을 위해서만 사용됩니다. 무료 단계 사용자의 경우, Google AdMob에서 핵심 광고 서비스를 제공하기 위해 익명화된 데이터를 사용할 수 있습니다. 당사는 귀하의 개인 데이터를 제3자 마케팅 담당자에게 그들의 목적으로 판매하거나 공유하지 않습니다. 당사는 표준 광고 기능 이외의 자동화된 의사 결정이나 프로파일링을 사용하지 않습니다.",
+            "section6_title": "6. 데이터 저장 및 보존",
+            "section6_content": "모든 알림 데이터, 설정 및 통계는 귀하의 기기에 로컬로 저장됩니다. 구매 정보만 암호화된 보안 데이터베이스에 저장됩니다. 알림 데이터는 당사 서버로 전송되지 않습니다. 알림 기록은 귀하가 삭제하거나 앱을 제거할 때까지 로컬에 저장됩니다. 라이선스 정보는 평생 구매를 확인하기 위해 무기한 보존됩니다. 앱을 제거하여 모든 로컬 데이터를 삭제하거나 당사에 연락하여 구매 데이터 삭제를 요청할 수 있습니다.",
+            "section7_title": "7. 데이터 공유 및 제3자",
+            "section7_content": "당사는 귀하의 개인 데이터를 판매하지 않습니다. 데이터 공유는 결제 처리를 위한 Google Play 스토어, 무료 단계 사용자에게 광고를 게재하기 위한 Google AdMob, 라이선스 검증을 위한 안전한 제3자 서비스로 제한됩니다. 당사는 귀하의 알림 데이터를 제3자와 공유하지 않습니다. 사용자는 데이터 판매 거부권(당사는 데이터를 판매하지 않음)을 가지며 기기 설정을 통해 광고 기본 설정을 관리할 수 있습니다.",
+            "section8_title": "8. 국제 데이터 전송",
+            "section8_content": "구매 데이터는 보안 데이터 센터에 위치한 서버에서 처리될 수 있습니다. 모든 국제 전송은 해당 데이터 보호법 및 적절한 보호 조치를 준수합니다. 데이터는 산업 표준 암호화를 사용하여 전송 중에 암호화됩니다.",
+            "section9_title": "9. 보안 조치",
+            "section9_content": "당사는 로컬 암호화, 보안 통신 프로토콜, 암호화된 데이터베이스 저장소 및 제한된 액세스 제어를 포함하여 귀하의 데이터를 보호하기 위한 기술적 및 관리적 보안 조치를 구현합니다. 그러나 100% 안전한 전송 또는 저장 방법은 없습니다. 당사는 귀하의 데이터를 보호하기 위해 노력하지만 절대적인 보안을 보장할 수는 없습니다.",
+            "section10_title": "10. 귀하의 권리",
+            "section10_content": "귀하는 귀하의 개인 데이터와 관련하여 액세스, 수정, 삭제, 처리 제한, 데이터 이동성, 처리 반대 및 동의 철회의 권리가 있습니다. 알 권리, 삭제할 권리, 판매를 거부할 권리(당사는 데이터를 판매하지 않음) 및 차별받지 않을 권리가 있습니다. 권리를 행사하려면 아래 이메일 주소로 연락하십시오. 당사는 관련 법률에서 요구하는 합리적인 기간 내에 응답할 것입니다.",
+            "section11_title": "11. 아동 개인정보 보호",
+            "section11_content": "당사의 앱은 18세 미만(또는 일부 관할 구역에서는 13세 미만)의 어린이를 대상으로 하지 않습니다. 당사는 의도적으로 어린이로부터 개인 데이터를 수집하지 않습니다. 어린이로부터 데이터를 수집한 것으로 밝혀지면 즉시 삭제합니다. 당사는 18세(또는 해당 관할 구역의 성인 연령) 미만의 개인이 수행한 구매에 대해 책임을 지지 않으며 어떠한 책임도 지지 않습니다. 부모 또는 보호자는 자녀의 앱 사용 및 구매를 모니터링할 전적인 책임이 있습니다. 미성년자가 적절한 승인 없이 구매한 경우 부모 또는 보호자는 Google Play Store에 환불 요청을 문의해야 합니다. 당사는 환불을 처리하지 않습니다.",
+            "section12_title": "12. 데이터 유출 알림",
+            "section12_content": "귀하의 권리에 영향을 미칠 수 있는 데이터 유출이 발생하는 경우, 관련 법률에서 요구하는 대로 관련 감독 당국에 통지하고, 권리에 대한 높은 위험이 있는 경우 부당한 지체 없이 영향을 받는 사용자에게 통지할 것입니다.",
+            "section13_title": "13. 이 정책의 변경",
+            "section13_content": "이 개인정보 처리방침은 수시로 업데이트될 수 있습니다. 중요한 변경 사항은 사용자에게 통지됩니다. 변경 후에도 앱을 계속 사용하는 것은 변경 사항을 수락하는 것으로 간주됩니다. 마지막 업데이트 날짜는 이 페이지 상단에 표시됩니다.",
+            "section14_title": "14. 광고",
+            "section14_content": "Raid Alarm의 무료 단계는 광고를 통해 지원됩니다. 당사는 광고를 게재하기 위해 Google AdMob을 사용합니다. AdMob은 관련성 높은 광고를 표시하고 분석 목적으로 귀하의 기기 광고 ID와 같은 데이터를 수집하고 사용할 수 있습니다. 평생 라이선스를 구매한 사용자는 애플리케이션에서 모든 제3자 광고가 삭제됩니다."
+        },
+        "terms_of_service": {
+            "title": "서비스 약관",
+            "last_updated": "최종 업데이트: {year}",
+            "contact_title": "문의",
+            "contact_email": "질문: alcstackdev@gmail.com",
+            "section1_title": "1. 약관의 수락",
+            "section1_content": "Raid Alarm을 다운로드, 설치, 액세스 또는 사용함으로써 귀하는 이 서비스 약관에 구속되는 데 동의하는 것입니다. 동의하지 않으면 앱을 사용하지 마십시오. 이 앱을 사용하려면 18세(또는 귀하의 관할 구역의 성인 연령) 이상이어야 합니다. 18세 미만인 경우 부모 또는 보호자의 동의가 있어야만 이 앱을 사용할 수 있습니다.",
+            "section2_title": "2. 서비스 설명",
+            "section2_content": "Raid Alarm은 Rust+ 앱의 알림을 모니터링하고 공격 알림이 수신되면 알람을 울리는 Google Play Store에서 독점적으로 제공되는 모바일 앱입니다. 앱은 어떠한 보증 없이 \"있는 그대로\" 제공됩니다. 앱의 기능은 Rust+ 앱에 전적으로 의존합니다. Rust+가 설치되어 있지 않거나, 비활성화되거나, Google Play Store에서 제거되거나, 알림 전송을 중지하거나, 지연되거나, Rust 게임 서버에 문제가 발생하면 앱이 작동하지 않으며 당사는 그로 인한 문제에 대해 책임을 지지 않습니다.",
+            "section3_title": "3. 제휴 또는 관계 없음",
+            "section3_content": "Raid Alarm은 Rust 게임, Rust+ 앱, Facepunch Studios Limited 또는 관련 법인과 제휴, 관계, 파트너십, 연결, 보증 또는 후원 관계가 없습니다. Raid Alarm은 독립적인 애플리케이션입니다. 당사는 앱이 수행하는 작업을 설명하기 위해 식별 및 설명 목적으로만 \"Rust+\", \"Rust\", \"Facepunch\" 및 관련 용어를 사용합니다(상표법에 따른 명목상 공정 사용). 당사는 이러한 상표에 대한 어떠한 권리도 주장하지 않습니다. 당사는 Facepunch Studios Limited의 승인, 보증 또는 연결을 받지 않았습니다. Facepunch Studios Limited가 당사의 이러한 용어 사용에 반대하는 경우 당사는 즉시 요청을 준수할 것입니다. 이러한 용어의 사용은 전적으로 설명적인 것이며 어떠한 관계, 승인 또는 보증도 의미하지 않습니다.",
+            "section4_title": "4. 외부 의존성 및 제한",
+            "section4_content": "중대한 의존성 알림: Raid Alarm의 기능은 Rust+ 앱에 완전히 그리고 절대적으로 의존합니다. 다음 상황 중 하나라도 발생하면 앱이 작동하지 않습니다:\n\n- Rust+ 앱이 기기에 설치되어 있지 않음\n- Rust+ 앱이 비활성화되거나 제거됨\n- Rust+ 앱이 Google Play Store에서 제거됨\n- Rust+ 앱을 사용할 수 없게 되거나 작동이 중지됨\n- Rust+ 앱이 알림 전송을 중지하거나 알림이 지연됨\n- Rust+ 앱의 \"스마트 알람\" 또는 알림 기능이 제거, 비활성화 또는 수정됨\n- Rust 게임 서버에 문제, 중단 또는 오작동 발생\n- Facepunch Studios Limited가 알림 기능을 제한하거나 금지함\n- 인터넷 연결 문제로 인해 Rust+ 알림을 수신할 수 없음\n- Rust+ 앱의 알림 전송 능력에 영향을 미치는 기타 모든 문제\n\n앱을 사용함으로써 귀하는 다음 사항을 명시적으로 인정하고 동의합니다:\n\n- 앱의 기능은 당사가 통제할 수 없는 외부 서비스(Rust+ 앱 및 Rust 게임 서버)에 전적으로 의존합니다\n- 당사는 Rust+ 앱의 가용성, 기능, Google Play Store에서의 제거, 알림 지연 또는 Facepunch Studios Limited가 변경한 사항에 대해 책임을 지지 않습니다\n- 당사는 Rust 게임 서버 문제, 중단 또는 오작동에 대해 책임을 지지 않습니다\n- Facepunch Studios Limited가 Rust+ 앱의 알림 기능을 제한, 금지 또는 수정하는 경우 당사는 책임을 지지 않습니다\n- 귀하는 Rust+ 앱 문제, Rust 게임 서버 문제, 알림 지연 또는 기타 외부 의존성 문제로 인해 당사에 책임을 묻거나, 환불을 요청하거나, 어떠한 청구도 하지 않을 것입니다\n- Rust+ 앱이 Google Play Store에서 제거되거나 작동이 중지되면 앱 작동이 즉시 중지되며 귀하는 환불, 보상 또는 기타 구제책에 대한 권리가 없습니다",
+            "section5_title": "5. 제3자 서비스에 대한 책임 부인",
+            "section5_content": "당사는 다음으로 인해 발생하는 모든 문제, 손해, 손실 또는 결과에 대해 책임을 지지 않으며 어떠한 책임도 지지 않습니다:\n\n- Rust 게임, Rust+ 앱, Facepunch Studios Limited 또는 관련 법인\n- Rust+ 앱이 Google Play Store에서 제거됨\n- Rust+ 앱이 알림 전송을 중지하거나 알림이 지연됨\n- Rust+ 앱의 \"스마트 알람\" 또는 알림 기능이 제거, 비활성화 또는 수정됨\n- Rust 게임 서버 문제, 중단 또는 오작동\n- Facepunch Studios Limited가 수행한 변경, 제한 또는 수정\n- 기타 제3자 서비스, 앱 또는 의존성\n\n귀하는 모든 외부 의존성과 관련하여 자신의 위험으로 앱을 사용합니다. 당사는 Rust+ 앱, Rust 게임 서버 또는 Facepunch Studios Limited에 대해 통제권이 없으며 이러한 외부 의존성으로 인해 발생하는 어떠한 문제에 대해서도 책임을 지지 않습니다.",
+            "section6_title": "6. 서비스 보증",
+            "section6_content": "당사는 다음 조건이 모두 동시에 충족되는 경우에 한해 Raid Alarm이 올바르게 작동함을 보증합니다:\n\n- Rust 게임 서버가 작동 중이고 정상적으로 기능함\n- Rust+ 앱이 기기에 설치, 활성화 및 정상적으로 작동함\n- Rust+ 앱이 Google Play Store에서 사용 가능하며 제거되지 않음\n- Rust+ 앱이 지연 없이 알림을 전송함\n- Rust+ 앱의 알림 기능(\"스마트 알람\" 포함)이 활성화되어 있고 비활성화되지 않음\n- 귀하의 기기가 모든 기술 요구 사항을 충족함\n- 필요한 모든 권한이 부여되고 유지됨\n- 인터넷 연결이 활성화됨\n- Facepunch Studios Limited가 알림 기능을 제한하거나 금지하지 않음\n\n이러한 조건 중 하나라도 충족되지 않으면 당사는 앱이 작동할 것이라고 보증할 수 없으며 보증하지 않으며, 그로 인한 문제, 손실 또는 손해에 대해 책임을 지지 않습니다.",
+            "section7_title": "7. 권한",
+            "section7_content": "Raid Alarm은 필요한 최소한의 권한만 요청합니다: Rust+ 앱의 알림을 모니터링하기 위한 알림 접근, 백그라운드 작업을 위한 배터리 최적화 예외, 알람을 울리기 위한 알람 권한.",
+            "section8_title": "8. 평생 라이선스 약관",
+            "section8_content": "가용성: 이 앱은 Google Play Store에서만 사용할 수 있습니다. 모든 구매는 Google Play Store 결제 시스템을 통해 처리됩니다.\n\n평생 라이선스: 프리미엄 기능은 일회성 구매가 필요합니다. 당사는 모든 프리미엄 기능에 영구적으로 액세스할 수 있는 '평생 라이선스'를 제공합니다. 이것은 반복적인 비용이나 구독이 없는 일회성 결제입니다.\n\n연령 요건: 라이선스를 구매하려면 18세(또는 귀하의 관할 구역의 성인 연령) 이상이어야 합니다. 18세 미만인 경우 부모 또는 보호자의 동의가 있어야만 구매할 수 있습니다. 당사는 적절한 승인 없이 미성년자가 수행한 구매에 대해 책임을 지지 않습니다. 부모 또는 보호자는 자녀의 구매를 모니터링할 전적인 책임이 있습니다. 미성년자가 승인 없이 구매한 경우 Google Play Store에 환불 요청을 문의하십시오.\n\n결제 처리: 모든 결제는 Google Play Store를 통해 안전하게 처리됩니다. 당사는 귀하의 결제 카드 정보를 저장하거나 액세스할 수 없습니다. 결제 정보는 전적으로 Google Play Store에서 처리합니다.\n\n가격: 가격은 국가마다 다를 수 있으며 사전 통지 없이 변경될 수 있습니다. 현재 가격은 앱 및 Google Play Store에 표시됩니다.\n\n서비스 수정: 당사는 통지나 환불 없이 언제든지 기능을 수정, 추가 또는 제거할 권리가 있습니다. 당사는 본 약관 위반 또는 불법 활동에 대해 언제든지 귀하의 라이선스를 종료하거나 정지할 권리가 있습니다.\n\n서비스 가용성: 앱의 기능은 Rust+ 앱에 전적으로 의존합니다. Rust+ 앱이 Google Play Store에서 제거되거나 작동이 중지되거나 알림 전송을 중지하면 라이선스 상태에 관계없이 앱이 작동하지 않으며 귀하는 환불이나 보상에 대한 권리가 없습니다.\n\n#### 환불 정책\n\n모든 판매는 최종적입니다. 다음을 포함하되 이에 국한되지 않는 어떠한 상황에서도 환불은 제공되지 않습니다:\n\n- Rust+ 앱의 Google Play Store 제거, 사용 불가 또는 문제\n- Rust+ 앱이 알림 전송을 중지하거나 알림이 지연됨\n- Facepunch Studios Limited가 Rust+ 앱의 알림 기능을 제거, 비활성화 또는 수정함\n- Rust 게임 서버 문제, 중단 또는 오작동\n- 앱의 기능적 문제(충돌, 버그, 알림 지연, 알람 미작동)\n- Rust+ 앱 문제 또는 제거로 인해 앱 작동이 중지됨\n- 앱 또는 그 기능에 대한 사용자 불만족\n- 구매 후 사용자 변심\n- 사용자 기기가 앱과 호환되지 않음\n- 사용자가 필요한 권한을 거부함\n- 미성년자의 무단 구매(환불 요청은 Google Play Store에 문의)\n- 기타 모든 이유\n\nGoogle Play Store 환불 기간(일반적으로 48시간) 이후에는 이유를 불문하고 어떠한 경우에도 당사에서 환불을 제공하지 않습니다.\n\n라이선스를 구매함으로써 귀하는 Google Play Store의 표준 환불 기간(일반적으로 48시간)을 제외하고 모든 환불 권리를 명시적으로 포기합니다.\n\n#### 중대한 인정\n\n라이선스를 구매함으로써 귀하는 다음 사항을 명시적으로 인정하고 이해하며 철회 불가능하게 동의합니다: 앱은 Rust+ 앱에 전적으로 의존합니다(섹션 4 참조). Rust+ 앱을 사용할 수 없거나 제거되거나 작동이 중지되면 앱이 작동하지 않으며 귀하는 환불이나 보상을 받을 권리가 없습니다. 귀하는 외부 의존성과 관련된 모든 위험을 수락하며 Rust+ 문제, Rust 게임 서버 문제 또는 외부 의존성 문제로 인해 환불을 청구하지 않을 것입니다(Google Play Store 48시간 표준 환불 기간 제외).",
+            "section9_title": "9. 지적 재산권 및 상표 공정 사용",
+            "section9_content": "Raid Alarm 앱 및 해당 콘텐츠는 저작권 및 상표법에 의해 보호됩니다. 모든 권리는 당사가 보유합니다.\n\n상표 고지: \"Rust+\", \"Rust\", \"Facepunch\" 및 관련 로고, 이름 및 상표는 Facepunch Studios Limited의 독점 재산입니다. 당사는 Facepunch Studios Limited와 제휴, 승인, 허가 또는 연결되어 있지 않습니다. 당사는 식별 및 설명 목적으로만(상표법에 따른 명목상 공정 사용) 이러한 상표를 사용합니다. 당사는 이러한 상표에 대한 어떠한 권리도 주장하지 않습니다. Facepunch Studios Limited가 당사의 사용에 반대하는 경우 당사는 즉시 준수할 것입니다. 추가 정보는 섹션 3을 참조하십시오.",
+            "section10_title": "10. 보증 부인",
+            "section10_content": "앱은 상품성, 특정 목적에의 적합성, 비침해 또는 앱이 올바르게 작동할 것이라는 보증을 포함하되 이에 국한되지 않는 명시적 또는 묵시적 어떠한 종류의 보증 없이 \"있는 그대로\" 및 \"사용 가능한 대로\" 제공됩니다.\n\n당사는 앱이 항상 올바르게 작동하거나 제3자 서비스를 항상 사용할 수 있거나 앱이 중단 없이 또는 오류 없이 작동할 것이라고 보증하지 않습니다. 앱의 기능은 Rust+ 앱에 전적으로 의존합니다(섹션 4 참조). 당사는 앱의 기능, 가용성 또는 신뢰성과 관련하여 어떠한 진술이나 보증도 하지 않습니다. 앱 사용에 따른 위험은 귀하가 감수합니다.",
+            "section11_title": "11. 책임 제한",
+            "section11_content": "법률이 허용하는 최대 범위 내에서 당사는 다음으로 인해 발생하는 어떠한 손해, 손실 또는 결과에 대해 책임을 지지 않습니다:\n\n- Rust+ 앱 문제, Google Play Store에서의 제거, 사용 불가 또는 모든 문제\n- Rust+ 앱이 알림 전송을 중지하거나 알림이 지연됨\n- Facepunch Studios Limited가 Rust+ 앱의 알림 기능을 제거, 비활성화 또는 수정함\n- Rust 게임 서버 문제, 중단 또는 오작동\n- Facepunch Studios Limited 또는 관련 법인이 기능을 제한하거나 금지함\n- Rust+ 앱 문제 또는 제거로 인해 앱 작동이 중지됨\n- 간접적, 부수적, 특별, 결과적 또는 징벌적 손해\n- 이익, 데이터, 영업권 또는 기타 무형 손실의 상실\n- 라이선스에 대해 지불한 금액을 초과하는 손해\n- 외부 의존성 또는 제3자 서비스와 관련된 모든 손해\n- 미성년자의 무단 구매(부모/보호자가 전적인 책임을 짐)\n\n어떠한 경우에도 당사의 총 책임은 청구 전 12개월 동안 귀하가 라이선스에 대해 지불한 금액을 초과하지 않습니다.",
+            "section12_title": "12. 사용자 책임",
+            "section12_content": "귀하는 다음 사항에 대해 전적인 책임이 있습니다:\n\n- 기기에 Rust+ 앱 설치 및 유지 관리\n- Rust+ 앱을 사용할 수 있고 설치되어 있으며 올바르게 작동하는지 확인\n- Raid Alarm 및 Rust+ 앱 모두에 필요한 모든 권한 부여\n- 기기가 Raid Alarm 및 Rust+ 앱 모두와 호환되는지 확인\n- 앱이 Rust+ 앱 및 외부 서비스에 완전히 의존한다는 점 이해\n- Rust+ 앱이 Google Play Store에서 제거되거나 작동이 중지되면 앱이 작동하지 않으며 환불받을 권리가 없음을 이해\n- Rust+ 앱 서비스 약관 및 모든 관련 법률 준수\n- 사용이 Rust+ 앱 서비스 약관을 위반하지 않는지 확인\n- 부모 또는 보호자인 경우 구매 모니터링 및 승인\n- 구매 전 18세 이상(또는 부모/보호자의 동의)인지 확인\n\n귀하의 사용이 Rust+ 앱 서비스 약관을 위반하는 경우 귀하는 모든 결과에 대해 전적인 책임을 지며 당사는 그로 인한 문제에 대해 책임을 지지 않습니다.",
+            "section13_title": "13. 약관 변경",
+            "section13_content": "이 서비스 약관은 수시로 업데이트될 수 있습니다. 중요한 변경 사항은 사용자에게 통지됩니다. 변경 후 앱을 계속 사용하는 것은 새로운 약관에 동의하는 것으로 간주됩니다.",
+            "section14_title": "14. 종료",
+            "section14_content": "당사는 본 약관 위반 또는 당사의 단독 재량에 따라 사전 통지 없이 귀하의 앱 액세스를 즉시 종료하거나 정지할 수 있습니다. 당사는 종료로 인한 손해에 대해 책임을 지지 않습니다.",
+            "section15_title": "15. 준거법 및 관할권",
+            "section15_content": "이 서비스 약관은 귀하의 위치에 따른 관련 법률의 적용을 받습니다. 분쟁은 관련 법률 및 관할권에 따라 해결됩니다.",
+            "section16_title": "16. 광고",
+            "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
+        }
+    },
+    "paywall": {
+        "title_line1": "평생",
+        "title_line2": "이용",
+        "subtitle": "한 번 결제로 평생 소유하세요.",
+        "no_subscriptions": "구독 없음.",
+        "secure_access": "무제한 보호 시작",
+        "restore": "복원",
+        "privacy": "개인정보 처리방침",
+        "terms": "서비스 약관",
+        "plan_card": {
+            "name": "평생 이용권",
+            "one_time": "일회성 결제"
+        },
+        "benefits": {
+            "critical_alarms": "중요 레이드 알람 (무음 모드 무시)",
+            "fake_call": "가짜 전화 수신 시뮬레이션",
+            "enemy_notifications": "적 온라인/오프라인 알림",
+            "server_notifications": "서버 온라인/오프라인 알림",
+            "wipe_notifications": "사용자 지정 초기화 알림"
+        },
+        "errors": {
+            "network": "네트워크 오류입니다. 인터넷 연결을 확인하고 다시 시도해 주세요.",
+            "pending": "결제 대기 중입니다. 결제가 확인되면 구매가 활성화됩니다.",
+            "invalid": "유효하지 않은 결제입니다. 다시 시도하거나 지원팀에 문의하세요.",
+            "unavailable": "현재 구매할 수 없는 상품입니다.",
+            "store": "스토어 문제가 발생했습니다. 나중에 다시 시도하거나 지원팀에 문의하세요.",
+            "already_purchased": "이미 구매한 상품입니다.",
+            "generic_failed": "구매 실패: {}",
+            "purchase_failed_default": "구매에 실패했습니다. 다시 시도해 주세요.",
+            "restore_no_internet": "인터넷에 연결되어 있지 않습니다. 네트워크를 확인해 주세요.",
+            "restore_timeout": "복원 시간이 초과되었습니다. 다시 시도해 주세요.",
+            "restore_failed": "복원 실패: {}",
+            "no_lifetime_found": "복원할 평생 구매 내역이 없습니다",
+            "purchase_verification_failed": "결제가 완료되었지만 평생 액세스를 확인할 수 없습니다."
+        }
+    },
+    "recoil_trainer": {
+        "title": "반동 트레이너",
+        "subtitle": "패턴 시각화",
+        "mouse_move": "마우스 이동",
+        "impact_point": "탄착점",
+        "fire": "발사",
+        "pause": "일시정지",
+        "shot": "발사",
+        "ready": "준비",
+        "complete": "완료",
+        "pull_down": "내리기",
+        "pull_left": "왼쪽으로",
+        "pull_right": "오른쪽으로",
+        "stabilize": "안정화",
+        "difficulty": {
+            "easy": "쉬움",
+            "medium": "보통",
+            "hard": "어려움",
+            "extreme": "매우 어려움"
+        }
+    }
+}

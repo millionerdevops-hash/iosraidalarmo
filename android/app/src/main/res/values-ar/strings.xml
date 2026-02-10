@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm نشط</string>
+    <string name="notification_service_active_text">تنبيهات الهجوم مفعّلة</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">خدمة Raid Alarm معطلة</string>
+    <string name="notification_service_disabled_text">خدمة مراقبة الإشعارات معطلة. قم بتمكين الخدمة لتلقي إشعارات الهجوم.</string>
+    <string name="notification_service_disabled_big_text">خدمة مراقبة الإشعارات معطلة. قم بتمكين الخدمة لتلقي إشعارات الهجوم.\n\nاضغط على الإعدادات لتمكين الخدمة.</string>
+    <string name="notification_service_disabled_action">الإعدادات</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">إيقاف</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">تفعيل التنبيه...</string>
+    <string name="alarm_playing">التنبيه يعمل - اضغط للإيقاف</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">تم اكتشاف هجوم على القاعدة</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm نشط</string>
+    <string name="channel_name_service_status">حالة الخدمة</string>
+    <string name="channel_name_attack_detected">كشف الهجوم</string>
+    <string name="channel_name_alarm_service">خدمة الإنذار</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">قناة Raid Alarm_ للإشعارات النشطة</string>
+    <string name="channel_description_service_status">Raid Alarm إشعارات حالة الخدمة</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm إشعارات حالة الخدمة (العرض الأولي)</string>
+    <string name="channel_description_attack_detected">تظهر الإشعارات عند اكتشاف إشعار هجوم</string>
+    <string name="channel_description_alarm_service">قناة إعلام خدمة التنبيه الأمامية</string>
+    <!-- Fake Call -->
+    <string name="text_accept">قبول</string>
+    <string name="text_decline">رفض</string>
+    <string name="fake_call_channel_name">مكالمة وهمية</string>
+    <string name="fake_call_channel_description">إشعارات المكالمات الوهمية الواردة</string>
+    <string name="channel_name_player_tracking">تتبع اللاعب</string>
+    <string name="channel_description_player_tracking">تغييرات حالة اللاعب الذي يتم تتبعه</string>
+    <string name="player_status_online">متصل</string>
+    <string name="player_status_offline">غير متصل</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">انضم %1$s إلى %2$s</string>
+    <string name="player_status_left_body">غادر %1$s %2$s</string>
+    <string name="unknown_server">خادم غير معروف</string>
+    <string name="default_server_name">خادم</string>
+    <string name="alarm_stop_button_full">إيقاف الإنذار</string>
+</resources>

@@ -1,0 +1,930 @@
+{
+    "common": {
+        "subscription_required": "Wymagana subskrypcja, aby aktywować ochronę",
+        "error_service_not_enabled": "Usługa powiadomień nie jest włączona.",
+        "no_internet": "No internet connection. Please check your network.",
+        "errors": {
+            "no_internet": "No internet connection. Please check your network."
+        },
+        "million_suffix": "M",
+        "loading": "ŁADOWANIE...",
+        "fauna_guide": "PRZEWODNIK FAUNY",
+        "select_species": "WYBIERZ GATUNEK",
+        "thousand_suffix": "K"
+    },
+    "tools": {
+        "section_utilities": "NARZĘDZIA",
+        "raid_cost": {
+            "title": "KOSZT",
+            "subtitle": "Materiały Wybuchowe & Siarka"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "Kamery Monumentów"
+        },
+        "tea_guide": {
+            "title": "HERBATY",
+            "subtitle": "Buffy & Przepisy"
+        },
+        "diesel_calc": {
+            "title": "DIESEL",
+            "subtitle": "Koparka & Kamieniołomy"
+        },
+        "animal_guide": {
+            "title": "ZWIERZĘTA",
+            "subtitle": "Polowanie i Zasoby"
+        },
+        "match_game": {
+            "title": "DOPASUJ",
+            "subtitle": "Gra pamięciowa",
+            "earned_coins": "Zdobyłeś {} monet!",
+            "not_enough_scrap": "Niewystarczająca ilość monet",
+            "victory": "ZWYCIĘSTWO",
+            "defeat": "PORAŻKA",
+            "net_result": "WYNIK NETTO",
+            "play_again": "ZAGRAJ PONOWNIE",
+            "return_to_menu": "WRÓĆ DO MENU",
+            "timer": "TIMER",
+            "potential": "POTENCJAŁ",
+            "memorize": "ZAPAMIĘTAJ!",
+            "menu_title": "GRA W DOPASOWYWANIE",
+            "menu_subtitle": "Znajdź pary, aby pomνοżyć swój złom.\nWysokie ryzyκο, wysoka nagroda.",
+            "play_action": "GRAJ (-{} ZŁOMU)",
+            "entry": "WEJŚCIE",
+            "pairs_count": "{} Par",
+            "exit_warning_title": "Wyjść z gry?",
+            "exit_warning_message": "Twój zakład przepadnie, jeśli teraz wyjdziesz. Kontynuować?",
+            "yes": "Tak",
+            "no": "Nie"
+        },
+        "code_raider": {
+            "title": "ZAMEK KODU",
+            "subtitle": "Łamanie Szyfrów",
+            "battery_level": "POZIOM BATERII",
+            "correct": "Poprawne",
+            "wrong_spot": "Złe miejsce",
+            "invalid": "Nieprawidłowe",
+            "waiting_input": "Oczekiwanie...",
+            "access_granted": "DOSTĘP PRZYZNANY",
+            "system_lockout": "SISTEM ZABLOKOWANY",
+            "reward_scrap": "Nagroda: +{} Scrap",
+            "code_changed": "Kod zmieniony",
+            "hack_another": "INNY HACK",
+            "retry_hack": "SPRÓBUJ PONOWNIE",
+            "open": "OTWARTE",
+            "clear": "WYCZYŚĆ",
+            "enter": "WEJDŹ",
+            "code_lock": "ZAMEK_KODU"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "Przepisy na Herbatę",
+            "mixing_table_recipe": "STÓŁ DO MIESZANIA",
+            "select_tier": "WYBIERZ POZIOM"
+        },
+        "stats": {
+            "rad_res": "Odp. na Prom.",
+            "hydration": "Nawodnienie",
+            "temp": "Temp",
+            "max_temp": "Maks. Temp",
+            "min_temp": "Min. Temp",
+            "quality": "Jakość",
+            "yield": "Plon",
+            "hot": "HoT",
+            "inst_hp": "Natychmiastowe HP",
+            "max_hp": "Maks. HP"
+        },
+        "durations": {
+            "instant": "Natychmiast",
+            "30m": "30m",
+            "20m": "20m",
+            "45m": "45m",
+            "1h": "1h",
+            "3m_20s": "3m 20s",
+            "5m": "5m",
+            "6m_40s": "6m 40s"
+        },
+        "categories": {
+            "Ore": "RUDA",
+            "Wood": "DREWNO",
+            "Scrap": "ZŁOM",
+            "Harvesting": "ZBIERANIE",
+            "MaxHealth": "MAKS. HP",
+            "Healing": "LECZENIE",
+            "Rad": "ANTY-RAD",
+            "Cooling": "CHŁODZENIE",
+            "Warming": "OGRZEWANIE",
+            "Crafting": "CRAFTING"
+        },
+        "tiers": {
+            "Basic": "P.",
+            "Advanced": "Z.",
+            "Pure": "C."
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "Podstawowa Herbata Anty-Rad",
+                "desc": "Podstawowy poziom herbaty przeciw promieniowaniu."
+            },
+            "Rad_adv": {
+                "name": "Zaawansowana Herbata Anty-Rad",
+                "desc": "Zaawansowany poziom herbaty przeciw promieniowaniu."
+            },
+            "Rad_pure": {
+                "name": "Czysta Herbata Anty-Rad",
+                "desc": "Czysty poziom herbaty przeciw promieniowaniu."
+            },
+            "Cooling_basic": {
+                "name": "Podstawowa Herbata Chłodząca",
+                "desc": "Podstawowy poziom herbaty chłodzącej."
+            },
+            "Cooling_adv": {
+                "name": "Zaawansowana Herbata Chłodząca",
+                "desc": "Zaawansowany poziom herbaty chłodzącej."
+            },
+            "Cooling_pure": {
+                "name": "Czysta Herbata Chłodząca",
+                "desc": "Czysty poziom herbaty chłodzącej."
+            },
+            "Crafting_basic": {
+                "name": "Podstawowa Herbata Craftingu",
+                "desc": "Podstawowy poziom herbaty craftingu."
+            },
+            "Crafting_adv": {
+                "name": "Zaawansowana Herbata Craftingu",
+                "desc": "Zaawansowany poziom herbaty craftingu."
+            },
+            "Crafting_pure": {
+                "name": "Czysta Herbata Craftingu",
+                "desc": "Czysty poziom herbaty craftingu."
+            },
+            "Harvesting_basic": {
+                "name": "Podstawowa Herbata Zbierania",
+                "desc": "Podstawowy poziom herbaty zbierania."
+            },
+            "Harvesting_adv": {
+                "name": "Zaawansowana Herbata Zbierania",
+                "desc": "Zaawansowany poziom herbaty zbierania."
+            },
+            "Harvesting_pure": {
+                "name": "Czysta Herbata Zbierania",
+                "desc": "Czysty poziom herbaty zbierania."
+            },
+            "Healing_basic": {
+                "name": "Podstawowa Herbata Lecząca",
+                "desc": "Podstawowy poziom herbaty leczącej."
+            },
+            "Healing_adv": {
+                "name": "Zaawansowana Herbata Lecząca",
+                "desc": "Zaawansowany poziom herbaty leczącej."
+            },
+            "Healing_pure": {
+                "name": "Czysta Herbata Lecząca",
+                "desc": "Czysty poziom herbaty leczącej."
+            },
+            "MaxHealth_basic": {
+                "name": "Podstawowa Herbata Max HP",
+                "desc": "Podstawowy poziom herbaty zwiększającej maks. HP."
+            },
+            "MaxHealth_adv": {
+                "name": "Zaawansowana Herbata Max HP",
+                "desc": "Zaawansowany poziom herbaty zwiększającej maks. HP."
+            },
+            "MaxHealth_pure": {
+                "name": "Czysta Herbata Max HP",
+                "desc": "Czysty poziom herbaty zwiększającej maks. HP."
+            },
+            "Ore_basic": {
+                "name": "Podstawowa Herbata Rudy",
+                "desc": "Podstawowy poziom herbaty na rudę."
+            },
+            "Ore_adv": {
+                "name": "Zaawansowana Herbata Rudy",
+                "desc": "Zaawansowany poziom herbaty na rudę."
+            },
+            "Ore_pure": {
+                "name": "Czysta Herbata Rudy",
+                "desc": "Czysty poziom herbaty na rudę."
+            },
+            "Scrap_basic": {
+                "name": "Podstawowa Herbata Złomu",
+                "desc": "Podstawowy poziom herbaty na złom."
+            },
+            "Scrap_adv": {
+                "name": "Zaawansowana Herbata Złomu",
+                "desc": "Zaawansowany poziom herbaty na złom."
+            },
+            "Scrap_pure": {
+                "name": "Czysta Herbata Złomu",
+                "desc": "Czysty poziom herbaty na złom."
+            },
+            "Warming_basic": {
+                "name": "Podstawowa Herbata Rozgrzewająca",
+                "desc": "Podstawowy poziom herbaty rozgrzewającej."
+            },
+            "Warming_adv": {
+                "name": "Zaawansowana Herbata Rozgrzewająca",
+                "desc": "Zaawansowany poziom herbaty rozgrzewającej."
+            },
+            "Warming_pure": {
+                "name": "Czysta Herbata Rozgrzewająca",
+                "desc": "Czysty poziom herbaty rozgrzewającej."
+            },
+            "Wood_basic": {
+                "name": "Podstawowa Herbata Drewna",
+                "desc": "Podstawowy poziom herbaty na drewno."
+            },
+            "Wood_adv": {
+                "name": "Zaawansowana Herbata Drewna",
+                "desc": "Zaawansowany poziom herbaty na drewno."
+            },
+            "Wood_pure": {
+                "name": "Czysta Herbata Drewna",
+                "desc": "Czysty poziom herbaty na drewno."
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "Czerwona Jagoda",
+            "Blue_Berry": "Niebieska Jagoda",
+            "Green_Berry": "Zielona Jagoda",
+            "Yellow_Berry": "Żółta Jagoda",
+            "White_Berry": "Biała Jagoda",
+            "Basic_Rad_Tea": "Podst. Herb. Rad",
+            "Adv_Rad_Tea": "Zaaw. Herb. Rad",
+            "Basic_Cooling_Tea": "Podst. Herb. Chłod.",
+            "Adv_Cooling_Tea": "Zaaw. Herb. Chłod.",
+            "Basic_Crafting_Tea": "Podst. Herb. Craft",
+            "Adv_Crafting_Tea": "Zaaw. Herb. Craft",
+            "Basic_Harvesting_Tea": "Podst. Herb. Zbior.",
+            "Adv_Harvesting_Tea": "Zaaw. Herb. Zbior.",
+            "Basic_Healing_Tea": "Podst. Herb. Lecz.",
+            "Adv_Healing_Tea": "Zaaw. Herb. Lecz.",
+            "Basic_MaxHealth_Tea": "Podst. Herb. HP",
+            "Adv_MaxHealth_Tea": "Zaaw. Herb. HP",
+            "Basic_Ore_Tea": "Podst. Herb. Rudy",
+            "Adv_Ore_Tea": "Zaaw. Herb. Rudy",
+            "Basic_Scrap_Tea": "Podst. Herb. Złom",
+            "Adv_Scrap_Tea": "Zaaw. Herb. Złom",
+            "Basic_Warming_Tea": "Podst. Herb. Grzew.",
+            "Adv_Warming_Tea": "Zaaw. Herb. Grzew.",
+            "Basic_Wood_Tea": "Podst. Herb. Drew.",
+            "Adv_Wood_Tea": "Zaaw. Herb. Drew."
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "KODY CCTV",
+            "no_signal": "BRAK SYGNAŁU",
+            "copied": "SKOPIOWANO",
+            "randomized": "Losowy Kod",
+            "rec": "NAGRYWANIE"
+        },
+        "categories": {
+            "all": "WSZYSTKIE KAMERY",
+            "large_oil": "PLATFORMA WIERTNICZA (LARGE)",
+            "small_oil": "PLATFORMA WIERTNICZA (SMALL)",
+            "cargo": "STATEK CARGO",
+            "silo": "SILOS",
+            "airfield": "LOTNISKO",
+            "labs": "LABORATORIA",
+            "outpost": "OUTPOST",
+            "bandit": "OBÓZ BANDYTÓW",
+            "dome": "KOPUŁA (DOME)",
+            "radtown": "RADTOWN",
+            "ferry": "TERMINAL",
+            "town": "MIASTO"
+        },
+        "labels": {
+            "dock": "Dok",
+            "exhaust": "Wydech",
+            "helipad": "Lądowisko",
+            "level_1": "Poziom 1",
+            "level_2": "Poziom 2",
+            "level_3": "Poziom 3",
+            "level_3a": "Poziom 3A",
+            "level_3b": "Poziom 3B",
+            "level_4": "Poziom 4",
+            "level_5": "Poziom 5",
+            "level_6a": "Poziom 6A",
+            "level_6b": "Poziom 6B",
+            "level_6c": "Poziom 6C",
+            "level_6d": "Poziom 6D",
+            "deck": "Pokład",
+            "bridge": "Mostek",
+            "stern": "Rufa",
+            "hold_1": "Ładownia 1",
+            "hold_2": "Ładownia 2",
+            "exit_1": "Wyjście 1",
+            "exit_2": "Wyjście 2",
+            "missile": "Pocisk",
+            "tower": "Wieża",
+            "shipping": "Wysyłka",
+            "casino": "Kasyno",
+            "chill_zone": "Strefa Relaksu",
+            "crude_oil": "Ropa Naftowa",
+            "music": "Muzyka",
+            "street": "Ulica",
+            "logistics": "Logistyka",
+            "parking": "Parking",
+            "utilities": "Media",
+            "apartments": "Apartamenty",
+            "house": "Dom",
+            "sbl": "SBL",
+            "dome_1": "Kopuła 1",
+            "top": "Szczyt",
+            "weapons": "Broń",
+            "lab": "Laboratorium",
+            "security": "Ochrona"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "Szukaj gracza",
+            "search_hint": "Nazwa gracza lub ID...",
+            "loading_text": "PRZESZUKIWANIE BATTLEMETRICS...",
+            "error_title": "Wyszukiwanie Nieudane",
+            "retry_button": "SPRÓBUJ PONOWNIE",
+            "empty_state": "Nie znaleziono gracza.",
+            "error_snackbar": "Błąd: {}",
+            "global": "GLOBALNE",
+            "player_id": "ID GRACZA"
+        },
+        "details": {
+            "tracking_id": "ŚLEDZENIE",
+            "current_state": "OBECNY STAN",
+            "online": "DOSTĘPNY",
+            "offline": "NIEDOSTĘPNY",
+            "last_seen": "OSTATNIO WIDZIANY",
+            "unknown": "Nieznany",
+            "alert_triggers": "WYZWALACZE ALARMU:",
+            "update_tracking": "OBSERWUJ GRACZA"
+        },
+        "list_item": {
+            "playing_on": "GRA NA:",
+            "not_in_server": "Nie na serwerze"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "STATYSTYKI ATAKÓW",
+            "total_attacks": "ŁĄCZNIE ATAKÓW",
+            "last_attack": "OSTATNI ATAK",
+            "recent_alerts": "OSTATNIE ALERTY",
+            "no_notification": "Nie znaleziono powiadomień.",
+            "unknown_source": "Nieznane Źródło",
+            "time_ago": {
+                "just_now": "Właśnie teraz",
+                "minutes": "{}m temu",
+                "hours": "{}h temu",
+                "days": "{}d temu",
+                "months": "{}mies. temu"
+            }
+        },
+        "traffic": {
+            "title": "Ruch Ataków",
+            "ranges": {
+                "day": "Dzień",
+                "week": "Tydzień",
+                "month": "Miesiąc"
+            }
+        },
+        "overlay": {
+            "premium_data": "DANE PREMIUM",
+            "upgrade_button": "ULEPSZ ABY ZOBACZYĆ"
+        },
+        "alarm": {
+            "stop": "ZATRZYMAJ ALARM"
+        },
+        "notifications": {
+            "base_attack": "Twoja baza jest atakowana!"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "NIESKUTECZNE",
+            "total_required": "Wymagane Łącznie",
+            "cannot_damage": "Nie może uszkodzić",
+            "loot_only": "TYLKO ŁUP",
+            "raw_sulfur": "SUROWA SIARKA"
+        },
+        "materials": {
+            "charcoal": "Węgiel Drzewny",
+            "fragments": "Odłamki Metalu",
+            "stones": "Kamień",
+            "wood": "Drewno",
+            "bone": "Kości",
+            "low_grade_fuel": "Paliwo Niskiej Jakości",
+            "cloth": "Materiał",
+            "rope": "Lina",
+            "pipe": "Rura",
+            "tech_trash": "Złom Techniczny",
+            "sulfur": "Sulfur"
+        },
+        "categories": {
+            "construction": "Konstrukcja",
+            "door": "Drzwi",
+            "placeable": "Przedmioty",
+            "item": "Pułapki"
+        },
+        "explosives": {
+            "c4": "C4",
+            "rocket": "Rakieta",
+            "satchel": "Torba z Ładunkiem (Satchel)",
+            "beancan": "Granat z Puszki (Beancan)",
+            "explo556": "Amunicja Wybuchowa 5.56",
+            "he_grenade": "Granat F1",
+            "he_grenade_40mm": "40mm HE",
+            "molotov": "Koktajl Mołotowa",
+            "hv_rocket": "Rakieta HV",
+            "incen_rocket": "Rakieta Zapalająca",
+            "homing_rocket": "Rakieta Samonaprowadzająca",
+            "mlrs_rocket": "Rakieta MLRS",
+            "survey_charge": "Ładunek Geologiczny",
+            "propane_bomb": "Butla z Propanem",
+            "ammo_rifle": "Amunicja 5.56",
+            "ammo_rifle_hv": "HV 5.56",
+            "ammo_rifle_incen": "Zapalająca 5.56",
+            "ammo_pistol": "Amunicja Pistoletowa",
+            "ammo_pistol_hv": "Pistoletowa HV",
+            "ammo_pistol_incen": "Pistoletowa Zapalająca",
+            "ammo_buckshot": "Buckshot",
+            "ammo_slug": "Slug",
+            "ammo_incen_shell": "Zapalająca do Strzelby",
+            "ammo_handmade": "Ręcznie Robiona",
+            "arrow_fire": "Ognista Strzała",
+            "arrow_bone": "Kościana Strzała",
+            "arrow_wooden": "Drewniana Strzała",
+            "arrow_hv": "Strzała HV"
+        },
+        "calculator": {
+            "title": "KALKULATOR RAJDU",
+            "select_target": "WYBIERZ CEL",
+            "materials_breakdown": "ZESTAWIENIE MATERIAŁÓW",
+            "total_sulfur": "ŁĄCZNIE WYGANA SIARKA",
+            "min_cost": "MINIMALNY KOSZT",
+            "best_for_sulfur": "Najlepsze dla Siarki",
+            "custom_plan": "WŁASNY PLAN RAJDU",
+            "clear_all": "WYCZYŚĆ WSZYSTKO"
+        },
+        "targets": {
+            "wood_wall": "Drewniana Ściana",
+            "stone_wall": "Kamienna Ściana",
+            "metal_wall": "Metalowa Ściana",
+            "hqm_wall": "Opancerzona Ściana",
+            "wood_foundation": "Drewniany Fundament",
+            "stone_foundation": "Kamienny Fundament",
+            "metal_foundation": "Metalowy Fundament",
+            "hqm_foundation": "Opancerzony Fundament",
+            "wood_floor": "Drewniana Podłoga",
+            "stone_floor": "Kamienna Podłoga",
+            "metal_floor": "Metalowa Podłoga",
+            "hqm_floor": "Opancerzona Podłoga",
+            "ext_wood_wall": "Wysoki Mur Drewniany",
+            "ext_stone_wall": "Wysoki Mur Kamienny",
+            "ext_gate_wood": "Brama Drewniana",
+            "ext_gate_stone": "Brama Kamienna",
+            "wood_door": "Drzwi Drewniane",
+            "metal_door": "Drzwi Metalowe",
+            "garage_door": "Brama Garażowa",
+            "armored_door": "Drzwi Pancerne",
+            "ladder_hatch": "Właz z Drabiną",
+            "triangle_ladder_hatch": "Trójkątny Właz",
+            "wood_bars": "Drewniane Kraty",
+            "metal_bars": "Metalowe Kraty",
+            "strengthened_glass": "Wzmocnione Okno",
+            "reinforced_glass": "Pancerne Okno",
+            "shutter_wood": "Drewniana Okiennica",
+            "metal_shop_front": "Metalowa Witryna",
+            "vending_machine": "Automat Sprzedający",
+            "tc": "Szafka z Narzędziami",
+            "small_box": "Mała Skrzynia",
+            "large_box": "Duża Skrzynia",
+            "sleeping_bag": "Śpiwór",
+            "bed": "Łóżko",
+            "furnace_small": "Mały Piec",
+            "furnace_large": "Wielki Piec",
+            "refinery": "Rafineria",
+            "autoturret": "Automatyczna Wieżyczka",
+            "flame_turret": "Wieżyczka Ogniowa",
+            "shotgun_trap": "Pułapka ze Strzelbą",
+            "sam_site": "Wyrzutnia SAM",
+            "tesla_coil": "Cewka Tesli",
+            "landmine": "Mina Lądowa",
+            "beartrap": "Wnyki",
+            "windmill": "Wiatrak",
+            "solar_panel": "Panel Słoneczny",
+            "battery_small": "Mały Akumulator",
+            "battery_medium": "Średni Akumulator",
+            "battery_large": "Duży Akumulator",
+            "locker": "Szafka",
+            "fridge": "Lodówka",
+            "hearth": "Kominek",
+            "search_light": "Szperacz",
+            "drop_box": "Skrzynka Podawcza",
+            "mailbox": "Skrzynka na Listy",
+            "sub_all_shapes": "Wszystkie Kształty",
+            "cctv_camera": "Kamera CCTV",
+            "workbench_level1": "Stół warsztatowy 1",
+            "workbench_level2": "Stół warsztatowy 2",
+            "workbench_level3": "Stół warsztatowy 3",
+            "cooking_workbench": "Stół kuchenny",
+            "engineering_workbench": "Stół inżynierski",
+            "planter": "Donica",
+            "sleepingbag": "Śpiwór",
+            "wicker_barrel": "Wiklinowa beczka",
+            "wooden_ladder": "Drewniana drabina",
+            "wood_shelter": "Drewniany szałas"
+        }
+    },
+    "subscription": {
+        "free_tier": "POZIOM DARMOWY",
+        "limited_features": "Ograniczone Funkcje",
+        "lifetime_license": "Licencja Dożywotnia Aktywna",
+        "duration": "CZAS TRWANIA",
+        "forever_free": "DARMOWE",
+        "lifetime": "DOŻYWOTNIO",
+        "status": "STATUS",
+        "locked": "ZABLOKOWANE",
+        "active": "AKTYWNE",
+        "upgrade_button": "ULEPSZ ABY ODBLOKOWAĆ"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "FUNKCJA PREMIUM",
+            "description": "Ulepsz, aby odblokować zaawansowane sterowanie",
+            "unlock_button": "ODBLOKUJ TERAZ"
+        },
+        "ui": {
+            "title": "Ustawienia",
+            "guides_setup": "PORADNIKI & KONFIGURACJA",
+            "how_it_works": "Jak to działa",
+            "setup_config": "Konfiguracja Instalacji",
+            "legal": "Prawne",
+            "tos": "WARUNKI",
+            "privacy": "PRYWATNOŚĆ",
+            "version": "RAID ALARM V{}"
+        },
+        "common": {
+            "error": "Błąd",
+            "durations": {
+                "sec_30": "30 sek",
+                "min_1": "1 min",
+                "min_3": "3 min",
+                "min_5": "5 min",
+                "sec_short": "{}s",
+                "min_short": "{}m",
+                "hour_short": "{}h"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "Brak",
+                "alarm_1": "Alarm 1",
+                "alarm_2": "Alarm 2",
+                "alarm_3": "Alarm 3",
+                "alarm_4": "Alarm 4",
+                "alarm_5": "Alarm 5",
+                "alarm_6": "Alarm 6",
+                "custom_label": "Niestandardowy",
+                "pick_custom": "Niestandardowy..."
+            }
+        },
+        "alarm_mode": {
+            "title": "Raid Alarm",
+            "subtitle": "Ciągły głośny alert",
+            "sound": "Dźwięk Alarmu",
+            "infinite_loop": "Nieskończona Pętla",
+            "duration": "Czas Trwania Alarmu"
+        },
+        "fake_call": {
+            "title": "Fałszywe Połączenie",
+            "subtitle": "Symuluj połączenie",
+            "caller_name": "Nazwa rozmówcy",
+            "show_number": "Pokaż numer",
+            "background": "Tło połączenia",
+            "background_options": {
+                "default": "Domyślne",
+                "gallery": "Galeria"
+            },
+            "sound": "Dzwonek",
+            "duration": "Czas trwania",
+            "infinite_loop": "Ciągła pętla"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "DOSTĘPNY",
+            "offline": "NIEDOSTĘPNY",
+            "official": "OFICJALNY",
+            "modded": "ZMODOWANY",
+            "community": "SPOŁECZNOŚCIOWY"
+        },
+        "monitor": {
+            "title": "Monitor Serwera",
+            "select_server": "WYBIERZ SERWER"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "ZNAJDŹ SERWER",
+                "subtitle": "Przeglądaj & Śledź Wipe'y"
+            },
+            "find_player": {
+                "title": "ZNAJDŹ GRACZA",
+                "subtitle": "Nazwa & Status Online"
+            }
+        },
+        "map": {
+            "info_unavailable": "Informacje o mapie niedostępne dla tego serwera",
+            "failed_load": "Nie udało się załadować mapy",
+            "check_connection": "Sprawdź swoje połączenie",
+            "loading": "Ładowanie mapy...",
+            "open_browser": "Otwórz w Przeglądarce",
+            "procedural": "Proceduralna",
+            "retry": "Ponów"
+        },
+        "live": {
+            "auto_refresh_active": "AUTO-ODŚWIEŻANIE AKTYWNE",
+            "auto_refresh_desc": "Kanał odświeża się co 15s.",
+            "activity_title": "Aktywność Graczy",
+            "no_signal": "BRAK SYGNAŁU",
+            "fetching_data": "Pobieranie danych o graczach..."
+        },
+        "overview": {
+            "population": "GRACZE",
+            "map": "MAPA",
+            "fps": "FPS",
+            "uptime": "CZAS PRACY (UPTIME)",
+            "next_wipe": "NASTĘPNY WIPE",
+            "last_wipe": "OSTATNI WIPE",
+            "wipe_notification": "Powiadomienie o Wipe",
+            "alert_me_before": "POWIADOM MNIE PRZED:",
+            "force_refresh": "WYMUŚ ODŚWIEŻENIE",
+            "unknown": "NIEZNANY",
+            "overdue": "Zaległy",
+            "size_label": "Rozmiar:",
+            "seed_label": "Seed:",
+            "active": "AKTYWNY",
+            "disabled": "WYŁĄCZONY",
+            "na": "N/D",
+            "time_ago_days": "{}d {}h",
+            "time_ago_hours": "{}h"
+        },
+        "notifications": {
+            "wipe_alert_title": "Alert Wipe'a: {}",
+            "wipe_alert_body": "Serwer będzie miał wipe za {} minut! Przygotuj się."
+        },
+        "wipe": {
+            "next_wipe_in": "NASTĘPNY WIPE ZA",
+            "wipe_alarm": "Alarm Wipe'a"
+        },
+        "targets": {
+            "enter_player_name": "Wpisz dokładną nazwę gracza...",
+            "no_targets": "Brak śledzonych celów.",
+            "go_to_live": "Idź do Live Feed",
+            "title": "CELE",
+            "active_badge": "Aktywny",
+            "empty": "Obecnie nie śledzisz żadnych graczy.",
+            "search_link": "SZUKAJ GRACZY",
+            "online_now": "Teraz Online",
+            "stop_tracking": {
+                "title": "Zatrzymać Śledzenie?",
+                "confirm": "Czy na pewno chcesz przestać śledzić {}?",
+                "button": "Zatrzymaj Śledzenie",
+                "cancel": "Anuluj"
+            }
+        },
+        "featured": {
+            "title": "POPULARNE SPOŁECZNOŚCI"
+        },
+        "search": {
+            "title": "Wyszukiwanie Serwera",
+            "tabs": {
+                "search": "Szukaj",
+                "favorites": "Ulubione",
+                "featured": "Polecane"
+            },
+            "placeholder": "Szukaj nazwy serwera...",
+            "searching": "Szukanie...",
+            "no_results": "Nie znaleziono serwerów dla \"{}\"",
+            "no_favorites": "Brak zapisanych ulubionych.",
+            "favorites_help": "Wyszukaj serwery i dotknij gwiazdki, aby śledzić je tutaj.",
+            "results_label": "WYNIKI",
+            "official_section": {
+                "title": "OFICJALNE SERWERY",
+                "desc": "Oficjalne serwery oferują comiesięczne wipe'y i wysoką niezawodność."
+            },
+            "sort": {
+                "title": "SORTUJ WEDŁUG",
+                "relevance": "Trafność",
+                "high_pop": "Wysoka Pop.",
+                "low_pop": "Niska Pop.",
+                "just_wiped": "Właśnie Wipowany"
+            },
+            "error": {
+                "title": "Wyszukiwanie Nieudane",
+                "retry": "Spróbuj Ponownie"
+            }
+        },
+        "active_widget": {
+            "select": "WYBIERZ AKTYWNY SERWER",
+            "wiped": "Wipowany"
+        },
+        "logs": {
+            "connected": "Połączony",
+            "disconnected": "Rozłączony",
+            "recently": "Ostatnio",
+            "just_now": "Właśnie teraz"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "PRZEGLĄD",
+                "map": "MAPA",
+                "live": "LIVE",
+                "targets": "CELE",
+                "wipe": "WIPE"
+            },
+            "errors": {
+                "unstable": "Połączenie niestabilne. Dane mogą być przestarzałe.",
+                "signal_lost": "Utracono Sygnał. Ponawianie...",
+                "connection": "Błąd połączenia. Spróbuj ponownie."
+            },
+            "tracking": {
+                "max_limit": "Maksymalnie 3 graczy może być śledzonych",
+                "not_found_exact": "Gracz o dokładnej nazwie \"{}\" nie znaleziony",
+                "not_found_on_server": "Gracz nie znaleziony na tym serwerze.",
+                "select_player": "Wybierz gracza"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "Kalkulator Paliwa",
+        "input_amount": "Ilość",
+        "runtime": "{} Czas",
+        "select_machine": "WYBIERZ MASZYNĘ",
+        "total_output": "CAŁKOWITA PRODUKCJA",
+        "estimated_yield": "SZACOWANY UZYSK",
+        "per_barrel": "Na Beczkę: {}",
+        "per_lgf": "Na LGF: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "DIESEL",
+            "low_grade": "Paliwo N.J."
+        },
+        "machines": {
+            "excavator": "Koparka",
+            "hqm_quarry": "Kam. HQM",
+            "sulfur_quarry": "Kam. Siarki",
+            "stone_quarry": "Kam. Kamienia",
+            "pump_jack": "Pompa Oleju",
+            "deploy_pump_jack": "Przen. Pompa",
+            "deploy_quarry": "Przen. Kam.",
+            "types": {
+                "monument": "Monument",
+                "static": "Statyczny",
+                "deployable": "Przenośny"
+            }
+        },
+        "resources": {
+            "diesel": "Paliwo Diesel",
+            "sulfur": "Ruda Siarki",
+            "hqm": "Ruda HQM",
+            "metal_frags": "Odłamki Metalu",
+            "stones": "Kamienie",
+            "metal_ore": "Ruda Metalu",
+            "crude_oil": "Ropa Naftowa",
+            "low_grade": "Paliwo Niskiej Jakości"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "Polityka Prywatności",
+            "last_updated": "Ostatnia aktualizacja: {year}",
+            "contact_title": "Kontakt",
+            "contact_email": "W sprawach związanych z prywatnością, żądaniami danych lub w celu skorzystania ze swoich praw, prosimy o kontakt:\n\nEmail: alcstackdev@gmail.com",
+            "section1_title": "1. Informacje, które zbieramy",
+            "section1_content": "Raid Alarm zbiera tylko minimalne dane niezbędne do działania aplikacji: zanonimizowane ID urządzenia do walidacji licencji, konkretne powiadomienia o atakach z aplikacji Rust+, status licencji dożywotniej (przetwarzany przez Google Play Billing) oraz ustawienia aplikacji przechowywane lokalnie na Twoim urządzeniu. Nie zbieramy nazwisk, adresów e-mail, numerów telefonów, danych o lokalizacji, danych biometrycznych ani danych kart płatniczych.",
+            "section2_title": "2. Podstawa prawna przetwarzania",
+            "section2_content": "Przetwarzamy Twoje dane osobowe na następujących podstawach prawnych:\n\n• Wykonanie umowy: Przetwarzanie niezbędne do świadczenia usług aplikacji, o które prosiłeś\n• Prawnie uzasadniony interes: Przetwarzanie w celu zapewnienia funkcjonalności i ulepszania aplikacji\n• Zgoda: Tam, gdzie jest to wyraźnie wymagane, uzyskujemy Twoją zgodę przed przetwarzaniem",
+            "section3_title": "3. Przetwarzanie danych powiadomień",
+            "section3_content": "Przetwarzamy tylko konkretne powiadomienia o atakach z aplikacji Rust+. Dane powiadomień są przetwarzane w całości na Twoim urządzeniu i przechowywane lokalnie. Nie mamy dostępu do powiadomień z innych aplikacji. Używamy standardowego API NotificationListenerService systemu Android za Twoją wyraźną zgodą. Nie jesteśmy powiązani z aplikacją Rust+, Facepunch Studios Limited ani żadnym podmiotem powiązanym.",
+            "section4_title": "4. Uprawnienia",
+            "section4_content": "Raid Alarm prosi tylko o minimalne niezbędne uprawnienia: dostęp do powiadomień w celu monitorowania alertów z aplikacji Rust+, wyjątek optymalizacji baterii dla działania w tle oraz uprawnienia alarmu do uruchamiania alarmów.",
+            "section5_title": "5. Jak wykorzystujemy Twoje informacje",
+            "section5_content": "Zebrane dane są wykorzystywane wyłącznie do obsługi systemu alarmowego, weryfikacji licencji i ulepszania aplikacji. W przypadku użytkowników Poziomu Darmowego, zanonimizowane dane mogą być wykorzystywane przez Google AdMob w celu świadczenia podstawowych usług reklamowych. Nie sprzedajemy ani nie udostępniamy Twoich danych osobowych zewnętrznym marketingowcom do ich własnych celów. Nie używamy zautomatyzowanego podejmowania decyzji ani profilowania poza standardowymi funkcjami reklamowymi.",
+            "section6_title": "6. Przechowywanie i retencja danych",
+            "section6_content": "Wszystkie dane powiadomień, ustawienia i statystyki są przechowywane lokalnie na Twoim urządzeniu. Tylko informacje o zakupach są przechowywane w bezpiecznej, zaszyfrowanej bazie danych. Dane powiadomień nigdy nie są przesyłane na nasze serwery. Historia powiadomień jest przechowywana lokalnie, dopóki jej nie usuniesz lub nie odinstalujesz aplikacji. Informacje o licencji są przechowywane przez czas nieokreślony w celu weryfikacji zakupów dożywotnich. Możesz usunąć wszystkie dane lokalne, odinstalowując aplikację, lub zażądać usunięcia danych zakupowych, kontaktując się z nami.",
+            "section7_title": "7. Udostępnianie danych i strony trzecie",
+            "section7_content": "Nie sprzedajemy Twoich danych osobowych. Udostępnianie danych jest ograniczone do sklepu Google Play w celu przetwarzania płatności, Google AdMob w celu wyświetlania reklam użytkownikom Poziomu Darmowego oraz bezpiecznych usług zewnętrznych w celu weryfikacji licencji. Nie udostępniamy danych Twoich powiadomień żadnym stronom trzecim. Użytkownicy mają prawo do rezygnacji ze sprzedaży danych (nie sprzedajemy danych) i zarządzania preferencjami reklamowymi poprzez ustawienia urządzenia.",
+            "section8_title": "8. Międzynarodowe transfery danych",
+            "section8_content": "Dane zakupowe mogą być przetwarzane na serwerach zlokalizowanych w bezpiecznych centrach danych. Wszystkie transfery międzynarodowe są zgodne z obowiązującymi przepisami o ochronie danych i odpowiednimi zabezpieczeniami. Dane są szyfrowane podczas przesyłania przy użyciu standardowego szyfrowania branżowego.",
+            "section9_title": "9. Środki bezpieczeństwa",
+            "section9_content": "Wdrażamy techniczne i administracyjne środki bezpieczeństwa w celu ochrony Twoich danych, w tym lokalne szyfrowanie, bezpieczne protokoły komunikacyjne, szyfrowane przechowywanie w bazie danych i ograniczone kontrole dostępu. Jednak żadna metoda transmisji lub przechowywania nie jest w 100% bezpieczna. Chociaż staramy się chronić Twoje dane, nie możemy zagwarantować absolutnego bezpieczeństwa.",
+            "section10_title": "10. Twoje prawa",
+            "section10_content": "Masz prawo do dostępu, sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych, sprzeciwu wobec przetwarzania i wycofania zgody w odniesieniu do swoich danych osobowych. Masz prawo wiedzieć, usunąć, zrezygnować ze sprzedaży (nie sprzedajemy danych) i nie być dyskryminowanym. Skontaktuj się z nami pod adresem e-mail poniżej, aby skorzystać ze swoich praw. Odpowiemy w rozsądnym terminie wymaganym przez obowiązujące prawo.",
+            "section11_title": "11. Prywatność dzieci",
+            "section11_content": "Nasza aplikacja nie jest przeznaczona dla dzieci poniżej 18 roku życia (lub 13 lat w niektórych jurysdykcjach). Nie zbieramy świadomie danych osobowych od dzieci. Jeśli odkryjemy, że zebraliśmy dane od dziecka, natychmiast je usuniemy. Nie ponosimy odpowiedzialności za zakupy dokonane przez osoby poniżej 18 roku życia (lub wieku pełnoletności w ich jurysdykcji). Rodzice lub opiekunowie ponoszą wyłączną odpowiedzialność za monitorowanie korzystania z aplikacji przez swoje dzieci i wszelkich zakupów. Jeśli osoba nieletnia dokona zakupu bez odpowiedniego upoważnienia, rodzic lub opiekun musi skontaktować się ze sklepem Google Play w sprawie prośby o zwrot pieniędzy, ponieważ my nie przetwarzamy zwrotów.",
+            "section12_title": "12. Powiadomienie o naruszeniu danych",
+            "section12_content": "W przypadku naruszenia danych, które może wpłynąć na Twoje prawa, powiadomimy odpowiednie organy nadzorcze zgodnie z wymogami obowiązującego prawa oraz poinformujemy poszkodowanych użytkowników bez zbędnej zwłoki, jeśli istnieje wysokie ryzyko dla ich praw.",
+            "section13_title": "13. Zmiany w niniejszej polityce",
+            "section13_content": "Niniejsza polityka prywatności może być okresowo aktualizowana. Istotne zmiany będą zgłaszane użytkownikom. Dalsze korzystanie z aplikacji po wprowadzeniu zmian oznacza ich akceptację. Data ostatniej aktualizacji znajduje się na górze tej strony.",
+            "section14_title": "14. Reklamy",
+            "section14_content": "Poziom Darmowy aplikacji Raid Alarm jest wspierany przez reklamy. Korzystamy z Google AdMob do wyświetlania reklam. AdMob może zbierać i wykorzystywać dane, takie jak identyfikator reklamowy Twojego urządzenia, w celu wyświetlania odpowiednich reklam oraz do celów analitycznych. Użytkownicy, którzy zakupią Licencję Dożywotnią, będą mieli usunięte wszystkie reklamy stron trzecich z aplikacji."
+        },
+        "terms_of_service": {
+            "title": "Warunki Świadczenia Usług",
+            "last_updated": "Ostatnia aktualizacja: {year}",
+            "contact_title": "Kontakt",
+            "contact_email": "Pytania: alcstackdev@gmail.com",
+            "section1_title": "1. Akceptacja Warunków",
+            "section1_content": "Pobierając, instalując, uzyskując dostęp lub korzystając z Raid Alarm, zgadzasz się na przestrzeganie niniejszych Warunków Świadczenia Usług. Jeśli się nie zgadzasz, nie używaj Aplikacji. Musisz mieć co najmniej 18 lat (lub osiągnąć pełnoletność w swojej jurysdykcji), aby korzystać z tej aplikacji. Jeśli masz mniej niż 18 lat, możesz korzystać z tej aplikacji wyłącznie za zgodą rodzica lub opiekuna.",
+            "section2_title": "2. Opis Usługi",
+            "section2_content": "Raid Alarm to aplikacja mobilna dostępna wyłącznie w sklepie Google Play, która monitoruje powiadomienia z aplikacji Rust+ i uruchamia alarm w przypadku otrzymania powiadomienia o ataku. Aplikacja jest dostarczana „tak jak jest” bez jakiejkolwiek gwarancji. Funkcjonalność Aplikacji zależy całkowicie od aplikacji Rust+. Jeśli Rust+ nie jest zainstalowany, jest wyłączony, usunięty ze sklepu Google Play, przestanie wysyłać powiadomienia, wystąpią opóźnienia lub jeśli serwery gry Rust napotkają problemy, Aplikacja nie będzie działać, a my nie ponosimy odpowiedzialności za jakiekolwiek wynikłe problemy.",
+            "section3_title": "3. Brak powiązania",
+            "section3_content": "Raid Alarm nie ma żadnych powiązań, partnerstwa, połączenia, zatwierdzenia ani sponsoringu z grą Rust, aplikacją Rust+, Facepunch Studios Limited ani żadnym podmiotem powiązanym. Raid Alarm jest niezależną aplikacją. Używamy odniesień do „Rust+”, „Rust”, „Facepunch” i powiązanych terminów WYŁĄCZNIE w celach identyfikacyjnych i opisowych, aby wyjaśnić, co robi Aplikacja (dozwolony użytek znaku towarowego). Nie rościmy sobie żadnych praw do tych znaków towarowych. Nie jesteśmy autoryzowani, zatwierdzeni ani połączeni z Facepunch Studios Limited. Jeśli Facepunch Studios Limited sprzeciwi się naszemu użyciu tych terminów, natychmiast zastosujemy się do ich żądania. Wszelkie użycie tych terminów jest czysto opisowe i nie sugeruje żadnego powiązania, autoryzacji ani zatwierdzenia.",
+            "section4_title": "4. Zależność Zewnętrzna i Ograniczenia",
+            "section4_content": "ZAWIADOMIENIE O KRYTYCZNEJ ZALEŻNOŚCI: Funkcjonalność Raid Alarm jest CAŁKOWICIE I ABSOLUTNIE ZALEŻNA od aplikacji Rust+. Aplikacja NIE BĘDZIE DZIAŁAĆ w żadnej z następujących okoliczności:\n\n- Aplikacja Rust+ nie jest zainstalowana na Twoim urządzeniu\n- Aplikacja Rust+ jest wyłączona lub odinstalowana\n- Aplikacja Rust+ została usunięta ze sklepu Google Play\n- Aplikacja Rust+ staje się niedostępna lub przestaje działać\n- Aplikacja Rust+ przestaje wysyłać powiadomienia lub są one opóźnione\n- Funkcja „Smart Alarm” lub powiadomienia w aplikacji Rust+ zostaną usunięte, wyłączone lub zmodyfikowane\n- Serwery gry Rust doświadczają problemów, przestojów lub awarii\n- Facepunch Studios Limited ogranicza lub zakazuje funkcji powiadomień\n- Problemy z połączeniem internetowym uniemożliwiają odbieranie powiadomień Rust+\n- Wszelkie inne problemy wpływające na zdolność aplikacji Rust+ do wysyłania powiadomień\n\nKORZYSTAJĄC Z APLIKACJI, WYRAŹNIE POTWIERDZASZ I ZGADZASZ SIĘ, ŻE:\n\n- Funkcjonalność Aplikacji jest CAŁKOWICIE zależna od usług zewnętrznych (aplikacja Rust+ i serwery gry Rust), nad którymi NIE MAMY KONTROLI\n- Nie ponosimy ODPOWIEDZIALNOŚCI za dostępność, funkcjonalność, usunięcie ze sklepu Google Play aplikacji Rust+, opóźnienia powiadomień ani zmiany wprowadzone przez Facepunch Studios Limited\n- Nie ponosimy ODPOWIEDZIALNOŚCI za problemy, przestoje lub awarie serwerów gry Rust\n- Nie ponosimy ODPOWIEDZIALNOŚCI, jeśli Facepunch Studios Limited ograniczy, zakaże lub zmodyfikuje funkcjonalność powiadomień aplikacji Rust+\n- NIE będziesz pociągać nas do odpowiedzialności, żądać zwrotu pieniędzy ani wnosić żadnych roszczeń przeciwko nam z powodu problemów z aplikacją Rust+, problemów z serwerami gry Rust, opóźnień w powiadomieniach lub innych problemów z zależnościami zewnętrznymi\n- Rozumiesz, że jeśli aplikacja Rust+ zostanie usunięta ze sklepu Google Play lub przestanie działać, Aplikacja natychmiast przestanie działać i nie będziesz mieć PRAWA do zwrotu pieniędzy, odszkodowania ani innych środków zaradczych",
+            "section5_title": "5. Brak Odpowiedzialności za Usługi Stron Trzecich",
+            "section5_content": "NIE JESTEŚMY ODPOWIEDZIALNI i NIE PONOSIMY ODPOWIEDZIALNOŚCI za jakiekolwiek problemy, szkody, straty lub konsekwencje wynikające z:\n\n- Gry Rust, aplikacji Rust+, Facepunch Studios Limited lub jakiegokolwiek podmiotu powiązanego\n- Usunięcia aplikacji Rust+ ze sklepu Google Play\n- Zaprzestania wysyłania powiadomień przez aplikację Rust+ lub ich opóźnienia\n- Usunięcia, wyłączenia lub modyfikacji funkcji „Smart Alarm” lub powiadomień w aplikacji Rust+\n- Problemów, przestojów lub awarii serwerów gry Rust\n- Wszelkich zmian, ograniczeń lub modyfikacji dokonanych przez Facepunch Studios Limited\n- Wszelkich innych usług, aplikacji lub zależności stron trzecich\n\nKorzystasz z Aplikacji NA WŁASNE RYZYKO w odniesieniu do wszystkich zależności zewnętrznych. Nie mamy KONTROLI nad aplikacją Rust+, serwerami gry Rust ani Facepunch Studios Limited i nie ponosimy ODPOWIEDZIALNOŚCI za jakiekolwiek problemy wynikające z tych zależności zewnętrznych.",
+            "section6_title": "6. Gwarancja Usługi",
+            "section6_content": "Gwarantujemy, że Raid Alarm będzie działać poprawnie TYLKO wtedy, gdy WSZYSTKIE poniższe warunki zostaną spełnione jednocześnie:\n\n- Serwery gry Rust działają i funkcjonują normalnie\n- Aplikacja Rust+ jest zainstalowana, włączona i działa normalnie na Twoim urządzeniu\n- Aplikacja Rust+ jest dostępna w sklepie Google Play i nie została usunięta\n- Aplikacja Rust+ wysyła powiadomienia bez opóźnień\n- Funkcje powiadomień aplikacji Rust+ (w tym „Smart Alarm”, jeśli dotyczy) są aktywne i nie wyłączone\n- Twoje urządzenie spełnia wszystkie wymagania techniczne\n- Wszystkie niezbędne uprawnienia zostały przyznane i są utrzymywane\n- Masz aktywne połączenie internetowe\n- Facepunch Studios Limited nie ograniczyło ani nie zakazało funkcjonalności powiadomień\n\nJeśli KTÓRYKOLWIEK z tych warunków nie zostanie spełniony, NIE MOŻEMY i NIE GWARANTUJEMY, że Aplikacja będzie działać, i nie ponosimy ODPOWIEDZIALNOŚCI za jakiekolwiek wynikłe problemy, straty lub szkody.",
+            "section7_title": "7. Uprawnienia",
+            "section7_content": "Raid Alarm prosi tylko o minimalne niezbędne uprawnienia: dostęp do powiadomień w celu monitorowania alertów z aplikacji Rust+, wyjątek optymalizacji baterii dla działania w tle oraz uprawnienia alarmu do uruchamiania alarmów.",
+            "section8_title": "8. Warunki Licencji Dożywotniej",
+            "section8_content": "Dostępność: Ta aplikacja jest dostępna wyłącznie w sklepie Google Play. Wszystkie zakupy są przetwarzane przez system płatności sklepu Google Play.\n\nLicencja Dożywotnia: Funkcje premium wymagają jednorazowego zakupu. Oferujemy „Licencję Dożywotnią”, która daje stały dostęp do wszystkich funkcji premium. Jest to płatność jednorazowa, bez opłat cyklicznych ani subskrypcji.\n\nWymagania Wiekowe: Musisz mieć co najmniej 18 lat (lub osiągnąć pełnoletność w swojej jurysdykcji), aby zakupić licencję. Jeśli masz mniej niż 18 lat, możesz dokonać zakupu wyłącznie za zgodą rodzica lub opiekuna. NIE PONOSIMY ODPOWIEDZIALNOŚCI za zakupy dokonane przez nieletnich bez odpowiedniego upoważnienia. Rodzice lub opiekunowie ponoszą wyłączną odpowiedzialność za monitorowanie zakupów swoich dzieci. Jeśli osoba nieletnia dokona zakupu bez upoważnienia, skontaktuj się ze sklepem Google Play w sprawie prośby o zwrot pieniędzy.\n\nPrzetwarzanie Płatności: Wszystkie płatności są bezpiecznie przetwarzane przez sklep Google Play. Nie przechowujemy ani nie mamy dostępu do danych Twojej karty płatniczej. Informacje o płatnościach są obsługiwane w całości przez sklep Google Play.\n\nCeny: Ceny mogą się różnić w zależności od kraju i mogą ulec zmianie bez powiadomienia. Aktualne ceny są wyświetlane w Aplikacji i w sklepie Google Play.\n\nModyfikacja Usługi: Zastrzegamy sobie prawo do modyfikowania, dodawania lub usuwania funkcji w dowolnym momencie bez powiadomienia i bez zwrotu pieniędzy. Zastrzegamy sobie prawo do zakończenia lub zawieszenia Twojej licencji w dowolnym momencie z powodu naruszenia niniejszych Warunków lub nielegalnych działań.\n\nDostępność Usługi: Funkcjonalność Aplikacji zależy całkowicie od aplikacji Rust+. Jeśli aplikacja Rust+ zostanie usunięta ze sklepu Google Play, przestanie działać lub przestanie wysyłać powiadomienia, Aplikacja nie będzie działać niezależnie od statusu Twojej licencji i nie będziesz mieć prawa do zwrotu pieniędzy ani odszkodowania.\n\n#### Polityka Zwrotów\n\nWSZYSTKIE SPRZEDAŻE SĄ OSTATECZNE. ZWROTY NIE BĘDĄ PRZYZNAWANE W ŻADNYCH OKOLICZNOŚCIACH, W TYM MIĘDZY INNYMI:\n\n- Usunięcie aplikacji Rust+ ze sklepu Google Play, niedostępność lub jakikolwiek problem\n- Zaprzestanie wysyłania powiadomień przez aplikację Rust+ lub ich opóźnienie\n- Usunięcie, wyłączenie lub modyfikacja funkcji powiadomień aplikacji Rust+ przez Facepunch Studios Limited\n- Problemy, przestoje lub awarie serwerów gry Rust\n- Problemy funkcjonalne aplikacji (awarie, błędy, opóźnienia w powiadomieniach, brak alarmu)\n- Zaprzestanie działania Aplikacji z powodu problemów z aplikacją Rust+ lub jej usunięcia\n- Niezadowolenie użytkownika z Aplikacji lub jej funkcjonalności\n- Zmiana zdania użytkownika po zakupie\n- Niekompatybilność urządzenia użytkownika z Aplikacją\n- Odmowa przyznania wymaganych uprawnień przez użytkownika\n- Nieautoryzowany zakup przez osobę nieletnią (skontaktuj się ze sklepem Google Play w sprawie zwrotu)\n- Jakikolwiek inny powód\n\nPo upływie okresu zwrotu sklepu Google Play (zazwyczaj 48 godzin), ŻADNE ZWROTY nie będą przez nas przyznawane w żadnym wypadku, bez względu na przyczynę.\n\nDOKONUJĄC ZAKUPU LICENCJI, WYRAŹNIE ZRZEKASZ SIĘ WSZELKICH PRAW DO ZWROTU PIENIĘDZY, z wyjątkiem standardowego okresu zwrotu sklepu Google Play (zazwyczaj 48 godzin), po którym ZWROTY NIE BĘDĄ PRZYZNAWANE.\n\n#### Krytyczne Uznanie\n\nDOKONUJĄC ZAKUPU LICENCJI, WYRAŹNIE UZNAJESZ, ROZUMIESZ I NIEODWRACALNIE ZGADZASZ SIĘ, ŻE: Aplikacja jest całkowicie zależna od aplikacji Rust+ (patrz Sekcja 4). Jeśli aplikacja Rust+ stanie się niedostępna, zostanie usunięta lub przestanie działać, Aplikacja nie będzie działać i nie będziesz mieć prawa do zwrotu pieniędzy ani odszkodowania. Akceptujesz WSZYSTKIE RYZYKA związane z zależnościami zewnętrznymi i NIE będziesz żądać zwrotu pieniędzy z powodu problemów z Rust+, problemów z serwerami gry Rust lub problemów z zależnościami zewnętrznymi (z wyjątkiem 48-godzinnego standardowego okresu zwrotu sklepu Google Play).",
+            "section9_title": "9. Własność Intelektualna i Dozwolony Użytek Znaku Towarowego",
+            "section9_content": "Aplikacja Raid Alarm i jej zawartość są chronione prawem autorskim i prawem znaków towarowych. Wszelkie prawa są zastrzeżone przez nas.\n\nZastrzeżenie dotyczące znaków towarowych: „Rust+”, „Rust”, „Facepunch” i powiązane loga, nazwy i znaki towarowe są wyłączną własnością Facepunch Studios Limited. NIE jesteśmy powiązani, zatwierdzeni, autoryzowani ani połączeni z Facepunch Studios Limited w żaden sposób. Używamy tych znaków towarowych WYŁĄCZNIE w celach identyfikacyjnych i opisowych (dozwolony użytek znaku towarowego). NIE rościmy sobie żadnych praw do tych znaków towarowych. Jeśli Facepunch Studios Limited sprzeciwi się naszemu użyciu, natychmiast zastosujemy się do tego. Zobacz Sekcję 3, aby uzyskać więcej informacji.",
+            "section10_title": "10. Wyłączenie Gwarancji",
+            "section10_content": "APLIKACJA JEST DOSTARCZANA „TAK JAK JEST” I „W MIARĘ DOSTĘPNOŚCI” BEZ Z JAKICHKOLWIEK GWARANCJI, WYRAŹNYCH LUB DOROZUMIANYCH, W TYM MIĘDZY INNYMI GWARANCJI PRZYDATNOŚCI HANDLOWEJ, PRZYDATNOŚCI DO OKREŚLONEGO CELU, Nienaruszenia praw LUB ŻE APLIKACJA BĘDZIE DZIAŁAĆ POPRAWNIE.\n\nNie gwarantujemy, że Aplikacja będzie zawsze działać poprawnie, że usługi stron trzecich będą zawsze dostępne ani że Aplikacja będzie wolna od przerw lub błędów. Funkcjonalność Aplikacji zależy całkowicie od aplikacji Rust+ (patrz Sekcja 4). Nie składamy żadnych oświadczeń ani gwarancji dotyczących funkcjonalności, dostępności lub niezawodności Aplikacji. KORZYSTASZ Z APLIKACJI NA WŁASNE RYZYKO.",
+            "section11_title": "11. Ograniczenie Odpowiedzialności",
+            "section11_content": "W MAKSYMALNYM ZAKRESIE DOZWOLONYM PRZEZ PRAWO NIE PONOSIMY ODPOWIEDZIALNOŚCI ZA JAKIEKOLWIEK SZKODY, STRATY LUB KONSEKWENCJE WYNIKAJĄCE Z:\n\n- Problemów z aplikacją Rust+, usunięcia ze sklepu Google Play, niedostępności lub jakiegokolwiek problemu\n- Zaprzestania wysyłania powiadomień przez aplikację Rust+ lub ich opóźnienia\n- Usunięcia, wyłączenia lub modyfikacji funkcji powiadomień aplikacji Rust+ przez Facepunch Studios Limited\n- Problemów, przestojów lub awarii serwerów gry Rust\n- Ograniczenia lub zakazu funkcjonalności przez Facepunch Studios Limited lub podmioty powiązane\n- Zaprzestania działania Aplikacji z powodu problemów z aplikacją Rust+ lub jej usunięcia\n- Szkód pośrednich, przypadkowych, specjalnych, wynikowych lub karnych\n- Utraty zysków, danych, wartości firmy lub innych strat niematerialnych\n- Wszelkich szkód przekraczających kwotę zapłaconą za licencję\n- Wszelkich szkód związanych z zależnościami zewnętrznymi lub usługami stron trzecich\n- Nieautoryzowanego zakupu przez osobę nieletnią (rodzice/opiekunowie ponoszą pełną odpowiedzialność)\n\nW ŻADNYM WYPADKU NASZA CAŁKOWITA ODPOWIEDZIALNOŚĆ NIE PRZEKROCZY KWOTY ZAPŁACONEJ PRZEZ CIEBIE ZA LICENCJĘ W CIĄGU 12 MIESIĘCY POPRZEDZAJĄCYCH ROSZCZENIE.",
+            "section12_title": "12. Odpowiedzialność Użytkownika",
+            "section12_content": "Jesteś WYŁĄCZNIE ODPOWIEDZIALNY za:\n\n- Instalację i utrzymanie aplikacji Rust+ na swoim urządzeniu\n- Zapewnienie, że aplikacja Rust+ jest dostępna, zainstalowana i działa poprawnie\n- Przyznanie wszystkich niezbędnych uprawnień zarówno Raid Alarm, jak i aplikacji Rust+\n- Zapewnienie, że Twoje urządzenie jest kompatybilne zarówno z Raid Alarm, jak i aplikacją Rust+\n- Zrozumienie, że Aplikacja jest CAŁKOWICIE ZALEŻNA od aplikacji Rust+ i usług zewnętrznych\n- Zrozumienie, że jeśli aplikacja Rust+ zostanie usunięta ze sklepu Google Play lub przestanie działać, Aplikacja nie będzie działać i NIE MASZ PRAWA do zwrotu pieniędzy\n- Przestrzeganie Warunków Świadczenia Usług aplikacji Rust+ i wszystkich obowiązujących przepisów\n- Zapewnienie, że Twoje korzystanie nie narusza Warunków Świadczenia Usług aplikacji Rust+\n- Monitorowanie i autoryzowanie zakupów, jeśli jesteś rodzicem lub opiekunem\n- Zapewnienie, że masz co najmniej 18 lat (lub zgodę rodzica/opiekuna) przed zakupem\n\nJeśli Twoje użycie narusza Warunki Świadczenia Usług aplikacji Rust+, ponosisz WYŁĄCZNĄ ODPOWIEDZIALNOŚĆ za wszystkie konsekwencje, a my NIE PONOSIMY ODPOWIEDZIALNOŚCI za jakiekolwiek wynikłe problemy.",
+            "section13_title": "13. Zmiany Warunków",
+            "section13_content": "Niniejsze Warunki Świadczenia Usług mogą być okresowo aktualizowane. Istotne zmiany będą zgłaszane użytkownikom. Dalsze korzystanie z Aplikacji po zmianach oznacza akceptację nowych Warunków.",
+            "section14_title": "14. Rozwiązanie",
+            "section14_content": "Możemy natychmiast zakończyć lub zawiesić Twój dostęp do Aplikacji bez wcześniejszego powiadomienia z powodu naruszenia niniejszych Warunków lub według naszego wyłącznego uznania. Nie ponosimy odpowiedzialności za szkody wynikające z rozwiązania.",
+            "section15_title": "15. Prawo Właściwe i Jurysdykcja",
+            "section15_content": "Niniejsze Warunki Świadczenia Usług podlegają obowiązującemu prawu w zależności od Twojej lokalizacji. Spory będą rozstrzygane zgodnie z obowiązującym prawem i jurysdykcją.",
+            "section16_title": "16. Reklamy",
+            "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
+        }
+    },
+    "paywall": {
+        "title_line1": "DOŻYWOTNI",
+        "title_line2": "DOSTĘP",
+        "subtitle": "Zapłać raz. Miej na zawsze.",
+        "no_subscriptions": "BRAK SUBSKRYPCJI.",
+        "secure_access": "ROZPOCZNIJ NIEOGRANICZONĄ OCHRONĘ",
+        "restore": "PRZYWRÓĆ",
+        "privacy": "POLITYKA PRYWATNOŚCI",
+        "terms": "WARUNKI USŁUGI",
+        "plan_card": {
+            "name": "DOSTĘP DOŻYWOTNI",
+            "one_time": "JEDNORAZOWA PŁATNOŚĆ"
+        },
+        "benefits": {
+            "critical_alarms": "Krytyczne Alarmy Raidowe (Ignoruje Tryb Cichy)",
+            "fake_call": "Symulacja Fałszywego Połączenia",
+            "enemy_notifications": "Powiadomienia Wróg Online/Offline",
+            "server_notifications": "Powiadomienia o serwerze Online/Offline",
+            "wipe_notifications": "Niestandardowe Powiadomienia o Wipe"
+        },
+        "errors": {
+            "network": "Błąd sieci. Sprawdź połączenie internetowe i spróbuj ponownie.",
+            "pending": "Płatność oczekująca. Zakup zostanie aktywowany po potwierdzeniu płatności.",
+            "invalid": "Nieprawidłowa płatność. Spróbuj ponownie lub skontaktuj się z pomocą.",
+            "unavailable": "Produkt jest obecnie niedostępny.",
+            "store": "Problem ze sklepem. Spróbuj ponownie później.",
+            "already_purchased": "Ten produkt został już zakupiony.",
+            "generic_failed": "Zakup nieudany: {}",
+            "purchase_failed_default": "Zakup nieudany. Spróbuj ponownie.",
+            "restore_no_internet": "Brak połączenia z internetem.",
+            "restore_timeout": "Przekroczono czas przywracania.",
+            "restore_failed": "Przywracanie nieudane: {}",
+            "no_lifetime_found": "Nie znaleziono dożywotniego zakupu do przywrócenia",
+            "purchase_verification_failed": "Płatność zakończona, ale nie można zweryfikować dostępu dożywotniego."
+        }
+    },
+    "recoil_trainer": {
+        "title": "TRENER ODRZUTU",
+        "subtitle": "Wizualizacja",
+        "mouse_move": "Ruch Myszy",
+        "impact_point": "Punkt Trafienia",
+        "fire": "OGIEŃ",
+        "pause": "PAUZA",
+        "shot": "STRZAŁ",
+        "ready": "Gotowy",
+        "complete": "Zakończono",
+        "pull_down": "CIĄGNIJ W DÓŁ",
+        "pull_left": "CIĄGNIJ W LEWO",
+        "pull_right": "CIĄGNIJ W PRAWO",
+        "stabilize": "USTABILIZUJ",
+        "difficulty": {
+            "easy": "ŁATWY",
+            "medium": "ŚREDNI",
+            "hard": "TRUDNY",
+            "extreme": "EKSTREMALNY"
+        }
+    }
+}

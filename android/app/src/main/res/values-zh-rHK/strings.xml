@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm 已啟用</string>
+    <string name="notification_service_active_text">攻擊警報已啟用</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm 服務已停用</string>
+    <string name="notification_service_disabled_text">通知監聽服務已停用。啟用服務以接收攻擊通知。</string>
+    <string name="notification_service_disabled_big_text">通知監聽服務已停用。啟用服務以接收攻擊通知。\n\n點擊設定以啟用服務。</string>
+    <string name="notification_service_disabled_action">設定</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">停止</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">正在觸發警報...</string>
+    <string name="alarm_playing">警報正在播放 - 點擊停止</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">偵測到基地攻擊</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm 激活</string>
+    <string name="channel_name_service_status">服務狀態</string>
+    <string name="channel_name_attack_detected">攻擊檢測</string>
+    <string name="channel_name_alarm_service">報警服務</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Raid Alarm 活動通知的通道</string>
+    <string name="channel_description_service_status">Raid Alarm 服務狀態通知</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm 服務狀態通知（初始顯示）</string>
+    <string name="channel_description_attack_detected">檢測到攻擊通知時顯示的通知</string>
+    <string name="channel_description_alarm_service">報警前台服務通知通道</string>
+    <!-- Fake Call -->
+    <string name="text_accept">接受</string>
+    <string name="text_decline">拒絕</string>
+    <string name="fake_call_channel_name">假電話</string>
+    <string name="fake_call_channel_description">來電虛假來電通知</string>
+    <string name="channel_name_player_tracking">玩家追蹤</string>
+    <string name="channel_description_player_tracking">追蹤玩家的狀態變更</string>
+    <string name="player_status_online">在線</string>
+    <string name="player_status_offline">離線</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s 已加入 %2$s</string>
+    <string name="player_status_left_body">%1$s 已離開 %2$s</string>
+    <string name="unknown_server">未知伺服器</string>
+    <string name="default_server_name">伺服器</string>
+    <string name="alarm_stop_button_full">停止警報</string>
+</resources>

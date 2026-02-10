@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Активен</string>
+    <string name="notification_service_active_text">Оповещения об атаке активны</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Служба Raid Alarm Отключена</string>
+    <string name="notification_service_disabled_text">Служба прослушивания уведомлений отключена. Включите службу для получения уведомлений об атаках.</string>
+    <string name="notification_service_disabled_big_text">Служба прослушивания уведомлений отключена. Включите службу для получения уведомлений об атаках.\n\nНажмите Настройки, чтобы включить службу.</string>
+    <string name="notification_service_disabled_action">Настройки</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Остановить</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Срабатывание сигнала тревоги...</string>
+    <string name="alarm_playing">Сигнал тревоги воспроизводится - Нажмите, чтобы остановить</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Обнаружена атака на базу</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Активен</string>
+    <string name="channel_name_service_status">Статус услуги</string>
+    <string name="channel_name_attack_detected">Обнаружение атак</string>
+    <string name="channel_name_alarm_service">Служба сигнализации</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Канал для активных уведомлений Raid Alarm</string>
+    <string name="channel_description_service_status">Raid Alarm уведомления о состоянии службы</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm уведомления о состоянии службы (первоначальное отображение)</string>
+    <string name="channel_description_attack_detected">Уведомления, отображаемые при обнаружении уведомления об атаке</string>
+    <string name="channel_description_alarm_service">Канал уведомлений службы приоритетного режима тревоги</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Принять</string>
+    <string name="text_decline">Отклонить</string>
+    <string name="fake_call_channel_name">Ложный звонок</string>
+    <string name="fake_call_channel_description">Уведомления о входящих ложных вызовах</string>
+    <string name="channel_name_player_tracking">Отслеживание игроков</string>
+    <string name="channel_description_player_tracking">Изменения статуса отслеживаемых игроков</string>
+    <string name="player_status_online">В сети</string>
+    <string name="player_status_offline">Вне сети</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s присоединился к %2$s</string>
+    <string name="player_status_left_body">%1$s покинул %2$s</string>
+    <string name="unknown_server">Неизвестный сервер</string>
+    <string name="default_server_name">Сервер</string>
+    <string name="alarm_stop_button_full">ОСТАНОВИТЬ ТРЕВОГУ</string>
+</resources>

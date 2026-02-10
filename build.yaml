@@ -1,0 +1,17 @@
+targets:
+  $default:
+    builders:
+      isar_generator:isar_generator:
+        enabled: true
+        generate_for:
+          exclude:
+            - lib/core/proto/**
+      riverpod_generator:riverpod_generator:
+        enabled: true
+        generate_for:
+          exclude:
+            - lib/core/proto/**
+      source_gen:combining_builder:
+        options:
+          ignore_for_file:
+            - lib/core/proto/**

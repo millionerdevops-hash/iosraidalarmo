@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Aktif</string>
+    <string name="notification_service_active_text">Saldırı uyarıları aktif</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm Servisi Kapalı</string>
+    <string name="notification_service_disabled_text">Bildirim dinleme servisi kapalı. Saldırı bildirimlerini almak için servisi aktif edin.</string>
+    <string name="notification_service_disabled_big_text">Bildirim dinleme servisi kapalı. Saldırı bildirimlerini almak için servisi aktif edin.\n\nAyarlara dokunarak servisi aktif edebilirsiniz.</string>
+    <string name="notification_service_disabled_action">Ayarlar</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Durdur</string>
+    <string name="alarm_stop_button_full">ALARMI DURDUR</string>
+    <string name="alarm_text_alarm">ALARM</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Alarm tetikleniyor...</string>
+    <string name="alarm_playing">Alarm çalıyor - Durdurmak için dokunun</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Base saldırısı tespit etti</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Aktif</string>
+    <string name="channel_name_service_status">Servis Durumu</string>
+    <string name="channel_name_attack_detected">Saldırı Tespiti</string>
+    <string name="channel_name_alarm_service">Alarm Servisi</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Raid Alarm aktif bildirimleri için kanal</string>
+    <string name="channel_description_service_status">Raid Alarm servis durumu bildirimleri</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm servis durumu bildirimleri (ilk gösterim)</string>
+    <string name="channel_description_attack_detected">Saldırı bildirimi tespit edildiğinde gösterilen bildirimler</string>
+    <string name="channel_description_alarm_service">Alarm foreground service bildirim kanalı</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Kabul Et</string>
+    <string name="text_decline">Reddet</string>
+    <string name="fake_call_channel_name">Sahte Arama</string>
+    <string name="fake_call_channel_description">Gelen sahte arama bildirimleri</string>
+    <string name="channel_name_player_tracking">Oyuncu Takibi</string>
+    <string name="channel_description_player_tracking">Takip edilen oyuncu durum değişiklikleri</string>
+    <string name="player_status_online">Çevrimiçi</string>
+    <string name="player_status_offline">Çevrimdışı</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s, %2$s sunucusuna katıldı</string>
+    <string name="player_status_left_body">%1$s, %2$s sunucusundan ayrıldı</string>
+    <string name="unknown_server">Bilinmeyen Sunucu</string>
+    <string name="default_server_name">Sunucu</string>
+</resources>

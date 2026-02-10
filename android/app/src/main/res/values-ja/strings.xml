@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm アクティブ</string>
+    <string name="notification_service_active_text">攻撃アラートが有効です</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm サービス無効</string>
+    <string name="notification_service_disabled_text">通知監視サービスが無効です。攻撃通知を受信するには、サービスを有効にしてください。</string>
+    <string name="notification_service_disabled_big_text">通知監視サービスが無効です。攻撃通知を受信するには、サービスを有効にしてください。\n\n設定をタップしてサービスを有効にします。</string>
+    <string name="notification_service_disabled_action">設定</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">停止</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">アラームをトリガーしています...</string>
+    <string name="alarm_playing">アラーム再生中 - タップして停止</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">ベース攻撃を検出しました</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm アクティブ</string>
+    <string name="channel_name_service_status">サービスステータス</string>
+    <string name="channel_name_attack_detected">攻撃の検出</string>
+    <string name="channel_name_alarm_service">アラームサービス</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Raid Alarm アクティブ通知のチャネル</string>
+    <string name="channel_description_service_status">Raid Alarm サービス ステータス通知</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm サービス状態通知（初期表示）</string>
+    <string name="channel_description_attack_detected">攻撃通知が検出されたときに表示される通知</string>
+    <string name="channel_description_alarm_service">アラームフォアグラウンドサービス通知チャネル</string>
+    <!-- Fake Call -->
+    <string name="text_accept">受け入れる</string>
+    <string name="text_decline">拒否</string>
+    <string name="fake_call_channel_name">偽の電話</string>
+    <string name="fake_call_channel_description">偽電話の着信通知</string>
+    <string name="channel_name_player_tracking">プレイヤー追跡</string>
+    <string name="channel_description_player_tracking">追跡対象プレイヤーの状態変更</string>
+    <string name="player_status_online">オンライン</string>
+    <string name="player_status_offline">オフライン</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s が %2$s に参加しました</string>
+    <string name="player_status_left_body">%1$s が %2$s を退出しました</string>
+    <string name="unknown_server">不明なサーバー</string>
+    <string name="default_server_name">サーバー</string>
+    <string name="alarm_stop_button_full">アラームを停止</string>
+</resources>

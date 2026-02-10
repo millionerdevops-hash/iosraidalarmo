@@ -1,0 +1,930 @@
+{
+    "common": {
+        "subscription_required": "Abonnement kræves for at aktivere beskyttelse",
+        "error_service_not_enabled": "Notifikationstjeneste er ikke aktiveret.",
+        "no_internet": "Ingen internetforbindelse. Tjek venligst dit netværk.",
+        "thousand_suffix": "K",
+        "million_suffix": "M",
+        "errors": {
+            "no_internet": "Ingen internetforbindelse. Tjek venligst dit netværk."
+        },
+        "loading": "INDLÆSER...",
+        "fauna_guide": "DYREGUIDE",
+        "select_species": "VÆLG ART"
+    },
+    "tools": {
+        "section_utilities": "VÆRKTØJER",
+        "raid_cost": {
+            "title": "RAID PRIS",
+            "subtitle": "Sprængstoffer & Svovl"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "Monument Kameraer"
+        },
+        "tea_guide": {
+            "title": "TE GUIDE",
+            "subtitle": "Buffs & Opskrifter"
+        },
+        "diesel_calc": {
+            "title": "DIESEL",
+            "subtitle": "Excavator & Quarry"
+        },
+        "animal_guide": {
+            "title": "DYR",
+            "subtitle": "Jagt & Ressourcer"
+        },
+        "match_game": {
+            "title": "MATCH",
+            "subtitle": "Hukommelsesspil",
+            "earned_coins": "Du tjente {} mønter!",
+            "not_enough_scrap": "Ikke nok mønter!",
+            "victory": "SEJR",
+            "defeat": "NEDERLAG",
+            "net_result": "NETTORESULTAT",
+            "play_again": "SPIL IGEN",
+            "return_to_menu": "VEND TILBAGE TIL MENUEN",
+            "timer": "TIMER",
+            "potential": "POTENTIALE",
+            "memorize": "HESK!",
+            "menu_title": "MATCH SPIL",
+            "menu_subtitle": "Find par for at multiplicere dit skrot.\nHøj risiko, høj belønning.",
+            "play_action": "SPIL (-{} SKROT)",
+            "entry": "INDGANG",
+            "pairs_count": "{} Par",
+            "exit_warning_title": "Afslut spil?",
+            "exit_warning_message": "Din indsats vil gå tabt, hvis du afslutter nu. Fortsæt?",
+            "yes": "Ja",
+            "no": "Nej"
+        },
+        "code_raider": {
+            "title": "KODELÅS",
+            "subtitle": "Knæk Kodelåse",
+            "battery_level": "BATTERINIVEAU",
+            "correct": "Korrekt",
+            "wrong_spot": "Forkert sted",
+            "invalid": "Ugyldig",
+            "waiting_input": "Venter på input...",
+            "access_granted": "ADGANG GIVET",
+            "system_lockout": "SYSTEMSPÆRRING",
+            "reward_scrap": "Belønning: +{} Scrap",
+            "code_changed": "Kode ændret",
+            "hack_another": "HACK EN ANDEN",
+            "retry_hack": "PRØV IGEN",
+            "open": "ÅBEN",
+            "clear": "SLET",
+            "enter": "OK",
+            "code_lock": "KODELÅS"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "Te Opskrifter",
+            "mixing_table_recipe": "BLANDEBORD",
+            "select_tier": "VÆLG NIVEAU"
+        },
+        "stats": {
+            "rad_res": "Rad Res",
+            "hydration": "Hydrering",
+            "temp": "Temp",
+            "max_temp": "Maks Temp",
+            "min_temp": "Min Temp",
+            "quality": "Kvalitet",
+            "yield": "Udbytte",
+            "hot": "HoT",
+            "inst_hp": "Øjeblikkelig HP",
+            "max_hp": "Maks HP"
+        },
+        "durations": {
+            "instant": "Øjeblikkelig",
+            "30m": "30m",
+            "20m": "20m",
+            "45m": "45m",
+            "1h": "1t",
+            "3m_20s": "3m 20s",
+            "5m": "5m",
+            "6m_40s": "6m 40s"
+        },
+        "categories": {
+            "Ore": "MALM",
+            "Wood": "TRÆ",
+            "Scrap": "SKROT",
+            "Harvesting": "HØST",
+            "MaxHealth": "MAKS HP",
+            "Healing": "HEALING",
+            "Rad": "ANTI-RAD",
+            "Cooling": "KØLING",
+            "Warming": "VARME",
+            "Crafting": "CRAFTING"
+        },
+        "tiers": {
+            "Basic": "B.",
+            "Advanced": "A.",
+            "Pure": "P."
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "B. Anti-Rad Te",
+                "desc": "Basic niveau strålingsmodstand te."
+            },
+            "Rad_adv": {
+                "name": "A. Anti-Rad Te",
+                "desc": "Advanced niveau strålingsmodstand te."
+            },
+            "Rad_pure": {
+                "name": "P. Anti-Rad Te",
+                "desc": "Pure niveau strålingsmodstand te."
+            },
+            "Cooling_basic": {
+                "name": "B. Køle Te",
+                "desc": "Basic niveau køle te."
+            },
+            "Cooling_adv": {
+                "name": "A. Køle Te",
+                "desc": "Advanced niveau køle te."
+            },
+            "Cooling_pure": {
+                "name": "P. Køle Te",
+                "desc": "Pure niveau køle te."
+            },
+            "Crafting_basic": {
+                "name": "B. Crafting Te",
+                "desc": "Basic niveau crafting hastighed te."
+            },
+            "Crafting_adv": {
+                "name": "A. Crafting Te",
+                "desc": "Advanced niveau crafting hastighed te."
+            },
+            "Crafting_pure": {
+                "name": "P. Crafting Te",
+                "desc": "Pure niveau crafting hastighed te."
+            },
+            "Harvesting_basic": {
+                "name": "B. Høst Te",
+                "desc": "Basic niveau ressource høst te."
+            },
+            "Harvesting_adv": {
+                "name": "A. Høst Te",
+                "desc": "Advanced niveau ressource høst te."
+            },
+            "Harvesting_pure": {
+                "name": "P. Høst Te",
+                "desc": "Pure niveau ressource høst te."
+            },
+            "Healing_basic": {
+                "name": "B. Healing Te",
+                "desc": "Basic niveau healing te."
+            },
+            "Healing_adv": {
+                "name": "A. Healing Te",
+                "desc": "Advanced niveau healing te."
+            },
+            "Healing_pure": {
+                "name": "P. Healing Te",
+                "desc": "Pure niveau healing te."
+            },
+            "MaxHealth_basic": {
+                "name": "B. Maks HP Te",
+                "desc": "Basic niveau maks helbredsforøgelse te."
+            },
+            "MaxHealth_adv": {
+                "name": "A. Maks HP Te",
+                "desc": "Advanced niveau maks helbredsforøgelse te."
+            },
+            "MaxHealth_pure": {
+                "name": "P. Maks HP Te",
+                "desc": "Pure niveau maks helbredsforøgelse te."
+            },
+            "Ore_basic": {
+                "name": "B. Malm Te",
+                "desc": "Basic niveau malm høst te."
+            },
+            "Ore_adv": {
+                "name": "A. Malm Te",
+                "desc": "Advanced niveau malm høst te."
+            },
+            "Ore_pure": {
+                "name": "P. Malm Te",
+                "desc": "Pure niveau malm høst te."
+            },
+            "Scrap_basic": {
+                "name": "B. Skrot Te",
+                "desc": "Basic niveau skrot høst te."
+            },
+            "Scrap_adv": {
+                "name": "A. Skrot Te",
+                "desc": "Advanced niveau skrot høst te."
+            },
+            "Scrap_pure": {
+                "name": "P. Skrot Te",
+                "desc": "Pure niveau skrot høst te."
+            },
+            "Warming_basic": {
+                "name": "B. Varme Te",
+                "desc": "Basic niveau varme te."
+            },
+            "Warming_adv": {
+                "name": "A. Varme Te",
+                "desc": "Advanced niveau varme te."
+            },
+            "Warming_pure": {
+                "name": "P. Varme Te",
+                "desc": "Pure niveau varme te."
+            },
+            "Wood_basic": {
+                "name": "B. Træ Te",
+                "desc": "Basic niveau træ høst te."
+            },
+            "Wood_adv": {
+                "name": "A. Træ Te",
+                "desc": "Advanced niveau træ høst te."
+            },
+            "Wood_pure": {
+                "name": "P. Træ Te",
+                "desc": "Pure niveau træ høst te."
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "Rødt Bær",
+            "Blue_Berry": "Blåt Bær",
+            "Green_Berry": "Grønt Bær",
+            "Yellow_Berry": "Gult Bær",
+            "White_Berry": "Hvidt Bær",
+            "Basic_Rad_Tea": "B. Rad Te",
+            "Adv_Rad_Tea": "Adv. Rad Te",
+            "Basic_Cooling_Tea": "B. Køle Te",
+            "Adv_Cooling_Tea": "Adv. Køle Te",
+            "Basic_Crafting_Tea": "B. Craft Te",
+            "Adv_Crafting_Tea": "Adv. Craft Te",
+            "Basic_Harvesting_Tea": "B. Høst Te",
+            "Adv_Harvesting_Tea": "Adv. Høst Te",
+            "Basic_Healing_Tea": "B. Heal Te",
+            "Adv_Healing_Tea": "Adv. Heal Te",
+            "Basic_MaxHealth_Tea": "B. HP Te",
+            "Adv_MaxHealth_Tea": "Adv. HP Te",
+            "Basic_Ore_Tea": "B. Malm Te",
+            "Adv_Ore_Tea": "Adv. Malm Te",
+            "Basic_Scrap_Tea": "B. Skrot Te",
+            "Adv_Scrap_Tea": "Adv. Skrot Te",
+            "Basic_Warming_Tea": "B. Varme Te",
+            "Adv_Warming_Tea": "Adv. Varme Te",
+            "Basic_Wood_Tea": "B. Træ Te",
+            "Adv_Wood_Tea": "Adv. Træ Te"
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "CCTV KODER",
+            "no_signal": "INTET SIGNAL FUNDET",
+            "copied": "KOPIERET",
+            "randomized": "Tilfældig Kode",
+            "rec": "OPT"
+        },
+        "categories": {
+            "all": "ALLE KAMERAER",
+            "large_oil": "LARGE OIL RIG",
+            "small_oil": "SMALL OIL RIG",
+            "cargo": "CARGO SHIP",
+            "silo": "SILO",
+            "airfield": "AIRFIELD",
+            "labs": "UNDERWATER LABS",
+            "outpost": "OUTPOST",
+            "bandit": "BANDIT CAMP",
+            "dome": "Katedral",
+            "radtown": "RADTOWN",
+            "ferry": "FERRY TERMINAL",
+            "town": "TOWN"
+        },
+        "labels": {
+            "dock": "Dok",
+            "exhaust": "Udstødning",
+            "helipad": "Helipad",
+            "level_1": "Niveau 1",
+            "level_2": "Niveau 2",
+            "level_3": "Niveau 3",
+            "level_3a": "Niveau 3A",
+            "level_3b": "Niveau 3B",
+            "level_4": "Niveau 4",
+            "level_5": "Niveau 5",
+            "level_6a": "Niveau 6A",
+            "level_6b": "Niveau 6B",
+            "level_6c": "Niveau 6C",
+            "level_6d": "Niveau 6D",
+            "deck": "Dæk",
+            "bridge": "Bro",
+            "stern": "Agter",
+            "hold_1": "Lastrum 1",
+            "hold_2": "Lastrum 2",
+            "exit_1": "Udgang 1",
+            "exit_2": "Udgang 2",
+            "missile": "Missil",
+            "tower": "Tårn",
+            "shipping": "Forsendelse",
+            "casino": "Kasino",
+            "chill_zone": "Chill Zone",
+            "crude_oil": "Råolie",
+            "music": "Musik",
+            "street": "Gade",
+            "logistics": "Logistik",
+            "parking": "Parkering",
+            "utilities": "Forsyning",
+            "apartments": "Lejligheder",
+            "house": "Hus",
+            "sbl": "SBL",
+            "dome_1": "Dome 1",
+            "top": "Top",
+            "weapons": "Våben",
+            "lab": "Laboratorium",
+            "security": "Sikkerhed"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "Søg efter spiller",
+            "search_hint": "Spillernavn eller ID...",
+            "loading_text": "SØGER PÅ BATTLEMETRICS...",
+            "error_title": "Søgning Mislykkedes",
+            "retry_button": "PRØV IGEN",
+            "empty_state": "Ingen spillere fundet.",
+            "error_snackbar": "Fejl: {}",
+            "global": "GLOBAL",
+            "player_id": "SPILLER ID"
+        },
+        "details": {
+            "tracking_id": "SPORER",
+            "current_state": "NUVÆRENDE STATUS",
+            "online": "FORBUNDET",
+            "offline": "AFBRUDT",
+            "last_seen": "SIDST SET",
+            "unknown": "Ukendt",
+            "alert_triggers": "ALARM UDLØSERE:",
+            "update_tracking": "FØLG SPILLER"
+        },
+        "list_item": {
+            "playing_on": "SPILLER PÅ:",
+            "not_in_server": "Ikke på serveren"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "ANGREBS STATISTIK",
+            "total_attacks": "TOTALE ANGREB",
+            "last_attack": "SIDSTE ANGREB",
+            "recent_alerts": "SENESTE ALARMER",
+            "no_notification": "Ingen notifikationer fundet.",
+            "unknown_source": "Ukendt Kilde",
+            "time_ago": {
+                "just_now": "Lige nu",
+                "minutes": "{}m siden",
+                "hours": "{}t siden",
+                "days": "{}d siden",
+                "months": "{}md siden"
+            }
+        },
+        "traffic": {
+            "title": "Angrebs Trafik",
+            "ranges": {
+                "day": "Dag",
+                "week": "Uge",
+                "month": "Måned"
+            }
+        },
+        "overlay": {
+            "premium_data": "PREMIUM DATA",
+            "upgrade_button": "OPGRADER FOR AT SE"
+        },
+        "alarm": {
+            "stop": "STOP ALARM"
+        },
+        "notifications": {
+            "base_attack": "Din base er under angreb!"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "UEFFEKTIV",
+            "total_required": "Total Påkrævet",
+            "cannot_damage": "Kan ikke skade",
+            "loot_only": "KUN LOOT",
+            "raw_sulfur": "RÅ SVOVL"
+        },
+        "materials": {
+            "charcoal": "Trækul",
+            "fragments": "Metalfragmenter",
+            "stones": "Sten",
+            "wood": "Træ",
+            "bone": "Knogle",
+            "low_grade_fuel": "Low Grade",
+            "cloth": "Stof",
+            "rope": "Reb",
+            "pipe": "Rør",
+            "tech_trash": "Tech Trash",
+            "sulfur": "Svovl"
+        },
+        "categories": {
+            "construction": "Konstruktion",
+            "door": "Døre",
+            "placeable": "Kan Placeres",
+            "item": "Fælder"
+        },
+        "explosives": {
+            "c4": "Tidsindstillet Sprængstof",
+            "rocket": "Raket",
+            "satchel": "Satchel sprængstof",
+            "beancan": "Beancan granat",
+            "explo556": "Eksplosiv 5.56",
+            "he_grenade": "F1 Granat",
+            "he_grenade_40mm": "40mm HE",
+            "molotov": "Molotov",
+            "hv_rocket": "HV Raket",
+            "incen_rocket": "Brandraket",
+            "homing_rocket": "Målsøgende raket",
+            "mlrs_rocket": "MLRS Raket",
+            "survey_charge": "Prøve-sprængstof",
+            "propane_bomb": "Propantank",
+            "ammo_rifle": "Riffel Ammo",
+            "ammo_rifle_hv": "Riffel HV",
+            "ammo_rifle_incen": "Riffel Brand-ammo",
+            "ammo_pistol": "Pistol Ammo",
+            "ammo_pistol_hv": "Pistol HV",
+            "ammo_pistol_incen": "Pistol Brand-ammo",
+            "ammo_buckshot": "Buckshot",
+            "ammo_slug": "Slug",
+            "ammo_incen_shell": "Brand-hagl",
+            "ammo_handmade": "Håndlavet hagl",
+            "arrow_fire": "Brandpil",
+            "arrow_bone": "Knoglepil",
+            "arrow_wooden": "Træpil",
+            "arrow_hv": "HV Pil"
+        },
+        "calculator": {
+            "title": "RAID BEREGNER",
+            "select_target": "VÆLG MÅL",
+            "materials_breakdown": "MATERIALE OPDELING",
+            "total_sulfur": "TOTAL SVOVL PÅKRÆVET",
+            "min_cost": "MINIMUM OMKOSTNING",
+            "best_for_sulfur": "Bedst for Svovl",
+            "custom_plan": "BRUGERDEFINERET RAID PLAN",
+            "clear_all": "RYD ALT"
+        },
+        "targets": {
+            "wood_wall": "Trævæg",
+            "stone_wall": "Stenvæg",
+            "metal_wall": "Metalvæg",
+            "hqm_wall": "Pansret Væg",
+            "wood_foundation": "Træfundament",
+            "stone_foundation": "Stenfundament",
+            "metal_foundation": "Metalfundament",
+            "hqm_foundation": "Pansret Fundament",
+            "wood_floor": "Trægulv",
+            "stone_floor": "Stengulv",
+            "metal_floor": "Metalgulv",
+            "hqm_floor": "Pansret Gulv",
+            "ext_wood_wall": "Høj Ekstern Trævæg",
+            "ext_stone_wall": "Høj Ekstern Stenvæg",
+            "ext_gate_wood": "Høj Ekstern Træport",
+            "ext_gate_stone": "Høj Ekstern Stenport",
+            "wood_door": "Trædør",
+            "metal_door": "Metaldør",
+            "garage_door": "Garageport",
+            "armored_door": "Pansret Dør",
+            "ladder_hatch": "Stigelem",
+            "triangle_ladder_hatch": "Trekantet Stigelem",
+            "wood_bars": "Træsortremmer",
+            "metal_bars": "Metal Tremmer",
+            "strengthened_glass": "Forstærket Glasvindue",
+            "reinforced_glass": "Armeret Glasvindue",
+            "shutter_wood": "Træskodder",
+            "metal_shop_front": "Metal Butiksfacade",
+            "vending_machine": "Salgsautomat",
+            "tc": "Værktøjsskab",
+            "small_box": "Lille Trækasse",
+            "large_box": "Stor Trækasse",
+            "sleeping_bag": "Sovepose",
+            "bed": "Seng",
+            "furnace_small": "Ovn",
+            "furnace_large": "Stor Ovn",
+            "refinery": "Raffinaderi",
+            "autoturret": "Auto Turret",
+            "flame_turret": "Flame Turret",
+            "shotgun_trap": "Shotgun Trap",
+            "sam_site": "SAM Site",
+            "tesla_coil": "Tesla Coil",
+            "landmine": "Landmine",
+            "beartrap": "Bjørnefælde",
+            "windmill": "Vindmølle",
+            "solar_panel": "Solpanel",
+            "battery_small": "Lille Batteri",
+            "battery_medium": "Mellem Batteri",
+            "battery_large": "Stort Batteri",
+            "locker": "Skab",
+            "fridge": "Køleskab",
+            "hearth": "Ildsted",
+            "search_light": "Søgelys",
+            "drop_box": "Drop Box",
+            "mailbox": "Postkasse",
+            "sub_all_shapes": "Alle Former",
+            "cctv_camera": "CCTV Kamera",
+            "workbench_level1": "Arbejdsbænk 1",
+            "workbench_level2": "Arbejdsbænk 2",
+            "workbench_level3": "Arbejdsbænk 3",
+            "cooking_workbench": "Madlavningsbord",
+            "engineering_workbench": "Ingeniørbord",
+            "planter": "Plantekasse",
+            "sleepingbag": "Sovepose",
+            "wicker_barrel": "Flet tønde",
+            "wooden_ladder": "Træstige",
+            "wood_shelter": "Træskur"
+        }
+    },
+    "subscription": {
+        "free_tier": "GRATIS NIVEAU",
+        "limited_features": "Begrænsede Funktioner",
+        "lifetime_license": "Livstidslicens Aktiv",
+        "duration": "VARIGHED",
+        "forever_free": "GRATIS",
+        "lifetime": "LIVSTID",
+        "status": "STATUS",
+        "locked": "LÅST",
+        "active": "AKTIV",
+        "upgrade_button": "OPGRADER FOR AT LÅSE OP"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "PREMIUM FUNKTION",
+            "description": "Opgrader for at låse op for avancerede kontroller",
+            "unlock_button": "LÅS OP NU"
+        },
+        "ui": {
+            "title": "Indstillinger",
+            "guides_setup": "GUIDES & OPSÆTNING",
+            "how_it_works": "Hvordan det virker",
+            "setup_config": "Opsætningskonfiguration",
+            "legal": "Juridisk",
+            "tos": "VILKÅR",
+            "privacy": "PRIVATLIV",
+            "version": "RAID ALARM VERSION {}"
+        },
+        "common": {
+            "error": "Fejl",
+            "durations": {
+                "sec_30": "30 sek",
+                "min_1": "1 min",
+                "min_3": "3 min",
+                "min_5": "5 min",
+                "sec_short": "{}s",
+                "min_short": "{}m",
+                "hour_short": "{}t"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "Ingen",
+                "alarm_1": "Alarm 1",
+                "alarm_2": "Alarm 2",
+                "alarm_3": "Alarm 3",
+                "alarm_4": "Alarm 4",
+                "alarm_5": "Alarm 5",
+                "alarm_6": "Alarm 6",
+                "custom_label": "Brugerdefineret",
+                "pick_custom": "Brugerdefineret..."
+            }
+        },
+        "alarm_mode": {
+            "title": "Raid Alarm",
+            "subtitle": "Kontinuerlig høj alarm",
+            "sound": "Alarmlyd",
+            "infinite_loop": "Uendelig Løkke",
+            "duration": "Alarm Varighed"
+        },
+        "fake_call": {
+            "title": "Falsk Opkald",
+            "subtitle": "Simuler opkald",
+            "caller_name": "Opkalder Navn",
+            "show_number": "Vis Nummer",
+            "background": "Opkaldsbaggrund",
+            "background_options": {
+                "default": "Standard",
+                "gallery": "Galleri"
+            },
+            "sound": "Ringetone",
+            "duration": "Opkaldsvarighed",
+            "infinite_loop": "Uendelig Løkke"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "FORBUNDET",
+            "offline": "AFBRUDT",
+            "official": "OFFICIEL",
+            "modded": "MODDED",
+            "community": "FÆLLESSKAB"
+        },
+        "monitor": {
+            "title": "Server Monitor",
+            "select_server": "VÆLG SERVER"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "FIND SERVER",
+                "subtitle": "Gennemse & Spor Wipes"
+            },
+            "find_player": {
+                "title": "FIND SPILLER",
+                "subtitle": "Navn & Online Status"
+            }
+        },
+        "map": {
+            "info_unavailable": "Kortoplysninger ikke tilgængelige for denne server",
+            "failed_load": "Kunne ikke indlæse kort",
+            "check_connection": "Tjek venligst din forbindelse",
+            "loading": "Indlæser kort...",
+            "open_browser": "Åbn i Browser",
+            "procedural": "Proceduremæssig",
+            "retry": "Prøv igen"
+        },
+        "live": {
+            "auto_refresh_active": "AUTO-REFRESH AKTIV",
+            "auto_refresh_desc": "Feed opdateres hver 15. sek.",
+            "activity_title": "Spiller Aktivitet",
+            "no_signal": "INTET SIGNAL",
+            "fetching_data": "Henter spillerdata..."
+        },
+        "overview": {
+            "population": "SPILLERE",
+            "map": "KORT",
+            "fps": "FPS",
+            "uptime": "OPPETID",
+            "next_wipe": "NÆSTE WIPE",
+            "last_wipe": "SIDSTE WIPE",
+            "wipe_notification": "Wipe Notifikation",
+            "alert_me_before": "ADVAR MIG FØR:",
+            "force_refresh": "TVING OPDATERING",
+            "unknown": "UKENDT",
+            "overdue": "Forsinket",
+            "size_label": "Størrelse:",
+            "seed_label": "Seed:",
+            "active": "AKTIV",
+            "disabled": "DEAKTIVERET",
+            "na": "N/A",
+            "time_ago_days": "{}d {}t",
+            "time_ago_hours": "{}t"
+        },
+        "notifications": {
+            "wipe_alert_title": "Wipe Advarsel: {}",
+            "wipe_alert_body": "Serveren wiper om {} minutter! Gør dig klar."
+        },
+        "wipe": {
+            "next_wipe_in": "NÆSTE WIPE OM",
+            "wipe_alarm": "Wipe Alarm"
+        },
+        "targets": {
+            "enter_player_name": "Indtast nøjagtigt spillernavn...",
+            "no_targets": "Ingen sporede mål.",
+            "go_to_live": "Gå til Live Feed",
+            "title": "MÅL",
+            "active_badge": "AKTIV",
+            "empty": "Sporer ingen spillere i øjeblikket.",
+            "search_link": "SØG SPILLER",
+            "online_now": "Online Nu",
+            "stop_tracking": {
+                "title": "Stop Sporing?",
+                "confirm": "Er du sikker på, at du vil stoppe med at spore {}?",
+                "button": "Stop Sporing",
+                "cancel": "Annuller"
+            }
+        },
+        "featured": {
+            "title": "Udvalgt Fællesskab"
+        },
+        "search": {
+            "title": "Server Søgning",
+            "tabs": {
+                "search": "Søg",
+                "favorites": "Favoritter",
+                "featured": "Udvalgte"
+            },
+            "placeholder": "Søg servernavn...",
+            "searching": "Søger...",
+            "no_results": "Ingen resultater for \"{}\"",
+            "no_favorites": "Ingen favoritservere.",
+            "favorites_help": "Søg efter servere og tryk på stjernen for at spore her.",
+            "results_label": "Resultater",
+            "official_section": {
+                "title": "Officielle Servere",
+                "desc": "Officielle servere med månedlig wipe cyklus og høj pålidelighed."
+            },
+            "sort": {
+                "title": "SORTER EFTER",
+                "relevance": "Relevans",
+                "high_pop": "Høj Pop",
+                "low_pop": "Lav Pop",
+                "just_wiped": "Lige Wiped"
+            },
+            "error": {
+                "title": "Søgning Mislykkedes",
+                "retry": "Prøv Igen"
+            }
+        },
+        "active_widget": {
+            "select": "Vælg Aktiv Server",
+            "wiped": "Wiped"
+        },
+        "logs": {
+            "connected": "Tilsluttet",
+            "disconnected": "Afbrudt",
+            "recently": "For nylig",
+            "just_now": "Lige nu"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "Oversigt",
+                "map": "Kort",
+                "live": "Live",
+                "targets": "Mål",
+                "wipe": "Wipe"
+            },
+            "errors": {
+                "unstable": "Upålidelig forbindelse. Data kan være forældede.",
+                "signal_lost": "Signal tabt. Prøver igen...",
+                "connection": "Forbindelsesfejl. Prøv venligst igen."
+            },
+            "tracking": {
+                "max_limit": "Grænse på maks 3 sporede spillere",
+                "not_found_exact": "Spiller \"{}\" ikke fundet",
+                "not_found_on_server": "Spiller ikke fundet på denne server.",
+                "select_player": "Vælg spiller"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "BRÆNDSTOF BEREGNER",
+        "input_amount": "Mængde",
+        "runtime": "{} Køretid",
+        "select_machine": "Vælg Maskine",
+        "total_output": "Total Output",
+        "estimated_yield": "Est. Udbytte",
+        "per_barrel": "Pr. Tønde: {}",
+        "per_lgf": "Pr. LGF: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "Diesel",
+            "low_grade": "Lav Kval. Brænd."
+        },
+        "machines": {
+            "excavator": "Gravemaskine",
+            "hqm_quarry": "HQM-brud",
+            "sulfur_quarry": "Svovl Brud",
+            "stone_quarry": "Sten Brud",
+            "pump_jack": "Oliepumpe",
+            "deploy_pump_jack": "Mobil Pumpe",
+            "deploy_quarry": "Mobil Brud",
+            "types": {
+                "monument": "Monument",
+                "static": "Statisk",
+                "deployable": "Mobil"
+            }
+        },
+        "resources": {
+            "diesel": "Diesel Brændstof",
+            "sulfur": "Svovlmalm",
+            "hqm": "HQM-malm",
+            "metal_frags": "Metalfragmenter",
+            "stones": "Sten",
+            "metal_ore": "Jernmalm",
+            "crude_oil": "Råolie",
+            "low_grade": "Lavkvalitetsbrændstof"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "Privatlivspolitik",
+            "last_updated": "Sidst opdateret: {year}",
+            "contact_title": "Kontakt",
+            "contact_email": "For spørgsmål om privatliv, dataanmodninger eller for at udøve dine rettigheder:\n\nEmail: alcstackdev@gmail.com",
+            "section1_title": "1. Information Vi Indsamler",
+            "section1_content": "Raid Alarm indsamler kun den nødvendige data for at appen kan fungere: anonymiseret enheds-ID til licensvalidering, specifikke angrebsnotifikationer fra Rust+ applikationen, livstidslicensstatus (behandlet via Google Play Billing), og app-indstillinger gemt lokalt på din enhed. Vi indsamler ikke personlige navne, e-mailadresser, telefonnumre, lokationsdata, biometriske data eller betalingskortinformation.",
+            "section2_title": "2. Retsgrundlag for Behandling",
+            "section2_content": "Vi behandler dine personlige data baseret på følgende retsgrundlag:\n\n• Kontrakt: Behandling nødvendig for at levere de app-tjenester du har anmodet om\n• Legitime Interesser: Behandling for app-funktionalitet og forbedring\n• Samtykke: Hvor det eksplicit kræves, indhenter vi dit samtykke før behandling",
+            "section3_title": "3. Behandling af Notifikationsdata",
+            "section3_content": "Vi behandler kun specifikke angrebsnotifikationer fra Rust+ applikationen. Notifikationsdata behandles udelukkende på din enhed og gemmes lokalt. Vi tilgår ikke notifikationer fra andre applikationer. Vi bruger Androids standard NotificationListenerService API med dit eksplicitte samtykke. Vi har ingen tilknytning til Rust+ applikationen, Facepunch Studios Limited eller relaterede entiteter.",
+            "section4_title": "4. Tilladelser",
+            "section4_content": "Raid Alarm anmoder kun om de minimumstilladelser der er nødvendige: notifikationsadgang til at overvåge notifikationer fra Rust+ applikationen, undtagelse for batterioptimering for baggrundsdrift, og alarmtilladelse til at udløse alarmen.",
+            "section5_title": "5. Hvordan Vi Bruger Din Information",
+            "section5_content": "Indsamlet data bruges kun til at køre alarmsystemet, licensvalidering og app-forbedringer. For brugere af den gratis version kan anonymiserede data blive brugt af Google AdMob til at levere grundlæggende annoncetjenester. Vi sælger eller deler ikke dine personlige data med tredjepartsmarkedsførere til deres egne formål. Vi bruger ikke automatiseret beslutningstagning eller profilering ud over standard annonceringsfunktioner.",
+            "section6_title": "6. Datalagring og Opbevaring",
+            "section6_content": "Al notifikationsdata, indstillinger og statistik gemmes lokalt på din enhed. Kun købsinformation gemmes i en krypteret sikker database. Notifikationsdata overføres aldrig til vores servere. Notifikationshistorik gemmes lokalt indtil du sletter den eller afinstallerer appen. Licensinformation opbevares på ubestemt tid for at validere dit livstidskøb. Du kan slette al lokal data ved at afinstallere appen eller anmode om sletning af købsdata ved at kontakte os.",
+            "section7_title": "7. Dataudveksling og Tredjeparter",
+            "section7_content": "Vi sælger ikke dine personlige data. Datadeling er begrænset til Google Play Store til betalingsbehandling, Google AdMob til visning af annoncer for brugere af den gratis version og sikre tredjepartstjenester til licensvalidering. Vi deler ikke dine notifikationsdata med nogen tredjepart. Brugere har ret til at fravælge salg af data (vi sælger ikke data) og administrere annoncepræferencer via enhedsindstillinger.",
+            "section8_title": "8. Internationale Dataoverførsler",
+            "section8_content": "Købsdata kan behandles på servere placeret i sikre datacentre. Alle internationale overførsler overholder gældende databeskyttelseslove og passende sikkerhedsforanstaltninger. Data krypteres under overførsel ved hjælp af industristandard kryptering.",
+            "section9_title": "9. Sikkerhedsforanstaltninger",
+            "section9_content": "Vi implementerer tekniske og administrative sikkerhedsforanstaltninger for at beskytte dine data, herunder lokal kryptering, sikre kommunikationsprotokoller, krypteret databaseopbevaring og begrænset adgangskontrol. Ingen overførsels- eller lagringsmetode er dog 100% sikker. Selvom vi bestræber os på at beskytte dine data, kan vi ikke garantere absolut sikkerhed.",
+            "section10_title": "10. Dine Rettigheder",
+            "section10_content": "Du har ret til indsigt, berigtigelse, sletning, begrænsning af behandling, dataportabilitet, indsigelse mod behandling og tilbagetrækning af samtykke vedrørende dine personlige data. Du har ret til at vide, slette, fravælge salg (vi sælger ikke data) og ikke-diskriminering. For at udøve dine rettigheder, kontakt os på e-mailadressen nedenfor. Vi vil svare inden for en rimelig tidsramme som krævet af gældende lov.",
+            "section11_title": "11. Børns Privatliv",
+            "section11_content": "Vores app er ikke beregnet til børn under 18 år (eller 13 i nogle jurisdiktioner). Vi indsamler ikke bevidst personlige data fra børn. Hvis vi opdager at vi har indsamlet data fra et barn, sletter vi det straks. Vi er ikke ansvarlige for, og påtager os intet ansvar for, køb foretaget af personer under 18 år (eller myndighedsalderen i deres jurisdiktion). Forældre eller værger er alene ansvarlige for at overvåge deres børns brug af appen og eventuelle køb. Hvis en mindreårig foretager et køb uden behørig tilladelse, skal forælderen eller værgen kontakte Google Play Store for anmodning om refusion, da vi ikke behandler refusioner.",
+            "section12_title": "12. Databrud Notifikation",
+            "section12_content": "I tilfælde af et databrud der kan påvirke dine rettigheder, vil vi underrette relevante tilsynsmyndigheder som krævet af gældende lov, og underrette berørte brugere uden unødig forsinkelse hvis der er en høj risiko for deres rettigheder.",
+            "section13_title": "13. Ændringer til denne Politik",
+            "section13_content": "Denne privatlivspolitik kan blive opdateret fra tid til anden. Væsentlige ændringer vil blive meddelt brugerne. Fortsat brug af appen efter ændringer udgør accept. Datoen for sidste opdatering vises øverst på denne side.",
+            "section14_title": "14. Annoncering",
+            "section14_content": "Den gratis version af Raid Alarm er støttet af annoncering. Vi bruger Google AdMob til at vise annoncer. AdMob kan indsamle og bruge data såsom din enheds annonce-ID til at vise relevante annoncer og til analyseformål. Brugere, der køber en livstidslicens, vil få alle tredjepartsannoncer fjernet fra applikationen."
+        },
+        "terms_of_service": {
+            "title": "Servicevilkår",
+            "last_updated": "Sidst opdateret: {year}",
+            "contact_title": "Kontakt",
+            "contact_email": "For spørgsmål: alcstackdev@gmail.com",
+            "section1_title": "1. Accept af Vilkår",
+            "section1_content": "Ved at downloade, installere, tilgå eller bruge Raid Alarm, accepterer du at være bundet af disse Servicevilkår. Hvis du ikke accepterer, skal du ikke bruge appen. Du skal være mindst 18 år gammel (eller myndighedsalderen i din jurisdiktion) for at bruge denne app. Hvis du er under 18, må du kun bruge denne app med samtykke fra forældre eller værge.",
+            "section2_title": "2. Beskrivelse af Service",
+            "section2_content": "Raid Alarm er en mobilapplikation, der udelukkende er tilgængelig i Google Play Store, som overvåger notifikationer fra Rust+ applikationen og udløser alarmer, når angrebsnotifikationer modtages. Appen leveres \"som den er\" uden nogen garantier. Appens funktionalitet er helt afhængig af Rust+ applikationen. Hvis Rust+ ikke er installeret, deaktiveret, fjernet fra Google Play Store, stopper med at sende notifikationer, oplever forsinkelser, eller hvis Rust spilservere oplever problemer, vil appen ikke fungere, og vi er ikke ansvarlige for eventuelle resulterende problemer.",
+            "section3_title": "3. Ingen Tilknytning eller Relation",
+            "section3_content": "Raid Alarm har ingen tilknytning, relation, partnerskab, forbindelse, støtte eller sponsorat med Rust spil, Rust+ applikation, Facepunch Studios Limited eller nogen relaterede entiteter. Raid Alarm er en uafhængig applikation. Vi bruger referencer til \"Rust+\", \"Rust\", \"Facepunch\" og relaterede udtryk KUN til identifikations- og beskrivende formål for at forklare, hvad appen gør (nominativ fair use under varemærkelovgivning). Vi gør ikke krav på nogen rettigheder til disse varemærker. Vi er ikke autoriseret af, støttet af eller forbundet med Facepunch Studios Limited på nogen måde. Hvis Facepunch Studios Limited gør indsigelse mod vores brug af disse vilkår, vil vi straks efterkomme deres anmodninger. Enhver brug af disse udtryk er rent beskrivende og indebærer ikke nogen relation, autorisation eller støtte.",
+            "section4_title": "4. Ekstern Afhængighed og Begrænsninger",
+            "section4_content": "KRITISK AFHÆNGIGHEDSNOTITS: Raid Alarms funktionalitet er FULDSTÆNDIG OG ABSOLUT AFHÆNGIG af Rust+ applikationen. Appen vil IKKE FUNGERE under nogen af følgende omstændigheder:\n\n- Rust+ applikationen er ikke installeret på din enhed\n- Rust+ applikationen er deaktiveret eller afinstalleret\n- Rust+ applikationen er fjernet fra Google Play Store\n- Rust+ applikationen bliver utilgængelig eller stopper med at fungere\n- Rust+ applikationen stopper med at sende notifikationer, eller notifikationer er forsinkede\n- Rust+ applikationens \"Smart Alarm\" eller notifikationsfunktioner fjernes, deaktiveres eller ændres\n- Rust spilservere oplever problemer, udfald eller fejl\n- Facepunch Studios Limited begrænser, indskrænker eller forbyder notifikationsfunktionalitet\n- Internetforbindelsesproblemer forhindrer Rust+ notifikationer i at blive modtaget\n- Enhver anden problemstilling, der påvirker Rust+ applikationens evne til at sende notifikationer\n\nVED AT BRUGE APPEN, ANERKENDER OG ACCEPTERER DU UDTRYKKELIGT AT:\n\n- Appens funktionalitet afhænger MELT af eksterne tjenester (Rust+ applikation og Rust spilservere), som vi har NUL KONTROL over\n- Vi er IKKE ANSVARLIGE for Rust+ applikationens tilgængelighed, funktionalitet, fjernelse fra Google Play Store, notifikationsforsinkelser eller eventuelle ændringer foretaget af Facepunch Studios Limited\n- Vi er IKKE ANSVARLIGE for Rust spilserverproblemer, udfald eller fejl\n- Vi er IKKE ANSVARLIGE hvis Facepunch Studios Limited begrænser, indskrænker, forbyder eller ændrer Rust+ applikationens notifikationsfunktionalitet\n- Du vil IKKE holde os ansvarlige, anmode om refusioner eller fremsætte krav mod os på grund af Rust+ applikationsproblemer, Rust spilserverproblemer, notifikationsforsinkelser eller andre eksterne afhængighedsproblemer\n- Du forstår, at hvis Rust+ applikationen fjernes fra Google Play Store eller stopper med at fungere, vil appen straks ophøre med at fungere, og du vil have INGEN RET til refusioner, kompensation eller andre retsmidler",
+            "section5_title": "5. Intet Ansvar for Tredjepartstjenester",
+            "section5_content": "Vi er IKKE ANSVARLIGE for, og PÅTAGER OS INTET ANSVAR for, eventuelle problemer, skader, tab eller konsekvenser, der opstår som følge af:\n\n- Rust spil, Rust+ applikation, Facepunch Studios Limited eller eventuelle relaterede entiteter\n- Rust+ applikationen bliver fjernet fra Google Play Store\n- Rust+ applikationen stopper med at sende notifikationer, eller notifikationer er forsinkede\n- Rust+ applikationens \"Smart Alarm\" eller notifikationsfunktioner fjernes, deaktiveres eller ændres\n- Rust spilserverproblemer, udfald eller fejl\n- Enhver ændringer, begrænsninger eller modifikationer foretaget af Facepunch Studios Limited\n- Enhver anden tredjepartstjeneste, applikation eller afhængighed\n\nDu bruger appen PÅ EGEN RISIKO vedrørende alle eksterne afhængigheder. Vi har INGEN KONTROL over Rust+ applikation, Rust spilservere eller Facepunch Studios Limited, og vi er IKKE ANSVARLIGE for eventuelle problemer, der opstår fra disse eksterne afhængigheder.",
+            "section6_title": "6. Servicegaranti",
+            "section6_content": "Vi garanterer, at Raid Alarm vil fungere korrekt KUN når ALLE de følgende betingelser er opfyldt samtidigt:\n\n- Rust spilservere er operationelle og fungerer normalt\n- Rust+ applikationen er installeret, aktiveret og fungerer normalt på din enhed\n- Rust+ applikationen er tilgængelig i Google Play Store og er ikke blevet fjernet\n- Rust+ applikationen sender notifikationer uden forsinkelser\n- Rust+ applikationens notifikationsfunktioner (inklusive \"Smart Alarm\" hvis relevant) er aktive og ikke deaktiverede\n- Din enhed opfylder alle tekniske krav\n- Alle nødvendige tilladelser er givet og vedligeholdt\n- Du har en aktiv internetforbindelse\n- Facepunch Studios Limited har ikke begrænset, indskrænket eller forbudt notifikationsfunktionalitet\n\nHvis NOGEN af disse betingelser ikke er opfyldt, KAN OG VIL VI IKKE garantere, at appen vil fungere, og vi er IKKE ANSVARLIGE for eventuelle resulterende problemer, tab eller skader.",
+            "section7_title": "7. Tilladelser",
+            "section7_content": "Raid Alarm anmoder kun om de minimumstilladelser der er nødvendige: notifikationsadgang til at overvåge notifikationer fra Rust+ applikationen, undtagelse for batterioptimering for baggrundsdrift, og alarmtilladelse til at udløse alarmen.",
+            "section8_title": "8. Livstidslicensvilkår",
+            "section8_content": "Tilgængelighed: Denne app er udelukkende tilgængelig i Google Play Store. Alle køb behandles gennem Google Play Stores faktureringssystem.\n\nLivstidslicens: Premium-funktioner kræver et engangskøb. Vi tilbyder en 'Livstidslicens', som giver dig permanent adgang til alle premium-funktioner. Dette er en engangsbetaling uden NOGEN tilbagevendende gebyrer eller abonnementer.\n\nAlderskrav: Du skal være mindst 18 år gammel (eller myndighedsalderen i din jurisdiktion) for at købe en licens. Hvis du er under 18, må du kun købe med samtykke fra forældre eller værge. Vi er IKKE ANSVARLIGE for køb foretaget af mindreårige uden behørig tilladelse. Forældre eller værger er alene ansvarlige for at overvåge deres børns køb. Hvis en mindreårig foretager et køb uden tilladelse, skal du kontakte Google Play Store for anmodning om refusion.\n\nBetalingsbehandling: Alle betalinger behandles sikkert gennem Google Play Store. Vi gemmer ikke og har ikke adgang til dine betalingskortoplysninger. Betalingsinformation håndteres udelukkende af Google Play Store.\n\nPrissætning: Priser kan variere efter land og kan ændres med forudgående varsel. Aktuelle priser vises i appen og i Google Play Store.\n\nServiceændringer: Vi forbeholder os retten til at ændre, tilføje eller fjerne funktioner til enhver tid uden varsel eller refusion. Vi forbeholder os retten til at opsige eller suspendere din licens til enhver tid for overtrædelse af disse vilkår eller ulovlig aktivitet.\n\nServicetilgængelighed: Appens funktionalitet afhænger helt af Rust+ applikationen. Hvis Rust+ applikationen fjernes fra Google Play Store, stopper med at fungere eller stopper med at sende notifikationer, vil appen ikke fungere uanset din licensstatus, og du vil have INGEN RET til refusioner eller kompensation.\n\n#### Refusionspolitik\n\nALLE SALG ER ENDELIGE. INGEN REFUSIONER VIL BLIVE GIVET UNDER NOGEN OMSTÆNDIGHEDER, INKLUSIVE MEN IKKE BEGRÆNSET TIL:\n\n- Rust+ applikationens fjernelse fra Google Play Store, utilgængelighed eller eventuelle problemer\n- Rust+ applikationen stopper med at sende notifikationer, eller notifikationer er forsinkede\n- Rust+ applikationens notifikationsfunktioner fjernes, deaktiveres eller ændres af Facepunch Studios Limited\n- Rust spilserverproblemer, udfald eller fejl\n- App-funktionalitetsproblemer (nedbrud, fejl, notifikationsforsinkelser, alarm udløses ikke)\n- Appen ophører med at fungere på grund af Rust+ applikationsproblemer eller fjernelse\n- Brugerutilfredshed med appen eller dens funktionalitet\n- Bruger fortryder efter køb\n- Brugers enhed er ikke kompatibel med appen\n- Bruger nægtede nødvendige tilladelser\n- Mindreårig foretager uautoriseret køb (kontakt Google Play Store for refusionsanmodninger)\n- Enhver anden grund overhovedet\n\nEfter Google Play Stores refusionsvindue (typisk 48 timer), VIL INGEN REFUSIONER blive givet af os under NOGEN omstændigheder, uanset årsagen.\n\nVED AT KØBE EN LICENS, FRASIGER DU DIG UDTRYKKELIGT ALLE RETTIGHEDER TIL REFUSIONER, med undtagelse af Google Play Stores standardrefusionsvindue (typisk 48 timer), hvorefter INGEN REFUSIONER vil blive givet.\n\n#### Kritisk Anerkendelse\n\nVED AT KØBE EN LICENS, ANERKENDER, FORSTÅR OG ACCEPTERER DU UDTRYKKELIGT OG UIGENKALDELIGT AT: Appen er fuldstændig afhængig af Rust+ applikationen (se Sektion 4). Hvis Rust+ applikationen er utilgængelig, fjernet eller stopper med at fungere, vil appen ikke fungere, og du vil have INGEN RET til refusioner eller kompensation. Du accepterer AL RISIKO forbundet med eksterne afhængigheder og vil IKKE anmode om refusioner på grund af Rust+ problemer, Rust spilserverproblemer eller andre eksterne afhængighedsproblemer (undtagen Google Play Stores standard 48-timers refusionsvindue).",
+            "section9_title": "9. Intellektuel Ejendom og Varemærke Fair Use",
+            "section9_content": "Raid Alarm applikationen og dens indhold er beskyttet af ophavsret og varemærkelove. Alle rettigheder tilhører os.\n\nVaremærkenotits: \"Rust+\", \"Rust\", \"Facepunch\" og relaterede logoer, navne og varemærker er den eksklusive ejendom tilhørende Facepunch Studios Limited. Vi er IKKE tilknyttet, støttet af, autoriseret af eller forbundet med Facepunch Studios Limited på nogen måde. Vi bruger disse varemærker KUN til identifikations- og beskrivende formål (nominativ fair use under varemærkelovgivning). Vi gør IKKE krav på nogen rettigheder til disse varemærker. Hvis Facepunch Studios Limited gør indsigelse mod vores brug, vil vi straks efterkomme dette. Se Sektion 3 for yderligere information.",
+            "section10_title": "10. Ansvarsfraskrivelse for Garantier",
+            "section10_content": "APPEN LEVERES \"SOM DEN ER\" OG \"SOM TILGÆNGELIG\" UDEN GARANTIER AF NOGEN ART, HVERKEN UDTRYKKELIGE ELLER STILTIENDE, INKLUSIVE MEN IKKE BEGRÆNSET TIL GARANTIER FOR SALGBARHED, EGNETHED TIL ET BESTEMT FORMÅL, IKKE-KRÆNKELSE, ELLER AT APPEN VIL FUNGERE KORREKT.\n\nVi garanterer ikke, at appen altid vil fungere korrekt, at tredjepartstjenester altid vil være tilgængelige, eller at appen vil fungere kontinuerligt, uafbrudt eller fejlfrit. Appens funktionalitet afhænger helt af Rust+ applikationen (se Sektion 4). Vi giver ingen repræsentationer eller garantier vedrørende appens funktionalitet, tilgængelighed eller pålidelighed. DU BRUGER APPEN PÅ EGEN RISIKO.",
+            "section11_title": "11. Begrænsning af Ansvar",
+            "section11_content": "I DET MAKSIMALE OMFANG LOVEN TILLADER, ER VI IKKE ANSVARLIGE FOR EVENTUELLE SKADER, TAB ELLER KONSEKVENSER SOM FØLGE AF:\n\n- Rust+ applikationsproblemer, fjernelse fra Google Play Store, utilgængelighed eller eventuelle problemer\n- Rust+ applikationen stopper med at sende notifikationer, eller notifikationer er forsinkede\n- Rust+ applikationens notifikationsfunktioner fjernes, deaktiveres eller ændres af Facepunch Studios Limited\n- Rust spilserverproblemer, udfald eller fejl\n- Facepunch Studios Limited eller relaterede entiteter begrænser, indskrænker eller forbyder funktionalitet\n- Appen ophører med at fungere på grund af Rust+ applikationsproblemer eller fjernelse\n- Indirekte, hændelige, særlige, følgeskader eller strafskader\n- Tab af fortjeneste, data, licensværdi eller andre immaterielle tab\n- Eventuelle skader, der overstiger det beløb, du betalte for licensen\n- Eventuelle skader overhovedet relateret til eksterne afhængigheder eller tredjepartstjenester\n- Mindreårig foretager uautoriseret køb (forældre/værger er alene ansvarlige)\n\nUNDER INGEN OMSTÆNDIGHEDER VIL VORES SAMLEDE ANSVAR OVERSTIGE DET BELØB, DU BETALTE FOR LICENSEN I DE 12 MÅNEDER FORUD FOR KRAVET.",
+            "section12_title": "12. Brugerens Ansvar",
+            "section12_content": "Du er ALENE ANSVARLIG for:\n\n- At installere og vedligeholde Rust+ applikationen på din enhed\n- At sikre, at Rust+ applikationen er tilgængelig, installeret og fungerer korrekt\n- At give alle nødvendige tilladelser til både Raid Alarm og Rust+ applikationen\n- At sikre, at din enhed er kompatibel med både Raid Alarm og Rust+ applikationen\n- At forstå, at appen AFHÆNGER FULDSTÆNDIG af Rust+ applikationen og eksterne tjenester\n- At forstå, at hvis Rust+ applikationen fjernes fra Google Play Store eller stopper med at fungere, vil appen ikke fungere, og du vil have INGEN RET til refusioner\n- At overholde Rust+ applikationens Servicevilkår og alle gældende love\n- At sikre, at din brug ikke overtræder Rust+ applikationens Servicevilkår\n- At overvåge og godkende køb, hvis du er forælder eller værge\n- At sikre, at du er mindst 18 år gammel (eller har forældre/værge samtykke) før køb\n\nHvis din brug overtræder Rust+ applikationens Servicevilkår, er du ALENE ANSVARLIG for eventuelle konsekvenser, og vi er IKKE ANSVARLIGE for eventuelle resulterende problemer.",
+            "section13_title": "13. Ændringer i Vilkår",
+            "section13_content": "Disse Servicevilkår kan opdateres fra tid til anden. Væsentlige ændringer vil blive meddelt brugerne. Din fortsatte brug af appen efter ændringer udgør accept af de nye Vilkår.",
+            "section14_title": "14. Opsigelse",
+            "section14_content": "Vi kan opsige eller suspendere din adgang til appen øjeblikkeligt uden forudgående varsel for overtrædelse af disse Vilkår eller efter vores eget skøn. Vi er ikke ansvarlige for eventuelle skader som følge af opsigelse.",
+            "section15_title": "15. Gældende Lov og Jurisdiktion",
+            "section15_content": "Disse Servicevilkår er underlagt gældende love baseret på din lokation. Tvister vil blive løst i overensstemmelse med gældende lov og jurisdiktion.",
+            "section16_title": "16. Reklamer",
+            "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
+        }
+    },
+    "paywall": {
+        "title_line1": "LIVSTID",
+        "title_line2": "ADGANG",
+        "subtitle": "Betal én gang. Ej det for altid.",
+        "no_subscriptions": "INGEN ABONNEMENTER.",
+        "secure_access": "START UBEGRÆNSET BESKYTTELSE",
+        "restore": "GENDAN",
+        "privacy": "Privatlivspolitik",
+        "terms": "Servicevilkår",
+        "plan_card": {
+            "name": "LIVSTIDSADGANG",
+            "one_time": "ENGANGSBETALING"
+        },
+        "benefits": {
+            "critical_alarms": "Kritiske Raid-alarmer (Tilsidesætter lydløs)",
+            "fake_call": "Falsk indgående opkaldssimulering",
+            "enemy_notifications": "Fjende Online/Offline Notifikationer",
+            "server_notifications": "Server Online/Offline Notifikationer",
+            "wipe_notifications": "Brugerdefinerede Wipe-notifikationer"
+        },
+        "errors": {
+            "network": "Netværksfejl. Tjek venligst din internetforbindelse og prøv igen.",
+            "pending": "Betaling afventer. Dit køb aktiveres, når betalingen er bekræftet.",
+            "invalid": "Betaling ugyldig. Prøv venligst igen eller kontakt support.",
+            "unavailable": "Produktet er ikke tilgængeligt for køb på nuværende tidspunkt.",
+            "store": "Butiksproblem. Prøv venligst igen senere eller kontakt support.",
+            "already_purchased": "Dette produkt er allerede købt.",
+            "generic_failed": "Køb mislykkedes: {}",
+            "purchase_failed_default": "Køb mislykkedes. Prøv venligst igen.",
+            "restore_no_internet": "Ingen internetforbindelse. Tjek venligst dit netværk.",
+            "restore_timeout": "Gendannelse fik timeout. Prøv venligst igen.",
+            "restore_failed": "Gendannelse mislykkedes: {}",
+            "no_lifetime_found": "Intet livstidskøb fundet at gendanne",
+            "purchase_verification_failed": "Betaling gennemført, men kunne ikke verificere livstidsadgang."
+        }
+    },
+    "recoil_trainer": {
+        "title": "REKYLTRÆNER",
+        "subtitle": "Mønster Viz",
+        "mouse_move": "Musebevægelse",
+        "impact_point": "Træfpunkt",
+        "fire": "SKYD",
+        "pause": "PAUSE",
+        "shot": "SKUD",
+        "ready": "Klar",
+        "complete": "Færdig",
+        "pull_down": "TRÆK NED",
+        "pull_left": "TRÆK VENSTRE",
+        "pull_right": "TRÆK HØJRE",
+        "stabilize": "STABILISER",
+        "difficulty": {
+            "easy": "LET",
+            "medium": "MEDIUM",
+            "hard": "SVÆR",
+            "extreme": "EKSTREM"
+        }
+    }
+}

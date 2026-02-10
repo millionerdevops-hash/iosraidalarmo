@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Đang Hoạt Động</string>
+    <string name="notification_service_active_text">Cảnh báo tấn công đang hoạt động</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Dịch vụ Raid Alarm Đã Tắt</string>
+    <string name="notification_service_disabled_text">Dịch vụ nghe thông báo đã tắt. Bật dịch vụ để nhận thông báo tấn công.</string>
+    <string name="notification_service_disabled_big_text">Dịch vụ nghe thông báo đã tắt. Bật dịch vụ để nhận thông báo tấn công.\n\nNhấn Cài đặt để bật dịch vụ.</string>
+    <string name="notification_service_disabled_action">Cài đặt</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Dừng</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Đang kích hoạt báo động...</string>
+    <string name="alarm_playing">Báo động đang phát - Nhấn để dừng</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Phát hiện tấn công căn cứ</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Đang hoạt động</string>
+    <string name="channel_name_service_status">Trạng thái dịch vụ</string>
+    <string name="channel_name_attack_detected">Phát hiện tấn công</string>
+    <string name="channel_name_alarm_service">Dịch vụ báo động</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Kênh dành cho Raid Alarm thông báo hoạt động</string>
+    <string name="channel_description_service_status">Raid Alarm thông báo trạng thái dịch vụ</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm thông báo trạng thái dịch vụ (hiển thị ban đầu)</string>
+    <string name="channel_description_attack_detected">Thông báo hiển thị khi phát hiện thông báo tấn công</string>
+    <string name="channel_description_alarm_service">Kênh thông báo dịch vụ tiền cảnh báo động</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Chấp nhận</string>
+    <string name="text_decline">Từ chối</string>
+    <string name="fake_call_channel_name">Cuộc gọi giả</string>
+    <string name="fake_call_channel_description">Thông báo cuộc gọi giả đến</string>
+    <string name="channel_name_player_tracking">Theo dõi người chơi</string>
+    <string name="channel_description_player_tracking">Thay đổi trạng thái người chơi được theo dõi</string>
+    <string name="player_status_online">Trực tuyến</string>
+    <string name="player_status_offline">Ngoại tuyến</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s đã tham gia %2$s</string>
+    <string name="player_status_left_body">%1$s đã rời khỏi %2$s</string>
+    <string name="unknown_server">Máy chủ không xác định</string>
+    <string name="default_server_name">Máy chủ</string>
+    <string name="alarm_stop_button_full">TẮT BÁO ĐỘNG</string>
+</resources>

@@ -1,0 +1,930 @@
+{
+    "common": {
+        "subscription_required": "Tilaus vaaditaan suojauksen aktivoimiseksi",
+        "error_service_not_enabled": "Ilmoituspalvelu ei ole käytössä.",
+        "no_internet": "Ei internetyhteyttä. Tarkista verkkosi.",
+        "thousand_suffix": "K",
+        "million_suffix": "M",
+        "errors": {
+            "no_internet": "No internet connection. Please check your network."
+        },
+        "loading": "LADATAAN...",
+        "fauna_guide": "ELÄINOPAS",
+        "select_species": "VALITSE LAJI"
+    },
+    "tools": {
+        "section_utilities": "TYÖKALUT",
+        "raid_cost": {
+            "title": "KULU",
+            "subtitle": "Räjähteet & Rikki"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "Monumenttien Kamerat"
+        },
+        "tea_guide": {
+            "title": "TEET",
+            "subtitle": "Buffit & Reseptit"
+        },
+        "diesel_calc": {
+            "title": "DIESEL",
+            "subtitle": "Excavator & Louhokset"
+        },
+        "animal_guide": {
+            "title": "ELÄIMET",
+            "subtitle": "Metsästys & Resurssit"
+        },
+        "match_game": {
+            "title": "PARIT",
+            "subtitle": "Muistipeli",
+            "earned_coins": "Ansaitsit {} kolikkoa!",
+            "not_enough_scrap": "Ei tarpeeksi kolikoita!",
+            "victory": "VOITTO",
+            "defeat": "TAPPIO",
+            "net_result": "NETTOTULOS",
+            "play_again": "PELAA UUDELLEEN",
+            "return_to_menu": "PALAA VALIKKOON",
+            "timer": "AJASTIN",
+            "potential": "MAHDOLLISUUS",
+            "memorize": "PAINA MIELEEN!",
+            "menu_title": "MUISTIPELI",
+            "menu_subtitle": "Etsi pareja moninkertaistaaksesi romusi.\nSuuri riski, suuri palkinto.",
+            "play_action": "PELAA (-{} ROMUA)",
+            "entry": "MAKSU",
+            "pairs_count": "{} Paria",
+            "exit_warning_title": "Poistu pelistä?",
+            "exit_warning_message": "Panoksesi menetetään, jos poistut nyt. Jatka?",
+            "yes": "Kyllä",
+            "no": "Ei"
+        },
+        "code_raider": {
+            "title": "KOODILUKKO",
+            "subtitle": "Murra Koodilukot",
+            "battery_level": "AKUN TASO",
+            "correct": "Oikein",
+            "wrong_spot": "Väärä paikka",
+            "invalid": "Virheellinen",
+            "waiting_input": "Odotetaan syötettä...",
+            "access_granted": "PÄÄSY SALLITTU",
+            "system_lockout": "JÄRJESTELMÄLUKITUS",
+            "reward_scrap": "Palkinto: +{} Scrap",
+            "code_changed": "Koodi vaihtui",
+            "hack_another": "HAKKAA TOINEN",
+            "retry_hack": "YRIRE UUDELLEEN",
+            "open": "AUKI",
+            "clear": "TYHJENNÄ",
+            "enter": "OK",
+            "code_lock": "KOODILUKKO"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "Tee Reseptit",
+            "mixing_table_recipe": "SEKOITUSPÖYTÄ",
+            "select_tier": "VALITSE TASO"
+        },
+        "stats": {
+            "rad_res": "Säteily Res",
+            "hydration": "Nesteytys",
+            "temp": "Lämpö",
+            "max_temp": "Max Lämpö",
+            "min_temp": "Min Lämpö",
+            "quality": "Laatu",
+            "yield": "Tuotto",
+            "hot": "HoT",
+            "inst_hp": "Välitön HP",
+            "max_hp": "Maksimi HP"
+        },
+        "durations": {
+            "instant": "Heti",
+            "30m": "30m",
+            "20m": "20m",
+            "45m": "45m",
+            "1h": "1h",
+            "3m_20s": "3m 20s",
+            "5m": "5m",
+            "6m_40s": "6m 40s"
+        },
+        "categories": {
+            "Ore": "MALMI",
+            "Wood": "PUU",
+            "Scrap": "ROMU",
+            "Harvesting": "KERÄILY",
+            "MaxHealth": "MAX HP",
+            "Healing": "PARANNUS",
+            "Rad": "SÄTEILY",
+            "Cooling": "VIILENNYS",
+            "Warming": "LÄMMITYS",
+            "Crafting": "CRAFTING"
+        },
+        "tiers": {
+            "Basic": "P.",
+            "Advanced": "E.",
+            "Pure": "P."
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "P. Säteilytee",
+                "desc": "Perustason säteilytee."
+            },
+            "Rad_adv": {
+                "name": "E. Säteilytee",
+                "desc": "Edistyneen tason säteilytee."
+            },
+            "Rad_pure": {
+                "name": "P. Säteilytee",
+                "desc": "Puhtaan tason säteilytee."
+            },
+            "Cooling_basic": {
+                "name": "P. Viilennystee",
+                "desc": "Perustason viilennystee."
+            },
+            "Cooling_adv": {
+                "name": "E. Viilennystee",
+                "desc": "Edistyneen tason viilennystee."
+            },
+            "Cooling_pure": {
+                "name": "P. Viilennystee",
+                "desc": "Puhtaan tason viilennystee."
+            },
+            "Crafting_basic": {
+                "name": "P. Crafting-tee",
+                "desc": "Perustason crafting-tee."
+            },
+            "Crafting_adv": {
+                "name": "E. Crafting-tee",
+                "desc": "Edistyneen tason crafting-tee."
+            },
+            "Crafting_pure": {
+                "name": "P. Crafting-tee",
+                "desc": "Puhtaan tason crafting-tee."
+            },
+            "Harvesting_basic": {
+                "name": "P. Keräilytee",
+                "desc": "Perustason keräilytee."
+            },
+            "Harvesting_adv": {
+                "name": "E. Keräilytee",
+                "desc": "Edistyneen tason keräilytee."
+            },
+            "Harvesting_pure": {
+                "name": "P. Keräilytee",
+                "desc": "Puhtaan tason keräilytee."
+            },
+            "Healing_basic": {
+                "name": "P. Parannustee",
+                "desc": "Perustason parannustee."
+            },
+            "Healing_adv": {
+                "name": "E. Parannustee",
+                "desc": "Edistyneen tason parannustee."
+            },
+            "Healing_pure": {
+                "name": "P. Parannustee",
+                "desc": "Puhtaan tason parannustee."
+            },
+            "MaxHealth_basic": {
+                "name": "P. Max HP Tee",
+                "desc": "Perustason Max HP tee."
+            },
+            "MaxHealth_adv": {
+                "name": "E. Max HP Tee",
+                "desc": "Edistyneen tason Max HP tee."
+            },
+            "MaxHealth_pure": {
+                "name": "P. Max HP Tee",
+                "desc": "Puhtaan tason Max HP tee."
+            },
+            "Ore_basic": {
+                "name": "P. Malmitee",
+                "desc": "Perustason malmitee."
+            },
+            "Ore_adv": {
+                "name": "E. Malmitee",
+                "desc": "Edistyneen tason malmitee."
+            },
+            "Ore_pure": {
+                "name": "P. Malmitee",
+                "desc": "Puhtaan tason malmitee."
+            },
+            "Scrap_basic": {
+                "name": "P. Romutee",
+                "desc": "Perustason romutee."
+            },
+            "Scrap_adv": {
+                "name": "E. Romutee",
+                "desc": "Edistyneen tason romutee."
+            },
+            "Scrap_pure": {
+                "name": "P. Romutee",
+                "desc": "Puhtaan tason romutee."
+            },
+            "Warming_basic": {
+                "name": "P. Lämmitystee",
+                "desc": "Perustason lämmitystee."
+            },
+            "Warming_adv": {
+                "name": "E. Lämmitystee",
+                "desc": "Edistyneen tason lämmitystee."
+            },
+            "Warming_pure": {
+                "name": "P. Lämmitystee",
+                "desc": "Puhtaan tason lämmitystee."
+            },
+            "Wood_basic": {
+                "name": "P. Puutee",
+                "desc": "Perustason puutee."
+            },
+            "Wood_adv": {
+                "name": "E. Puutee",
+                "desc": "Edistyneen tason puutee."
+            },
+            "Wood_pure": {
+                "name": "P. Puutee",
+                "desc": "Puhtaan tason puutee."
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "Punainen Marja",
+            "Blue_Berry": "Sininen Marja",
+            "Green_Berry": "Vihreä Marja",
+            "Yellow_Berry": "Keltainen Marja",
+            "White_Berry": "Valkoinen Marja",
+            "Basic_Rad_Tea": "P. Säteilytee",
+            "Adv_Rad_Tea": "Edist. Säteilytee",
+            "Basic_Cooling_Tea": "P. Viilennystee",
+            "Adv_Cooling_Tea": "Edist. Viilennyst. ",
+            "Basic_Crafting_Tea": "P. Crafting-tee",
+            "Adv_Crafting_Tea": "Edist. Crafting-tee",
+            "Basic_Harvesting_Tea": "P. Keräilytee",
+            "Adv_Harvesting_Tea": "Edist. Keräilytee",
+            "Basic_Healing_Tea": "P. Parannustee",
+            "Adv_Healing_Tea": "Edist. Parannustee",
+            "Basic_MaxHealth_Tea": "P. MaxHP Tee",
+            "Adv_MaxHealth_Tea": "Edist. MaxHP Tee",
+            "Basic_Ore_Tea": "P. Malmitee",
+            "Adv_Ore_Tea": "Edist. Malmitee",
+            "Basic_Scrap_Tea": "P. Romutee",
+            "Adv_Scrap_Tea": "Edist. Romutee",
+            "Basic_Warming_Tea": "P. Lämmitystee",
+            "Adv_Warming_Tea": "Edist. Lämmitystee",
+            "Basic_Wood_Tea": "P. Puutee",
+            "Adv_Wood_Tea": "Edist. Puutee"
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "CCTV KOODIT",
+            "no_signal": "SIGNAALIA EI LÖYTYNYT",
+            "copied": "KOPIOITU",
+            "randomized": "Satunnainen Koodi",
+            "rec": "REC"
+        },
+        "categories": {
+            "all": "KAIKKI KAMERAT",
+            "large_oil": "LARGE OIL",
+            "small_oil": "SMALL OIL",
+            "cargo": "CARGO",
+            "silo": "SILO",
+            "airfield": "LENTOKENTTÄ",
+            "labs": "LABRAT",
+            "outpost": "OUTPOST",
+            "bandit": "BANDIT CAMP",
+            "dome": "DOME",
+            "radtown": "RADTOWN",
+            "ferry": "LAUTTA",
+            "town": "KAUPUNKI"
+        },
+        "labels": {
+            "dock": "Laituri",
+            "exhaust": "Pakoputki",
+            "helipad": "Helipad",
+            "level_1": "Taso 1",
+            "level_2": "Taso 2",
+            "level_3": "Taso 3",
+            "level_3a": "Taso 3A",
+            "level_3b": "Taso 3B",
+            "level_4": "Taso 4",
+            "level_5": "Taso 5",
+            "level_6a": "Taso 6A",
+            "level_6b": "Taso 6B",
+            "level_6c": "Taso 6C",
+            "level_6d": "Taso 6D",
+            "deck": "Kansi",
+            "bridge": "Silta",
+            "stern": "Perä",
+            "hold_1": "Ruuma 1",
+            "hold_2": "Ruuma 2",
+            "exit_1": "Uloskäynti 1",
+            "exit_2": "Uloskäynti 2",
+            "missile": "Ohjus",
+            "tower": "Torni",
+            "shipping": "Rahtaus",
+            "casino": "Kasino",
+            "chill_zone": "Oleskelualue",
+            "crude_oil": "Raakaöljy",
+            "music": "Musiikki",
+            "street": "Katu",
+            "logistics": "Logistiikka",
+            "parking": "Pysäköinti",
+            "utilities": "Hyödykkeet",
+            "apartments": "Asunnot",
+            "house": "Talo",
+            "sbl": "SBL",
+            "dome_1": "Kupoli 1",
+            "top": "Yläosa",
+            "weapons": "Aseet",
+            "lab": "Labra",
+            "security": "Turvallisuus"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "Etsi pelaajaa",
+            "search_hint": "Pelaajan nimi tai ID...",
+            "loading_text": "KYSAYTÄÄN BATTLEMETRICS...",
+            "error_title": "Haku epäonnistui",
+            "retry_button": "YRITÄ UUDELLEEN",
+            "empty_state": "Pelaajia ei löytynyt.",
+            "error_snackbar": "Virhe: {}",
+            "global": "GLOBAL",
+            "player_id": "PELAAJA ID"
+        },
+        "details": {
+            "tracking_id": "SEURATAAN",
+            "current_state": "NYKYINEN TILA",
+            "online": "VERKOSSA",
+            "offline": "EI VERKOSSA",
+            "last_seen": "VIIMEKSI NÄHTY",
+            "unknown": "Tuntematon",
+            "alert_triggers": "HÄLYTYKSEN LAUKAISIJAT:",
+            "update_tracking": "SEURAA PELAAJAA"
+        },
+        "list_item": {
+            "playing_on": "PELAA SERVERILLÄ:",
+            "not_in_server": "Ei palvelimella"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "HYÖKKÄYSTILASTOT",
+            "total_attacks": "HYÖKKÄYKSIÄ YHTEENSÄ",
+            "last_attack": "VIIMEISIN HYÖKKÄYS",
+            "recent_alerts": "VIIMEISIMMÄT HÄLYTYKSET",
+            "no_notification": "Ilmoituksia ei löytynyt.",
+            "unknown_source": "Tuntematon lähde",
+            "time_ago": {
+                "just_now": "Juuri nyt",
+                "minutes": "{}m sitten",
+                "hours": "{}h sitten",
+                "days": "{}pv sitten",
+                "months": "{}kk sitten"
+            }
+        },
+        "traffic": {
+            "title": "Hyökkäysliikenne",
+            "ranges": {
+                "day": "Päivä",
+                "week": "Viikko",
+                "month": "Kuukausi"
+            }
+        },
+        "overlay": {
+            "premium_data": "PREMIUM TIEDOT",
+            "upgrade_button": "PÄIVITÄ NÄHDÄKSESI"
+        },
+        "alarm": {
+            "stop": "PYSÄYTÄ HÄLYTYS"
+        },
+        "notifications": {
+            "base_attack": "Tukikohtaasi hyökätään!"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "TEHOTON",
+            "total_required": "Yhteensä vaadittu",
+            "cannot_damage": "Ei voi vahingoittaa kohdetta",
+            "loot_only": "VAIN LOOT",
+            "raw_sulfur": "RIKKAAMATON RIKKI"
+        },
+        "materials": {
+            "charcoal": "Hiili",
+            "fragments": "Fragit",
+            "stones": "Kivi",
+            "wood": "Puu",
+            "bone": "Luu",
+            "low_grade_fuel": "LGF",
+            "cloth": "Kangas",
+            "rope": "Köysi",
+            "pipe": "Putki",
+            "tech_trash": "Tekninen Romu",
+            "sulfur": "Sulfur"
+        },
+        "categories": {
+            "construction": "Rakentaminen",
+            "door": "Ovet",
+            "placeable": "Esineet",
+            "item": "Ansat"
+        },
+        "explosives": {
+            "c4": "C4",
+            "rocket": "Raketti",
+            "satchel": "Satchel",
+            "beancan": "Beancan",
+            "explo556": "Räjähtävä 5.56",
+            "he_grenade": "F1 Kranaatti",
+            "he_grenade_40mm": "40mm HE",
+            "molotov": "Molotov",
+            "hv_rocket": "HV Raketti",
+            "incen_rocket": "Palo Raketti",
+            "homing_rocket": "Hakeutuva Ohjus",
+            "mlrs_rocket": "MLRS Raketti",
+            "survey_charge": "Survey Panos",
+            "propane_bomb": "Propaanipommi",
+            "ammo_rifle": "5.56 Kivääri",
+            "ammo_rifle_hv": "HV 5.56",
+            "ammo_rifle_incen": "Palo 5.56",
+            "ammo_pistol": "Pistooli",
+            "ammo_pistol_hv": "HV Pistooli",
+            "ammo_pistol_incen": "Palo Pistooli",
+            "ammo_buckshot": "Hauli",
+            "ammo_slug": "Täyteinen",
+            "ammo_incen_shell": "Palo Haulikko",
+            "ammo_handmade": "Kotitekoinen",
+            "arrow_fire": "Tulinooli",
+            "arrow_bone": "Luunuoli",
+            "arrow_wooden": "Puunuoli",
+            "arrow_hv": "HV Nuoli"
+        },
+        "calculator": {
+            "title": "RAID LASKIN",
+            "select_target": "VALITSE KOHDE",
+            "materials_breakdown": "MATERIAALI ERITTELY",
+            "total_sulfur": "YHTEENSÄ RIKKIÄ VAADITTU",
+            "min_cost": "MINIMIKUSTANNUS",
+            "best_for_sulfur": "Paras rikille",
+            "custom_plan": "OMA RAID SUUNNITELMA",
+            "clear_all": "TYHJENNÄ KAIKKI"
+        },
+        "targets": {
+            "wood_wall": "Puu Seinä",
+            "stone_wall": "Kivi Seinä",
+            "metal_wall": "Metalli Seinä",
+            "hqm_wall": "HQM Seinä",
+            "wood_foundation": "Puu Perustus",
+            "stone_foundation": "Kivi Perustus",
+            "metal_foundation": "Metalli Perustus",
+            "hqm_foundation": "HQM Perustus",
+            "wood_floor": "Puu Lattia",
+            "stone_floor": "Kivi Lattia",
+            "metal_floor": "Metalli Lattia",
+            "hqm_floor": "HQM Lattia",
+            "ext_wood_wall": "Iso Puu Muuri",
+            "ext_stone_wall": "Iso Kivi Muuri",
+            "ext_gate_wood": "Puu Portti",
+            "ext_gate_stone": "Kivi Portti",
+            "wood_door": "Puu Ovi",
+            "metal_door": "Metalli Ovi",
+            "garage_door": "Autotallin Ovi",
+            "armored_door": "Panssaroitu Ovi",
+            "ladder_hatch": "Tikapuu Luukku",
+            "triangle_ladder_hatch": "Kolmio Luukku",
+            "wood_bars": "Puu Kalterit",
+            "metal_bars": "Metalli Kalterit",
+            "strengthened_glass": "Vahvistettu Lasi",
+            "reinforced_glass": "Panssaroitu Lasi",
+            "shutter_wood": "Puu Ikkunaluukku",
+            "metal_shop_front": "Metalli Kauppaetu",
+            "vending_machine": "Myyntiautomaatti",
+            "tc": "Työkalukaappi",
+            "small_box": "Pieni Laatikko",
+            "large_box": "Iso Laatikko",
+            "sleeping_bag": "Makuupussi",
+            "bed": "Sänky",
+            "furnace_small": "Pieni Uuni",
+            "furnace_large": "Iso Uuni",
+            "refinery": "Jalostamo",
+            "autoturret": "Auto Turrent",
+            "flame_turret": "Liekinheitin Turrent",
+            "shotgun_trap": "Haulikko Ansa",
+            "sam_site": "SAM Asema",
+            "tesla_coil": "Tesla Kela",
+            "landmine": "Maamiina",
+            "beartrap": "Karhunrauta",
+            "windmill": "Tuulimylly",
+            "solar_panel": "Aurinkopaneeli",
+            "battery_small": "Pieni Akku",
+            "battery_medium": "Keskikokoinen Akku",
+            "battery_large": "Iso Akku",
+            "locker": "Kaappi",
+            "fridge": "Jääkaappi",
+            "hearth": "Takka",
+            "search_light": "Hakuvalo",
+            "drop_box": "Pudotuslaatikko",
+            "mailbox": "Postilaatikko",
+            "sub_all_shapes": "Kaikki Muodot",
+            "cctv_camera": "CCTV Kamera",
+            "workbench_level1": "Työpenkki 1",
+            "workbench_level2": "Työpenkki 2",
+            "workbench_level3": "Työpenkki 3",
+            "cooking_workbench": "Ruoanlaittotaso",
+            "engineering_workbench": "Suunnittelupöytä",
+            "planter": "Viljelylaatikko",
+            "sleepingbag": "Makuupussi",
+            "wicker_barrel": "Pajuastia",
+            "wooden_ladder": "Puutikkaat",
+            "wood_shelter": "Puusuoja"
+        }
+    },
+    "subscription": {
+        "free_tier": "ILMAINEN TASO",
+        "limited_features": "Rajoitetut Ominaisuudet",
+        "lifetime_license": "Elinikäinen Lisenssi Aktiivinen",
+        "duration": "KESTO",
+        "forever_free": "ILMAINEN",
+        "lifetime": "ELINIKÄINEN",
+        "status": "TILA",
+        "locked": "LUKITTU",
+        "active": "AKTIIVINEN",
+        "upgrade_button": "PÄIVITÄ AVATAKSESI"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "PREMIUM OMINAISUUS",
+            "description": "Päivitä avataksesi edistyneet toiminnot",
+            "unlock_button": "AVAA NYT"
+        },
+        "ui": {
+            "title": "Asetukset",
+            "guides_setup": "OPPAAT & ASENNUS",
+            "how_it_works": "Miten se toimii",
+            "setup_config": "Asennuksen Konfiguraatio",
+            "legal": "Lakiasiat",
+            "tos": "EHDOT",
+            "privacy": "TIETOSUOJA",
+            "version": "RAID ALARM V{}"
+        },
+        "common": {
+            "error": "Virhe",
+            "durations": {
+                "sec_30": "30 sek",
+                "min_1": "1 min",
+                "min_3": "3 min",
+                "min_5": "5 min",
+                "sec_short": "{}s",
+                "min_short": "{}m",
+                "hour_short": "{}h"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "Ei mitään",
+                "alarm_1": "Hälytys 1",
+                "alarm_2": "Hälytys 2",
+                "alarm_3": "Hälytys 3",
+                "alarm_4": "Hälytys 4",
+                "alarm_5": "Hälytys 5",
+                "alarm_6": "Hälytys 6",
+                "custom_label": "Mukautettu",
+                "pick_custom": "Mukautettu..."
+            }
+        },
+        "alarm_mode": {
+            "title": "Raid Hälytys",
+            "subtitle": "Jatkuva kova hälytys",
+            "sound": "Hälytysääni",
+            "infinite_loop": "Ikuinen Silmukka",
+            "duration": "Hälytyksen Kesto"
+        },
+        "fake_call": {
+            "title": "Valepuhelu",
+            "subtitle": "Simuloi puhelu",
+            "caller_name": "Soittajan Nimi",
+            "show_number": "Näytä Numero",
+            "background": "Puhelun Tausta",
+            "background_options": {
+                "default": "Oletus",
+                "gallery": "Galleria"
+            },
+            "sound": "Soittoääni",
+            "duration": "Puhelun Kesto",
+            "infinite_loop": "Ikuinen Silmukka"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "VERKOSSA",
+            "offline": "EI VERKOSSA",
+            "official": "VIRALLINEN",
+            "modded": "MODATTU",
+            "community": "YHTEISÖ"
+        },
+        "monitor": {
+            "title": "Palvelin Monitori",
+            "select_server": "VALITSE PALVELIN"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "ETSI PALVELIN",
+                "subtitle": "Selaa & Seuraa Wipejä"
+            },
+            "find_player": {
+                "title": "ETSI PELAAJA",
+                "subtitle": "Nimi & Online-tila"
+            }
+        },
+        "map": {
+            "info_unavailable": "Kartan tiedot eivät ole saatavilla tälle palvelimelle",
+            "failed_load": "Kartan lataus epäonnistui",
+            "check_connection": "Tarkista yhteytesi",
+            "loading": "Ladataan karttaa...",
+            "open_browser": "Avaa Selaimessa",
+            "procedural": "Proseduraalinen",
+            "retry": "Yritä uudelleen"
+        },
+        "live": {
+            "auto_refresh_active": "AUTO-PÄIVITYS AKTIIVINEN",
+            "auto_refresh_desc": "Syöte päivittyy 15 sekunnin välein.",
+            "activity_title": "Pelaaja Aktiviteetti",
+            "no_signal": "EI SIGNAALIA",
+            "fetching_data": "Haetaan pelaajia..."
+        },
+        "overview": {
+            "population": "PELAAJAT",
+            "map": "KARTTA",
+            "fps": "FPS",
+            "uptime": "KÄYTTÖAIKA",
+            "next_wipe": "SEURAAVA WIPE",
+            "last_wipe": "VIIMEISIN WIPE",
+            "wipe_notification": "Wipe Ilmoitus",
+            "alert_me_before": "ILMOITA MINULLE ENNEN:",
+            "force_refresh": "PAKOTA PÄIVITYS",
+            "unknown": "TUNTEMATON",
+            "overdue": "Myöhässä",
+            "size_label": "Koko:",
+            "seed_label": "Siemen:",
+            "active": "AKTIIVINEN",
+            "disabled": "POIS KÄYTÖSTÄ",
+            "na": "N/A",
+            "time_ago_days": "{}pv {}h",
+            "time_ago_hours": "{}h"
+        },
+        "notifications": {
+            "wipe_alert_title": "Wipe-hälytys: {}",
+            "wipe_alert_body": "Palvelin nollataan {} minuutin kuluttua! Valmistaudu."
+        },
+        "wipe": {
+            "next_wipe_in": "SEURAAVA WIPE:",
+            "wipe_alarm": "Wipe Hälytys"
+        },
+        "targets": {
+            "enter_player_name": "Syötä tarkka pelaajan nimi...",
+            "no_targets": "Ei seurattavia kohteita.",
+            "go_to_live": "Mene Live Syötteeseen",
+            "title": "KOHTEET",
+            "active_badge": "Aktiivinen",
+            "empty": "Ei pelaajia seurannassa tällä hetkellä.",
+            "search_link": "ETSI PELAAJIA",
+            "online_now": "Online Nyt",
+            "stop_tracking": {
+                "title": "Lopeta Seuranta?",
+                "confirm": "Oletko varma että haluat lopettaa pelaajan {} seurannan?",
+                "button": "Lopeta Seuranta",
+                "cancel": "Peruuta"
+            }
+        },
+        "featured": {
+            "title": "SUOSITUT YHTEISÖT"
+        },
+        "search": {
+            "title": "Palvelinhaku",
+            "tabs": {
+                "search": "Haku",
+                "favorites": "Suosikit",
+                "featured": "Suositellut"
+            },
+            "placeholder": "Etsi palvelimen nimeä...",
+            "searching": "Etsitään...",
+            "no_results": "Palvelimia ei löytynyt: \"{}\"",
+            "no_favorites": "Ei tallennettuja suosikkeja.",
+            "favorites_help": "Etsi palvelimia ja napauta tähteä seurataksesi niitä tässä.",
+            "results_label": "TULOKSET",
+            "official_section": {
+                "title": "VIRALLISET PALVELIMET",
+                "desc": "Viralliset palvelimet tarjoavat kuukausittaiset wipet ja korkean luotettavuuden."
+            },
+            "sort": {
+                "title": "JÄRJESTÄ",
+                "relevance": "Osuvuus",
+                "high_pop": "Korkea Pop",
+                "low_pop": "Matala Pop",
+                "just_wiped": "Juuri Vipet"
+            },
+            "error": {
+                "title": "Haku Epäonnistui",
+                "retry": "Yritä Uudelleen"
+            }
+        },
+        "active_widget": {
+            "select": "VALITSE AKTIIVINEN PALVELIN",
+            "wiped": "Wipet"
+        },
+        "logs": {
+            "connected": "Yhdistetty",
+            "disconnected": "Katkaistu",
+            "recently": "Äskettäin",
+            "just_now": "Juuri nyt"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "YLEISKATSAUS",
+                "map": "KARTTA",
+                "live": "LIVE",
+                "targets": "KOHTEET",
+                "wipe": "WIPE"
+            },
+            "errors": {
+                "unstable": "Yhteys epävakaa. Tiedot voivat olla vanhoja.",
+                "signal_lost": "Signaali menetetty. Yritetään uudelleen...",
+                "connection": "Yhteysvirhe. Yritä uudelleen."
+            },
+            "tracking": {
+                "max_limit": "Enintään 3 pelaajaa voidaan seurata",
+                "not_found_exact": "Pelaajaa tarkalla nimellä \"{}\" ei löytynyt",
+                "not_found_on_server": "Pelaajaa ei löytynyt tältä palvelimelta.",
+                "select_player": "Valitse pelaaja"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "Polttoaine Laskin",
+        "input_amount": "Määrä",
+        "runtime": "{} Aika",
+        "select_machine": "VALITSE KONE",
+        "total_output": "KOKONAISTUOTTO",
+        "estimated_yield": "ARVIOITU TUOTTO",
+        "per_barrel": "Per Tynnyri: {}",
+        "per_lgf": "Per LGF: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "DIESEL",
+            "low_grade": "Huonol. PA"
+        },
+        "machines": {
+            "excavator": "Kaivinkone",
+            "hqm_quarry": "HQM Louhos",
+            "sulfur_quarry": "Rikkilouhos",
+            "stone_quarry": "Kivilouhos",
+            "pump_jack": "Öljypumppu",
+            "deploy_pump_jack": "Siir. Pumppu",
+            "deploy_quarry": "Siir. Louhos",
+            "types": {
+                "monument": "Monumentti",
+                "static": "Staattinen",
+                "deployable": "Siirrettävä"
+            }
+        },
+        "resources": {
+            "diesel": "Diesel Polttoaine",
+            "sulfur": "Rikkimalmi",
+            "hqm": "HQM Malmi",
+            "metal_frags": "Metallifragmentit",
+            "stones": "Kivet",
+            "metal_ore": "Metallimalmi",
+            "crude_oil": "Raakaöljy",
+            "low_grade": "Low Grade Fuel"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "Tietosuojaseloste",
+            "last_updated": "Päivitetty viimeksi: {year}",
+            "contact_title": "Yhteystiedot",
+            "contact_email": "Tietosuojaan liittyvissä kysymyksissä, tietopyynnöissä tai oikeuksiesi käyttämisessä:\n\nSähköposti: alcstackdev@gmail.com",
+            "section1_title": "1. Keräämämme tiedot",
+            "section1_content": "Raid Alarm kerää vain minimaaliset tiedot sovelluksen toiminnan varmistamiseksi: anonyymi laitetunnus lisenssin vahvistamiseksi, tietyt raid-ilmoitukset Rust+ -sovelluksesta, elinikäisen lisenssin tila (käsitelty Google Play Billingin kautta) ja sovellusasetukset, jotka on tallennettu paikallisesti laitteellesi. Emme kerää henkilökohtaisia nimiä, sähköpostiosoitteita, puhelinnumeroita, sijaintitietoja, biometrisiä tietoja tai maksukorttitietoja.",
+            "section2_title": "2. Käsittelyn oikeusperuste",
+            "section2_content": "Käsittelemme henkilötietojasi seuraavilla laillisilla perusteilla:\n\n• Sopimuksen täyttäminen: Käsittely on tarpeen pyytämiesi sovelluspalvelujen tarjoamiseksi\n• Oikeutetut edut: Käsittely sovelluksen toimivuuden ja parantamisen varmistamiseksi\n• Suostumus: Kun se on nimenomaisesti vaadittu, pyydämme suostumuksesi ennen käsittelyä",
+            "section3_title": "3. Ilmoitustietojen käsittely",
+            "section3_content": "Käsittelemme vain tiettyjä raid-ilmoituksia Rust+ -sovelluksesta. Ilmoitustiedot käsitellään kokonaan laitteellasi ja tallennetaan paikallisesti. Emme pääse käsiksi muiden sovellusten ilmoituksiin. Käytämme Androidin normaalia NotificationListenerService-rajapintaa nimenomaisella suostumuksellasi. Meillä ei ole yhteyttä Rust+ -sovellukseen, Facepunch Studios Limitediin tai niihin liittyviin tahoihin.",
+            "section4_title": "4. Luvat",
+            "section4_content": "Raid Alarm pyytää vain minimaaliset tarvittavat luvat: ilmoitusten käyttöoikeus Rust+ -sovelluksen ilmoitusten seuraamiseksi, akun optimoinnin poikkeus taustatoimintaa varten ja hälytyslupa hälytysten laukaisemiseksi.",
+            "section5_title": "5. Miten käytämme tietojasi",
+            "section5_content": "Kerättyjä tietoja käytetään vain hälytysjärjestelmän toimintaan, lisenssin vahvistamiseen ja sovelluksen parantamiseen. Ilmaisversion käyttäjien osalta Google AdMob voi käyttää anonymisoituja tietoja mainospalveluiden tarjoamiseen. Emme myy tai jaa henkilötietojasi kolmannen osapuolen markkinoijille heidän omiin tarkoituksiinsa. Emme käytä automaattista päätöksentekoa tai profilointia tavallisten mainosominaisuuksien ulkopuolella.",
+            "section6_title": "6. Tietojen säilytys ja tallennus",
+            "section6_content": "Kaikki ilmoitustiedot, asetukset ja tilastot tallennetaan paikallisesti laitteellesi. Vain ostotiedot tallennetaan salattuun turvalliseen tietokantaan. Ilmoitustietoja ei koskaan siirretä palvelimillemme. Ilmoitushistoria tallennetaan paikallisesti, kunnes poistat sen tai poistat sovelluksen asennuksen. Lisenssitiedot säilytetään toistaiseksi elinikäisen ostoksen vahvistamiseksi. Voit poistaa kaikki paikalliset tiedot poistamalla sovelluksen asennuksen tai pyytää ostotietojen poistamista ottamalla yhteyttä meihin.",
+            "section7_title": "7. Tietojen jakaminen ja kolmannet osapuolet",
+            "section7_content": "Emme myy henkilötietojasi. Tietojen jakaminen rajoittuu Google Play Kauppaan maksujen käsittelyä varten, Google AdMobiin mainosten näyttämiseksi ilmaisversion käyttäjille sekä turvallisiin kolmannen osapuolen palveluihin lisenssin vahvistamiseksi. Emme jaa ilmoitustietojasi kolmansille osapuolille. Käyttäjillä on oikeus kieltäytyä tietojen myynnistä (emme myy tietoja) ja hallita mainosasetuksia laitteen asetuksista.",
+            "section8_title": "8. Kansainväliset tiedonsiirrot",
+            "section8_content": "Ostotietoja voidaan käsitellä palvelimilla, jotka sijaitsevat turvallisissa datakeskuksissa. Kaikki kansainväliset siirrot noudattavat sovellettavia tietosuojalakeja ja asianmukaisia suojatoimia. Tiedot salataan siirron aikana käyttämällä alan standardien mukaista salausta.",
+            "section9_title": "9. Turvallisuustoimenpiteet",
+            "section9_content": "Toteutamme teknisiä ja hallinnollisia turvatoimia tietojesi suojaamiseksi, mukaan lukien paikallinen salaus, turvalliset viestintäprotokollat, salattu tietokannan tallennus ja rajoitetut pääsynvalvontatoimet. Mikään siirto- tai tallennustapa ei kuitenkaan ole 100% turvallinen. Vaikka pyrimme suojaamaan tietosi, emme voi taata täydellistä turvallisuutta.",
+            "section10_title": "10. Oikeutesi",
+            "section10_content": "Sinulla on oikeus päästä käsiksi, oikaista, poistaa, rajoittaa käsittelyä, siirtää tiedot, vastustaa käsittelyä ja peruuttaa suostumus henkilötietojesi osalta. Sinulla on oikeus tietää, poistaa, kieltäytyä myynnistä (emme myy tietoja) ja syrjimättömyyteen. Oikeuksiesi käyttämiseksi ota meihin yhteyttä alla olevaan sähköpostiosoitteeseen. Vastaamme kohtuullisessa ajassa sovellettavan lain edellyttämällä tavalla.",
+            "section11_title": "11. Lasten tietosuoja",
+            "section11_content": "Sovelluksemme ei ole tarkoitettu alle 18-vuotiaille lapsille (tai 13-vuotiaille joillakin lainkäyttöalueilla). Emme tietoisesti kerää henkilötietoja lapsilta. Jos havaitsemme keränneemme tietoja lapselta, poistamme ne välittömästi. Emme ole vastuussa emmekä ota vastuuta alle 18-vuotiaiden (tai täysi-ikäisyyden saavuttaneiden henkilöiden) tekemistä ostoista. Vanhemmat tai huoltajat ovat yksin vastuussa lastensa sovelluksen käytön ja mahdollisten ostojen valvonnasta. Jos alaikäinen tekee ostoksen ilman asianmukaista lupaa, vanhemman tai huoltajan tulee ottaa yhteyttä Google Play Kauppaan hyvityspyyntöjä varten, koska emme käsittele hyvityksiä.",
+            "section12_title": "12. Ilmoitus tietoturvaloukkauksesta",
+            "section12_content": "Tietoturvaloukkauksen sattuessa, joka voi vaikuttaa oikeuksiisi, ilmoitamme asianomaisille valvontaviranomaisille sovellettavan lain edellyttämällä tavalla ja ilmoitamme asianomaisille käyttäjille ilman aiheetonta viivytystä, jos heidän oikeuksiinsa kohdistuu korkea riski.",
+            "section13_title": "13. Muutokset tähän käytäntöön",
+            "section13_content": "Tätä tietosuojaselostetta voidaan päivittää aika ajoin. Merkittävistä muutoksista ilmoitetaan käyttäjille. Sovelluksen käytön jatkaminen muutosten jälkeen katsotaan niiden hyväksymiseksi. Viimeisin päivityspäivämäärä näkyy tämän sivun yläosassa.",
+            "section14_title": "14. Mainonta",
+            "section14_content": "Raid Alarmin ilmaisversio on mainosrahoitteinen. Käytämme Google AdMobia mainosten näyttämiseen. AdMob voi kerätä ja käyttää tietoja, kuten laitteesi mainostunnusta, osuvien mainosten näyttämiseen ja analyysitarkoituksiin. Käyttäjiltä, jotka ostavat elinikäisen lisenssin, poistetaan kaikki kolmannen osapuolen mainokset sovelluksesta."
+        },
+        "terms_of_service": {
+            "title": "Käyttöehdot",
+            "last_updated": "Päivitetty viimeksi: {year}",
+            "contact_title": "Yhteystiedot",
+            "contact_email": "Kysymyksiä varten: alcstackdev@gmail.com",
+            "section1_title": "1. Ehtojen hyväksyminen",
+            "section1_content": "Lataamalla, asentamalla, käyttämällä tai avaamalla Raid Alarmin hyväksyt nämä käyttöehdot. Jos et hyväksy, älä käytä sovellusta. Sinun on oltava vähintään 18-vuotias (tai täysi-ikäinen lainkäyttöalueellasi) käyttääksesi tätä sovellusta. Jos olet alle 18-vuotias, voit käyttää tätä sovellusta vain vanhemman tai huoltajan suostumuksella.",
+            "section2_title": "2. Palvelun kuvaus",
+            "section2_content": "Raid Alarm on mobiilisovellus, joka on saatavilla yksinomaan Google Play Kaupasta. Se valvoo ilmoituksia Rust+ -sovelluksesta ja laukaisee hälytyksiä, kun raid-ilmoituksia vastaanotetaan. Sovellus tarjotaan \"sellaisena kuin se on\" ilman mitään takuita. Sovelluksen toimivuus on täysin riippuvainen Rust+ -sovelluksesta. Jos Rust+ ei ole asennettu, se on poistettu käytöstä, poistettu Google Play Kaupasta, se lakkaa lähettämästä ilmoituksia, siinä on viiveitä tai jos Rust-pelipalvelimilla on ongelmia, sovellus ei toimi, emmekä ole vastuussa mistään tästä aiheutuvista ongelmista.",
+            "section3_title": "3. Ei kytköksiä tai suhdetta",
+            "section3_content": "Raid Alarmilla ei ole kytköksiä, suhdetta, kumppanuutta, yhteyttä, tukea tai sponsorointia Rust-pelin, Rust+ -sovelluksen, Facepunch Studios Limitedin tai niihin liittyvien tahojen kanssa. Raid Alarm on itsenäinen sovellus. Käytämme viittauksia \"Rust+\", \"Rust\", \"Facepunch\" ja niihin liittyviin termeihin VAIN tunnistamis- ja kuvaamistarkoituksiin selittääksemme, mitä sovellus tekee (tavaramerkkilain mukainen nominatiivinen reilu käyttö). Emme vaadi mitään oikeuksia näihin tavaramerkkeihin. Facepunch Studios Limited ei ole valtuuttanut, tukenut tai ole millään tavalla yhteydessä meihin. Jos Facepunch Studios Limited vastustaa näiden termien käyttöämme, noudatamme heidän pyyntöjään välittömästi. Kaikki näiden termien käyttö on puhtaasti kuvailevaa eikä tarkoita mitään suhdetta, valtuutusta tai tukea.",
+            "section4_title": "4. Ulkoinen riippuvuus ja rajoitukset",
+            "section4_content": "KRIITTINEN RIIPPUVUUSILMOITUS: Raid Alarmin toimivuus on TÄYSIN JA EHDOTTOMASTI RIIPPUVAINEN Rust+ -sovelluksesta. Sovellus EI TOIMI missään seuraavista olosuhteista:\n\n- Rust+ -sovellusta ei ole asennettu laitteellesi\n- Rust+ -sovellus on poistettu käytöstä tai asennus on poistettu\n- Rust+ -sovellus on poistettu Google Play Kaupasta\n- Rust+ -sovellus ei ole saatavilla tai lakkaa toimimasta\n- Rust+ -sovellus lakkaa lähettämästä ilmoituksia tai ilmoitukset viivästyvät\n- Rust+ -sovelluksen \"Smart Alarm\" tai ilmoitusominaisuudet poistetaan, poistetaan käytöstä tai muutetaan\n- Rust-pelipalvelimilla on ongelmia, katkoksia tai häiriöitä\n- Facepunch Studios Limited rajoittaa tai kieltää ilmoitustoiminnot\n- Internet-yhteysongelmat estävät Rust+ -ilmoitusten vastaanottamisen\n- Mikä tahansa muu ongelma, joka vaikuttaa Rust+ -sovelluksen kykyyn lähettää ilmoituksia\n\nKÄYTTÄMÄLLÄ SOVELLUSTA HYVÄKSYT NIMENOMAISESTI JA SUOSTUT SIIHEN, ETTÄ:\n\n- Sovelluksen toimivuus riippuu KOKONAAN ulkoisista palveluista (Rust+ -sovellus ja Rust-pelipalvelimet), joihin meillä on NOLLA KONTROLLIA\n- Emme ole VASTUUSSA Rust+ -sovelluksen saatavuudesta, toimivuudesta, poistamisesta Google Play Kaupasta, ilmoitusviiveistä tai mistään Facepunch Studios Limitedin tekemistä muutoksista\n- Emme ole VASTUUSSA Rust-pelipalvelimen ongelmista, katkoksista tai häiriöistä\n- Emme ole VASTUUSSA, jos Facepunch Studios Limited rajoittaa, kieltää tai muuttaa Rust+ -sovelluksen ilmoitustoimintoja\n- Et PIDÄ meitä vastuussa, vaadi hyvityksiä tai esitä vaatimuksia meitä vastaan Rust+ -sovelluksen ongelmien, Rust-pelipalvelimen ongelmien, ilmoitusviiveiden tai muiden ulkoisten riippuvuusongelmien vuoksi\n- Ymmärrät, että jos Rust+ -sovellus poistetaan Google Play Kaupasta tai se lakkaa toimimasta, sovellus lakkaa toimimasta välittömästi eikä sinulla ole MITÄÄN OIKEUTTA hyvityksiin, korvauksiin tai muihin oikeuskeinoihin",
+            "section5_title": "5. Ei vastuuta kolmannen osapuolen palveluista",
+            "section5_content": "Olemme VASTUUVAPAUTETTUJA emmekä OTA MITÄÄN VASTUUTA ongelmista, vahingoista, menetyksistä tai seurauksista, jotka johtuvat:\n\n- Rust-pelistä, Rust+ -sovelluksesta, Facepunch Studios Limitedistä tai niihin liittyvistä tahoista\n- Rust+ -sovelluksen poistamisesta Google Play Kaupasta\n- Rust+ -sovelluksen ilmoitusten lähettämisen lopettamisesta tai ilmoitusten viivästymisestä\n- Rust+ -sovelluksen \"Smart Alarm\" tai ilmoitusominaisuuksien poistamisesta, käytöstä poistamisesta tai muuttamisesta\n- Rust-pelipalvelimen ongelmista, katkoksista tai häiriöistä\n- Mistä tahansa Facepunch Studios Limitedin tekemistä muutoksista, rajoituksista tai muokkauksista\n- Mistä tahansa muista kolmannen osapuolen palveluista, sovelluksista tai riippuvuuksista\n\nKäytät sovellusta OMALLA VASTUULLASI kaikkien ulkoisten riippuvuuksien osalta. Meillä on NOLLA KONTROLLIA Rust+ -sovellukseen, Rust-pelipalvelimiin tai Facepunch Studios Limitediin, emmekä ole VASTUUSSA mistään näistä ulkoisista riippuvuuksista aiheutuvista ongelmista.",
+            "section6_title": "6. Palvelutakuu",
+            "section6_content": "Takaamme, että Raid Alarm toimii oikein VAIN kun KAIKKI seuraavat ehdot täyttyvät samanaikaisesti:\n\n- Rust-pelipalvelimet ovat toiminnassa ja toimivat normaalisti\n- Rust+ -sovellus on asennettu, käytössä ja toimii normaalisti laitteellasi\n- Rust+ -sovellus on saatavilla Google Play Kaupassa eikä sitä ole poistettu\n- Rust+ -sovellus lähettää ilmoituksia ilman viiveitä\n- Rust+ -sovelluksen ilmoitusominaisuudet (mukaan lukien \"Smart Alarm\" jos sovellettavissa) ovat aktiivisia eikä niitä ole poistettu käytöstä\n- Laitteesi täyttää kaikki tekniset vaatimukset\n- Kaikki tarvittavat luvat on myönnetty ja ylläpidetty\n- Sinulla on aktiivinen internet-yhteys\n- Facepunch Studios Limited ei ole rajoittanut tai kieltänyt ilmoitustoimintoja\n\nJos MIKÄ TAHANSA näistä ehdoista ei täyty, EMME VOI TAATA emmekä TAKAA, että sovellus toimii, emmekä ole VASTUUSSA mistään tästä aiheutuvista ongelmista, menetyksistä tai vahingoista.",
+            "section7_title": "7. Luvat",
+            "section7_content": "Raid Alarm pyytää vain minimaaliset tarvittavat luvat: ilmoitusten käyttöoikeus Rust+ -sovelluksen ilmoitusten seuraamiseksi, akun optimoinnin poikkeus taustatoimintaa varten ja hälytyslupa hälytysten laukaisemiseksi.",
+            "section8_title": "8. Elinikäisen lisenssin ehdot",
+            "section8_content": "Saatavuus: Tämä sovellus on saatavilla yksinomaan Google Play Kaupasta. Kaikki ostokset käsitellään Google Play Kaupan laskutusjärjestelmän kautta.\n\nElinikäinen lisenssi: Premium-ominaisuudet vaativat kertamaksun. Tarjoamme 'Elinikäisen lisenssin', joka antaa sinulle pysyvän pääsyn kaikkiin premium-ominaisuuksiin. Tämä on kertamaksu ilman toistuvia maksuja tai tilauksia.\n\nIkäraja: Sinun on oltava vähintään 18-vuotias (tai täysi-ikäinen lainkäyttöalueellasi) ostaaksesi lisenssin. Jos olet alle 18-vuotias, voit ostaa vain vanhemman tai huoltajan suostumuksella. EMME OLE VASTUUSSA alaikäisten ilman asianmukaista lupaa tekemistä ostoista. Vanhemmat tai huoltajat ovat yksin vastuussa lastensa ostojen valvonnasta. Jos alaikäinen tekee ostoksen ilman lupaa, ota yhteyttä Google Play Kauppaan hyvityspyyntöjä varten.\n\nMaksujen käsittely: Kaikki maksut käsitellään turvallisesti Google Play Kaupan kautta. Emme tallenna emmekä pääse käsiksi maksukorttitietoihisi. Maksutietoja käsittelee kokonaan Google Play Kauppa.\n\nHinnoittelu: Hinnat voivat vaihdella maittain ja ne voivat muuttua ennakkoilmoituksella. Nykyiset hinnat näytetään sovelluksessa ja Google Play Kaupassa.\n\nPalvelun muutokset: Pidätämme oikeuden muuttaa, lisätä tai poistaa ominaisuuksia milloin tahansa ilman ilmoitusta tai hyvitystä. Pidätämme oikeuden irtisanoa tai keskeyttää lisenssisi milloin tahansa näiden ehtojen rikkomisen tai laittoman toiminnan vuoksi.\n\nPalvelun saatavuus: Sovelluksen toimivuus riippuu täysin Rust+ -sovelluksesta. Jos Rust+ -sovellus poistetaan Google Play Kaupasta, se lakkaa toimimasta tai lakkaa lähettämästä ilmoituksia, sovellus ei toimi riippumatta lisenssisi tilasta, eikä sinulla ole MITÄÄN OIKEUTTA hyvityksiin tai korvauksiin.\n\n#### Hyvityskäytäntö\n\nKAIKKI MYYNNIT OVAT LOPULLISIA. HYVITYKSIÄ EI MYÖNNETÄ MISSÄÄN OLOSUHTEISSA, MUKAAN LUKIEN MUTTA EI RAJOITTUEN:\n\n- Rust+ -sovelluksen poistaminen Google Play Kaupasta, saatavuusongelmat tai muut ongelmat\n- Rust+ -sovellus lakkaa lähettämästä ilmoituksia tai ilmoitukset viivästyvät\n- Facepunch Studios Limited poistaa, poistaa käytöstä tai muuttaa Rust+ -sovelluksen ilmoitusominaisuuksia\n- Rust-pelipalvelimen ongelmat, katkokset tai häiriöt\n- Sovelluksen toimivuusongelmat (kaatumiset, virheet, ilmoitusviiveet, hälytys ei laukea)\n- Sovelluksen toiminnan lakkaaminen Rust+ -sovelluksen ongelmien tai poistamisen vuoksi\n- Käyttäjän tyytymättömyys sovellukseen tai sen toimivuuteen\n- Käyttäjä muutti mielensä oston jälkeen\n- Käyttäjän laite ei ole yhteensopiva sovelluksen kanssa\n- Käyttäjä eväsi tarvittavat luvat\n- Alaikäinen tekee luvattoman oston (ota yhteyttä Google Play Kauppaan hyvityspyyntöjä varten)\n- Mikä tahansa muu syy\n\nGoogle Play Kaupan hyvitysikkunan (tyypillisesti 48 tuntia) jälkeen EMME myönnä HYVITYKSIÄ MISSÄÄN olosuhteissa riippumatta syystä.\n\nOSTAMALLA LISENSSIN LUOVUT NIMENOMAISESTI KAIKISTA OIKEUKSISTA HYVITYKSIIN, lukuun ottamatta Google Play Kaupan normaalia hyvitysikkunaa (tyypillisesti 48 tuntia), jonka jälkeen HYVITYKSIÄ EI MYÖNNETÄ.\n\n#### Kriittinen tunnustus\n\nOSTAMALLA LISENSSIN TUNNUSTAT NIMENOMAISESTI, YMMÄRRÄT JA HYVÄKSYT PERUUTTAMATTOMASTI, ETTÄ: Sovellus on täysin riippuvainen Rust+ -sovelluksesta (katso kohta 4). Jos Rust+ -sovellus ei ole saatavilla, se poistetaan tai se lakkaa toimimasta, sovellus ei toimi eikä sinulla ole MITÄÄN OIKEUTTA hyvityksiin tai korvauksiin. Hyväksyt KAIKKI ulkoisiin riippuvuuksiin liittyvät RISKIT etkä vaadi hyvityksiä Rust+ -ongelmien, Rust-pelipalvelimen ongelmien tai muiden ulkoisten riippuvuusongelmien vuoksi (lukuun ottamatta Google Play Kaupan normaalia 48 tunnin hyvitysikkunaa).",
+            "section9_title": "9. Immateriaalioikeudet ja tavaramerkkien reilu käyttö",
+            "section9_content": "Raid Alarm -sovellus ja sen sisältö on suojattu tekijänoikeus- ja tavaramerkkilaeilla. Kaikki oikeudet kuuluvat meille.\n\nTavaramerkki-ilmoitus: \"Rust+\", \"Rust\", \"Facepunch\" ja niihin liittyvät logot, nimet ja tavaramerkit ovat Facepunch Studios Limitedin yksinomaista omaisuutta. Emme ole MILLÄÄN TAVALLA yhteydessä, tuettuja, valtuutettuja tai kytköksissä Facepunch Studios Limitediin. Käytämme näitä tavaramerkkejä VAIN tunnistamis- ja kuvaamistarkoituksiin (tavaramerkkilain mukainen nominatiivinen reilu käyttö). Emme VAADI mitään oikeuksia näihin tavaramerkkeihin. Jos Facepunch Studios Limited vastustaa käyttöämme, noudatamme pyyntöä välittömästi. Katso lisätietoja kohdasta 3.",
+            "section10_title": "10. Takuun vastuuvapauslauseke",
+            "section10_content": "SOVELLUS TARJOTAAN \"SELLAISENA KUIN SE ON\" JA \"SELLAISENA KUIN SE ON SAATAVILLA\" ILMAN MINKÄÄNLAISIA TAKUITA, SUORIA TAI EPÄSUORIA, MUKAAN LUKIEN MUTTA EI RAJOITTUEN TAKUISIIN MYYNTIKELPOISUUDESTA, SOVELTUVUUDESTA TIETTYYN TARKOITUKSEEN, LOUKKAAMATTOMUUDESTA TAI SIITÄ, ETTÄ SOVELLUS TOIMII OIKEIN.\n\nEmme takaa, että sovellus toimii aina oikein, että kolmannen osapuolen palvelut ovat aina saatavilla tai että sovellus toimii keskeytyksettä, häiriöttömästi tai virheettömästi. Sovelluksen toimivuus riippuu täysin Rust+ -sovelluksesta (katso kohta 4). Emme anna mitään vakuutuksia tai takuita sovelluksen toimivuudesta, saatavuudesta tai luotettavuudesta. KÄYTÄT SOVELLUSTA OMALLA VASTUULLASI.",
+            "section11_title": "11. Vastuun rajoitus",
+            "section11_content": "LAIN SALLIMISSA RAJOISSA EMME OLE VASTUUSSA MISTÄÄN VAHINGOISTA, MENETYKSISTÄ TAI SEURAUKSISTA, JOTKA JOHTUVAT:\n\n- Rust+ -sovelluksen ongelmista, poistamisesta Google Play Kaupasta, saatavuusongelmista tai muista ongelmista\n- Rust+ -sovelluksen ilmoitusten lähettämisen lopettamisesta tai ilmoitusten viivästymisestä\n- Facepunch Studios Limitedin poistamista, käytöstä poistamista tai muuttamista Rust+ -sovelluksen ilmoitusominaisuuksista\n- Rust-pelipalvelimen ongelmista, katkoksista tai häiriöistä\n- Facepunch Studios Limitedin tai siihen liittyvien tahojen rajoittamasta tai kieltämämästä toiminnallisuudesta\n- Sovelluksen toiminnan lakkaamisesta Rust+ -sovelluksen ongelmien tai poistamisen vuoksi\n- Epäsuorista, satunnaisista, erityisistä, seurannaisista tai rangaistusluonteisista vahingoista\n- Voiton, tietojen, goodwill-arvon tai muiden aineettomien menetysten menetyksestä\n- Mistä tahansa vahingoista, jotka ylittävät lisenssistä maksamasi summan\n- Mistä tahansa vahingoista, jotka liittyvät ulkoisiin riippuvuuksiin tai kolmannen osapuolen palveluihin\n- Alaikäisen tekemästä luvattomasta ostosta (vanhemmat/huoltajat ovat yksin vastuussa)\n\nMISSÄÄN TAPAUKSESSA KOKONAISVASTUUMME EI YLITÄ SUMMAA, JONKA OLET MAKSANUT LISENSSISTÄ VAATIMUSTA EDELTÄVIEN 12 KUUKAUDEN AIKANA.",
+            "section12_title": "12. Käyttäjän velvollisuudet",
+            "section12_content": "Olet YKSIN VASTUUSSA:\n\n- Rust+ -sovelluksen asentamisesta ja ylläpidosta laitteellasi\n- Sen varmistamisesta, että Rust+ -sovellus on saatavilla, asennettu ja toimii oikein\n- Kaikkien tarvittavien lupien myöntämisestä sekä Raid Alarmille että Rust+ -sovellukselle\n- Sen varmistamisesta, että laitteesi on yhteensopiva sekä Raid Alarmin että Rust+ -sovelluksen kanssa\n- Sen ymmärtämisestä, että sovellus on TÄYSIN RIIPPUVAINEN Rust+ -sovelluksesta ja ulkoisista palveluista\n- Sen ymmärtämisestä, että jos Rust+ -sovellus poistetaan Google Play Kaupasta tai se lakkaa toimimasta, sovellus ei toimi eikä sinulla ole MITÄÄN OIKEUTTA hyvityksiin\n- Rust+ -sovelluksen käyttöehtojen ja kaikkien sovellettavien lakien noudattamisesta\n- Sen varmistamisesta, että käyttötapasi ei riko Rust+ -sovelluksen käyttöehtoja\n- Ostojen valvonnasta ja hyväksymisestä, jos olet vanhempi tai huoltaja\n- Sen varmistamisesta, että olet vähintään 18-vuotias (tai sinulla on vanhemman/huoltajan suostumus) ennen ostamista\n\nJos käyttötapasi rikkoo Rust+ -sovelluksen käyttöehtoja, olet YKSIN VASTUUSSA kaikista seurauksista, emmekä ole VASTUUSSA mistään tästä aiheutuvista ongelmista.",
+            "section13_title": "13. Muutokset ehtoihin",
+            "section13_content": "Näitä käyttöehtoja voidaan päivittää ajoittain. Merkittävistä muutoksista ilmoitetaan käyttäjille. Sovelluksen käytön jatkaminen muutosten jälkeen katsotaan uusien ehtojen hyväksymiseksi.",
+            "section14_title": "14. Irtisanominen",
+            "section14_content": "Voimme irtisanoa tai keskeyttää pääsysi sovellukseen välittömästi ilman ennakkoilmoitusta näiden ehtojen rikkomisen vuoksi tai oman harkintamme mukaan. Emme ole vastuussa mistään irtisanomisesta aiheutuvista vahingoista.",
+            "section15_title": "15. Sovellettava laki ja oikeuspaikka",
+            "section15_content": "Näihin käyttöehtoihin sovelletaan sijaintiisi perustuvia lakeja. Riidat ratkaistaan sovellettavan lain ja oikeuspaikan mukaisesti.",
+            "section16_title": "16. Mainokset",
+            "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
+        }
+    },
+    "paywall": {
+        "title_line1": "ELINIKÄINEN",
+        "title_line2": "PÄÄSY",
+        "subtitle": "Maksa kerran. Omista ikuisesti.",
+        "no_subscriptions": "EI TILAUKSIA.",
+        "secure_access": "ALOITA RAJOITATON SUOJAUS",
+        "restore": "PALAUTA",
+        "privacy": "TIETOSUOJAKÄYTÄNTÖ",
+        "terms": "KÄYTTÖEHDOT",
+        "plan_card": {
+            "name": "ELINIKÄINEN PÄÄSY",
+            "one_time": "KERTAMAKSU"
+        },
+        "benefits": {
+            "critical_alarms": "Kriittiset Raid-hälytykset (Ohittaa äänettömyyden)",
+            "fake_call": "Valepuhelusimulaatio",
+            "enemy_notifications": "Vihollinen Online/Offline -ilmoitukset",
+            "server_notifications": "Palvelin Online/Offline -ilmoitukset",
+            "wipe_notifications": "Mukautetut Wipe-ilmoitukset"
+        },
+        "errors": {
+            "network": "Verkkovirhe. Tarkista internetyhteytesi ja yritä uudelleen.",
+            "pending": "Maksu odottaa. Ostoksesi aktivoidaan, kun maksu on vahvistettu.",
+            "invalid": "Maksu virheellinen. Yritä uudelleen tai ota yhteyttä tukeen.",
+            "unavailable": "Tuote ei ole saatavilla tällä hetkellä.",
+            "store": "Kaupan ongelma. Yritä myöhemmin uudelleen.",
+            "already_purchased": "Tämä tuote on jo ostettu.",
+            "generic_failed": "Osto epäonnistui: {}",
+            "purchase_failed_default": "Osto epäonnistui. Yritä uudelleen.",
+            "restore_no_internet": "Ei internetyhteyttä.",
+            "restore_timeout": "Palautuksen aikakatkaisu.",
+            "restore_failed": "Palautus epäonnistui: {}",
+            "no_lifetime_found": "Elinikäistä ostosta ei löytynyt palautettavaksi",
+            "purchase_verification_failed": "Maksu suoritettu, mutta elinikäistä käyttöoikeutta ei voitu vahvistaa."
+        }
+    },
+    "recoil_trainer": {
+        "title": "REKYYLITREENI",
+        "subtitle": "Visualisointi",
+        "mouse_move": "Hiiren Liike",
+        "impact_point": "Osumakohta",
+        "fire": "TULI",
+        "pause": "TAUKO",
+        "shot": "LAUKAUS",
+        "ready": "Valmis",
+        "complete": "Valmis",
+        "pull_down": "VEDÄ ALAS",
+        "pull_left": "VEDÄ VASEMMALLE",
+        "pull_right": "VEDÄ OIKEALLE",
+        "stabilize": "VAKAUTA",
+        "difficulty": {
+            "easy": "HELPPO",
+            "medium": "KESKITASO",
+            "hard": "VAIKEA",
+            "extreme": "ERITTÄIN VAIKEA"
+        }
+    }
+}

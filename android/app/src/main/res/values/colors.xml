@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Raid Alarm App Colors -->
+    <color name="ic_launcher_background">#CD412B</color>
+    <!-- Raid Alarm primary color -->
+    <color name="rust_primary">#2B2924</color>
+    <!-- Raid Alarm background -->
+    <color name="rust_background">#1E2020</color>
+    <!-- Raid Alarm icon background -->
+    <color name="rust_icon_background">#CD412B</color>
+    
+    <!-- Fake Call Colors -->
+    <color name="accept">#4CAF50</color>
+    <color name="accept_ripple">#A6FFA9</color>
+    <color name="decline">#F44336</color>
+    <color name="decline_ripple">#FB8D85</color>
+    <color name="action_text">#FFFFFF</color>
+    <color name="ripple_main_color">#80ffffff</color>
+</resources>
+

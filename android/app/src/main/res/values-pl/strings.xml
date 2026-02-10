@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Aktywny</string>
+    <string name="notification_service_active_text">Alerty ataku są aktywne</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Usługa Raid Alarm Wyłączona</string>
+    <string name="notification_service_disabled_text">Usługa nasłuchiwania powiadomień jest wyłączona. Włącz usługę, aby otrzymywać powiadomienia o atakach.</string>
+    <string name="notification_service_disabled_big_text">Usługa nasłuchiwania powiadomień jest wyłączona. Włącz usługę, aby otrzymywać powiadomienia o atakach.\n\nDotknij Ustawienia, aby włączyć usługę.</string>
+    <string name="notification_service_disabled_action">Ustawienia</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Zatrzymaj</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Uruchamianie alarmu...</string>
+    <string name="alarm_playing">Alarm gra - Dotknij, aby zatrzymać</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Wykryto atak na bazę</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Aktywny</string>
+    <string name="channel_name_service_status">Stan usługi</string>
+    <string name="channel_name_attack_detected">Wykrywanie ataku</string>
+    <string name="channel_name_alarm_service">Serwis alarmowy</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Kanał dla Raid Alarm aktywnych powiadomień</string>
+    <string name="channel_description_service_status">Raid Alarm powiadomienia o stanie usługi</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm powiadomienia o stanie usługi (wyświetlanie początkowe)</string>
+    <string name="channel_description_attack_detected">Powiadomienia wyświetlane po wykryciu powiadomienia o ataku</string>
+    <string name="channel_description_alarm_service">Kanał powiadamiania o usługach alarmowych na pierwszym planie</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Zaakceptuj</string>
+    <string name="text_decline">Odrzuć</string>
+    <string name="fake_call_channel_name">Fałszywe połączenie</string>
+    <string name="fake_call_channel_description">Powiadomienia o fałszywych połączeniach przychodzących</string>
+    <string name="channel_name_player_tracking">Śledzenie Gracza</string>
+    <string name="channel_description_player_tracking">Zmiany statusu śledzonego gracza</string>
+    <string name="player_status_online">Online</string>
+    <string name="player_status_offline">Offline</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s dołączył do %2$s</string>
+    <string name="player_status_left_body">%1$s opuścił %2$s</string>
+    <string name="unknown_server">Nieznany serwer</string>
+    <string name="default_server_name">Serwer</string>
+    <string name="alarm_stop_button_full">ZATRZYMAJ ALARM</string>
+</resources>

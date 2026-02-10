@@ -1,0 +1,930 @@
+{
+    "common": {
+        "subscription_required": "Korumayı etkinleştirmek için abonelik gereklidir",
+        "error_service_not_enabled": "Bildirim servisi etkinleştirilmedi.",
+        "no_internet": "İnternet bağlantısı yok. Lütfen ağınızı kontrol edin.",
+        "million_suffix": "M",
+        "loading": "YÜKLENİYOR...",
+        "fauna_guide": "FAUNA REHBERİ",
+        "select_species": "TÜR SEÇİN",
+        "errors": {
+            "no_internet": "İnternet bağlantısı yok. Lütfen ağınızı kontrol edin."
+        },
+        "thousand_suffix": "B"
+    },
+    "tools": {
+        "section_utilities": "ARAÇLAR",
+        "raid_cost": {
+            "title": "RAID HESP.",
+            "subtitle": "Patlayıcılar & Sulfur"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "Monument Kameraları"
+        },
+        "tea_guide": {
+            "title": "ÇAYLAR",
+            "subtitle": "Bufflar & Tarifler"
+        },
+        "diesel_calc": {
+            "title": "DİZEL",
+            "subtitle": "Ekskavatör ve Taş Ocakları"
+        },
+        "animal_guide": {
+            "title": "HAYVANLAR",
+            "subtitle": "Avcılık ve Kaynaklar"
+        },
+        "match_game": {
+            "title": "EŞLEŞTİRME",
+            "subtitle": "Hafıza Oyunu",
+            "earned_coins": "{} coin kazandınız!",
+            "not_enough_scrap": "Yeterli coin yok!",
+            "victory": "ZAFER",
+            "defeat": "BOZGUN",
+            "net_result": "NET SONUÇ",
+            "play_again": "TEKRAR OYNA",
+            "return_to_menu": "MENÜYE DÖN",
+            "timer": "SÜRE",
+            "potential": "POTANSİYEL",
+            "memorize": "EZBERLE!",
+            "menu_title": "EŞLEŞTİRME OYUNU",
+            "menu_subtitle": "Eşleri bularak hurdalarınızı katlayın.\nYüksek risk, yüksek ödül.",
+            "play_action": "OYNA (-{} HURDA)",
+            "entry": "GİRİŞ",
+            "pairs_count": "{} Eş",
+            "exit_warning_title": "Oyundan Çık?",
+            "exit_warning_message": "Şimdi çıkarsan bahsin kaybolacak. Devam edilsin mi?",
+            "yes": "Evet",
+            "no": "Hayır"
+        },
+        "code_raider": {
+            "title": "KOD AKINCISI",
+            "subtitle": "Kod Kilitlerini Kır",
+            "battery_level": "BATARYA SEVİYESİ",
+            "correct": "Doğru",
+            "wrong_spot": "Yanlış Yer",
+            "invalid": "Geçersiz",
+            "waiting_input": "Giriş yapılması bekleniyor...",
+            "access_granted": "ERİŞİM ONAYLANDI",
+            "system_lockout": "SİSTEM KİLİTLENDİ",
+            "reward_scrap": "Ödül: +{} Coin",
+            "code_changed": "Kod sahibi tarafından değiştirildi",
+            "hack_another": "BAŞKA HACKLE",
+            "retry_hack": "TEKRAR DENE",
+            "open": "AÇIK",
+            "clear": "TEMİZLE",
+            "enter": "GİRİŞ",
+            "code_lock": "KOD_KİLİDİ"
+        }
+    },
+    "recoil_trainer": {
+        "title": "GERİ TEPME EĞİTİMİ",
+        "subtitle": "Desen Görselleştirme",
+        "mouse_move": "Fare Hareketi",
+        "impact_point": "Vuruş Noktası",
+        "fire": "ATEŞ ET",
+        "pause": "DURAKLAT",
+        "shot": "ATIŞ",
+        "ready": "Hazır",
+        "complete": "Tamamlandı",
+        "pull_down": "AŞAĞI ÇEK",
+        "pull_left": "SOLA ÇEK",
+        "pull_right": "SAĞA ÇEK",
+        "stabilize": "STABİL TUT",
+        "difficulty": {
+            "easy": "KOLAY",
+            "medium": "ORTA",
+            "hard": "ZOR",
+            "extreme": "EKSTREM"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "Çay Tarifleri",
+            "mixing_table_recipe": "KARIŞTIRMA MASASI",
+            "select_tier": "SEVİYE SEÇ"
+        },
+        "stats": {
+            "rad_res": "Rad Direnci",
+            "hydration": "Hidrasyon",
+            "temp": "Sıcaklık",
+            "max_temp": "Maks Sıcaklık",
+            "min_temp": "Min Sıcaklık",
+            "quality": "Kalite",
+            "yield": "Verim",
+            "hot": "Zamanla İyileşme",
+            "inst_hp": "Anlık Can",
+            "max_hp": "Maks Can"
+        },
+        "durations": {
+            "instant": "Anlık",
+            "30m": "30 dk",
+            "20m": "20 dk",
+            "45m": "45 dk",
+            "1h": "1 sa",
+            "3m_20s": "3 dk 20 sn",
+            "5m": "5 dk",
+            "6m_40s": "6 dk 40 sn"
+        },
+        "categories": {
+            "Ore": "MADEN",
+            "Wood": "ODUN",
+            "Scrap": "HURDA",
+            "Harvesting": "TOPLAMA",
+            "MaxHealth": "MAKS CAN",
+            "Healing": "KAZANÇ",
+            "Rad": "ANTİ-RAD",
+            "Cooling": "SOĞUTMA",
+            "Warming": "ISITMA",
+            "Crafting": "ÜRETİM"
+        },
+        "tiers": {
+            "Basic": "TEMEL",
+            "Advanced": "GELİŞMİŞ",
+            "Pure": "SAF"
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "Temel Rad Çayı",
+                "desc": "Temel seviye radyasyon çayı."
+            },
+            "Rad_adv": {
+                "name": "Gelişmiş Rad Çayı",
+                "desc": "Gelişmiş seviye radyasyon çayı."
+            },
+            "Rad_pure": {
+                "name": "Saf Rad Çayı",
+                "desc": "Saf seviye radyasyon çayı."
+            },
+            "Cooling_basic": {
+                "name": "Temel Soğutma Çayı",
+                "desc": "Temel seviye soğutma çayı."
+            },
+            "Cooling_adv": {
+                "name": "Gelişmiş Soğutma Çayı",
+                "desc": "Gelişmiş seviye soğutma çayı."
+            },
+            "Cooling_pure": {
+                "name": "Saf Soğutma Çayı",
+                "desc": "Saf seviye soğutma çayı."
+            },
+            "Crafting_basic": {
+                "name": "Temel Üretim Çayı",
+                "desc": "Temel seviye üretim çayı."
+            },
+            "Crafting_adv": {
+                "name": "Gelişmiş Üretim Çayı",
+                "desc": "Gelişmiş seviye üretim çayı."
+            },
+            "Crafting_pure": {
+                "name": "Saf Üretim Çayı",
+                "desc": "Saf seviye üretim çayı."
+            },
+            "Harvesting_basic": {
+                "name": "Temel Toplama Çayı",
+                "desc": "Temel seviye toplama çayı."
+            },
+            "Harvesting_adv": {
+                "name": "Gelişmiş Toplama Çayı",
+                "desc": "Gelişmiş seviye toplama çayı."
+            },
+            "Harvesting_pure": {
+                "name": "Saf Toplama Çayı",
+                "desc": "Saf seviye toplama çayı."
+            },
+            "Healing_basic": {
+                "name": "Temel İyileşme Çayı",
+                "desc": "Temel seviye iyileşme çayı."
+            },
+            "Healing_adv": {
+                "name": "Gelişmiş İyileşme Çayı",
+                "desc": "Gelişmiş seviye iyileşme çayı."
+            },
+            "Healing_pure": {
+                "name": "Saf İyileşme Çayı",
+                "desc": "Saf seviye iyileşme çayı."
+            },
+            "MaxHealth_basic": {
+                "name": "Temel Maks Can Çayı",
+                "desc": "Temel seviye maksimum can çayı."
+            },
+            "MaxHealth_adv": {
+                "name": "Gelişmiş Maks Can Çayı",
+                "desc": "Gelişmiş seviye maksimum can çayı."
+            },
+            "MaxHealth_pure": {
+                "name": "Saf Maks Can Çayı",
+                "desc": "Saf seviye maksimum can çayı."
+            },
+            "Ore_basic": {
+                "name": "Temel Maden Çayı",
+                "desc": "Temel seviye maden çayı."
+            },
+            "Ore_adv": {
+                "name": "Gelişmiş Maden Çayı",
+                "desc": "Gelişmiş seviye maden çayı."
+            },
+            "Ore_pure": {
+                "name": "Saf Maden Çayı",
+                "desc": "Saf seviye maden çayı."
+            },
+            "Scrap_basic": {
+                "name": "Temel Hurda Çayı",
+                "desc": "Temel seviye hurda çayı."
+            },
+            "Scrap_adv": {
+                "name": "Gelişmiş Hurda Çayı",
+                "desc": "Gelişmiş seviye hurda çayı."
+            },
+            "Scrap_pure": {
+                "name": "Saf Hurda Çayı",
+                "desc": "Saf seviye hurda çayı."
+            },
+            "Warming_basic": {
+                "name": "Temel Isınma Çayı",
+                "desc": "Temel seviye ısınma çayı."
+            },
+            "Warming_adv": {
+                "name": "Gelişmiş Isınma Çayı",
+                "desc": "Gelişmiş seviye ısınma çayı."
+            },
+            "Warming_pure": {
+                "name": "Saf Isınma Çayı",
+                "desc": "Saf seviye ısınma çayı."
+            },
+            "Wood_basic": {
+                "name": "Temel Odun Çayı",
+                "desc": "Temel seviye odun çayı."
+            },
+            "Wood_adv": {
+                "name": "Gelişmiş Odun Çayı",
+                "desc": "Gelişmiş seviye odun çayı."
+            },
+            "Wood_pure": {
+                "name": "Saf Odun Çayı",
+                "desc": "Saf seviye odun çayı."
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "Kırmızı Meyve",
+            "Blue_Berry": "Mavi Meyve",
+            "Green_Berry": "Yeşil Meyve",
+            "Yellow_Berry": "Sarı Meyve",
+            "White_Berry": "Beyaz Meyve",
+            "Basic_Rad_Tea": "Temel Rad Çayı",
+            "Adv_Rad_Tea": "Gel. Rad Çayı",
+            "Basic_Cooling_Tea": "Temel Soğutma Çayı",
+            "Adv_Cooling_Tea": "Gel. Soğutma Çayı",
+            "Basic_Crafting_Tea": "Temel Üretim Çayı",
+            "Adv_Crafting_Tea": "Gel. Üretim Çayı",
+            "Basic_Harvesting_Tea": "Temel Toplama Çayı",
+            "Adv_Harvesting_Tea": "Gel. Toplama Çayı",
+            "Basic_Healing_Tea": "Temel İyileşme Çayı",
+            "Adv_Healing_Tea": "Gel. İyileşme Çayı",
+            "Basic_MaxHealth_Tea": "Temel Maks Can Çayı",
+            "Adv_MaxHealth_Tea": "Gel. Maks Can Çayı",
+            "Basic_Ore_Tea": "Temel Maden Çayı",
+            "Adv_Ore_Tea": "Gel. Maden Çayı",
+            "Basic_Scrap_Tea": "Temel Hurda Çayı",
+            "Adv_Scrap_Tea": "Gel. Hurda Çayı",
+            "Basic_Warming_Tea": "Temel Isınma Çayı",
+            "Adv_Warming_Tea": "Gel. Isınma Çayı",
+            "Basic_Wood_Tea": "Temel Odun Çayı",
+            "Adv_Wood_Tea": "Gel. Odun Çayı"
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "CCTV KODLARI",
+            "no_signal": "SİNYAL BULUNAMADI",
+            "copied": "KOPYALANDI",
+            "randomized": "Rastgele Kod",
+            "rec": "KAYIT"
+        },
+        "categories": {
+            "all": "TÜMÜ",
+            "large_oil": "BÜYÜK PETROL",
+            "small_oil": "KÜÇÜK PETROL",
+            "cargo": "KARGO",
+            "silo": "SİLO",
+            "airfield": "HAVALİMANI",
+            "labs": "LABLAR",
+            "outpost": "GÜVENLİ BÖLGE",
+            "bandit": "BANDİT",
+            "dome": "DOME",
+            "radtown": "RADTOWN",
+            "ferry": "FERİBOT",
+            "town": "KASABA"
+        },
+        "labels": {
+            "dock": "İskele",
+            "exhaust": "Egzoz",
+            "helipad": "Heliped",
+            "level_1": "Seviye 1",
+            "level_2": "Seviye 2",
+            "level_3": "Seviye 3",
+            "level_3a": "Seviye 3A",
+            "level_3b": "Seviye 3B",
+            "level_4": "Seviye 4",
+            "level_5": "Seviye 5",
+            "level_6a": "Seviye 6A",
+            "level_6b": "Seviye 6B",
+            "level_6c": "Seviye 6C",
+            "level_6d": "Seviye 6D",
+            "deck": "Güverte",
+            "bridge": "Köprü",
+            "stern": "Kıç",
+            "hold_1": "Ambar 1",
+            "hold_2": "Ambar 2",
+            "exit_1": "Çıkış 1",
+            "exit_2": "Çıkış 2",
+            "missile": "Füze",
+            "tower": "Kule",
+            "shipping": "Sevkiyat",
+            "casino": "Gazino",
+            "chill_zone": "Dinlenme Alanı",
+            "crude_oil": "Ham Petrol",
+            "music": "Müzik",
+            "street": "Sokak",
+            "logistics": "Lojistik",
+            "parking": "Otopark",
+            "utilities": "Hizmetler",
+            "apartments": "Apartmanlar",
+            "house": "Ev",
+            "sbl": "SBL",
+            "dome_1": "Kubbe 1",
+            "top": "Üst",
+            "weapons": "Silahlar",
+            "lab": "Lab",
+            "security": "Güvenlik"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "Oyuncu Ara",
+            "search_hint": "Oyuncu adı veya ID ara...",
+            "loading_text": "BATTLEMETRICS SORGULANIYOR...",
+            "error_title": "Arama Başarısız",
+            "retry_button": "TEKRAR DENE",
+            "empty_state": "Oyuncu bulunamadı.",
+            "error_snackbar": "Hata: {}",
+            "global": "KÜRESEL",
+            "player_id": "OYUNCU ID"
+        },
+        "details": {
+            "tracking_id": "TAKİP",
+            "current_state": "GÜNCEL DURUM",
+            "online": "ÇEVRİMİÇİ",
+            "offline": "ÇEVRİMDIŞI",
+            "last_seen": "SON GÖRÜLME",
+            "unknown": "Bilinmiyor",
+            "alert_triggers": "ALARM TETİKLEYİCİLERİ:",
+            "update_tracking": "OYUNCUYU TAKİP ET"
+        },
+        "list_item": {
+            "playing_on": "OYUN OYNADIĞI YER:",
+            "not_in_server": "Bir sunucuda değil"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "SALDIRI İSTATİSTİKLERİ",
+            "total_attacks": "TOPLAM SALDIRI",
+            "last_attack": "SON SALDIRI",
+            "recent_alerts": "SON ALARMLAR",
+            "no_notification": "Bildirim bulunamadı.",
+            "unknown_source": "Bilinmeyen Kaynak",
+            "time_ago": {
+                "just_now": "Az önce",
+                "minutes": "{}dk önce",
+                "hours": "{}sa önce",
+                "days": "{}g önce",
+                "months": "{}ay önce"
+            }
+        },
+        "traffic": {
+            "title": "Saldırı Trafiği",
+            "ranges": {
+                "day": "Gün",
+                "week": "Hafta",
+                "month": "Ay"
+            }
+        },
+        "overlay": {
+            "premium_data": "PREMİUM VERİ",
+            "upgrade_button": "GÖRMEK İÇİN YÜKSELT"
+        },
+        "alarm": {
+            "stop": "ALARMI DURDUR"
+        },
+        "notifications": {
+            "base_attack": "Basen saldırı altında!"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "ETKİSİZ",
+            "total_required": "Toplam Gerekli",
+            "cannot_damage": "Hedeflere zarar veremez",
+            "loot_only": "SADECE LOOT",
+            "raw_sulfur": "HAM SULFUR"
+        },
+        "materials": {
+            "charcoal": "Kömür",
+            "fragments": "Metal",
+            "stones": "Taş",
+            "wood": "Odun",
+            "bone": "Kemik",
+            "low_grade_fuel": "LGF",
+            "cloth": "Kumaş",
+            "rope": "İp",
+            "pipe": "Boru",
+            "tech_trash": "Teknik",
+            "sulfur": "Sulfur"
+        },
+        "categories": {
+            "construction": "İnşaat",
+            "door": "Kapılar",
+            "placeable": "Eşyalar",
+            "item": "Tuzaklar"
+        },
+        "explosives": {
+            "c4": "C4",
+            "rocket": "Roket",
+            "satchel": "Satchel",
+            "beancan": "Beancan",
+            "explo556": "Patlayıcı 5.56",
+            "he_grenade": "F1 El Bombası",
+            "he_grenade_40mm": "40mm HE",
+            "molotov": "Molotof",
+            "hv_rocket": "HV Roket",
+            "incen_rocket": "Yakıcı Roket",
+            "homing_rocket": "Güdümlü Füze",
+            "mlrs_rocket": "MLRS Roketi",
+            "survey_charge": "Sondaj Patlayıcısı",
+            "propane_bomb": "Propan Bombası",
+            "ammo_rifle": "5.56 Tüfek",
+            "ammo_rifle_hv": "HV 5.56",
+            "ammo_rifle_incen": "Yakıcı 5.56",
+            "ammo_pistol": "Tabanca",
+            "ammo_pistol_hv": "HV Tabanca",
+            "ammo_pistol_incen": "Yakıcı Tabanca",
+            "ammo_buckshot": "Saçma",
+            "ammo_slug": "Tek Kurşun",
+            "ammo_incen_shell": "Yakıcı Fişek",
+            "ammo_handmade": "El Yapımı",
+            "arrow_fire": "Ateşli Ok",
+            "arrow_bone": "Kemik Ok",
+            "arrow_wooden": "Tahta Ok",
+            "arrow_hv": "HV Ok"
+        },
+        "calculator": {
+            "title": "RAID HESAPLAYICI",
+            "select_target": "HEDEF SEÇ",
+            "materials_breakdown": "MALZEME ANALİZİ",
+            "total_sulfur": "TOPLAM GEREKLİ SULFUR",
+            "min_cost": "MİNUMUM MALİYET",
+            "best_for_sulfur": "En Az Sulfur",
+            "custom_plan": "ÖZEL RAID PLANI",
+            "clear_all": "TEMİZLE"
+        },
+        "targets": {
+            "wood_wall": "Tahta Duvar",
+            "stone_wall": "Taş Duvar",
+            "metal_wall": "Metal Duvar",
+            "hqm_wall": "Zırhlı Duvar",
+            "wood_foundation": "Tahta Temel",
+            "stone_foundation": "Taş Temel",
+            "metal_foundation": "Metal Temel",
+            "hqm_foundation": "Zırhlı Temel",
+            "wood_floor": "Tahta Zemin",
+            "stone_floor": "Taş Zemin",
+            "metal_floor": "Metal Zemin",
+            "hqm_floor": "Zırhlı Zemin",
+            "ext_wood_wall": "Yüksek Dış Tahta",
+            "ext_stone_wall": "Yüksek Dış Taş",
+            "ext_gate_wood": "Tahta Kapı (Dış)",
+            "ext_gate_stone": "Taş Kapı (Dış)",
+            "wood_door": "Tahta Kapı",
+            "metal_door": "Metal Kapı",
+            "garage_door": "Garaj Kapısı",
+            "armored_door": "Zırhlı Kapı",
+            "ladder_hatch": "Merdiven Kapağı",
+            "triangle_ladder_hatch": "Üçgen Kapak",
+            "wood_bars": "Tahta Parmaklık",
+            "metal_bars": "Metal Parmaklık",
+            "strengthened_glass": "Cam Pencere",
+            "reinforced_glass": "Zırhlı Cam",
+            "shutter_wood": "Tahta Panjur",
+            "metal_shop_front": "Metal Dükkan Önü",
+            "vending_machine": "Otomat",
+            "tc": "TC (Dolap)",
+            "small_box": "Küçük Kutu",
+            "large_box": "Büyük Kutu",
+            "sleeping_bag": "Uyku Tulumu",
+            "bed": "Yatak",
+            "furnace_small": "Küçük Fırın",
+            "furnace_large": "Büyük Fırın",
+            "refinery": "Rafineri",
+            "autoturret": "Otomatik Taret",
+            "flame_turret": "Alev Tareti",
+            "shotgun_trap": "Shotgun Tuzağı",
+            "sam_site": "SAM Sitesi",
+            "tesla_coil": "Tesla Bobini",
+            "landmine": "Mayın",
+            "beartrap": "Ayı Tuzağı",
+            "windmill": "Rüzgar Gülü",
+            "solar_panel": "Güneş Paneli",
+            "battery_small": "Küçük Batarya",
+            "battery_medium": "Orta Batarya",
+            "battery_large": "Büyük Batarya",
+            "locker": "Dolap",
+            "fridge": "Buzdolabı",
+            "hearth": "Şömine",
+            "search_light": "Işıldak",
+            "drop_box": "Drop Box",
+            "mailbox": "Posta Kutusu",
+            "sub_all_shapes": "Tüm Şekiller",
+            "cctv_camera": "CCTV Kamerası",
+            "workbench_level1": "Tezgah Seviye 1",
+            "workbench_level2": "Tezgah Seviye 2",
+            "workbench_level3": "Tezgah Seviye 3",
+            "cooking_workbench": "Yemek Tezgahı",
+            "engineering_workbench": "Mühendislik Tezgahı",
+            "planter": "Saksı",
+            "sleepingbag": "Uyku Tulumu",
+            "wicker_barrel": "Hasır Varil",
+            "wooden_ladder": "Tahta Merdiven",
+            "wood_shelter": "Tahta Kulübe"
+        }
+    },
+    "subscription": {
+        "free_tier": "ÜCRETSİZ SEVİYE",
+        "limited_features": "Sınırlı Özellikler",
+        "lifetime_license": "Ömür Boyu Lisans Aktif",
+        "duration": "SÜRE",
+        "forever_free": "ÜCRETSİZ",
+        "lifetime": "ÖMÜR BOYU",
+        "status": "DURUM",
+        "locked": "KİLİTLİ",
+        "active": "AKTİF",
+        "upgrade_button": "AÇMAK İÇİN YÜKSELT"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "PREMİUM ÖZELLİK",
+            "description": "Gelişmiş kontrolleri açmak için yükseltin",
+            "unlock_button": "ŞİMDİ AÇ"
+        },
+        "ui": {
+            "title": "Ayarlar",
+            "guides_setup": "REHBERLER VE KURULUM",
+            "how_it_works": "Nasıl Çalışır",
+            "setup_config": "Kurulum Yapılandırması",
+            "legal": "Yasal",
+            "tos": "HİZMET KOŞULLARI",
+            "privacy": "GİZLİLİK POLİTİKASI",
+            "version": "RAID ALARM V{}"
+        },
+        "common": {
+            "error": "Hata",
+            "durations": {
+                "sec_30": "30 sn",
+                "min_1": "1 dk",
+                "min_3": "3 dk",
+                "min_5": "5 dk",
+                "sec_short": "{}sn",
+                "min_short": "{}dk",
+                "hour_short": "{}sa"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "Yok",
+                "alarm_1": "Alarm 1",
+                "alarm_2": "Alarm 2",
+                "alarm_3": "Alarm 3",
+                "alarm_4": "Alarm 4",
+                "alarm_5": "Alarm 5",
+                "alarm_6": "Alarm 6",
+                "custom_label": "Özel",
+                "pick_custom": "Özel..."
+            }
+        },
+        "alarm_mode": {
+            "title": "Raid Alarmı",
+            "subtitle": "Sürekli yüksek sesli uyarı",
+            "sound": "Alarm Sesi",
+            "infinite_loop": "Sonsuz Döngü",
+            "duration": "Alarm Süresi"
+        },
+        "fake_call": {
+            "title": "Sahte Arama",
+            "subtitle": "Gelen arama simülasyonu",
+            "caller_name": "Arayan İsmi",
+            "show_number": "Numarayı Göster",
+            "background": "Arama Arkaplanı",
+            "background_options": {
+                "default": "Varsayılan",
+                "gallery": "Galeri"
+            },
+            "sound": "Zil Sesi",
+            "duration": "Arama Süresi",
+            "infinite_loop": "Sonsuz Döngü"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "ÇEVRİMİÇİ",
+            "offline": "ÇEVRİMDIŞI",
+            "official": "RESMİ",
+            "modded": "MODLU",
+            "community": "TOPLULUK"
+        },
+        "monitor": {
+            "title": "Sunucu Monitörü",
+            "select_server": "SUNUCU SEÇ"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "SUNUCU BUL",
+                "subtitle": "Wipe'ları Gözat ve Takip Et"
+            },
+            "find_player": {
+                "title": "OYUNCU BUL",
+                "subtitle": "İsim ve Çevrimiçi Durumu"
+            }
+        },
+        "map": {
+            "info_unavailable": "Bu sunucu için harita bilgisi bulunamadı",
+            "failed_load": "Harita yüklenemedi",
+            "check_connection": "Lütfen bağlantınızı kontrol edin",
+            "loading": "Harita yükleniyor...",
+            "open_browser": "Tarayıcıda Aç",
+            "procedural": "Prosedürel",
+            "retry": "Yeniden Dene"
+        },
+        "live": {
+            "auto_refresh_active": "OTOMATİK YENİLEME AKTİF",
+            "auto_refresh_desc": "Akış her 15 saniyede bir güncellenir.",
+            "activity_title": "Oyuncu Aktivitesi",
+            "no_signal": "SİNYAL YOK",
+            "fetching_data": "Oyuncu verileri alınıyor..."
+        },
+        "overview": {
+            "population": "OYUNCULAR",
+            "map": "HARİTA",
+            "fps": "FPS",
+            "uptime": "AKTİF SÜRE",
+            "next_wipe": "SONRAKİ WIPE",
+            "last_wipe": "SON WIPE",
+            "wipe_notification": "Wipe Bildirimi",
+            "alert_me_before": "BENİ UYAR:",
+            "force_refresh": "ZORLA YENİLE",
+            "unknown": "BİLİNMİYOR",
+            "overdue": "Gecikmiş",
+            "size_label": "Boyut:",
+            "seed_label": "Seed:",
+            "active": "AKTİF",
+            "disabled": "DEVRE DIŞI",
+            "na": "N/A",
+            "time_ago_days": "{}g {}sa",
+            "time_ago_hours": "{}sa"
+        },
+        "notifications": {
+            "wipe_alert_title": "Wipe Alarmı: {}",
+            "wipe_alert_body": "Sunucu {} dakika içinde sıfırlanacak! Hazırlan."
+        },
+        "wipe": {
+            "next_wipe_in": "SONRAKİ WIPE",
+            "wipe_alarm": "Wipe Alarmı"
+        },
+        "targets": {
+            "enter_player_name": "Tam oyuncu adını girin...",
+            "no_targets": "Takip edilen hedef yok.",
+            "go_to_live": "Canlı Akışa Git",
+            "title": "HEDEFLER",
+            "active_badge": "Aktif",
+            "empty": "Şu anda takip edilen oyuncu yok.",
+            "search_link": "OYUNCU ARA",
+            "online_now": "Şimdi Çevrimiçi",
+            "stop_tracking": {
+                "title": "Takibi Durdur?",
+                "confirm": "{} takibini durdurmak istediğinize emin misiniz?",
+                "button": "Takibi Durdur",
+                "cancel": "İptal"
+            }
+        },
+        "featured": {
+            "title": "POPÜLER TOPLULUKLAR"
+        },
+        "search": {
+            "title": "Sunucu Arama",
+            "tabs": {
+                "search": "Ara",
+                "favorites": "Favoriler",
+                "featured": "Öne Çıkanlar"
+            },
+            "placeholder": "Sunucu adı ara...",
+            "searching": "Aranıyor...",
+            "no_results": "\"{}\" ile eşleşen sunucu bulunamadı",
+            "no_favorites": "Kaydedilmiş favori yok.",
+            "favorites_help": "Sunucuları arayın ve takip etmek için yıldız simgesine dokunun.",
+            "results_label": "SONUÇLAR",
+            "official_section": {
+                "title": "RESMİ SUNUCULAR",
+                "desc": "Resmi sunucular aylık wipe ve yüksek güvenilirlik sunar."
+            },
+            "sort": {
+                "title": "SIRALA",
+                "relevance": "Eşleşme",
+                "high_pop": "Yüksek Pop",
+                "low_pop": "Düşük Pop",
+                "just_wiped": "Yeni Wipelanmış"
+            },
+            "error": {
+                "title": "Arama Başarısız",
+                "retry": "Tekrar Dene"
+            }
+        },
+        "active_widget": {
+            "select": "AKTİF SUNUCU SEÇ",
+            "wiped": "Wipelanmış"
+        },
+        "logs": {
+            "connected": "Bağlandı",
+            "disconnected": "Bağlantı Kesildi",
+            "recently": "Yakın zamanda",
+            "just_now": "Az önce"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "GENEL",
+                "map": "HARİTA",
+                "live": "CANLI",
+                "targets": "HEDEFLER",
+                "wipe": "WIPE"
+            },
+            "errors": {
+                "unstable": "Bağlantı kararsız. Veriler eski olabilir.",
+                "signal_lost": "Sinyal Kayboldu. Tekrar deneniyor...",
+                "connection": "Bağlantı hatası. Tekrar deneyin."
+            },
+            "tracking": {
+                "max_limit": "Maksimum 3 oyuncu takip edilebilir",
+                "not_found_exact": "\"{}\" adıyla tam eşleşen oyuncu bulunamadı",
+                "not_found_on_server": "Oyuncu bu sunucuda bulunamadı.",
+                "select_player": "Oyuncu seçin"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "Yakıt Hesaplayıcı",
+        "input_amount": "MİKTAR GİRİN",
+        "runtime": "{} Süre",
+        "select_machine": "MAKİNE SEÇİN",
+        "total_output": "TOPLAM ÇIKTI",
+        "estimated_yield": "TAHMİNİ VERİM",
+        "per_barrel": "Varil Başına: {}",
+        "per_lgf": "LGF Başına: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "MAZOT",
+            "low_grade": "D.K. YAKIT"
+        },
+        "machines": {
+            "excavator": "Dev Ekskavatör",
+            "hqm_quarry": "HQM Madeni",
+            "sulfur_quarry": "Sulfur Madeni",
+            "stone_quarry": "Taş Madeni",
+            "pump_jack": "Sabit Pompa",
+            "deploy_pump_jack": "Yerleştirilebilir Pompa",
+            "deploy_quarry": "Maden Ocağı",
+            "types": {
+                "monument": "Monument",
+                "static": "Sabit Bölge",
+                "deployable": "Yerleştirilebilir"
+            }
+        },
+        "resources": {
+            "diesel": "Mazot",
+            "sulfur": "Sulfur Cevheri",
+            "hqm": "HQM Cevheri",
+            "metal_frags": "Metal Parçaları",
+            "stones": "Taş",
+            "metal_ore": "Metal Cevheri",
+            "crude_oil": "Ham Petrol",
+            "low_grade": "Düşük Kalite Yakıt"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "Gizlilik Politikası",
+            "last_updated": "Son Güncelleme: {year}",
+            "contact_title": "İletişim",
+            "contact_email": "Gizlilik soruları, veri talepleri veya haklarınızı kullanmak için lütfen bizimle iletişime geçin:\n\nE-posta: alcstackdev@gmail.com",
+            "section1_title": "1. Topladığımız Bilgiler",
+            "section1_content": "Raid Alarm, uygulamanın çalışması için yalnızca gerekli olan minimum verileri toplar: lisans doğrulaması için anonimleştirilmiş cihaz kimliği, Rust+ uygulamasından gelen belirli saldırı bildirimleri, ömür boyu lisans durumu (Google Play Faturalandırma yoluyla işlenir) ve cihazınızda yerel olarak saklanan uygulama ayarları. Kişisel adlar, e-posta adresleri, telefon numaraları, konum verileri, biyometrik veriler veya ödeme kartı bilgilerini toplamıyoruz.",
+            "section2_title": "2. İşlemenin Yasal Dayanağı",
+            "section2_content": "Kişisel verilerinizi aşağıdaki yasal dayanaklara göre işliyoruz:\n\n• Sözleşmenin İfası: Talep ettiğiniz uygulama hizmetlerini sağlamak için gerekli işleme\n• Meşru Menfaatler: Uygulama işlevselliği ve iyileştirmesi için işleme\n• Rıza: Açıkça gerekli olduğunda, işlemeden önce rızanızı alıyoruz",
+            "section3_title": "3. Bildirim Verilerinin İşlenmesi",
+            "section3_content": "Yalnızca Rust+ uygulamasından gelen belirli saldırı bildirimlerini işliyoruz. Bildirim verileri tamamen cihazınızda işlenir ve yerel olarak saklanır. Diğer uygulamalardan gelen bildirimlere erişimimiz yoktur. Android'in standart NotificationListenerService API'sini açık rızanızla kullanıyoruz. Rust+ uygulaması, Facepunch Studios Limited veya ilgili herhangi bir kuruluşla bağlantımız yoktur.",
+            "section4_title": "4. İzinler",
+            "section4_content": "Raid Alarm yalnızca minimum gerekli izinleri ister: Rust+ uygulamasından gelen uyarıları izlemek için bildirim erişimi, arka planda çalışma için pil optimizasyonu istisnası ve alarmları tetiklemek için alarm izni.",
+            "section5_title": "5. Bilgilerinizi Nasıl Kullanıyoruz",
+            "section5_content": "Toplanan veriler yalnızca alarm sisteminin çalıştırılması, lisans doğrulama ve uygulama iyileştirmeleri için kullanılır. Ücretsiz Katman kullanıcıları için anonimleştirilmiş veriler, temel reklam hizmetleri sağlamak amacıyla Google AdMob tarafından kullanılabilir. Kişisel verilerinizi kendi amaçları için üçüncü taraf pazarlamacılarla satmıyoruz veya paylaşmıyoruz. Standart reklam özelliklerinin ötesinde otomatik karar verme veya profilleme kullanmıyoruz.",
+            "section6_title": "6. Veri Depolama ve Saklama",
+            "section6_content": "Tüm bildirim verileri, ayarlar ve istatistikler cihazınızda yerel olarak saklanır. Yalnızca satın alma bilgileri güvenli, şifrelenmiş bir veritabanında saklanır. Bildirim verileri asla sunucularımıza iletilmez. Bildirim geçmişi, siz temizleyene veya uygulamayı kaldırana kadar yerel olarak saklanır. Lisans bilgileri, ömür boyu satın alma işleminizi doğrulamak için süresiz olarak saklanır. Uygulamayı kaldırarak tüm yerel verileri silebilir veya bizimle iletişime geçerek satın alma verilerinin silinmesini talep edebilirsiniz.",
+            "section7_title": "7. Veri Paylaşımı ve Üçüncü Taraflar",
+            "section7_content": "Kişisel verilerinizi satmıyoruz. Veri paylaşımı, ödeme işleme için Google Play Store, Ücretsiz Katman kullanıcılarına reklam sunmak için Google AdMob ve lisans doğrulama için güvenli üçüncü taraf hizmetlerle sınırlıdır. Bildirim verilerinizi hiçbir üçüncü tarafla paylaşmıyoruz. Kullanıcılar veri satışından vazgeçme (veri satmıyoruz) ve cihaz ayarları aracılığıyla reklam tercihlerini yönetme hakkına sahiptir.",
+            "section8_title": "8. Uluslararası Veri Transferleri",
+            "section8_content": "Satın alma verileri, güvenli veri merkezlerinde bulunan sunucularda işlenebilir. Tüm uluslararası transferler, geçerli veri koruma yasalarına ve uygun güvencelere uygundur. Veriler, endüstri standardı şifreleme kullanılarak iletim sırasında şifrelenir.",
+            "section9_title": "9. Güvenlik Önlemleri",
+            "section9_content": "Verilerinizi korumak için yerel şifreleme, güvenli iletişim protokolleri, şifreli veritabanı depolaması ve kısıtlı erişim kontrolleri dahil olmak üzere teknik ve idari güvenlik önlemleri uyguluyoruz. Ancak, hiçbir iletim veya depolama yöntemi %100 güvenli değildir. Verilerinizi korumaya çalışsak da, mutlak güvenliği garanti edemeyiz.",
+            "section10_title": "10. Haklarınız",
+            "section10_content": "Kişisel verilerinizle ilgili olarak erişim, düzeltme, silme, işlemeyi kısıtlama, veri taşınabilirliği, işlemeye itiraz etme ve rızayı geri çekme hakkına sahipsiniz. Bilme hakkına, silme hakkına, satıştan vazgeçme hakkına (biz veri satmıyoruz) ve ayrımcılık yapılmama hakkına sahipsiniz. Haklarınızı kullanmak için aşağıdaki e-posta adresinden bizimle iletişime geçin. Geçerli yasaların gerektirdiği makul bir süre içinde yanıt vereceğiz.",
+            "section11_title": "11. Çocukların Gizliliği",
+            "section11_content": "Uygulamamız 18 yaşın (veya bazı yetki alanlarında 13 yaşın) altındaki çocuklara yönelik değildir. Bilerek çocuklardan kişisel veri toplamıyoruz. Bir çocuktan veri topladığımızı fark edersek, derhal sileceğiz. 18 yaşın (veya kendi yetki alanlarında reşit olma yaşının) altındaki kişiler tarafından yapılan satın alma işlemlerinden sorumlu değiliz ve hiçbir yükümlülük kabul etmiyoruz. Ebeveynler veya vasiler, çocuklarının uygulama kullanımını ve herhangi bir satın alma işlemini denetlemekten tek başına sorumludur. Bir reşit olmayan kişi uygun izin olmadan bir satın alma işlemi yaparsa, iadeleri biz işlemediğimiz için ebeveyn veya vasi iade talepleri için Google Play Store ile iletişime geçmelidir.",
+            "section12_title": "12. Veri İhlali Bildirimi",
+            "section12_content": "Haklarınızı etkileyebilecek bir veri ihlali durumunda, geçerli yasaların gerektirdiği şekilde ilgili denetim makamlarını bilgilendireceğiz ve hakları için yüksek risk varsa etkilenen kullanıcıları gecikmeksizin bilgilendireceğiz.",
+            "section13_title": "13. Bu Politikadaki Değişiklikler",
+            "section13_content": "Bu Gizlilik Politikası zaman zaman güncellenebilir. Önemli değişiklikler kullanıcılara bildirilecektir. Değişikliklerden sonra uygulamanın kullanılmaya devam edilmesi, kabul edildiği anlamına gelir. Son güncelleme tarihi bu sayfanın üst kısmında gösterilmektedir.",
+            "section14_title": "14. Reklam",
+            "section14_content": "Raid Alarm'ın Ücretsiz Katmanı reklamlarla desteklenmektedir. Reklam sunmak için Google AdMob kullanıyoruz. AdMob, ilgili reklamları göstermek ve analiz amaçları için cihazınızın reklam kimliği gibi verileri toplayabilir ve kullanabilir. Ömür Boyu Lisans satın alan kullanıcıların uygulamasından tüm üçüncü taraf reklamları kaldırılacaktır."
+        },
+        "terms_of_service": {
+            "title": "Hizmet Şartları",
+            "last_updated": "Son Güncelleme: {year}",
+            "contact_title": "İletişim",
+            "contact_email": "Sorular: alcstackdev@gmail.com",
+            "section1_title": "1. Şartların Kabulü",
+            "section1_content": "Raid Alarm'ı indirerek, yükleyerek, erişerek veya kullanarak, bu Hizmet Şartlarına bağlı kalmayı kabul etmiş olursunuz. Kabul etmiyorsanız, Uygulamayı kullanmayın. Bu uygulamayı kullanmak için en az 18 yaşında (veya yetki alanınızdaki reşit olma yaşında) olmalısınız. 18 yaşın altındaysanız, bu uygulamayı yalnızca bir ebeveyn veya vasinin rızasıyla kullanabilirsiniz.",
+            "section2_title": "2. Hizmet Tanımı",
+            "section2_content": "Raid Alarm, yalnızca Google Play Store'da bulunan, Rust+ uygulamasından gelen bildirimleri izleyen ve bir saldırı bildirimi alındığında bir alarmı tetikleyen bir mobil uygulamadır. Uygulama, herhangi bir garanti olmaksızın \"olduğu gibi\" sunulmaktadır. Uygulamanın işlevselliği tamamen Rust+ uygulamasına bağlıdır. Rust+ yüklü değilse, devre dışı bırakılmışsa, Google Play Store'dan kaldırılmışsa, bildirim göndermeyi durdurursa, gecikmeler yaşarsa veya Rust oyun sunucuları sorunlarla karşılaşırsa, Uygulama çalışmayacaktır ve ortaya çıkan sorunlardan sorumlu değiliz.",
+            "section3_title": "3. Bağlantı Yoktur",
+            "section3_content": "Raid Alarm'ın Rust oyunu, Rust+ uygulaması, Facepunch Studios Limited veya ilgili herhangi bir kuruluşla hiçbir bağlantısı, ortaklığı, ilişkisi, onayı veya sponsorluğu yoktur. Raid Alarm bağımsız bir uygulamadır. \"Rust+\", \"Rust\", \"Facepunch\" ve ilgili terimlere yapılan atıfları YALNIZCA uygulamanın ne yaptığını açıklamak için tanımlayıcı ve açıklayıcı amaçlarla kullanıyoruz (adil kullanım hakkı). Bu ticari markalar üzerinde herhangi bir hak iddia etmiyoruz. Facepunch Studios Limited tarafından yetkilendirilmedik, onaylanmadık veya onlarla ilişkili değiliz. Facepunch Studios Limited bu terimleri kullanımımıza itiraz ederse, taleplerini derhal yerine getireceğiz. Bu terimlerin herhangi bir kullanımı tamamen açıklayıcıdır ve herhangi bir ilişki, yetkilendirme veya onay ima etmez.",
+            "section4_title": "4. Harici Bağımlılık ve Sınırlamalar",
+            "section4_content": "KRİTİK BAĞIMLILIK BİLDİRİMİ: Raid Alarm'ın işlevselliği TAMAMEN VE KAYITSIZ ŞARTSIZ Rust+ uygulamasına BAĞLIDIR. Uygulama, aşağıdaki durumlardan herhangi birinde ÇALIŞMAYACAKTIR:\n\n- Rust+ uygulamasının cihazınızda yüklü olmaması\n- Rust+ uygulamasının devre dışı bırakılması veya kaldırılması\n- Rust+ uygulamasının Google Play Store'dan kaldırılması\n- Rust+ uygulamasının kullanılamaz hale gelmesi veya çalışmayı durdurması\n- Rust+ uygulamasının bildirim göndermeyi durdurması veya bildirimlerin gecikmesi\n- Rust+ uygulamasındaki \"Smart Alarm\" veya bildirim özelliklerinin kaldırılması, devre dışı bırakılması veya değiştirilmesi\n- Rust oyun sunucularının sorunlar, kesintiler veya çökmeler yaşaması\n- Facepunch Studios Limited'in bildirim işlevselliğini sınırlaması veya yasaklaması\n- İnternet bağlantısı sorunlarının Rust+ bildirimlerinin alınmasını engellemesi\n- Rust+ uygulamasının bildirim gönderme yeteneğini etkileyen diğer sorunlar\n\nUYGULAMAYI KULLANARAK, ŞUNLARI AÇIKÇA KABUL EDİYOR VE ONAYLIYORSUNUZ:\n\n- Uygulamanın işlevselliği TAMAMEN bizim üzerinde HİÇBİR KONTROLÜMÜZÜN OLMADIĞI harici hizmetlere (Rust+ uygulaması ve Rust oyun sunucuları) bağlıdır\n- Rust+ uygulamasının kullanılabilirliği, işlevselliği, Google Play Store'dan kaldırılması, bildirim gecikmeleri veya Facepunch Studios Limited tarafından yapılan değişikliklerden SORUMLU DEĞİLİZ\n- Rust oyun sunucusu sorunları, kesintileri veya çökmelerinden SORUMLU DEĞİLİZ\n- Facepunch Studios Limited, Rust+ uygulamasının bildirim işlevselliğini sınırlar, yasaklar veya değiştirirse SORUMLU DEĞİLİZ\n- Rust+ uygulaması sorunları, Rust oyun sunucusu sorunları, bildirim gecikmeleri veya diğer harici bağımlılık sorunları nedeniyle bizi sorumlu tutmayacak, geri ödeme talep etmeyecek veya bize karşı herhangi bir iddiada BULUNMAYACAKSINIZ\n- Rust+ uygulaması Google Play Store'dan kaldırılırsa veya çalışmayı durdurursa, Uygulamanın derhal çalışmayı durduracağını ve geri ödeme, tazminat veya diğer çözüm yollarına HAKKINIZ OLMADIĞINI anlıyorsunuz",
+            "section5_title": "5. Üçüncü Taraf Hizmetleri İçin Sorumluluk Yoktur",
+            "section5_content": "Aşağıdakilerden kaynaklanan herhangi bir sorun, hasar, kayıp veya sonuçtan SORUMLU DEĞİLİZ ve HİÇBİR YÜKÜMLÜLÜK KABUL ETMİYORUZ:\n\n- Rust oyunu, Rust+ uygulaması, Facepunch Studios Limited veya ilgili herhangi bir kuruluş\n- Rust+ uygulamasının Google Play Store'dan kaldırılması\n- Rust+ uygulamasının bildirim göndermeyi durdurması veya bildirimlerin gecikmesi\n- Rust+ uygulamasındaki \"Smart Alarm\" veya bildirim özelliklerinin kaldırılması, devre dışı bırakılması veya değiştirilmesi\n- Rust oyun sunucusu sorunları, kesintileri veya çökmeleri\n- Facepunch Studios Limited tarafından yapılan herhangi bir değişiklik, kısıtlama veya modifikasyon\n- Diğer üçüncü taraf hizmetleri, uygulamaları veya bağımlılıkları\n\nUygulamayı, tüm harici bağımlılıklarla ilgili olarak KENDİ RİSKİNİZLE kullanırsınız. Rust+ uygulaması, Rust oyun sunucuları veya Facepunch Studios Limited üzerinde HİÇBİR KONTROLÜMÜZ yoktur ve bu harici bağımlılıklardan kaynaklanan hiçbir sorundan SORUMLU DEĞİLİZ.",
+            "section6_title": "6. Hizmet Garantisi",
+            "section6_content": "Raid Alarm'ın YALNIZCA aşağıdaki koşulların HEPSİ aynı anda karşılandığında düzgün çalışacağını garanti ediyoruz:\n\n- Rust oyun sunucularının açık olması ve normal çalışması\n- Rust+ uygulamasının cihazınızda yüklü, etkin ve normal çalışıyor olması\n- Rust+ uygulamasının Google Play Store'da mevcut olması ve kaldırılmamış olması\n- Rust+ uygulamasının bildirimleri gecikmesiz göndermesi\n- Rust+ uygulaması bildirim özelliklerinin (varsa \"Smart Alarm\" dahil) aktif olması ve devre dışı bırakılmamış olması\n- Cihazınızın tüm teknik gereksinimleri karşılaması\n- Gerekli tüm izinlerin verilmiş olması ve sürdürülmesi\n- Aktif bir internet bağlantınızın olması\n- Facepunch Studios Limited'in bildirim işlevselliğini kısıtlamamış veya yasaklamamış olması\n\nBu koşullardan HERHANGİ BİRİ karşılanmazsa, Uygulamanın çalışacağını GARANTİ EDEMEYİZ ve ETMİYORUZ ve ortaya çıkan sorunlardan, kayıplardan veya hasarlardan SORUMLU DEĞİLİZ.",
+            "section7_title": "7. İzinler",
+            "section7_content": "Raid Alarm yalnızca minimum gerekli izinleri ister: Rust+ uygulamasından gelen uyarıları izlemek için bildirim erişimi, arka planda çalışma için pil optimizasyonu istisnası ve alarmları tetiklemek için alarm izni.",
+            "section8_title": "8. Ömür Boyu Lisans Şartları",
+            "section8_content": "Kullanılabilirlik: Bu uygulama yalnızca Google Play Store'da mevcuttur. Tüm satın alma işlemleri Google Play Store'un ödeme sistemi üzerinden gerçekleştirilir.\n\nÖmür Boyu Lisans: Premium özellikler tek seferlik satın alma gerektirir. Tüm premium özelliklere kalıcı erişim sağlayan ve TÜM üçüncü taraf reklamlarını KALDIRAN bir \"Ömür Boyu Lisans\" sunuyoruz. Bu, yinelenen ücretler veya abonelikler içermeyen tek seferlik bir ödemedir.\n\nYaş Gereksinimi: Bir lisans satın almak için en az 18 yaşında (veya yetki alanınızdaki reşit olma yaşında) olmalısınız. 18 yaşın altındaysanız, yalnızca bir ebeveyn veya vasinin rızasıyla satın alabilirsiniz. Reşit olmayanlar tarafından uygun izin olmadan yapılan satın alımlardan SORUMLU DEĞİLİZ. Ebeveynler veya vasiler çocuklarının satın alımlarını denetlemekten tek başına sorumludur. Bir reşit olmayan kişi izinsiz satın alma yaparsa, geri ödeme talepleri için Google Play Store ile iletişime geçin.\n\nÖdeme İşleme: Tüm ödemeler Google Play Store üzerinden güvenli bir şekilde işlenir. Ödeme kartı bilgilerinizi saklamıyoruz ve bunlara erişimimiz yok. Ödeme bilgileri tamamen Google Play Store tarafından yönetilir.\n\nFiyatlandırma: Fiyatlar ülkeye göre değişebilir ve önceden haber verilmeksizin değiştirilebilir. Mevcut fiyatlar Uygulamada ve Google Play Store'da görüntülenir.\n\nHizmet Değişikliği: Herhangi bir zamanda özellik ekleme, değiştirme veya kaldırma hakkımızı önceden haber vermeksizin ve geri ödeme yapmaksızın saklı tutarız. Bu Şartların ihlali veya yasa dışı faaliyetler nedeniyle lisansınızı herhangi bir zamanda feshetme veya askıya alma hakkımızı saklı tutarız.\n\nHizmet Kullanılabilirliği: Uygulamanın işlevselliği tamamen Rust+ Uygulamasına bağlıdır. Rust+ Uygulaması Google Play Store'den kaldırılırsa, çalışmayı durdurursa veya bildirim göndermeyi durdurursa, lisans durumunuza bakılmaksızın Uygulama çalışmayacaktır ve geri ödeme veya tazminat HAKKINIZ YOKTUR.\n\n#### İade Politikası\n\nTÜM SATIŞLAR NİHAİDİR. AŞAĞIDAKİLER DAHİL ANCAK BUNLARLA SINIRLI OLMAMAK ÜZERE HİÇBİR KOŞULDA İADE YAPILMAYACAKTIR:\n\n- Rust+ uygulamasının Google Play Store'dan kaldırılması, kullanılamaması veya herhangi bir sorun\n- Rust+ uygulamasının bildirim göndermeyi durdurması veya gecikmeli bildirimler\n- Rust+ uygulaması bildirim özelliklerinin Facepunch Studios Limited tarafından kaldırılması, devre dışı bırakılması veya değiştirilmesi\n- Rust oyun sunucusu sorunları, kesintileri veya çökmeleri\n- Uygulama işlevselliği sorunları (çökmeler, hatalar, bildirim gecikmeleri, alarmın çalmaması)\n- Rust+ uygulaması sorunları veya kaldırılması nedeniyle Uygulamanın çalışmayı durdurması\n- Kullanıcının Uygulama veya işlevselliğinden memnun olmaması\n- Kullanıcının satın aldıktan sonra fikrini değiştirmesi\n- Kullanıcının cihazının Uygulama ile uyumlu olmaması\n- Kullanıcının gerekli izinleri vermeyi reddetmesi\n- Reşit olmayan kişi tarafından izinsiz satın alma (iade için Google Play Store ile iletişime geçin)\n- Diğer herhangi bir neden\n\nGoogle Play Store iade süresi (genellikle 48 saat) dolduktan sonra, nedeni ne olursa olsun HİÇBİR durumda tarafımızdan İADE YAPILMAYACAKTIR.\n\nBİR LİSANS SATIN ALARAK, Google Play Store'un standart iade süresi (genellikle 48 saat) haricinde TÜM İADE HAKLARINDAN AÇIKÇA VAZGEÇİYORSUNUZ, bu süreden sonra İADE YAPILMAYACAKTIR.\n\n#### Kritik Kabul\n\nBİR LİSANS SATIN ALARAK, ŞUNLARI AÇIKÇA VE GAYRİ KABİLİ RÜCU KABUL EDİYOR, ANLIYOR VE ONAYLIYORSUNUZ: Uygulama tamamen Rust+ Uygulamasına bağlıdır (Bkz. Bölüm 4). Rust+ uygulaması kullanılamaz hale gelirse, kaldırılırsa veya çalışmayı durdurursa, Uygulama çalışmayacaktır ve geri ödeme veya tazminat HAKKINIZ YOKTUR. Harici bağımlılıklarla ilgili TÜM RİSKLERİ kabul ediyorsunuz ve Rust+ sorunları, Rust oyun sunucusu sorunları veya harici bağımlılık sorunları (Google Play Store 48 saatlik standart iade süresi dışında) nedeniyle geri ödeme talep etmeyeceksiniz.",
+            "section9_title": "9. Fikri Mülkiyet ve Ticari Marka Adil Kullanımı",
+            "section9_content": "Raid Alarm uygulaması ve içeriği telif hakkı ve ticari marka yasalarıyla korunmaktadır. Tüm hakları tarafımızca saklıdır.\n\nTicari Marka Sorumluluk Reddi: \"Rust+\", \"Rust\", \"Facepunch\" ve ilgili logolar, isimler ve ticari markalar Facepunch Studios Limited'in tek mülkiyetindedir. Facepunch Studios Limited ile HİÇBİR şekilde bağlantılı değiliz, onaylanmadık, yetkilendirilmedik veya ilişkili değiliz. Bu ticari markaları YALNIZCA tanımlama ve açıklama amacıyla kullanıyoruz (adil kullanım hakkı). Bu ticari markalar üzerinde herhangi bir hak iddia etmiyoruz. Facepunch Studios Limited kullanımımıza itiraz ederse, derhal yerine getireceğiz. Daha fazla bilgi için Bölüm 3'e bakın.",
+            "section10_title": "10. Garanti Reddi",
+            "section10_content": "UYGULAMA, TİCARİ ELVERİŞLİLİK, BELİRLİ BİR AMACA UYGUNLUK, İHLAL ETMEME VEYA UYGULAMANIN DÜZGÜN ÇALIŞACAĞI GARANTİLERİ DAHİL ANCAK BUNLARLA SINIRLI OLMAMAK ÜZERE, AÇIK VEYA ZIMNİ HİÇBİR GARANTİ OLMAKSIZIN \"OLDUĞU GİBİ\" VE \"MEVCUT OLDUĞU ŞEKİLDE\" SAĞLANMAKTADIR.\n\nUygulamanın her zaman düzgün çalışacağını, üçüncü taraf hizmetlerinin her zaman kullanılabilir olacağını veya Uygulamanın kesintisiz veya hatasız olacağını garanti etmiyoruz. Uygulamanın işlevselliği tamamen Rust+ uygulamasına bağlıdır (Bkz. Bölüm 4). Uygulamanın işlevselliği, kullanılabilirliği veya güvenilirliği ile ilgili hiçbir beyan veya garanti vermiyoruz. UYGULAMAYI KENDİ RİSKİNİZLE KULLANIRSINIZ.",
+            "section11_title": "11. Sorumluluğun Sınırlandırılması",
+            "section11_content": "YASALARIN İZİN VERDİĞİ AZAMİ ÖLÇÜDE, AŞAĞIDAKİLERDEN KAYNAKLANAN HERHANGİ BİR HASAR, KAYIP VEYA SONUÇTAN SORUMLU DEĞİLİZ:\n\n- Rust+ uygulaması sorunları, Google Play Store'dan kaldırılması, kullanılamaması veya herhangi bir sorun\n- Rust+ uygulamasının bildirim göndermeyi durdurması veya gecikmeli bildirimler\n- Rust+ uygulaması bildirim özelliklerinin Facepunch Studios Limited tarafından kaldırılması, devre dışı bırakılması veya değiştirilmesi\n- Rust oyun sunucusu sorunları, kesintileri veya çökmeleri\n- Facepunch Studios Limited veya ilgili kuruluşların işlevselliği sınırlaması veya yasaklaması\n- Rust+ uygulaması sorunları veya kaldırılması nedeniyle Uygulamanın çalışmayı durdurması\n- Dolaylı, arızi, özel, sonuç olarak ortaya çıkan veya cezai hasarlar\n- Kar, veri, itibar kaybı veya diğer maddi olmayan kayıplar\n- Lisans için ödediğiniz tutarı aşan herhangi bir hasar\n- Harici bağımlılıklar veya üçüncü taraf hizmetleriyle ilgili herhangi bir hasar\n- Reşit olmayan kişi tarafından izinsiz satın alma (ebeveynler/vasiler tamamen sorumludur)\n\nHİÇBİR DURUMDA TOPLAM SORUMLULUĞUMUZ, İDDİADAN ÖNCEKİ 12 AY İÇİNDE LİSANS İÇİN ÖDEDİĞİNİZ TUTARI AŞMAYACAKTIR.",
+            "section12_title": "12. Kullanıcı Sorumluluğu",
+            "section12_content": "Şunlardan TEK BAŞINIZA SORUMLUSUNUZ:\n\n- Rust+ uygulamasını cihazınıza yüklemek ve bakımını yapmak\n- Rust+ uygulamasının mevcut, yüklü ve düzgün çalıştığından emin olmak\n- Hem Raid Alarm'a hem de Rust+ uygulamasına gerekli tüm izinleri vermek\n- Cihazınızın hem Raid Alarm hem de Rust+ uygulamasıyla uyumlu olduğundan emin olmak\n- Uygulamanın Rust+ uygulamasına ve harici hizmetlere TAMAMEN BAĞLI olduğunu anlamak\n- Rust+ uygulaması Google Play Store'dan kaldırılırsa veya çalışmayı durdurursa Uygulamanın çalışmayacağını ve geri ödeme HAKKINIZ OLMADIĞINI anlamak\n- Rust+ uygulamasının Hizmet Şartlarına ve tüm geçerli yasalara uymak\n- Kullanımınızın Rust+ uygulaması Hizmet Şartlarını ihlal etmediğinden emin olmak\n- Ebeveyn veya vasi iseniz satın alımları izlemek ve onaylamak\n- Satın almadan önce en az 18 yaşında olduğunuzdan (veya ebeveyn/vasi rızası aldığınızdan) emin olmak\n\nKullanımınız Rust+ uygulaması Hizmet Şartlarını ihlal ediyorsa, tüm sonuçlardan TEK BAŞINIZA SORUMLUSUNUZ ve ortaya çıkan hiçbir sorundan SORUMLU DEĞİLİZ.",
+            "section13_title": "13. Şartların Değiştirilmesi",
+            "section13_content": "Bu Hizmet Şartları zaman zaman güncellenebilir. Önemli değişiklikler kullanıcılara bildirilecektir. Değişikliklerden sonra Uygulamayı kullanmaya devam etmeniz, yeni Şartları kabul ettiğiniz anlamına gelir.",
+            "section14_title": "14. Fesih",
+            "section14_content": "Bu Şartların ihlali nedeniyle veya tamamen kendi takdirimize bağlı olarak, önceden haber vermeksizin Uygulamaya erişiminizi derhal feshedebilir veya askıya alabiliriz. Fesihten kaynaklanan hasarlardan sorumlu değiliz.",
+            "section15_title": "15. Geçerli Hukuk ve Yargı Yetkisi",
+            "section15_content": "Bu Hizmet Şartları, bulunduğunuz yere göre geçerli yasalara tabidir. Anlaşmazlıklar geçerli yasa ve yargı yetkisine uygun olarak çözülecektir.",
+            "section16_title": "16. Reklamlar",
+            "section16_content": "Uygulama, Google AdMob başta olmak üzere üçüncü taraf reklam ağları tarafından sunulan reklamların görüntülendiği Ücretsiz bir sürüm sunmaktadır. Bu reklamlar, Uygulamanın sürekli geliştirilmesini ve bakımını finanse etmeye yardımcı olur. Ömür Boyu Lisans satın alan kullanıcılar için reklamlar kaldırılır. Reklamı yapılan ürün veya hizmetleri onaylamıyoruz ve üçüncü taraf reklamlarının içeriğinden sorumlu değiliz."
+        }
+    },
+    "paywall": {
+        "title_line1": "ÖMÜR BOYU",
+        "title_line2": "ERİŞİM",
+        "subtitle": "Bir kez öde. Sonsuza kadar sahip ol.",
+        "no_subscriptions": "ABONELİK YOK.",
+        "secure_access": "SINIRSIZ KORUMAYI BAŞLAT",
+        "restore": "GERİ YÜKLE",
+        "privacy": "GİZLİLİK",
+        "terms": "HİZMET KOŞULLARI",
+        "plan_card": {
+            "name": "ÖMÜR BOYU ERİŞİM",
+            "one_time": "TEK SEFERLİK ÖDEME"
+        },
+        "benefits": {
+            "critical_alarms": "Kritik Raid Alarmları (Sessiz Modu Aşar)",
+            "fake_call": "Sahte Gelen Arama Simülasyonu",
+            "enemy_notifications": "Düşman Çevrimiçi/Çevrimdışı Bildirimleri",
+            "server_notifications": "Sunucu Çevrimiçi/Çevrimdışı Bildirimleri",
+            "wipe_notifications": "Özel Wipe Bildirimleri"
+        },
+        "errors": {
+            "network": "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
+            "pending": "Ödeme beklemede. Ödeme onaylandığında satın almanız etkinleştirilecektir.",
+            "invalid": "Geçersiz ödeme. Lütfen tekrar deneyin veya destekle iletişime geçin.",
+            "unavailable": "Ürün şu anda satın alınamaz.",
+            "store": "Mağaza sorunu. Lütfen daha sonra tekrar deneyin veya destekle iletişime geçin.",
+            "already_purchased": "Bu ürün zaten satın alındı.",
+            "generic_failed": "Satın alma başarısız: {}",
+            "purchase_failed_default": "Satın alma başarısız. Lütfen tekrar deneyin.",
+            "restore_no_internet": "İnternet bağlantısı yok. Lütfen ağınızı kontrol edin.",
+            "restore_timeout": "Geri yükleme zaman aşımına uğradı. Lütfen tekrar deneyin.",
+            "restore_failed": "Geri yükleme başarısız: {}",
+            "no_lifetime_found": "Geri yüklenecek ömür boyu satın alma bulunamadı",
+            "purchase_verification_failed": "Ödeme tamamlandı ancak ömür boyu erişim doğrulanamadı."
+        }
+    }
+}

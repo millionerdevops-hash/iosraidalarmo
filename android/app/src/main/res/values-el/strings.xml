@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Ενεργό</string>
+    <string name="notification_service_active_text">Οι ειδοποιήσεις επίθεσης είναι ενεργές</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Υπηρεσία Raid Alarm Απενεργοποιημένη</string>
+    <string name="notification_service_disabled_text">Η υπηρεσία παρακολούθησης ειδοποιήσεων είναι απενεργοποιημένη. Ενεργοποιήστε την υπηρεσία για να λάβετε ειδοποιήσεις επίθεσης.</string>
+    <string name="notification_service_disabled_big_text">Η υπηρεσία παρακολούθησης ειδοποιήσεων είναι απενεργοποιημένη. Ενεργοποιήστε την υπηρεσία για να λάβετε ειδοποιήσεις επίθεσης.\n\nΠατήστε Ρυθμίσεις για να ενεργοποιήσετε την υπηρεσία.</string>
+    <string name="notification_service_disabled_action">Ρυθμίσεις</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Σταμάτα</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Ενεργοποίηση συναγερμού...</string>
+    <string name="alarm_playing">Συναγερμός παίζει - Πατήστε για διακοπή</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Εντοπίστηκε επίθεση στη βάση</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Ενεργό</string>
+    <string name="channel_name_service_status">Κατάσταση υπηρεσίας</string>
+    <string name="channel_name_attack_detected">Ανίχνευση επίθεσης</string>
+    <string name="channel_name_alarm_service">Υπηρεσία συναγερμού</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Κανάλι για Raid Alarm ενεργές ειδοποιήσεις</string>
+    <string name="channel_description_service_status">Raid Alarm ειδοποιήσεις κατάστασης υπηρεσίας</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm ειδοποιήσεις κατάστασης υπηρεσίας (αρχική εμφάνιση)</string>
+    <string name="channel_description_attack_detected">Οι ειδοποιήσεις εμφανίζονται όταν εντοπίζεται ειδοποίηση επίθεσης</string>
+    <string name="channel_description_alarm_service">Κανάλι ειδοποίησης υπηρεσίας προσκηνίου συναγερμού</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Αποδοχή</string>
+    <string name="text_decline">Απόρριψη</string>
+    <string name="fake_call_channel_name">Ψεύτικη κλήση</string>
+    <string name="fake_call_channel_description">Εισερχόμενες ψεύτικες ειδοποιήσεις κλήσεων</string>
+    <string name="channel_name_player_tracking">Παρακολούθηση Παίκτη</string>
+    <string name="channel_description_player_tracking">Αλλαγές κατάστασης παρακολουθούμενου παίκτη</string>
+    <string name="player_status_online">Συνδεδεμένος</string>
+    <string name="player_status_offline">Αποσυνδεδεμένος</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">Ο χρήστης %1$s εισήλθε στο %2$s</string>
+    <string name="player_status_left_body">Ο χρήστης %1$s αποχώρεσε από το %2$s</string>
+    <string name="unknown_server">Άγνωστος διακομιστής</string>
+    <string name="default_server_name">Διακομιστής</string>
+    <string name="alarm_stop_button_full">ΣΤΑΜΑΤΗΣΤΕ ΤΟ ΣΥΝΑΓΕΡΜΟ</string>
+</resources>

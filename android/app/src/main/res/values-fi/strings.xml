@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Aktiivinen</string>
+    <string name="notification_service_active_text">Hyökkäyshälytykset ovat aktiivisia</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm -palvelu Pois Päällä</string>
+    <string name="notification_service_disabled_text">Ilmoitusten kuuntelupalvelu on pois päältä. Ota palvelu käyttöön vastaanottaaksesi hyökkäysilmoituksia.</string>
+    <string name="notification_service_disabled_big_text">Ilmoitusten kuuntelupalvelu on pois päältä. Ota palvelu käyttöön vastaanottaaksesi hyökkäysilmoituksia.\n\nNapauta Asetukset ottaaaksesi palvelun käyttöön.</string>
+    <string name="notification_service_disabled_action">Asetukset</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Lopeta</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Hälytys laukeaa...</string>
+    <string name="alarm_playing">Hälytys soi - Napauta lopettaaksesi</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Tukikohdan hyökkäys havaittu</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Aktiivinen</string>
+    <string name="channel_name_service_status">Palvelun tila</string>
+    <string name="channel_name_attack_detected">Hyökkäyksen tunnistus</string>
+    <string name="channel_name_alarm_service">Hälytyspalvelu</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Kanava Raid Alarm aktiivisille ilmoituksille</string>
+    <string name="channel_description_service_status">Raid Alarm palvelun tilailmoitukset</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm palvelun tilailmoitukset (alkunäyttö)</string>
+    <string name="channel_description_attack_detected">Ilmoitukset näytetään, kun hyökkäysilmoitus havaitaan</string>
+    <string name="channel_description_alarm_service">Hälytyksen etualan palvelun ilmoituskanava</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Hyväksy</string>
+    <string name="text_decline">Hylkää</string>
+    <string name="fake_call_channel_name">Väärä puhelu</string>
+    <string name="fake_call_channel_description">Saapuvat valepuheluilmoitukset</string>
+    <string name="channel_name_player_tracking">Pelaajan seuranta</string>
+    <string name="channel_description_player_tracking">Seuratun pelaajan tilan muutokset</string>
+    <string name="player_status_online">Online</string>
+    <string name="player_status_offline">Offline</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s on liittynyt palvelimelle %2$s</string>
+    <string name="player_status_left_body">%1$s on poistunut palvelimelta %2$s</string>
+    <string name="unknown_server">Tuntematon palvelin</string>
+    <string name="default_server_name">Palvelin</string>
+    <string name="alarm_stop_button_full">PYSÄYTÄ HÄLYTYS</string>
+</resources>

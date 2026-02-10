@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm เปิดใช้งาน</string>
+    <string name="notification_service_active_text">การแจ้งเตือนการโจมตีเปิดใช้งานอยู่</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">บริการ Raid Alarm ถูกปิดใช้งาน</string>
+    <string name="notification_service_disabled_text">บริการฟังการแจ้งเตือนถูกปิดใช้งาน เปิดใช้งานบริการเพื่อรับการแจ้งเตือนการโจมตี</string>
+    <string name="notification_service_disabled_big_text">บริการฟังการแจ้งเตือนถูกปิดใช้งาน เปิดใช้งานบริการเพื่อรับการแจ้งเตือนการโจมตี\n\nแตะการตั้งค่าเพื่อเปิดใช้งานบริการ</string>
+    <string name="notification_service_disabled_action">การตั้งค่า</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">หยุด</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">กำลังเรียกสัญญาณเตือน...</string>
+    <string name="alarm_playing">สัญญาณเตือนกำลังเล่น - แตะเพื่อหยุด</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">ตรวจพบการโจมตีฐาน</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm ใช้งานอยู่</string>
+    <string name="channel_name_service_status">สถานะการบริการ</string>
+    <string name="channel_name_attack_detected">การตรวจจับการโจมตี</string>
+    <string name="channel_name_alarm_service">บริการแจ้งเตือน</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">ช่องทางสำหรับการแจ้งเตือนที่ใช้งานอยู่ Raid Alarm</string>
+    <string name="channel_description_service_status">Raid Alarm การแจ้งเตือนสถานะบริการ</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm การแจ้งเตือนสถานะบริการ (การแสดงผลเริ่มต้น)</string>
+    <string name="channel_description_attack_detected">การแจ้งเตือนที่แสดงเมื่อตรวจพบการแจ้งเตือนการโจมตี</string>
+    <string name="channel_description_alarm_service">ช่องทางแจ้งเตือนบริการเบื้องหน้า</string>
+    <!-- Fake Call -->
+    <string name="text_accept">ยอมรับ</string>
+    <string name="text_decline">ปฏิเสธ</string>
+    <string name="fake_call_channel_name">โทรปลอม</string>
+    <string name="fake_call_channel_description">การแจ้งเตือนสายปลอมเข้ามา</string>
+    <string name="channel_name_player_tracking">ติดตามผู้เล่น</string>
+    <string name="channel_description_player_tracking">การเปลี่ยนแปลงสถานะของผู้เล่นที่ติดตาม</string>
+    <string name="player_status_online">ออนไลน์</string>
+    <string name="player_status_offline">ออฟไลน์</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s เข้าร่วม %2$s</string>
+    <string name="player_status_left_body">%1$s ออกจาก %2$s</string>
+    <string name="unknown_server">ไม่รู้จักเซิร์ฟเวอร์</string>
+    <string name="default_server_name">เซิร์ฟเวอร์</string>
+    <string name="alarm_stop_button_full">หยุดการแจ้งเตือน</string>
+</resources>

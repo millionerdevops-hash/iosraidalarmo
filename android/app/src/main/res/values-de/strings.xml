@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Aktiv</string>
+    <string name="notification_service_active_text">Angriffswarnungen sind aktiv</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm Dienst Deaktiviert</string>
+    <string name="notification_service_disabled_text">Benachrichtigungsüberwachungsdienst ist deaktiviert. Aktivieren Sie den Dienst, um Angriffsbenachrichtigungen zu erhalten.</string>
+    <string name="notification_service_disabled_big_text">Benachrichtigungsüberwachungsdienst ist deaktiviert. Aktivieren Sie den Dienst, um Angriffsbenachrichtigungen zu erhalten.\n\nTippen Sie auf Einstellungen, um den Dienst zu aktivieren.</string>
+    <string name="notification_service_disabled_action">Einstellungen</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Stoppen</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Alarm wird ausgelöst...</string>
+    <string name="alarm_playing">Alarm läuft - Zum Stoppen tippen</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Basisangriff erkannt</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Aktiv</string>
+    <string name="channel_name_service_status">Servicestatus</string>
+    <string name="channel_name_attack_detected">Angriffserkennung</string>
+    <string name="channel_name_alarm_service">Alarmdienst</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Kanal für Raid Alarm aktive Benachrichtigungen</string>
+    <string name="channel_description_service_status">Raid Alarm Dienststatusbenachrichtigungen</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm Dienststatusbenachrichtigungen (erste Anzeige)</string>
+    <string name="channel_description_attack_detected">Benachrichtigungen werden angezeigt, wenn eine Angriffsbenachrichtigung erkannt wird</string>
+    <string name="channel_description_alarm_service">Benachrichtigungskanal für den Alarm-Vordergrunddienst</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Annehmen</string>
+    <string name="text_decline">Ablehnen</string>
+    <string name="fake_call_channel_name">Täuschungsanruf</string>
+    <string name="fake_call_channel_description">Benachrichtigungen über eingehende gefälschte Anrufe</string>
+    <string name="channel_name_player_tracking">Spieler-Tracking</string>
+    <string name="channel_description_player_tracking">Statusänderungen von verfolgten Spielern</string>
+    <string name="player_status_online">Online</string>
+    <string name="player_status_offline">Offline</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s ist %2$s beigetreten</string>
+    <string name="player_status_left_body">%1$s hat %2$s verlassen</string>
+    <string name="unknown_server">Unbekannter Server</string>
+    <string name="default_server_name">Server</string>
+    <string name="alarm_stop_button_full">ALARM STOPPEN</string>
+</resources>

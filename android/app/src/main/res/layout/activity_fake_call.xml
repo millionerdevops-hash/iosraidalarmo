@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1E1E1E"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/llBackgroundAnimation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fitsSystemWindows="false"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/size_avatar"
+                android:layout_height="@dimen/size_avatar"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="80dp"
+                android:visibility="invisible"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:padding="0dp"
+                android:clipToPadding="false"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivAvatar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNameCaller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeMaxTextSize="@dimen/size_text_name"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/size_text_name"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
+                    tools:ignore="MissingPrefix"
+                    tools:targetApi="o"
+                    tools:text="Raid Alarm" />
+
+                <TextView
+                    android:id="@+id/tvCallerNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:fontFamily="sans-serif"
+                    android:visibility="gone"
+                    tools:text="+1 555 123 4567" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/llAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="80dp"
+            android:fitsSystemWindows="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <com.raidalarm.fake_call.widgets.RippleRelativeLayout
+                    android:layout_width="@dimen/size_button_x2_5"
+                    android:layout_height="@dimen/size_button_x2_5"
+                    app:ripple_amount="4"
+                    app:ripple_radius="@dimen/base_margin_x1_5"
+                    app:ripple_scale="4.5">
+
+                    <ImageView
+                        android:id="@+id/ivDeclineCall"
+                        android:layout_width="@dimen/size_button"
+                        android:layout_height="@dimen/size_button"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_button_decline"
+                        android:padding="@dimen/base_margin_x1_5"
+                        android:src="@drawable/ic_decline"
+                        android:clickable="true"
+                        android:focusable="true"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tvDecline"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/ivDeclineCall"
+                        android:layout_marginBottom="@dimen/base_margin"
+                        android:gravity="center"
+                        android:text="@string/text_decline"
+                        android:textColor="@color/action_text"
+                        android:textSize="@dimen/size_text_action" />
+
+                </com.raidalarm.fake_call.widgets.RippleRelativeLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <com.raidalarm.fake_call.widgets.RippleRelativeLayout
+                    android:layout_width="@dimen/size_button_x2_5"
+                    android:layout_height="@dimen/size_button_x2_5"
+                    app:ripple_amount="4"
+                    app:ripple_radius="@dimen/base_margin_x1_5"
+                    app:ripple_scale="4.5">
+
+                    <ImageView
+                        android:id="@+id/ivAcceptCall"
+                        android:layout_width="@dimen/size_button"
+                        android:layout_height="@dimen/size_button"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_button_accept"
+                        android:padding="@dimen/base_margin_x1_5"
+                        android:src="@drawable/ic_accept"
+                        android:clickable="true"
+                        android:focusable="true"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tvAccept"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/ivAcceptCall"
+                        android:layout_marginBottom="@dimen/base_margin"
+                        android:gravity="center"
+                        android:text="@string/text_accept"
+                        android:textColor="@color/action_text"
+                        android:textSize="@dimen/size_text_action" />
+
+                </com.raidalarm.fake_call.widgets.RippleRelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

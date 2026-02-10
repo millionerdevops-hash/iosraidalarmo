@@ -1,0 +1,10 @@
+{
+  "name": "raidalarm-monorepo",
+  "version": "1.0.0",
+  "description": "RaidAlarm - Site + API monorepo",
+  "private": true,
+  "dependencies": {
+    "@vitalets/google-translate-api": "^9.2.1",
+    "googleapis": "^120.0.0"
+  }
+}

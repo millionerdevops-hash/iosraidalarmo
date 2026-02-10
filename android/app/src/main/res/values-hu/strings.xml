@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Aktív</string>
+    <string name="notification_service_active_text">A támadási értesítések aktívak</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm Szolgáltatás Letiltva</string>
+    <string name="notification_service_disabled_text">Az értesítésfigyelő szolgáltatás letiltva. Engedélyezze a szolgáltatást a támadási értesítések fogadásához.</string>
+    <string name="notification_service_disabled_big_text">Az értesítésfigyelő szolgáltatás letiltva. Engedélyezze a szolgáltatást a támadási értesítések fogadásához.\n\nÉrintse a Beállítások lehetőséget a szolgáltatás engedélyezéséhez.</string>
+    <string name="notification_service_disabled_action">Beállítások</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Leállítás</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Riasztás indítása...</string>
+    <string name="alarm_playing">Riasztás lejátszása - Érintse a leállításhoz</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Bázis támadás észlelve</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Aktív</string>
+    <string name="channel_name_service_status">Szolgáltatás állapota</string>
+    <string name="channel_name_attack_detected">Támadás észlelése</string>
+    <string name="channel_name_alarm_service">Riasztószolgálat</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Csatorna Raid Alarm aktív értesítésekhez</string>
+    <string name="channel_description_service_status">Raid Alarm szolgáltatás állapotértesítések</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm szolgáltatás állapotértesítések (kezdeti megjelenítés)</string>
+    <string name="channel_description_attack_detected">Értesítések akkor jelennek meg, ha a rendszer támadási értesítést észlel</string>
+    <string name="channel_description_alarm_service">Riasztási előtér szolgáltatás értesítési csatorna</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Elfogad</string>
+    <string name="text_decline">Elutasít</string>
+    <string name="fake_call_channel_name">Álhívás</string>
+    <string name="fake_call_channel_description">Bejövő hamis hívások értesítései</string>
+    <string name="channel_name_player_tracking">Játékoskövetés</string>
+    <string name="channel_description_player_tracking">A követett játékos állapotváltozásai</string>
+    <string name="player_status_online">Online</string>
+    <string name="player_status_offline">Offline</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s csatlakozott a(z) %2$s szerverhez</string>
+    <string name="player_status_left_body">%1$s elhagyta a(z) %2$s szervert</string>
+    <string name="unknown_server">Ismeretlen szerver</string>
+    <string name="default_server_name">Szerver</string>
+    <string name="alarm_stop_button_full">RIASZTÁS LEÁLLÍTÁSA</string>
+</resources>

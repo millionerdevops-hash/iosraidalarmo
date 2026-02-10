@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Service Active Notification -->
+    <string name="notification_service_active_title">Raid Alarm Actief</string>
+    <string name="notification_service_active_text">Aanvalsmeldingen zijn actief</string>
+    <!-- Service Disabled Notification -->
+    <string name="notification_service_disabled_title">Raid Alarm Service Uitgeschakeld</string>
+    <string name="notification_service_disabled_text">Meldingen luisteren service is uitgeschakeld. Schakel de service in om aanvalsmeldingen te ontvangen.</string>
+    <string name="notification_service_disabled_big_text">Meldingen luisteren service is uitgeschakeld. Schakel de service in om aanvalsmeldingen te ontvangen.\n\nTik op Instellingen om de service in te schakelen.</string>
+    <string name="notification_service_disabled_action">Instellingen</string>
+    <!-- Alarm Stop Screen -->
+    <string name="alarm_stop_title">Raid Alarm</string>
+    <string name="alarm_stop_button">Stoppen</string>
+    <!-- Alarm Notifications -->
+    <string name="alarm_triggering">Alarm activeren...</string>
+    <string name="alarm_playing">Alarm speelt - Tik om te stoppen</string>
+    <!-- Attack Detected Notification -->
+    <string name="attack_detected_title">Raid Alarm</string>
+    <string name="attack_detected_message">Basisaanval gedetecteerd</string>
+    <!-- Notification Channel Names -->
+    <string name="channel_name_alarm">Raid Alarm Actief</string>
+    <string name="channel_name_service_status">Servicestatus</string>
+    <string name="channel_name_attack_detected">Aanvalsdetectie</string>
+    <string name="channel_name_alarm_service">Alarmservice</string>
+    <!-- Notification Channel Descriptions -->
+    <string name="channel_description_alarm">Kanaal voor Raid Alarm actieve meldingen</string>
+    <string name="channel_description_service_status">Raid Alarm servicestatusmeldingen</string>
+    <string name="channel_description_service_status_headsup">Raid Alarm servicestatusmeldingen (eerste weergave)</string>
+    <string name="channel_description_attack_detected">Meldingen worden weergegeven wanneer een aanvalsmelding wordt gedetecteerd</string>
+    <string name="channel_description_alarm_service">Kanaal voor melding van alarmvoorgrondservice</string>
+    <!-- Fake Call -->
+    <string name="text_accept">Accepteren</string>
+    <string name="text_decline">Weigeren</string>
+    <string name="fake_call_channel_name">Valse oproep</string>
+    <string name="fake_call_channel_description">Meldingen van inkomende nepoproepen</string>
+    <string name="channel_name_player_tracking">Speler Volgen</string>
+    <string name="channel_description_player_tracking">Statuswijzigingen van gevolgde speler</string>
+    <string name="player_status_online">Online</string>
+    <string name="player_status_offline">Offline</string>
+    <string name="player_status_title">%1$s %2$s %3$s!</string>
+    <string name="player_status_joined_body">%1$s is verbonden met %2$s</string>
+    <string name="player_status_left_body">%1$s heeft %2$s verlaten</string>
+    <string name="unknown_server">Onbekende server</string>
+    <string name="default_server_name">Server</string>
+    <string name="alarm_stop_button_full">ALARM STOPPEN</string>
+</resources>
