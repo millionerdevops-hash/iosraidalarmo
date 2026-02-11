@@ -11,10 +11,10 @@ async function sendPushNotification(onesignalId, message) {
 
     const notification = {
         contents: {
-            'en': message.body || 'New Rust+ notification',
+            'en': message.body || 'New Raid Alarm notification',
         },
         headings: {
-            'en': message.title || 'Rust+',
+            'en': message.title || 'Raid Alarm',
         },
         include_subscription_ids: [onesignalId],
         data: message.data || {},

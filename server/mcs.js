@@ -165,12 +165,12 @@ async function handleNotification(user, data, db) {
     // DEBUG: Log the full payload to see what we are receiving
     console.log('[MCS] 📩 Received Payload:', JSON.stringify(payload, null, 2));
 
-    let title = "Rust+ Notification";
-    let body = "New event detected";
+    let title = "Raid Alarm";
+    let body = "New Notification";
 
     if (payload.ip && payload.playerToken) {
-        title = "Server Pairing";
-        body = `A new server (${payload.name || payload.ip}) is ready to pair.`;
+        title = "Raid Alarm";
+        body = "Server Connection Established";
 
         // AUTOMATICALLY SAVE SERVER TO DATABASE
         if (db) {
