@@ -28,16 +28,31 @@ class PairDevicesScreen extends ConsumerStatefulWidget {
   ConsumerState<PairDevicesScreen> createState() => _PairDevicesScreenState();
 }
 
-class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> {
+class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with WidgetsBindingObserver {
   bool _isLoggedIn = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _checkLoginStatus();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(serverListViewModelProvider.notifier).scanForServers();
     });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Refresh list when app comes to foreground (e.g. after pairing in browser/game)
+      ref.read(serverListViewModelProvider.notifier).scanForServers();
+    }
   }
 
   Future<void> _checkLoginStatus() async {
