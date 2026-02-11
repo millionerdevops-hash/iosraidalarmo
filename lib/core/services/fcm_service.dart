@@ -46,12 +46,13 @@ class FcmService {
         debugPrint("[ServerSync] ✅ Sync successful");
         return true;
       } else {
-        debugPrint("[ServerSync] ❌ Sync failed: ${response.body}");
-        return false;
+        final errorMsg = jsonDecode(response.body)['error'] ?? 'Unknown server error';
+        debugPrint("[ServerSync] ❌ Sync failed: $errorMsg");
+        throw errorMsg;
       }
     } catch (e) {
       debugPrint("[ServerSync] ❌ Error: $e");
-      return false;
+      rethrow;
     }
   }
 

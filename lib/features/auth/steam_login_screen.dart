@@ -96,21 +96,17 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
       });
 
       // 2. Hand off full registration to Server
-      final success = await fcmService.syncWithServer(cred);
+      await fcmService.syncWithServer(cred);
       
-      if (success) {
-        if (mounted) {
-          if (widget.onSuccess != null) {
-            widget.onSuccess!();
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Steam login successful. Server is setting up your notifications...")),
-            );
-            context.go('/');
-          }
+      if (mounted) {
+        if (widget.onSuccess != null) {
+          widget.onSuccess!();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Steam login successful. Notifications are now managed by the server.")),
+          );
+          context.go('/');
         }
-      } else {
-         throw "Server Registration Failed";
       }
 
     } catch (e) {
