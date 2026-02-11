@@ -111,3 +111,4 @@ setupDb().then(database => {
         const users = await db.all('SELECT * FROM users');
         users.forEach(user => startMcsForUser(user, db));
     });
+});
