@@ -37,7 +37,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
     WidgetsBinding.instance.addObserver(this);
     _checkLoginStatus();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(serverListViewModelProvider.notifier).scanForServers();
+      ref.read(serverListViewModelProvider.notifier).scanForServers(); // Check on init
     });
   }
 
