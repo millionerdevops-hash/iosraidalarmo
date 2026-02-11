@@ -162,6 +162,9 @@ async function handleNotification(user, data, db) {
         } catch (e) { }
     }
 
+    // DEBUG: Log the full payload to see what we are receiving
+    console.log('[MCS] 📩 Received Payload:', JSON.stringify(payload, null, 2));
+
     let title = "Rust+ Notification";
     let body = "New event detected";
 
