@@ -25,14 +25,29 @@ async function performFullRegistration(steamToken) {
         console.log('[Register] 📦 Starting official app emulated registration...');
 
         // 1. GCM/FCM Register using @liamcottle/push-receiver (Handles checkin internally)
-        const fcmCredentials = await AndroidFCM.register(
-            RUSTPLUS_CONFIG.apiKey,
-            RUSTPLUS_CONFIG.projectId,
-            RUSTPLUS_CONFIG.gcmSenderId,
-            RUSTPLUS_CONFIG.gmsAppId,
-            RUSTPLUS_CONFIG.androidPackageName,
-            RUSTPLUS_CONFIG.androidPackageCert
-        );
+        let fcmCredentials;
+        let retries = 3;
+        while (retries > 0) {
+            try {
+                fcmCredentials = await AndroidFCM.register(
+                    RUSTPLUS_CONFIG.apiKey,
+                    RUSTPLUS_CONFIG.projectId,
+                    RUSTPLUS_CONFIG.gcmSenderId,
+                    RUSTPLUS_CONFIG.gmsAppId,
+                    RUSTPLUS_CONFIG.androidPackageName,
+                    RUSTPLUS_CONFIG.androidPackageCert
+                );
+                break;
+            } catch (err) {
+                retries--;
+                if (err.message.includes('PHONE_REGISTRATION_ERROR') && retries > 0) {
+                    console.log(`[Register] ⚠️ GCM Registration temporary error, retrying... (${retries} attempts left)`);
+                    await new Promise(r => setTimeout(r, 2000));
+                } else {
+                    throw err;
+                }
+            }
+        }
 
         const fcmToken = fcmCredentials.fcm.token;
         const androidId = fcmCredentials.gcm.androidId;

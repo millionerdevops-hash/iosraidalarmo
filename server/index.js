@@ -101,6 +101,26 @@ app.post('/api/sync-servers', async (req, res) => {
     }
 });
 
+// 4. Get Servers (For App Sync)
+app.get('/api/servers', async (req, res) => {
+    const { steam_id } = req.query;
+
+    if (!steam_id) {
+        return res.status(400).json({ error: 'Missing steam_id' });
+    }
+
+    try {
+        const user = await db.get('SELECT id FROM users WHERE steam_id = ?', [steam_id]);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        const servers = await db.all('SELECT * FROM servers WHERE user_id = ?', [user.id]);
+        res.json({ servers });
+    } catch (e) {
+        console.error('[API] ❌ Fetch error:', e);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
 // Initialize and Start
 setupDb().then(database => {
     db = database;

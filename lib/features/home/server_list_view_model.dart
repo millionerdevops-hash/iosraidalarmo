@@ -4,11 +4,9 @@ import 'package:isar/isar.dart';
 import '../../core/services/database_service.dart';
 import '../../data/models/server_info.dart';
 import '../../data/models/fcm_credential.dart';
-import '../../core/services/rust_api_service.dart';
-
+import '../../core/services/fcm_service.dart';
 import '../../data/models/smart_device.dart';
 import '../../data/models/automation_rule.dart';
-
 part 'server_list_view_model.g.dart';
 
 @riverpod
@@ -23,12 +21,37 @@ class ServerListViewModel extends _$ServerListViewModel {
   Future<void> scanForServers() async {
     final dbService = DatabaseService();
     final isar = await dbService.db;
-    final cred = await isar.fcmCredentials.where().findFirst();
     
-    if (cred != null && cred.steamToken != null) {
-      final api = RustApiService();
-      await api.checkHistoryForPairing(cred.steamToken!);
-    } 
+    // Fetch from backend
+    final fcmService = FcmService();
+    final servers = await fcmService.fetchPairedServers();
+
+    if (servers.isNotEmpty) {
+      await isar.writeTxn(() async {
+        for (final s in servers) {
+          final existing = await isar.serverInfos
+              .filter()
+              .ipEqualTo(s['ip'])
+              .portEqualTo(s['port'])
+              .findFirst();
+
+          if (existing == null) {
+            final newServer = ServerInfo()
+              ..ip = s['ip']
+              ..port = s['port'].toString()
+              ..playerId = s['player_id']
+              ..playerToken = s['player_token']
+              ..name = s['name'] ?? '${s['ip']}:${s['port']}';
+            await isar.serverInfos.put(newServer);
+          } else {
+             // Update if token changed
+             existing.playerToken = s['player_token'];
+             existing.name = s['name'] ?? existing.name;
+             await isar.serverInfos.put(existing);
+          }
+        }
+      });
+    }
   }
 
   Future<void> deleteServer(int serverId) async {

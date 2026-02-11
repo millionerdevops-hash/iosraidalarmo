@@ -88,4 +88,27 @@ class FcmService {
       debugPrint("[ServerSync] ❌ Sync Servers Error: $e");
     }
   }
+
+  /// Fetches the list of paired servers from the Node.js backend
+  Future<List<Map<String, dynamic>>> fetchPairedServers() async {
+    try {
+      final cred = await getExistingCredentials();
+      if (cred == null || cred.steamId == null) return [];
+
+      final response = await http.get(
+        Uri.parse('$serverUrl/api/servers?steam_id=${cred.steamId}'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['servers'] != null) {
+          return List<Map<String, dynamic>>.from(data['servers']);
+        }
+      }
+      return [];
+    } catch (e) {
+      debugPrint("[ServerSync] ❌ Fetch Servers Error: $e");
+      return [];
+    }
+  }
 }
