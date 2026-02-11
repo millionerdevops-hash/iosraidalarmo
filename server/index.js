@@ -22,12 +22,17 @@ app.get('/api/status', (req, res) => {
 app.post('/api/register', async (req, res) => {
     const { steam_id, steam_token, onesignal_id, platform } = req.body;
 
-    if (!steam_id || !steam_token || !onesignal_id) {
-        return res.status(400).json({ error: 'Missing required fields (steam_id, steam_token, onesignal_id)' });
+    // Check minimum requirements
+    if (!steam_id || !steam_token) {
+        return res.status(400).json({ error: 'Missing steam_id or steam_token' });
     }
 
     try {
         console.log(`[API] 👤 Registering user: ${steam_id} (${platform || 'unknown'})`);
+
+        if (!onesignal_id) {
+            console.warn(`[API] ⚠️ No onesignal_id provided for ${steam_id}. User won't receive notifications until synced.`);
+        }
 
         // Perform the heavy lifting on the server
         const mcsCredentials = await performFullRegistration(steam_token);
@@ -40,7 +45,7 @@ app.post('/api/register', async (req, res) => {
                 android_id = excluded.android_id,
                 security_token = excluded.security_token,
                 fcm_token = excluded.fcm_token,
-                onesignal_id = excluded.onesignal_id,
+                onesignal_id = COALESCE(excluded.onesignal_id, users.onesignal_id),
                 platform = excluded.platform,
                 last_login = CURRENT_TIMESTAMP
         `, [
@@ -49,19 +54,26 @@ app.post('/api/register', async (req, res) => {
             mcsCredentials.android_id.toString(),
             mcsCredentials.security_token.toString(),
             mcsCredentials.fcm_token,
-            onesignal_id,
+            onesignal_id || null,
             platform
         ]);
 
         const user = await db.get('SELECT * FROM users WHERE steam_id = ?', [steam_id]);
 
         // Start MCS listener for this user
-        startMcsForUser(user);
+        startMcsForUser(user, db);
 
-        res.json({ success: true, user_id: user.id, message: 'Full registration completed on server' });
+        res.json({
+            success: true,
+            user_id: user.id,
+            message: 'Registration completed successfully'
+        });
     } catch (e) {
-        console.error('[API] ❌ Registration error:', e.message);
-        res.status(500).json({ error: e.message || 'Server-side registration failed' });
+        console.error(`[API] ❌ Registration failed for ${steam_id}:`, e.message);
+        res.status(500).json({
+            error: e.message || 'Registration failed',
+            details: 'Check server logs for MCS/FCM/Expo registration details'
+        });
     }
 });
 
@@ -97,6 +109,5 @@ setupDb().then(database => {
 
         // Restart MCS for all users on startup
         const users = await db.all('SELECT * FROM users');
-        users.forEach(user => startMcsForUser(user));
+        users.forEach(user => startMcsForUser(user, db));
     });
-});

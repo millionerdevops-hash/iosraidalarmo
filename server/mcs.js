@@ -84,7 +84,7 @@ async function performFullRegistration(steamToken) {
     }
 }
 
-async function startMcsForUser(user) {
+async function startMcsForUser(user, db) {
     if (activeClients.has(user.id)) {
         console.log(`[MCS] ℹ️ User ${user.id} already has an active client.`);
         return;
@@ -102,26 +102,26 @@ async function startMcsForUser(user) {
         client.on('ON_NOTIFICATION_RECEIVED', (notification) => {
             const data = notification.data || {};
             // Convert data to our format if needed
-            handleNotification(user, { appData: Object.entries(data).map(([key, value]) => ({ key, value })) });
+            handleNotification(user, { appData: Object.entries(data).map(([key, value]) => ({ key, value })) }, db);
         });
 
         // Listen for data messages (Rust+ typically sends data messages)
         client.on('ON_DATA_RECEIVED', (data) => {
             // rustplus.js CLI structure: data is the message object
             const appData = Object.keys(data).map(key => ({ key, value: data[key] }));
-            handleNotification(user, { appData });
+            handleNotification(user, { appData }, db);
         });
 
         client.on('error', (err) => {
             console.error(`[MCS] ❌ Error for user ${user.id}:`, err);
             activeClients.delete(user.id);
-            setTimeout(() => startMcsForUser(user), 5000);
+            setTimeout(() => startMcsForUser(user, db), 5000);
         });
 
         client.on('close', () => {
             console.log(`[MCS] ⚠️ Connection closed for user ${user.id}`);
             activeClients.delete(user.id);
-            setTimeout(() => startMcsForUser(user), 5000);
+            setTimeout(() => startMcsForUser(user, db), 5000);
         });
 
         await client.connect();
@@ -132,7 +132,7 @@ async function startMcsForUser(user) {
     }
 }
 
-function handleNotification(user, data) {
+async function handleNotification(user, data, db) {
     const payload = {};
     if (data.appData) {
         data.appData.forEach(entry => {
@@ -153,6 +153,41 @@ function handleNotification(user, data) {
     if (payload.ip && payload.playerToken) {
         title = "Server Pairing";
         body = `A new server (${payload.name || payload.ip}) is ready to pair.`;
+
+        // AUTOMATICALLY SAVE SERVER TO DATABASE
+        if (db) {
+            try {
+                // Ensure port is an integer
+                const port = parseInt(payload.port || '28015');
+                const ip = payload.ip;
+                const playerId = payload.playerId || user.steam_id;
+                const playerToken = payload.playerToken;
+                const name = payload.name || `${ip}:${port}`;
+
+                // Check if already exists to avoid duplicates
+                const existing = await db.get(
+                    'SELECT id FROM servers WHERE user_id = ? AND ip = ? AND port = ?',
+                    [user.id, ip, port]
+                );
+
+                if (!existing) {
+                    await db.run(`
+                        INSERT INTO servers (user_id, ip, port, player_id, player_token, name)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                    `, [user.id, ip, port, playerId, playerToken, name]);
+                    console.log(`[MCS] ✅ Auto-paired new server: ${name} for user ${user.steam_id}`);
+                } else {
+                    // Update token if changed
+                    await db.run(`
+                        UPDATE servers SET player_token = ?, name = ? WHERE id = ?
+                    `, [playerToken, name, existing.id]);
+                    console.log(`[MCS] 🔄 Updated server credentials: ${name}`);
+                }
+            } catch (err) {
+                console.error('[MCS] ❌ Failed to save auto-paired server:', err);
+            }
+        }
+
     } else if (payload.entityId) {
         if (payload.entityType == "1") {
             title = "Smart Switch";
