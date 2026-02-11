@@ -114,17 +114,24 @@ async function startMcsForUser(user, db) {
             [] // persistentIds
         );
 
+        await client.connect();
+        activeClients.set(user.id, client);
+
+        // Helper to extract appData
+        const extractAppData = (data) => {
+            if (data.appData && Array.isArray(data.appData)) {
+                return data.appData;
+            }
+            return Object.entries(data).map(([key, value]) => ({ key, value }));
+        };
+
         client.on('ON_NOTIFICATION_RECEIVED', (notification) => {
             const data = notification.data || {};
-            // Convert data to our format if needed
-            handleNotification(user, { appData: Object.entries(data).map(([key, value]) => ({ key, value })) }, db);
+            handleNotification(user, { appData: extractAppData(data) }, db);
         });
 
-        // Listen for data messages (Rust+ typically sends data messages)
         client.on('ON_DATA_RECEIVED', (data) => {
-            // rustplus.js CLI structure: data is the message object
-            const appData = Object.keys(data).map(key => ({ key, value: data[key] }));
-            handleNotification(user, { appData }, db);
+            handleNotification(user, { appData: extractAppData(data) }, db);
         });
 
         client.on('error', (err) => {
@@ -138,9 +145,6 @@ async function startMcsForUser(user, db) {
             activeClients.delete(user.id);
             setTimeout(() => startMcsForUser(user, db), 5000);
         });
-
-        await client.connect();
-        activeClients.set(user.id, client);
 
     } catch (e) {
         console.error(`[MCS] ❌ Connection failed for user ${user.id}:`, e);
@@ -157,9 +161,15 @@ async function handleNotification(user, data, db) {
 
     if (payload.body) {
         try {
+            console.log('[MCS] 🔍 Parsing Body:', payload.body);
             const bodyJson = JSON.parse(payload.body);
             Object.assign(payload, bodyJson);
-        } catch (e) { }
+            console.log('[MCS] ✅ Body Parsed Successfully. IPs:', payload.ip);
+        } catch (e) {
+            console.error('[MCS] ❌ JSON Parse Error:', e.message);
+        }
+    } else {
+        console.warn('[MCS] ⚠️ Payload has no body field:', Object.keys(payload));
     }
 
     // DEBUG: Log the full payload to see what we are receiving

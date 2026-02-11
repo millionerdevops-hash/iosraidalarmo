@@ -5,6 +5,13 @@ const cors = require('cors');
 const { setupDb } = require('./database');
 const { startMcsForUser, performFullRegistration } = require('./mcs');
 
+// DEBUG: Check for API Keys
+console.log('[System] 🔑 OneSignal Key Status:', process.env.ONESIGNAL_API_KEY ? 'Present' : 'MISSING ❌');
+console.log('[System] 🔑 OneSignal App ID Status:', process.env.ONESIGNAL_APP_ID ? 'Present' : 'MISSING ❌');
+
+console.log('[System] 🔑 OneSignal Key Status:', process.env.ONESIGNAL_API_KEY ? 'Present (' + process.env.ONESIGNAL_API_KEY.substring(0, 4) + '...)' : 'MISSING ❌');
+console.log('[System] 🔑 OneSignal App ID Status:', process.env.ONESIGNAL_APP_ID ? 'Present' : 'MISSING ❌');
+
 const app = express();
 const port = process.env.PORT || 3000;
 

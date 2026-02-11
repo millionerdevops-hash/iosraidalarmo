@@ -27,7 +27,11 @@ async function sendPushNotification(onesignalId, message) {
         const response = await client.createNotification(notification);
         console.log('[Notification] ✅ Sent successfully:', response.body.id);
     } catch (e) {
-        console.error('[Notification] ❌ Error sending:', e);
+        if (e.statusCode === 403) {
+            console.error('[Notification] ⛔ Access Denied (403). CHECK YOUR ONESIGNAL_API_KEY in Render dashboard!');
+        } else {
+            console.error('[Notification] ❌ Error sending:', e.message);
+        }
     }
 }
 
