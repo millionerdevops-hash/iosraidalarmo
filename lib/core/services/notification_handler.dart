@@ -68,23 +68,79 @@ class NotificationHandler {
       final int entityId = int.parse(data['entityId'].toString());
       final int entityType = int.parse(data['entityType'].toString());
       
+      final dbService = DatabaseService();
+      final isar = await dbService.db;
+
+      // 1. Check if device is already paired
+      final existingDevice = await isar.smartDevices
+          .filter()
+          .entityIdEqualTo(entityId)
+          .findFirst();
+
+      if (existingDevice != null) {
+        // Device exists -> Update state silently
+        debugPrint("[NotificationHandler] 🔄 Device ${existingDevice.name} already paired. Updating state...");
+        
+        // Extract value from payload content if available
+        bool newState = existingDevice.isActive; // Default to current
+        
+        try {
+           // Rust+ Fcm payload structure varies, usually:
+           // message: "Switch 'X' state changed."
+           // But key data is usually needed.
+           // If we can't determine state from push, we might need to fetch it.
+           // However, let's assume if we get a notification, we can at least try to pull the new state via ConnectionManager if app is open
+           // Or just leave it to the app resume logic.
+           
+           // For now, we mainly prevent the annoyance of the Dialog popping up.
+           // We can optimistically toggle if we knew the prev state, but that's risky.
+           
+           // If the payload has "value" or "active", use it.
+           if (data.containsKey('value')) {
+             newState = data['value'] == 'true' || data['value'] == true || data['value'] == '1';
+             await isar.writeTxn(() async {
+                existingDevice.isActive = newState;
+                await isar.smartDevices.put(existingDevice);
+             });
+           }
+        } catch (e) {
+           debugPrint("Error updating state in handler: $e");
+        }
+        return; // EXIT, do not show dialog
+      }
+
+      // 2. Not paired -> Show Pairing Dialog
       final context = AppRouter.router.routerDelegate.navigatorKey.currentContext;
       if (context != null) {
-         final dbService = DatabaseService();
-         final isar = await dbService.db;
          final server = await isar.collection<ServerInfo>().filter().isSelectedEqualTo(true).findFirst() 
                         ?? await isar.collection<ServerInfo>().where().findFirst();
                         
          if (server != null) {
-            showMaterialModalBottomSheet(
+            showGeneralDialog(
               context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context) => DevicePairingScreen(
-                serverId: server.id,
-                entityId: entityId,
-                entityType: entityType,
-                initialName: data['name'],
-              ),
+              barrierDismissible: true,
+              barrierLabel: "Pair Device",
+              barrierColor: Colors.black54,
+              transitionDuration: const Duration(milliseconds: 200),
+              pageBuilder: (context, anim1, anim2) {
+                return Center(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: DevicePairingScreen(
+                      serverId: server.id,
+                      entityId: entityId,
+                      entityType: entityType,
+                      initialName: data['name'],
+                    ),
+                  ),
+                );
+              },
+              transitionBuilder: (context, anim1, anim2, child) {
+                return Transform.scale(
+                  scale: Curves.easeOutBack.transform(anim1.value),
+                  child: child,
+                );
+              },
             );
          }
       }

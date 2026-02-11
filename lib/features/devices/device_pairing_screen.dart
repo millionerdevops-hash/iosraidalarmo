@@ -130,18 +130,23 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Media query to handle keyboard appearing
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
-
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        padding: EdgeInsets.fromLTRB(24, 24, 24, 24 + bottomInset),
-        margin: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: const Color(0xFF2C2C2C),
-          borderRadius: BorderRadius.circular(12),
-        ),
+    return Center(
+      child: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.85,
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: const Color(0xFF2C2C2C),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.white10),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black45,
+                blurRadius: 16,
+                offset: Offset(0, 8),
+              )
+            ],
+          ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -225,7 +230,7 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 
   Widget _getImageForType(int typeVal) {
