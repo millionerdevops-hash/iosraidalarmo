@@ -15,6 +15,8 @@ import PushKit
     private var pushRegistry: PKPushRegistry?
     
     private var methodChannel: FlutterMethodChannel?
+    private var voipChannel: FlutterMethodChannel?
+    private var storedVoipToken: String?
     
     override func application(
         _ application: UIApplication,
@@ -24,6 +26,19 @@ import PushKit
         let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
         methodChannel = FlutterMethodChannel(name: "com.raidalarm.voip",
                                               binaryMessenger: controller.binaryMessenger)
+        
+        // Setup VoIP method channel for token retrieval
+        voipChannel = FlutterMethodChannel(name: "com.raidalarm/voip",
+                                           binaryMessenger: controller.binaryMessenger)
+        
+        // Handle VoIP token requests from Flutter
+        voipChannel?.setMethodCallHandler { [weak self] (call, result) in
+            if call.method == "getVoipToken" {
+                result(self?.storedVoipToken)
+            } else {
+                result(FlutterMethodNotImplemented)
+            }
+        }
         
         // 1. Setup Audio
         alarmManager.setupAudioSession()
