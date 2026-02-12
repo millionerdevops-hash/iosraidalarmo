@@ -33,7 +33,6 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
   @override
   void initState() {
     super.initState();
-    // Use device type name as default, not server name
     final defaultName = _getDefaultNameForType(widget.entityType);
     _nameController = TextEditingController(text: widget.initialName ?? defaultName);
   }
@@ -242,7 +241,7 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
       case AppEntityType.Alarm: assetName = 'smart-alarm.png'; break;
       default: assetName = 'smart-switch.png';
     }
-    return Image.asset('assets/png/ingame/pairing/$assetName', width: 64, height: 64);
+    return Image.asset('assets/images/png/ingame/pairing/$assetName', width: 64, height: 64);
   }
 
   String _getTitleForType(int typeVal) {

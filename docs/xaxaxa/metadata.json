@@ -1,0 +1,7 @@
+{
+  "name": "xaxaxa",
+  "description": "A high-fidelity prototype of the RAID ALARM app, focusing on Rust raid alerts, onboarding flow, lifetime purchase logic, and team pairing.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
