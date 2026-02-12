@@ -6,6 +6,7 @@ import '../../data/models/server_info.dart';
 import '../../core/services/database_service.dart';
 import '../../core/services/automation_service.dart';
 import '../../data/models/smart_device.dart';
+import 'dart:async';
 
 final connectionManagerProvider = FutureProvider.autoDispose.family<ConnectionManager, int>((ref, serverId) async {
   final dbService = DatabaseService();

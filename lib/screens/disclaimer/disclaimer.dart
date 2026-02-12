@@ -331,7 +331,7 @@ class _DisclaimerScreenState extends State<DisclaimerScreen> {
                     // Discontinuation Risk
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.red.shade950.withOpacity(0.2),
+                        color: const Color(0xFF450a0a).withOpacity(0.2),
                         border: Border.all(
                           color: Colors.red.shade500.withOpacity(0.3),
                         ),
