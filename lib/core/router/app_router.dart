@@ -32,6 +32,8 @@ import 'package:raidalarm/screens/notifypermission/notificationpermissionscreen.
 import 'package:raidalarm/screens/socialproof/socialproof.dart';
 import 'package:raidalarm/screens/howitworks/howitworks.dart';
 import 'package:raidalarm/screens/getstarted/getstarted.dart';
+import 'package:raidalarm/screens/disclaimer/disclaimer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final routerProvider = Provider((ref) => AppRouter.router);
 
@@ -70,6 +72,7 @@ class AppRouter {
   static const String _pathSocialProof = '/social-proof';
   static const String _pathHowItWorks = '/how-it-works';
   static const String _pathGetStarted = '/get-started';
+  static const String _pathDisclaimer = '/disclaimer';
 
   static final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
@@ -289,6 +292,11 @@ class AppRouter {
         name: 'get-started',
         builder: (context, state) => const GetStartedScreen(),
       ),
+      GoRoute(
+        path: _pathDisclaimer,
+        name: 'disclaimer',
+        builder: (context, state) => const DisclaimerScreen(),
+      ),
     ],
   );
 
@@ -318,6 +326,15 @@ class AppRouter {
         } catch (e) {
         }
       }
+      
+      // Check if disclaimer has been accepted
+      final prefs = await SharedPreferences.getInstance();
+      final disclaimerAccepted = prefs.getBool('disclaimer_accepted') ?? false;
+      
+      if (!disclaimerAccepted) {
+        return _pathDisclaimer;
+      }
+      
       return null;
     }
 
