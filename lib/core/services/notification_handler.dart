@@ -164,7 +164,6 @@ class NotificationHandler {
                       serverId: server.id,
                       entityId: entityId,
                       entityType: entityType,
-                      initialName: data['name'],
                     ),
                   ),
                 );

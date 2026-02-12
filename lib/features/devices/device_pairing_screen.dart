@@ -33,7 +33,9 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.initialName ?? "Smart Device");
+    // Use device type name as default, not server name
+    final defaultName = _getDefaultNameForType(widget.entityType);
+    _nameController = TextEditingController(text: widget.initialName ?? defaultName);
   }
 
   bool _isPairing = false;
@@ -68,9 +70,6 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
           .findFirst();
 
       if (existing != null) {
-        // Already exists, just update name? or stop?
-        // User asked to prevent bugs. Saving duplicate is bad.
-        // If it exists, let's just update it.
         await isar.writeTxn(() async {
            existing.name = name;
            await isar.smartDevices.put(existing);
@@ -179,6 +178,7 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
             TextField(
               controller: _nameController,
               autofocus: true,
+              maxLength: 40,
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 labelText: "DEVICE NAME",
@@ -222,7 +222,7 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
                           width: 20, 
                           child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)
                         )
-                      : const Text("CONNECT DEVICE"),
+                      : const Text("CONNECT"),
                   ),
                 ),
               ],
@@ -246,6 +246,15 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
   }
 
   String _getTitleForType(int typeVal) {
+     final type = AppEntityType.valueOf(typeVal) ?? AppEntityType.Switch;
+     switch (type) {
+       case AppEntityType.Switch: return "Smart Switch";
+       case AppEntityType.Alarm: return "Smart Alarm";
+       default: return "Smart Device";
+     }
+  }
+
+  String _getDefaultNameForType(int typeVal) {
      final type = AppEntityType.valueOf(typeVal) ?? AppEntityType.Switch;
      switch (type) {
        case AppEntityType.Switch: return "Smart Switch";
