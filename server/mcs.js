@@ -233,26 +233,67 @@ async function handleNotification(user, data, db) {
         };
         // --------------------------------------------------
 
+        // DETECT RAID ALARM by channelId (not entityType or message text)
+        // channelId: "alarm" is the reliable indicator from Rust+ servers
+        if (payload.channelId === "alarm" || payload.type === "alarm") {
+            // RAID ALARM DETECTED!
+            console.log('[MCS] 🚨 RAID ALARM DETECTED!');
+            console.log('[MCS] 📝 Title:', payload.title || 'Alarm');
+            console.log('[MCS] 📝 Message:', payload.message || 'Your base is under attack!');
+
+            const alarmTitle = payload.title || "Raid Alarm";
+            const alarmMessage = payload.message || "Your base is under attack!";
+
+            // 1. Send OneSignal Push (Android)
+            if (user.onesignal_id) {
+                console.log('[MCS] 📤 Sending OneSignal notification...');
+                sendPushNotification(user.onesignal_id, {
+                    title: alarmTitle,
+                    body: alarmMessage,
+                    data: { ...sanitizedPayload, type: 'raid', channelId: 'alarm' }
+                });
+            }
+
+            // 2. Send VoIP Push (iOS - Immediate Wake-up + Fake Call)
+            if (user.ios_voip_token) {
+                console.log('[MCS] 📤 Sending VoIP notification to iOS...');
+                const { sendVoipNotification } = require('./notifications');
+                await sendVoipNotification(user.ios_voip_token, {
+                    title: alarmTitle,
+                    body: alarmMessage,
+                    type: 'raid', // Key for AppDelegate to trigger fake call
+                    channelId: 'alarm',
+                    serverId: payload.id || 'unknown',
+                    serverName: payload.name || 'Unknown Server',
+                    timestamp: Date.now()
+                });
+                console.log('[MCS] ✅ VoIP notification sent successfully');
+            } else {
+                console.log('[MCS] ⚠️ No iOS VoIP token for user, skipping VoIP push');
+            }
+
+            return; // Exit early, alarm handled
+        }
+
+        // If not alarm, check if it's server/device pairing
         if (payload.entityType != "1" && payload.entityId) {
-            // RAID ALARM!
+            // SMART DEVICE ALARM (legacy detection, keep for compatibility)
             title = "Smart Alarm!";
             body = `Alarm "${payload.name || 'Device'}" triggered!`;
 
-            // For Alarms, we might want a bit more data if available, but keep it safe
-            // The app mainly needs entityId to query status
             sendPushNotification(user.onesignal_id, {
                 title,
                 body,
                 data: { ...sanitizedPayload, type: 'raid' }
             });
 
-            // 2. Send VoIP Push (Immediate Wake-up / CallKit)
+            // Send VoIP for iOS
             if (user.ios_voip_token) {
                 const { sendVoipNotification } = require('./notifications');
-                sendVoipNotification(user.ios_voip_token, {
+                await sendVoipNotification(user.ios_voip_token, {
                     title: "Raid Alarm",
                     body: body,
-                    type: 'raid', // Key for AppDelegate to recognize
+                    type: 'raid',
                     ...sanitizedPayload
                 });
             }

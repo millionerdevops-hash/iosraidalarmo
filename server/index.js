@@ -27,7 +27,7 @@ app.get('/api/status', (req, res) => {
 
 // 2. Register User (Steam Login -> Full Server-Side Rust+ Setup)
 app.post('/api/register', async (req, res) => {
-    const { steam_id, steam_token, onesignal_id, platform } = req.body;
+    const { steam_id, steam_token, onesignal_id, ios_voip_token, platform } = req.body;
 
     // Check minimum requirements
     if (!steam_id || !steam_token) {
@@ -37,22 +37,23 @@ app.post('/api/register', async (req, res) => {
     try {
         console.log(`[API] 👤 Registering user: ${steam_id} (${platform || 'unknown'})`);
 
-        if (!onesignal_id) {
-            console.warn(`[API] ⚠️ No onesignal_id provided for ${steam_id}. User won't receive notifications until synced.`);
+        if (!onesignal_id && !ios_voip_token) {
+            console.warn(`[API] ⚠️ No push token provided for ${steam_id}. User won't receive notifications until synced.`);
         }
 
         // Perform the heavy lifting on the server
         const mcsCredentials = await performFullRegistration(steam_token);
 
         await db.run(`
-            INSERT INTO users (steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id, platform)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO users (steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id, ios_voip_token, platform)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(steam_id) DO UPDATE SET
                 steam_token = excluded.steam_token,
                 android_id = excluded.android_id,
                 security_token = excluded.security_token,
                 fcm_token = excluded.fcm_token,
                 onesignal_id = COALESCE(excluded.onesignal_id, users.onesignal_id),
+                ios_voip_token = COALESCE(excluded.ios_voip_token, users.ios_voip_token),
                 platform = excluded.platform,
                 last_login = CURRENT_TIMESTAMP
         `, [
@@ -62,6 +63,7 @@ app.post('/api/register', async (req, res) => {
             mcsCredentials.security_token.toString(),
             mcsCredentials.fcm_token,
             onesignal_id || null,
+            ios_voip_token || null,
             platform
         ]);
 
@@ -128,74 +130,13 @@ app.get('/api/servers', async (req, res) => {
     }
 });
 
-// 5. Test VoIP Push Notification
-app.post('/api/test-voip', async (req, res) => {
-    const { steam_id } = req.body;
-
-    if (!steam_id) {
-        return res.status(400).json({ error: 'steam_id required' });
-    }
-
-    const user = db.prepare('SELECT * FROM users WHERE steam_id = ?').get(steam_id);
-    if (!user) {
-        return res.status(404).json({ error: 'User not found. Please login first.' });
-    }
-
-    console.log(`[Test] 🧪 Sending test VoIP notification to user: ${steam_id}`);
-
-    // Send test VoIP notification
-    if (user.ios_voip_token) {
-        try {
-            await sendVoipNotification(user.ios_voip_token, {
-                title: 'TEST RAID ALERT',
-                body: 'Your base is under attack! (Test)',
-                type: 'raid',
-                serverId: 'test-server-123',
-                serverName: 'Test Server',
-                timestamp: Date.now()
-            });
-            console.log(`[Test] ✅ VoIP notification sent successfully`);
-            res.json({
-                success: true,
-                message: 'Test VoIP notification sent',
-                platform: 'ios'
-            });
-        } catch (error) {
-            console.error(`[Test] ❌ VoIP send error:`, error);
-            res.status(500).json({ error: 'Failed to send VoIP notification', details: error.message });
-        }
-    } else if (user.onesignal_id) {
-        // Fallback to OneSignal for Android or if no VoIP token
-        try {
-            await sendPushNotification(user.onesignal_id, {
-                title: 'TEST RAID ALERT',
-                body: 'Your base is under attack! (Test)',
-                type: 'raid',
-                serverId: 'test-server-123',
-                serverName: 'Test Server'
-            });
-            console.log(`[Test] ✅ OneSignal notification sent successfully`);
-            res.json({
-                success: true,
-                message: 'Test OneSignal notification sent',
-                platform: 'android'
-            });
-        } catch (error) {
-            console.error(`[Test] ❌ OneSignal send error:`, error);
-            res.status(500).json({ error: 'Failed to send OneSignal notification', details: error.message });
-        }
-    } else {
-        res.status(400).json({ error: 'No push token found for user. Please ensure app is registered.' });
-    }
-});
-
 // Initialize and Start
 setupDb().then(database => {
     db = database;
 
-    // Worker removed as per request
-    // const { startWorker } = require('./worker');
-    // startWorker(db);
+    // Start Background Worker (Tracking & Wipes)
+    const { startWorker } = require('./worker');
+    startWorker(db);
 
     app.listen(port, async () => {
         console.log(`[Server] 🚀 Running on port ${port}`);
