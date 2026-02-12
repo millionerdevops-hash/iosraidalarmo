@@ -480,26 +480,31 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
 
                 // Button
                 Padding(
-                  padding: ScreenUtilHelper.paddingAll(24),
-                  child: RustButton(
-                    onPressed: () {
-                      HapticHelper.mediumImpact();
-                      _throttler.run(() {
+                  padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 32.h),
+                  child: Column(
+                    children: [
+                      RustButton(
+                        onPressed: () {
+                          HapticHelper.mediumImpact();
+                          _throttler.run(() {
 
-                        _handleContinue();
-                      });
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(tr('how_it_works.button_continue')),
+                            _handleContinue();
+                          });
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(tr('how_it_works.button_continue')),
+                            ),
+                            ScreenUtilHelper.sizedBoxWidth(8),
+                            Icon(Icons.arrow_forward, size: 16.w),
+                          ],
                         ),
-                        ScreenUtilHelper.sizedBoxWidth(8),
-                        Icon(Icons.arrow_forward, size: 16.w),
-                      ],
-                    ),
+                      ),
+                      ScreenUtilHelper.sizedBoxHeight(8.0),
+                    ],
                   ),
                 ),
               ],

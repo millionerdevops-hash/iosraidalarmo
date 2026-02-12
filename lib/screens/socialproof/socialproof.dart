@@ -373,7 +373,7 @@ class _StickyFooter extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Container(
-        padding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 24.h),
+        padding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 16.h),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.bottomCenter,
@@ -386,28 +386,34 @@ class _StickyFooter extends StatelessWidget {
             stops: [0.0, 0.5, 1.0],
           ),
         ),
-        child: RustButton.primary(
-          onPressed: () async {
-            HapticHelper.mediumImpact();
-            final InAppReview inAppReview = InAppReview.instance;
-            if (await inAppReview.isAvailable()) {
-              await inAppReview.requestReview();
-            }
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RustButton.primary(
+              onPressed: () async {
+                HapticHelper.mediumImpact();
+                final InAppReview inAppReview = InAppReview.instance;
+                if (await inAppReview.isAvailable()) {
+                  await inAppReview.requestReview();
+                }
 
-            await AppDatabase().saveAppSetting('social_proof_completed', 'true');
-            if (context.mounted) {
-              context.go('/paywall');
-            }
-          },
-          child: Text(
-            'JOIN THE SQUAD',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1.5.w,
+                await AppDatabase().saveAppSetting('social_proof_completed', 'true');
+                if (context.mounted) {
+                  context.go('/paywall');
+                }
+              },
+              child: Text(
+                'JOIN THE SQUAD',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.5.w,
+                ),
+              ),
             ),
-          ),
+            SizedBox(height: 8.h),
+          ],
         ),
       ),
     );

@@ -448,7 +448,7 @@ class _ActionArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(32.w, 0, 32.w, 40.h),
+      padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 32.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -489,6 +489,7 @@ class _ActionArea extends StatelessWidget {
               child: Text('Enable Critical Alerts'),
             ),
           ),
+          SizedBox(height: 8.h),
         ],
       ),
     );
