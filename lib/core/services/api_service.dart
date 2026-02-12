@@ -24,6 +24,7 @@ class ApiService {
   static Future<void> registerUser({
     required String steamId,
     required String steamToken,
+    String? iosVoipToken,
   }) async {
     try {
       final String? onesignalId = OneSignalService.getPushId();
@@ -32,15 +33,23 @@ class ApiService {
         debugPrint("[ApiService] ⚠️ OneSignal ID not ready yet.");
       }
 
+      final body = {
+        'steam_id': steamId,
+        'steam_token': steamToken,
+        'onesignal_id': onesignalId,
+        'platform': defaultTargetPlatform.name.toLowerCase(),
+      };
+
+      // Add iOS VoIP token if provided
+      if (iosVoipToken != null && iosVoipToken.isNotEmpty) {
+        body['ios_voip_token'] = iosVoipToken;
+        debugPrint("[ApiService] 📱 Sending iOS VoIP token to server");
+      }
+
       final response = await http.post(
         Uri.parse('$baseUrl/api/register'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'steam_id': steamId,
-          'steam_token': steamToken,
-          'onesignal_id': onesignalId,
-          'platform': defaultTargetPlatform.name.toLowerCase(),
-        }),
+        body: jsonEncode(body),
       );
 
       if (response.statusCode == 200) {

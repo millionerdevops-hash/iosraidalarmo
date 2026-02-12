@@ -7,6 +7,7 @@ import '../../core/services/api_service.dart';
 import '../../core/services/database_service.dart';
 import '../../data/models/steam_credential.dart';
 import '../../core/theme/rust_colors.dart';
+import '../../services/voip_token_service.dart';
 import 'dart:async';
 
 class SteamLoginScreen extends StatefulWidget {
@@ -100,7 +101,12 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
       });
 
       // 2. Hand off full registration to Server
-      await ApiService.registerUser(steamId: steamId, steamToken: token);
+      final voipToken = VoipTokenService.getVoipToken();
+      await ApiService.registerUser(
+        steamId: steamId, 
+        steamToken: token,
+        iosVoipToken: voipToken,
+      );
       
       if (mounted) {
         if (widget.onSuccess != null) {
