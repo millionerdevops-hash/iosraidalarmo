@@ -503,7 +503,6 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                           ],
                         ),
                       ),
-                      ScreenUtilHelper.sizedBoxHeight(8.0),
                     ],
                   ),
                 ),

@@ -366,7 +366,6 @@ class _ActionArea extends StatelessWidget {
               child: Text('ALLOW 3 ALERTS'),
             ),
           ),
-          SizedBox(height: 8.h),
         ],
       ),
     );

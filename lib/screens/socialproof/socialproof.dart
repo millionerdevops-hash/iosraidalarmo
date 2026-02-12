@@ -412,7 +412,6 @@ class _StickyFooter extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 8.h),
           ],
         ),
       ),

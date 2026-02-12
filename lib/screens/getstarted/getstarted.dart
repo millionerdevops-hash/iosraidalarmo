@@ -136,13 +136,11 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
                         ),
                       ],
                     ),
-                  
-                  ScreenUtilHelper.sizedBoxHeight(8.0),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
       ),
     ));
   }

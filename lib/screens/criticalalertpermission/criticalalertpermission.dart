@@ -489,7 +489,6 @@ class _ActionArea extends StatelessWidget {
               child: Text('Enable Critical Alerts'),
             ),
           ),
-          SizedBox(height: 8.h),
         ],
       ),
     );
