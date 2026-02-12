@@ -29,19 +29,23 @@ try {
 async function sendPushNotification(onesignalId, message) {
     if (!onesignalId) return;
 
+    const isSilent = message.silent;
+
     const notification = {
-        contents: {
-            'en': message.body || 'New Raid Alarm notification',
-        },
-        headings: {
-            'en': message.title || 'Raid Alarm',
-        },
         include_subscription_ids: [onesignalId],
         data: message.data || {},
         android_group: 'rust_alarm_group',
-        ios_badgeType: 'Increase',
-        ios_badgeCount: 1,
     };
+
+    if (!isSilent) {
+        notification.contents = { 'en': message.body || 'New Raid Alarm notification' };
+        notification.headings = { 'en': message.title || 'Raid Alarm' };
+        notification.ios_badgeType = 'Increase';
+        notification.ios_badgeCount = 1;
+    } else {
+        notification.content_available = true; // For iOS background update
+        // No contents, no headings = Silent
+    }
 
     try {
         const response = await client.createNotification(notification);

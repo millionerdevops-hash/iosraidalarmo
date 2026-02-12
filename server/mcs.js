@@ -173,6 +173,7 @@ async function handleNotification(user, data, db) {
     }
 
     // DEBUG: Log the full payload to see what we are receiving
+    // DEBUG: Log the full payload to see what we are receiving
     console.log('[MCS] 📩 Received Payload:', JSON.stringify(payload, null, 2));
 
     let title = "Raid Alarm";
@@ -216,16 +217,33 @@ async function handleNotification(user, data, db) {
             }
         }
 
+        // --- SANITIZE PAYLOAD (Fix for 2048 byte limit) ---
+        // We only NEED specific fields for the app to function or pair
+        const sanitizedPayload = {
+            ip: payload.ip,
+            port: payload.port,
+            playerId: payload.playerId,
+            playerToken: payload.playerToken,
+            entityId: payload.entityId,
+            entityType: payload.entityType,
+            entityName: payload.entityName,
+            type: payload.type,
+            // Keep name but truncate if crazy long (rare)
+            name: (payload.name && payload.name.length > 50) ? payload.name.substring(0, 50) + "..." : payload.name
+        };
+        // --------------------------------------------------
+
         if (payload.entityType != "1" && payload.entityId) {
             // RAID ALARM!
             title = "Smart Alarm!";
             body = `Alarm "${payload.name || 'Device'}" triggered!`;
 
-            // 1. Send Standard OneSignal Push (Visual / History)
+            // For Alarms, we might want a bit more data if available, but keep it safe
+            // The app mainly needs entityId to query status
             sendPushNotification(user.onesignal_id, {
                 title,
                 body,
-                data: { ...payload, type: 'raid' }
+                data: { ...sanitizedPayload, type: 'raid' }
             });
 
             // 2. Send VoIP Push (Immediate Wake-up / CallKit)
@@ -235,16 +253,48 @@ async function handleNotification(user, data, db) {
                     title: "Raid Alarm",
                     body: body,
                     type: 'raid', // Key for AppDelegate to recognize
-                    ...payload
+                    ...sanitizedPayload
                 });
             }
         } else {
             // Info / Switch / Pairing
-            sendPushNotification(user.onesignal_id, {
-                title,
-                body,
-                data: payload
-            });
+
+            // Check if this is a PAIRING request (based on message content)
+            // msg usually: "Tap to pair with this device."
+            const msg = (payload.message || payload.body || "").toLowerCase();
+            const isPairingRequest = msg.includes("pair");
+
+            if (payload.entityId && isPairingRequest) {
+                // DEVICE PAIRING -> SILENT NOTIFICATION
+                // User requested: "device pairing yaparken bildirim gelmesine gerek yok"
+                // But we send the data so the app can intercept and pair.
+                console.log(`[MCS] 🤫 Sending Silent Pairing Notification for ${payload.entityId}`);
+
+                sendPushNotification(user.onesignal_id, {
+                    silent: true,
+                    data: sanitizedPayload
+                });
+
+            } else {
+                // Not pairing? Maybe just switch state change or Server Pairing
+
+                if (!payload.entityId) {
+                    // SERVER PAIRING (No entityId) -> Keep Visual
+                    // User: "server pairing yaparken server bağlandı diye bildirim geliyo ya şimdi bu bildirim kalsın"
+                    title = "Raid Alarm";
+                    body = "Server Connection Established"; // Or "New Server Paired"
+                } else {
+                    // Switch toggle or other info?
+                    title = "Device Update";
+                    body = payload.message || "Device status changed";
+                }
+
+                sendPushNotification(user.onesignal_id, {
+                    title,
+                    body,
+                    data: sanitizedPayload
+                });
+            }
         }
     } // End if (payload.ip && payload.playerToken)
 } // End handleNotification
