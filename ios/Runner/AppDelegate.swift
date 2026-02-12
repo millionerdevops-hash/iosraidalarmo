@@ -120,9 +120,8 @@ import PushKit
 // MARK: - VoIP Push Delegate
 extension AppDelegate: PKPushRegistryDelegate {
     
-    func pushRegistry(_ registry: PKPushRegistry, didUpdate descriptors: PKPushCredentials, for type: PKPushType) {
-        // Obsolete in newer iOS but required protocol stub
-    }
+    // Obsolete but required protocol stub (empty)
+    // func pushRegistry(_ registry: PKPushRegistry, didUpdate descriptors: PKPushCredentials, for type: PKPushType) {}
     
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         let token = pushCredentials.token.map { String(format: "%02x", $0) }.joined()
