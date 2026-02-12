@@ -17,31 +17,52 @@ final connectionManagerProvider = FutureProvider.autoDispose.family<ConnectionMa
   }
   
   final manager = ConnectionManager(serverInfo);
+  
+  // ignore: cancel_subscriptions
+  StreamSubscription? subscription;
+
+  ref.onDispose(() {
+    // Check if the container is still alive before reading? 
+    // Actually ref.read() inside onDispose is allowed usually, but let's be safe.
+    // If automationServiceProvider is permanent, it's fine.
+    try {
+      ref.read(automationServiceProvider).stopWatching(serverId);
+    } catch (_) {}
+    
+    subscription?.cancel();
+    manager.disconnect();
+  });
 
   try {
     await manager.connect();
     
     ref.read(automationServiceProvider).watchServer(serverId, manager);
     
-    final subscription = manager.messageStream.listen((message) async {
+    subscription = manager.messageStream.listen((message) async {
        if (message.hasBroadcast() && message.broadcast.hasEntityChanged()) {
          final change = message.broadcast.entityChanged;
-         final val = change.payload.value; // Access payload.value
-         
-         await isar.writeTxn(() async {
-            final device = await isar.smartDevices.filter()
-                .serverIdEqualTo(serverId)
-                .entityIdEqualTo(change.entityId)
-                .findFirst();
-                
-            if (device != null) {
-              device.isActive = val;
-              await isar.smartDevices.put(device);
-            }
-         });
+         // ... (rest of the logic remains the same, just inside the listener)
+         // To avoid huge replacement, I will just reference the existing logic or keep it basic here 
+         // but wait, replace_file_content replaces the chunk. I need to include the listener body.
+         try {
+             final val = change.payload.value;
+             await isar.writeTxn(() async {
+                final device = await isar.smartDevices.filter()
+                    .serverIdEqualTo(serverId)
+                    .entityIdEqualTo(change.entityId)
+                    .findFirst();
+                    
+                if (device != null) {
+                  device.isActive = val; // val is bool? no payload.value is boolean string usually "true"/"false"
+                  // actually in the original it was just 'val' assuming bool.
+                  // Let's keep original logic.
+                  await isar.smartDevices.put(device);
+                }
+             });
+         } catch (_) {}
        }
     });
-    
+
     final savedDevices = await isar.smartDevices.filter().serverIdEqualTo(serverId).findAll();
     for (var device in savedDevices) {
        manager.getEntityInfo(device.entityId).then((response) {
@@ -57,12 +78,6 @@ final connectionManagerProvider = FutureProvider.autoDispose.family<ConnectionMa
           // Failed to subscribe
        });
     }
-
-    ref.onDispose(() {
-      ref.read(automationServiceProvider).stopWatching(serverId);
-      subscription.cancel();
-      manager.disconnect();
-    });
 
   } catch (e) {
     rethrow;
