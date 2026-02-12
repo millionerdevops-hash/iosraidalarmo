@@ -149,64 +149,45 @@ class _DisclaimerScreenState extends State<DisclaimerScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header
-            Container(
-              padding: const EdgeInsets.fromLTRB(24, 40, 24, 16),
-              decoration: const BoxDecoration(
-                color: Color(0xFF0c0c0e),
-                border: Border(
-                  bottom: BorderSide(color: Color(0xFF27272a)),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black54,
-                    blurRadius: 20,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: Colors.red.shade600,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.red.shade900.withOpacity(0.4),
-                          blurRadius: 8,
-                        ),
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.shield_outlined,
-                      color: Colors.white,
-                      size: 24,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'IMPORTANT DISCLAIMER',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Scrollable Content
+            // Scrollable Content (including header)
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.fromLTRB(24, 40, 24, 24),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Header (now inside scroll)
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: Colors.red.shade600,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.red.shade900.withOpacity(0.4),
+                            blurRadius: 8,
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.shield_outlined,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    const Text(
+                      'IMPORTANT DISCLAIMER',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: 32),
                     // Main Warning Box
                     Container(
                       decoration: BoxDecoration(
@@ -422,7 +403,7 @@ class _DisclaimerScreenState extends State<DisclaimerScreen> {
 
             // Footer Actions
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(
                 color: Color(0xFF121214),
                 border: Border(
