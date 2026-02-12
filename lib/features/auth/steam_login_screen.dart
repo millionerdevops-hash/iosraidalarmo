@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/services/fcm_service.dart';
+import '../../core/services/api_service.dart';
 import '../../core/services/database_service.dart';
-import '../../data/models/fcm_credential.dart';
+import '../../data/models/steam_credential.dart';
 import '../../core/theme/rust_colors.dart';
 import 'dart:async';
 
@@ -27,7 +27,7 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
   void initState() {
     super.initState();
     // Wake up backend to ensure smooth login
-    FcmService.wakeUpBackend();
+    ApiService.wakeUpBackend();
     
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -87,21 +87,20 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
       final String token = data['Token'];
       final String steamId = data['SteamId'];
       
-      final fcmService = FcmService();
       final isar = await _dbService.db;
       
-      final cred = FcmCredential()
+      final cred = SteamCredential()
         ..steamId = steamId
         ..steamToken = token;
 
       // 1. Save Basic Credentials Locally
       await isar.writeTxn(() async {
-          await isar.fcmCredentials.clear();
-          await isar.fcmCredentials.put(cred);
+          await isar.steamCredentials.clear();
+          await isar.steamCredentials.put(cred);
       });
 
       // 2. Hand off full registration to Server
-      await fcmService.syncWithServer(cred);
+      await ApiService.registerUser(steamId: steamId, steamToken: token);
       
       if (mounted) {
         if (widget.onSuccess != null) {

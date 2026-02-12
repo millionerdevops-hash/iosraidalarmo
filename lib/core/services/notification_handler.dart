@@ -9,7 +9,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../features/devices/device_pairing_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'fcm_service.dart';
 import 'database_service.dart';
 import '../../data/models/notification_data.dart';
 import '../../data/repositories/notification_repository.dart';
@@ -39,8 +38,7 @@ class NotificationHandler {
         _handleData(result.notification.additionalData);
       });
 
-      // 3. Initial Sync
-      unawaited(FcmService().syncServersToServer());
+      // Server handles sync automatically
 
     } catch (e) {
       debugPrint("[NotificationHandler] ❌ Init Error: $e");

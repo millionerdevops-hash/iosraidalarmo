@@ -9,7 +9,7 @@ part of 'server_list_view_model.dart';
 // **************************************************************************
 
 String _$serverListViewModelHash() =>
-    r'f736961cc5d97c604587c4375a247adae725e481';
+    r'45f46322ed0ace66e2f96a88a3f8c5206c0d0a57';
 
 /// See also [ServerListViewModel].
 @ProviderFor(ServerListViewModel)

@@ -12,7 +12,7 @@ import 'package:raidalarm/core/services/notification_handler.dart';
 import 'package:raidalarm/core/services/database_service.dart';
 import 'package:raidalarm/core/services/quick_actions_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:raidalarm/core/services/fcm_service.dart';
+import 'package:raidalarm/core/services/api_service.dart';
 
 const String _translationsPath = 'assets/translations';
 const Locale _fallbackLocale = Locale('en');
@@ -51,7 +51,7 @@ Future<void> bootstrap() async {
   await NotificationHandler.initialize();
   
   // Wake up backend early
-  FcmService.wakeUpBackend();
+  ApiService.wakeUpBackend();
 
   // Initialize Database
   final dbService = DatabaseService();

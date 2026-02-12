@@ -821,6 +821,7 @@ class _ServerDetailScreenState extends ConsumerState<ServerDetailScreen> with Ro
                     ),
                     Expanded(
                       child: _buildTabContent(),
+                    ),
                   ],
                 ),
                 if (_inspectingPlayer != null) _buildInspectionModal(),

@@ -3,8 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:isar/isar.dart';
 import '../../core/services/database_service.dart';
 import '../../data/models/server_info.dart';
-import '../../data/models/fcm_credential.dart';
-import '../../core/services/fcm_service.dart';
+import '../../data/models/steam_credential.dart';
+import '../../core/services/api_service.dart';
 import '../../data/models/smart_device.dart';
 import '../../data/models/automation_rule.dart';
 part 'server_list_view_model.g.dart';
@@ -22,9 +22,12 @@ class ServerListViewModel extends _$ServerListViewModel {
     final dbService = DatabaseService();
     final isar = await dbService.db;
     
+    // Get Steam ID from local database
+    final cred = await isar.steamCredentials.get(1);
+    if (cred == null || cred.steamId == null) return;
+    
     // Fetch from backend
-    final fcmService = FcmService();
-    final servers = await fcmService.fetchPairedServers();
+    final servers = await ApiService.fetchPairedServers(cred.steamId!);
 
     if (servers.isNotEmpty) {
       await isar.writeTxn(() async {

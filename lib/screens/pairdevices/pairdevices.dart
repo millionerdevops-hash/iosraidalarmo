@@ -10,7 +10,7 @@ import 'package:raidalarm/features/auth/steam_login_screen.dart';
 import 'package:raidalarm/features/home/server_list_view_model.dart';
 import 'package:raidalarm/data/models/server_info.dart';
 import 'package:go_router/go_router.dart';
-import 'package:raidalarm/core/services/fcm_service.dart';
+import 'package:raidalarm/core/services/api_service.dart';
 import 'package:raidalarm/features/dashboard/server_dashboard_view_model.dart';
 import 'package:raidalarm/features/dashboard/connection_provider.dart';
 import 'package:raidalarm/data/models/smart_device.dart';
@@ -36,7 +36,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
   void initState() {
     super.initState();
     // Wake up backend to ensure smooth pairing
-    FcmService.wakeUpBackend();
+    ApiService.wakeUpBackend();
     
     WidgetsBinding.instance.addObserver(this);
     _checkLoginStatus();
@@ -60,8 +60,9 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
   }
 
   Future<void> _checkLoginStatus() async {
-    final fcmService = FcmService();
-    final creds = await fcmService.getExistingCredentials();
+    final dbService = DatabaseService();
+    final isar = await dbService.db;
+    final creds = await isar.steamCredentials.get(1);
     if (mounted) {
       setState(() {
         _isLoggedIn = creds != null;

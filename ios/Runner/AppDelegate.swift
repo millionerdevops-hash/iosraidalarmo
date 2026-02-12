@@ -1,15 +1,5 @@
 import Flutter
 import UIKit
-
-@main
-import Flutter
-import UIKit
-import AVFoundation
-import UserNotifications
-
-@main
-import Flutter
-import UIKit
 import AVFoundation
 import UserNotifications
 import CallKit
