@@ -455,58 +455,68 @@ class _DisclaimerScreenState extends State<DisclaimerScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
 
-                  // Accept Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _isChecked ? _handleAccept : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _isChecked
-                            ? Colors.red.shade600
-                            : const Color(0xFF27272a),
-                        foregroundColor: _isChecked
-                            ? Colors.white
-                            : const Color(0xFF6b7280),
-                        disabledBackgroundColor: const Color(0xFF27272a),
-                        disabledForegroundColor: const Color(0xFF6b7280),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        elevation: _isChecked ? 8 : 0,
-                        shadowColor: _isChecked
-                            ? Colors.red.shade900.withOpacity(0.4)
-                            : null,
-                      ),
-                      child: const Text(
-                        'I Accept & Continue',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                  // Buttons (side by side)
+                  Row(
+                    children: [
+                      // Decline Button
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: _handleDecline,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: const Color(0xFF6b7280),
+                            side: const BorderSide(color: Color(0xFF3f3f46)),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text(
+                            'Decline',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Decline Button
-                  TextButton(
-                    onPressed: _handleDecline,
-                    style: TextButton.styleFrom(
-                      foregroundColor: const Color(0xFF6b7280),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                    ),
-                    child: const Text(
-                      'DECLINE',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.5,
+                      
+                      const SizedBox(width: 12),
+                      
+                      // Accept Button
+                      Expanded(
+                        flex: 2,
+                        child: ElevatedButton(
+                          onPressed: _isChecked ? _handleAccept : null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _isChecked
+                                ? Colors.red.shade600
+                                : const Color(0xFF27272a),
+                            foregroundColor: _isChecked
+                                ? Colors.white
+                                : const Color(0xFF6b7280),
+                            disabledBackgroundColor: const Color(0xFF27272a),
+                            disabledForegroundColor: const Color(0xFF6b7280),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            elevation: _isChecked ? 8 : 0,
+                            shadowColor: _isChecked
+                                ? Colors.red.shade900.withOpacity(0.4)
+                                : null,
+                          ),
+                          child: const Text(
+                            'Accept',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
