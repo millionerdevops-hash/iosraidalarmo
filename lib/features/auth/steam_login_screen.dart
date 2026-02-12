@@ -48,6 +48,7 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
             }
           },
           onPageStarted: (url) {
+            if (!mounted) return;
             if (!_isLoading) {
               setState(() => _isLoading = true);
             }
@@ -56,6 +57,7 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
             }
           },
           onPageFinished: (url) {
+            if (!mounted) return;
             if (url.contains('steamcommunity.com/openid/login') || !url.contains('facepunch.com')) {
               if (_isLoading) {
                 setState(() => _isLoading = false);
