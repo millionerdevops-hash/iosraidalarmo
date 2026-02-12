@@ -19,7 +19,7 @@ class QuickActionsService {
       const ShortcutItem(
         type: _actionOffer,
         localizedTitle: 'Claim Your Offer 🎁',
-        icon: 'gift', // Requires asset: ios/Runner/Assets.xcassets/gift.imageset
+        // icon: 'gift', // Disabled until asset is added to iOS project
       ),
     ]);
   }
