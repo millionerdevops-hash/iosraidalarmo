@@ -113,6 +113,9 @@ extension AppDelegate: PKPushRegistryDelegate {
         let token = pushCredentials.token.map { String(format: "%02x", $0) }.joined()
         print("📱 VoIP Token: \(token)")
         
+        // Store token for later retrieval
+        storedVoipToken = token
+        
         // Send to Flutter
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.methodChannel?.invokeMethod("onVoipToken", arguments: token)
