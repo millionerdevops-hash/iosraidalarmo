@@ -130,6 +130,95 @@ app.get('/api/servers', async (req, res) => {
     }
 });
 
+// 5. Test VoIP/OneSignal Push Notification
+app.post('/api/test-voip', async (req, res) => {
+    const { steam_id } = req.body;
+
+    if (!steam_id) {
+        return res.status(400).json({ error: 'steam_id required' });
+    }
+
+    try {
+        const user = await db.get('SELECT * FROM users WHERE steam_id = ?', [steam_id]);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found. Please login first.' });
+        }
+
+        console.log(`[Test] 🧪 Sending test notification to user: ${steam_id}`);
+        console.log(`[Test] 📱 iOS VoIP Token: ${user.ios_voip_token ? 'Present' : 'Missing'}`);
+        console.log(`[Test] 📱 OneSignal ID: ${user.onesignal_id ? 'Present' : 'Missing'}`);
+
+        const { sendVoipNotification } = require('./notifications');
+        const { sendPushNotification } = require('./notifications');
+
+        // Try iOS VoIP first
+        if (user.ios_voip_token) {
+            try {
+                await sendVoipNotification(user.ios_voip_token, {
+                    title: 'TEST RAID ALERT',
+                    body: 'Your base is under attack! (Test)',
+                    type: 'raid',
+                    channelId: 'alarm',
+                    serverId: 'test-server-123',
+                    serverName: 'Test Server',
+                    timestamp: Date.now()
+                });
+                console.log(`[Test] ✅ VoIP notification sent successfully`);
+                return res.json({
+                    success: true,
+                    message: 'Test VoIP notification sent to iOS',
+                    platform: 'ios',
+                    token_type: 'voip'
+                });
+            } catch (error) {
+                console.error(`[Test] ❌ VoIP send error:`, error);
+                return res.status(500).json({
+                    error: 'Failed to send VoIP notification',
+                    details: error.message
+                });
+            }
+        }
+
+        // Fallback to OneSignal
+        if (user.onesignal_id) {
+            try {
+                await sendPushNotification(user.onesignal_id, {
+                    title: 'TEST RAID ALERT',
+                    body: 'Your base is under attack! (Test)',
+                    type: 'raid',
+                    serverId: 'test-server-123',
+                    serverName: 'Test Server'
+                });
+                console.log(`[Test] ✅ OneSignal notification sent successfully`);
+                return res.json({
+                    success: true,
+                    message: 'Test OneSignal notification sent',
+                    platform: 'android',
+                    token_type: 'onesignal'
+                });
+            } catch (error) {
+                console.error(`[Test] ❌ OneSignal send error:`, error);
+                return res.status(500).json({
+                    error: 'Failed to send OneSignal notification',
+                    details: error.message
+                });
+            }
+        }
+
+        return res.status(400).json({
+            error: 'No push token found for user',
+            details: 'User must login on iOS (for VoIP) or Android (for OneSignal) first'
+        });
+
+    } catch (error) {
+        console.error(`[Test] ❌ Database error:`, error);
+        return res.status(500).json({
+            error: 'Database error',
+            details: error.message
+        });
+    }
+});
+
 // Initialize and Start
 setupDb().then(database => {
     db = database;
