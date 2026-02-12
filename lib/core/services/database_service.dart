@@ -1,9 +1,9 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../data/models/server_info.dart';
-import '../../data/models/fcm_credential.dart';
 import '../../data/models/smart_device.dart';
 import '../../data/models/automation_rule.dart';
+import '../../data/models/steam_credential.dart';
 
 class DatabaseService {
   late Future<Isar> db;
@@ -21,7 +21,7 @@ class DatabaseService {
     return await Isar.open(
       [
         ServerInfoSchema,
-        FcmCredentialSchema,
+        SteamCredentialSchema,
         SmartDeviceSchema,
         AutomationRuleSchema,
       ],

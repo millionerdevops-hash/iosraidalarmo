@@ -205,7 +205,7 @@ class NotificationHandler {
         await isar.collection<ServerInfo>().put(serverInfo);
       });
 
-      unawaited(FcmService().syncServersToServer());
+      // Server sync removed - server handles this automatically via MCS
       
     } catch (e) {
       debugPrint("[NotificationHandler] ❌ Server Pairing Error: $e");

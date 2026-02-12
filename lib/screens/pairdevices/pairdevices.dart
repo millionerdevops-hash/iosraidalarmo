@@ -15,6 +15,7 @@ import 'package:raidalarm/features/dashboard/server_dashboard_view_model.dart';
 import 'package:raidalarm/features/dashboard/connection_provider.dart';
 import 'package:raidalarm/data/models/smart_device.dart';
 import 'package:raidalarm/core/services/database_service.dart';
+import 'package:raidalarm/data/models/steam_credential.dart';
 import 'package:isar/isar.dart';
 import 'package:raidalarm/core/proto/rustplus.pb.dart' hide Color;
 import 'package:raidalarm/core/proto/rustplus.pbenum.dart';
@@ -62,7 +63,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
   Future<void> _checkLoginStatus() async {
     final dbService = DatabaseService();
     final isar = await dbService.db;
-    final creds = await isar.steamCredentials.get(1);
+    final creds = await isar.collection<SteamCredential>().get(1);
     if (mounted) {
       setState(() {
         _isLoggedIn = creds != null;
