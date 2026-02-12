@@ -132,9 +132,9 @@ app.get('/api/servers', async (req, res) => {
 setupDb().then(database => {
     db = database;
 
-    // Start Background Worker (Tracking & Wipes)
-    const { startWorker } = require('./worker');
-    startWorker(db);
+    // Worker removed as per request
+    // const { startWorker } = require('./worker');
+    // startWorker(db);
 
     app.listen(port, async () => {
         console.log(`[Server] 🚀 Running on port ${port}`);
