@@ -21,16 +21,9 @@ class NotificationRepository {
   static const String _whereChannelPackage = 'channel_id = ? AND package_name = ?';
   static const String _whereId = 'id = ?';
   static const String _orderByTimestampDesc = 'timestamp DESC';
-  static const String _packageRustCompanion = 'com.facepunch.rust.companion';
   static const String _channelAlarm = 'alarm';
   static const String _queryCountNotifications = 'SELECT COUNT(*) as count FROM notifications';
 
-  /// Bildirimi kaydet (duplicate kontrolü ile)
-  /// 
-  /// UNIQUE constraint sayesinde duplicate bildirimler otomatik olarak engellenir.
-  /// ConflictAlgorithm.ignore kullanıldığı için duplicate durumunda INSERT başarısız olur (rowId = -1).
-  /// SELECT gereksizdir çünkü UNIQUE constraint zaten duplicate'leri engelliyor.
-  /// Transaction kullanarak race condition önlenir.
   Future<bool> saveNotification(NotificationData notification) async {
     try {
       final db = await _db.database;
@@ -45,16 +38,12 @@ class NotificationRepository {
           _keySubtitle: notification.subtitle,
         };
 
-        // UNIQUE constraint sayesinde duplicate kontrolü otomatik yapılır
-        // ConflictAlgorithm.ignore kullanıldığı için duplicate durumunda rowId = -1 döner
         final rowId = await txn.insert(
           _tableNotifications,
           data,
           conflictAlgorithm: ConflictAlgorithm.ignore,
         );
 
-        // rowId != -1 ise INSERT başarılı (yeni kayıt eklendi)
-        // rowId == -1 ise INSERT başarısız (duplicate kayıt, ignore edildi)
         return rowId != -1;
       });
     } catch (e) {
@@ -85,8 +74,8 @@ class NotificationRepository {
 
       final results = await db.query(
         _tableNotifications,
-        where: _whereChannelPackage,
-        whereArgs: [_channelAlarm, _packageRustCompanion],
+        where: 'channel_id = ?', // Simply filter by channel 'alarm'
+        whereArgs: [_channelAlarm],
         orderBy: _orderByTimestampDesc,
         limit: limit,
       );

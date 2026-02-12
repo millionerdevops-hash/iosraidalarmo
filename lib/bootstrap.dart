@@ -8,10 +8,9 @@ import 'package:raidalarm/core/theme/rust_colors.dart'; // Fixed path
 import 'package:raidalarm/data/database/app_database.dart';
 import 'package:raidalarm/services/onesignal_service.dart';
 import 'package:raidalarm/services/adapty_service.dart';
-import 'package:raidalarm/services/local_notification_service.dart';
-import 'package:raidalarm/services/ad_service.dart';
 import 'package:raidalarm/core/services/notification_handler.dart';
 import 'package:raidalarm/core/services/database_service.dart';
+import 'package:raidalarm/core/services/quick_actions_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const String _translationsPath = 'assets/translations';
@@ -49,6 +48,9 @@ Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   await NotificationHandler.initialize();
+  
+  // Wake up backend early
+  FcmService.wakeUpBackend();
 
   // Initialize Database
   final dbService = DatabaseService();
@@ -78,13 +80,12 @@ Future<void> bootstrap() async {
   
   await EasyLocalization.ensureInitialized();
   await OneSignalService.init();
-  await AdaptyService.init();
-  final adService = AdService();
-  unawaited(adService.initialize());
+  
+  // Initialize Adapty
+  final adaptyService = AdaptyService();
+  await adaptyService.init();
+  
   await _initializeDatabase();
-  unawaited(
-    _initializeNotificationService(),
-  );
   
   final app = EasyLocalization(
     supportedLocales: _supportedLocales,
@@ -95,22 +96,21 @@ Future<void> bootstrap() async {
   
   runApp(
     ProviderScope(
+      overrides: [
+        adaptyServiceProvider.overrideWithValue(adaptyService),
+      ],
       child: app,
     ),
   );
+  
+  // Initialize Quick Actions (Non-blocking)
+  final container = ProviderContainer();
+  container.read(quickActionsServiceProvider).initialize();
 }
 
 Future<void> _initializeDatabase() async {
   try {
     await AppDatabase().database;
-  } catch (_) {
-  }
-}
-
-Future<void> _initializeNotificationService() async {
-  try {
-    // await NotificationListenerService().initialize(); // Removed as service is deleted
-    await LocalNotificationService().initialize();
   } catch (_) {
   }
 }

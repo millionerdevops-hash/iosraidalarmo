@@ -9,9 +9,7 @@ import 'package:raidalarm/core/utils/screen_util_helper.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
+
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 
 class DieselCalculatorScreen extends ConsumerStatefulWidget {
@@ -29,10 +27,6 @@ class _DieselCalculatorScreenState extends ConsumerState<DieselCalculatorScreen>
   // Added _handleBack method
   void _handleBack() {
     if (!mounted) return;
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
     if (mounted) context.pop();
   }
 
@@ -734,7 +728,7 @@ class _DieselCalculatorScreenState extends ConsumerState<DieselCalculatorScreen>
                       ),
                     ),
                   ),
-                const BannerAdWidget(),
+
             ],
           ),
         ),

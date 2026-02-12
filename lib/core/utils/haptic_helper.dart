@@ -94,5 +94,14 @@ class HapticHelper {
   }
   
 
+  /// Error feedback
+  /// Used for: failed operations, validation errors
+  /// Pattern: Medium-Pause-Medium (50ms-50ms-50ms)
+  static Future<bool> error() async {
+    return _vibrate(
+      pattern: [0, 50, 50, 50],
+      amplitude: 255,
+    );
+  }
 }
 

@@ -242,7 +242,7 @@ class _DevicePairingScreenState extends ConsumerState<DevicePairingScreen> {
       case AppEntityType.Alarm: assetName = 'smart-alarm.png'; break;
       default: assetName = 'smart-switch.png';
     }
-    return Image.asset('assets/png/items/$assetName', width: 64, height: 64);
+    return Image.asset('assets/png/ingame/pairing/$assetName', width: 64, height: 64);
   }
 
   String _getTitleForType(int typeVal) {

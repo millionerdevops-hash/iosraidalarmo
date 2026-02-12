@@ -11,6 +11,10 @@ import '../../features/devices/device_pairing_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'fcm_service.dart';
 import 'database_service.dart';
+import '../../data/models/notification_data.dart';
+import '../../data/repositories/notification_repository.dart';
+import '../../data/repositories/attack_statistics_repository.dart';
+import '../../data/database/app_database.dart';
 import 'dart:async';
 
 class NotificationHandler {
@@ -60,6 +64,36 @@ class NotificationHandler {
       await _handleDevicePairing(normalizedData);
     } else if (normalizedData.containsKey('ip') && normalizedData.containsKey('playerToken')) {
       await _handlePairingNotification(normalizedData);
+    } else if (normalizedData['type'] == 'alarm') {
+      await _handleAlarmNotification(normalizedData);
+    }
+  }
+
+  static Future<void> _handleAlarmNotification(Map<String, dynamic> data) async {
+    try {
+      final db = AppDatabase();
+      final statsRepo = AttackStatisticsRepository(db);
+      final notifRepo = NotificationRepository(db);
+      
+      final int timestamp = DateTime.now().millisecondsSinceEpoch;
+      
+      // 1. Record Statistics
+      await statsRepo.recordAttack(timestamp);
+      
+      // 2. Save Notification History
+      final notification = NotificationData(
+        title: data['title'] ?? 'Alarm',
+        body: data['message'] ?? 'Your base is under attack!',
+        timestamp: timestamp,
+        packageName: 'com.raidalarm', // Internal package name
+        channelId: 'alarm',
+      );
+      
+      await notifRepo.saveNotification(notification);
+      
+      debugPrint("[NotificationHandler] ⚔️ Attack recorded & saved to history");
+    } catch (e) {
+      debugPrint("[NotificationHandler] ❌ Error handling alarm: $e");
     }
   }
   

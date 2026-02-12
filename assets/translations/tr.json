@@ -75,6 +75,37 @@
             "clear": "TEMİZLE",
             "enter": "GİRİŞ",
             "code_lock": "KOD_KİLİDİ"
+        },
+        "news_feed": {
+            "title": "HABERLER",
+            "subtitle": "Oyun Güncellemeleri"
+        },
+        "blackjack": {
+            "title": "BLACKJACK",
+            "subtitle": "21 Casino Oyunu",
+            "score_you": "Sen: {}",
+            "score_dealer": "Kurpiyer: {}",
+            "dealer": "Kurpiyer",
+            "player": "Oyuncu",
+            "place_bet": "BAHSİNİ YAP",
+            "deal_cards": "KARTLARI DAĞIT",
+            "hit": "KART AL",
+            "stand": "KAL",
+            "double": "İKİ KAT",
+            "dealing": "DAĞITILIYOR...",
+            "dealer_turn": "SIRA KURPİYERDE...",
+            "results": {
+                "busted": "BOZGUN",
+                "busted_sub": "21'i geçtin",
+                "blackjack": "BLACKJACK!",
+                "blackjack_sub": "Ödeme 3:2",
+                "you_win": "KAZANDIN",
+                "dealer_busted": "Kurpiyer Patladı",
+                "score_vs_score": "{} vs {}",
+                "dealer_wins": "KURPİYER KAZANDI",
+                "push": "BERABERE",
+                "scrap_returned": "HQM İade"
+            }
         }
     },
     "recoil_trainer": {
@@ -563,12 +594,15 @@
         "limited_features": "Sınırlı Özellikler",
         "lifetime_license": "Ömür Boyu Lisans Aktif",
         "duration": "SÜRE",
-        "forever_free": "ÜCRETSİZ",
-        "lifetime": "ÖMÜR BOYU",
+        "duration_weekly": "Haftalık",
+        "duration_monthly": "Aylık",
+        "duration_3month": "3 Aylık",
+        "license_weekly": "Haftalık Lisans Aktif",
+        "license_monthly": "Aylık Lisans Aktif",
+        "license_3month": "3 Aylık Lisans Aktif",
         "status": "DURUM",
-        "locked": "KİLİTLİ",
         "active": "AKTİF",
-        "upgrade_button": "AÇMAK İÇİN YÜKSELT"
+        "restore_purchases": "SATIN ALMALARI GERİ YÜKLE"
     },
     "settings": {
         "premium_lock": {
@@ -817,6 +851,347 @@
             "low_grade": "Düşük Kalite Yakıt"
         }
     },
+    "get_started": {
+        "title": "OFFLINE\nOYUNCULARI\n<TESPİT ET.>",
+        "button_text": "BAŞLA"
+    },
+    "onboarding": {
+        "profile_config": "PROFİL YAPILANDIRILIYOR",
+        "questions": {
+            "q1": {
+                "text": "Genellikle hangi Rust sunucu türünde oynuyorsun?",
+                "options": {
+                    "official": "ğŸ ›️ Resmi (Official)",
+                    "community": "ğŸ ˜️ Topluluk (Community)",
+                    "modded": "🔧 Modlu (Modded)",
+                    "private": "🔐 Özel / Arkadaşlarla",
+                    "jump": "ğŸŽ¢ Sunucular arası geçiş yapıyorum"
+                }
+            },
+            "q2": {
+                "text": "Genellikle hangi sunucu oranında oynuyorsun?",
+                "options": {
+                    "vanilla": "ğŸ ¦ Vanilla (1x)",
+                    "2x": "ğŸ“ˆ 2x",
+                    "3x": "ğŸ“ˆ 3x",
+                    "5x": "ğŸ“ˆ 5x",
+                    "10x": "ğŸ“ˆ 10x+",
+                    "wipe_dependent": "ğŸ“‰ Wipe'a göre değişir"
+                }
+            },
+            "q3": {
+                "text": "Hangi wipe döngüsünü tercih ediyorsun?",
+                "options": {
+                    "weekly": "ğŸ“… Haftalık wipe",
+                    "biweekly": "ğŸ—“️ İki haftalık wipe",
+                    "monthly": "ğŸ“Š Aylık wipe",
+                    "pvp_only": "⚔️ Umurumda değil, sadece PvP"
+                }
+            },
+            "q4": {
+                "text": "Rust'ı genellikle nasıl oynarsın?",
+                "options": {
+                    "solo": "ğŸ º Solo",
+                    "duo": "ğŸ¤  Duo",
+                    "trio": "ğŸ‘¥ Trio",
+                    "small_group": "ğŸ‘¨â€ ğŸ‘©â€ ğŸ‘§â€ ğŸ‘¦ Küçük grup (4â€“5)",
+                    "clan": "ğŸ›¡️ Clan (6â€“12)",
+                    "zerg": "ğŸ œ Zerg (12â€“âˆž)"
+                }
+            },
+            "q5": {
+                "text": "En çok ne zaman raid yiyorsun?",
+                "options": {
+                    "offline": "ğŸ˜´ Offline (çoğu zaman)",
+                    "online": "⚔️ Online raid",
+                    "both": "ğŸ˜­ Her ikisi de",
+                    "raider": "ğŸ˜ˆ Ben başkalarını raidliyorum"
+                }
+            },
+            "q6": {
+                "text": "Rust'ta en büyük kabusun ne?",
+                "options": {
+                    "wiped": "ğŸ’€ Tamamen yıkılmış bir base'e uyanmak",
+                    "lost_loot": "ğŸ’£ Tüm kükürt ve lootumu kaybetmek",
+                    "sleeping": "ğŸ˜´ Uyurken raid yemek",
+                    "work_school": "ğŸ « İş/okulda iken raid yemek",
+                    "missed_boom": "ğŸ‘‚ İlk patlama sesini kaçırmak"
+                }
+            },
+            "q7": {
+                "text": "Genellikle ne zaman offline olursun?",
+                "options": {
+                    "sleeping": "ğŸ˜´ Uyurken",
+                    "work_school": "ğŸ « İş/okuldayken",
+                    "traveling": "âœˆ️ Seyahatteyken",
+                    "all_day": "ğŸŽ® Neredeyse tüm gün oynuyorum",
+                    "random": "ğŸ”€ Rastgele saatler"
+                }
+            },
+            "q8": {
+                "text": "Base'ini genellikle nasıl kuruyorsun?",
+                "options": {
+                    "small": "Küçük gizli base",
+                    "bunker": "ğŸ§± Bunker base",
+                    "compound": "ğŸ”« Taretli compound",
+                    "multiple": "ğŸ   Birden fazla küçük base",
+                    "whatever": "ğŸŽ² Wipe'ı atlatacak ne varsa"
+                }
+            },
+            "q9": {
+                "text": "Raid bildirimleri için Rust+ kullanıyor musun?",
+                "options": {
+                    "yes_unreliable": "âš ️ Evet, ama bildirimler güvenilmez",
+                    "no_trust": "ğŸ¤¨ Denedim ama güvenemedim",
+                    "too_late": "ğŸ•’ Bildirimleri çok geç alıyorum",
+                    "no": "â Œ Hiç Rust+ kullanmıyorum"
+                }
+            },
+            "q10": {
+                "text": "Rust+ sesini duymadığın için hiç raid kaçırdın mı?",
+                "options": {
+                    "yes_many": "ğŸ˜ž Evet... sayamayacağım kadar çok",
+                    "yes_wiped": "ğŸ’€ Evet ve base'im yıkıldı",
+                    "almost": "ğŸ˜° Neredeyse â€” son anda girebildim"
+                }
+            },
+            "q11": {
+                "text": "Raid bildirimlerini genellikle neden kaçırıyorsun?",
+                "options": {
+                    "silent": "ğŸ”• Telefonum sessiz/titreşimde",
+                    "another_room": "ğŸ“± Telefonum başka odada",
+                    "battery_saver": "ğŸ”‹ Pil tasarrufu bildirimleri kesiyor",
+                    "sleeping": "ğŸ˜´ Uyuyorum ve alarm duymuyorum"
+                }
+            },
+            "q12": {
+                "text": "Raid sırasında seni gerçekten ne uyandırabilir?",
+                "options": {
+                    "loud_alarm": "ğŸ”” Yüksek sesli, durdurulamaz alarm",
+                    "repeating_alarm": "ğŸ”  Sen durdurana kadar tekrar eden alarm",
+                    "phone_call": "ğŸ“ž Telefon araması simülasyonu",
+                    "all": "⭐ Maksimum güvenlik için hepsini kullanırım"
+                }
+            },
+            "q13": {
+                "text": "Hangi özelliği kullanmak için en heyecanlısın?",
+                "options": {
+                    "alarm_only": "ğŸš¨ Sadece Raid Alarm",
+                    "tracking_wipe": "ğŸŽ¯ Oyuncu takibi ve sunucu wipe bildirimleri",
+                    "both": "⭐ Her iki özellik"
+                }
+            }
+        }
+    },
+    "risk_analysis": {
+        "status": {
+            "analyzing": "ANALİZ EDİLİYOR...",
+            "danger_detected": "TEHLİKE TESPİT EDİLDİ"
+        },
+        "stats": {
+            "threat_level": "Tehdit Seviyesi",
+            "threat_value": "Kritik",
+            "vulnerable_time": "Savunmasız Zaman",
+            "vulnerable_time_format": "{} - {}",
+            "wipe_risk": "Wipe Riski",
+            "wipe_risk_value": "Yüksek",
+            "raid_probability": "Raid Olasılığı",
+            "percentage_format": "{}%"
+        },
+        "calculating_odds": "OLASILIKLAR HESAPLANIYOR...",
+        "button_view_solution": "ÇÖZÜMÜ GÖR"
+    },
+    "how_it_works": {
+        "title": "Rust+ Tespit Eder",
+        "description": "Rust+ raidi tespit eder ve uyarısını gönderir.",
+        "subtitle": "Kontrolü Biz Alırız",
+        "mode_alarm": "ALARM MODU",
+        "mode_call": "SAHTE ARAMA",
+        "button_continue": "DEVAM ET",
+        "demo": {
+            "notification_title": "Alarm",
+            "notification_message": "Basen saldırı altında!",
+            "rust_plus": "RUST+",
+            "time_now": "şimdi",
+            "raid_alarm_title": "RAID\nALARMI",
+            "activated": "AKTİFLEŞTİRİLDİ",
+            "incoming_call_name": "Raid Alarmı",
+            "calling_status": "Arıyor...",
+            "lock_screen_date": "Pazartesi, 29 Ekim"
+        }
+    },
+    "player_tracking": {
+        "max_limit_reached": "Maksimum {} oyuncu takip edilebilir",
+        "status": {
+            "just_added": "Yeni eklendi"
+        },
+        "preview": {
+            "title": "Canlı Takip",
+            "description": "Düşmanlarınız için gerçek zamanlı durum güncellemeleri.",
+            "app_header": "Hedefler",
+            "system_active": "SİSTEM AKTİF",
+            "status": {
+                "online": "ÇEVRİMİÇİ",
+                "offline": "ÇEVRİMDIŞI"
+            },
+            "time": {
+                "active_now": "Şimdi Aktif",
+                "seen_5m": "5 dk önce görüldü",
+                "seen_4h": "4 saat önce görüldü"
+            },
+            "notification": {
+                "online_title": "HEDEF ÇEVRİMİÇİ",
+                "offline_title": "HEDEF ÇEVRİMDIŞI",
+                "now": "şimdi",
+                "online_message": "Player 1 ÇEVRİMİÇİ",
+                "offline_message": "Player 1 ÇEVRİMDIŞI"
+            },
+            "button_continue": "DEVAM ET"
+        }
+    },
+    "partners": {
+        "title": "ORTAKLAR",
+        "subtitle": "Güvenilir Sunucu Barındırma",
+        "pine": {
+            "description": "Premium Rust barındırma. Ciddi sunucu sahipleri için tasarlanmış özel kontrol paneli ile sektör lideri performans."
+        },
+        "hosthavoc": {
+            "description": "%99,9 çalışma süresi ile kurumsal donanım. 10 dakikadan kısa yanıt süreleriyle 7/24 destek. Modlu sunucular için güvenilir seçim."
+        },
+        "gportal": {
+            "description": "Official host for Rust servers. Instant setup, DDoS protection included, and switch between games anytime. Great for beginners."
+        }
+    },
+    "setup_ready": {
+        "ui": {
+            "configuration": "YAPILANDIRMA",
+            "step_format": "{} / {}",
+            "continue": "DEVAM ET",
+            "back": "GERİ"
+        },
+        "step1": {
+            "title": "Rust+ Yükle",
+            "description": "Raid Alarm, Rust+ ile birlikte çalışır.",
+            "how_it_works": "NASIL ÇALIŞIR",
+            "signal": "SİNYAL",
+            "protection": "KORUMA",
+            "installed_continue": "Rust+ tespit edildi. Kurulum süresini azaltın.",
+            "hero": {
+                "rust_plus": "Rust+ raid sinyalini gönderir.",
+                "raid_alarm": "Raid Alarm duyduğunuzdan emin olur."
+            },
+            "status": {
+                "detected": "Rust+ uygulaması başarıyla tespit edildi.",
+                "not_found": "Rust+ uygulaması bulunamadı. Lütfen önce yükleyin.",
+                "already_installed": "Eğer Rust+ zaten yüklüyse devam edebilirsiniz."
+            },
+            "buttons": {
+                "check": "KURULUMU KONTROL ET",
+                "install": "RUST+ YÜKLE"
+            }
+        },
+        "step2": {
+            "title": "Rust+ Bağla",
+            "subtitle": "Bildirimleri almak için sunucunuzu bağlayın",
+            "items": {
+                "1": "Rust+ açın ve Steam hesabınızla giriş yapın",
+                "2": "Bir sunucuya katılın -> ESC Menüsü -> Pair with App",
+                "3": "Sunucunuzun uygulamada 'Bağlı' göründüğünden emin olun",
+                "4": "Uyarıları almak için oyun içine 'Smart Alarm' yerleştirin"
+            },
+            "button": "BAĞLANDIM"
+        },
+        "step3": {
+            "title": "Bildirimleri Etkinleştir",
+            "description": "Raid uyarılarının telefonunuza ulaşabildiğinden emin olun.",
+            "check": {
+                "in_app": "Rust+ uygulama içi bildirimler açık",
+                "system": "Sistem bildirimlerine izin verildi"
+            },
+            "buttons": {
+                "check_settings": "BİLDİRİM AYARLARINI KONTROL ET",
+                "open_app": "RUST+ UYGULAMASINI AÇ",
+                "open_settings": "RUST+ AYARLARINI AÇ"
+            }
+        },
+        "step4": {
+            "title_line1": "Neden Sadece Rust+",
+            "title_line2": "Yeterli Değil",
+            "description": "Rust+ bildirim gönderir — ama ne zaman:",
+            "reasons": {
+                "silent": "Telefonunuz sessizde veya titreşimdeyse",
+                "sleeping": "Uyuyorsanız",
+                "battery": "Pil tasarrufu aktifse",
+                "dnd": "Rahatsız Etmeyin modu aktifse"
+            },
+            "boom": "İlk patlama sesini asla duymazsınız.",
+            "fail_reason": "Çoğu offline raid, uyarılar fark edilmediği için başarılı olur.",
+            "missed_button": "UYARILARI KAÇIRDIM"
+        },
+        "step5": {
+            "title": "Raid Alarm Yükseltmeleri",
+            "subtitle": "Rust+ bildirimlerini yüksek sesli alarmlara dönüştürür",
+            "features": {
+                "loud_alarms": "Yüksek sesli alarmlar",
+                "fake_calls": "Sahte gelen aramalar",
+                "repeating": "Tekrarlayan uyarılar"
+            },
+            "notice": "Böylece Rust+ bildirim gönderdiğinde —\nfark edeceğinizden emin olursunuz."
+        },
+        "step6": {
+            "title": "Raid Alarm'ı Hazırla",
+            "description": "Bir raidi asla kaçırmadığınızdan emin olmak için Raid Alarm'ın düzgün çalışması için birkaç izne ihtiyacı var.",
+            "allow_us": "BUNLAR ŞUNLARI SAĞLAR:",
+            "reasons": {
+                "trigger": "Yüksek sesli alarmları tetikleme",
+                "simulate": "Gelen aramaları simüle etme",
+                "override": "Sessiz ve pil kısıtlamalarını aşma"
+            },
+            "warning": "Bunlar olmadan uyarılar hala kaçırılabilir.",
+            "button": "KURULUMA DEVAM ET"
+        },
+        "step7": {
+            "title": "İzinleri Ver",
+            "description": "İzinleri vermek için sırayla seçeneklere tıklayın.",
+            "grant_button": "KALANLARI VER",
+            "permissions": {
+                "notifications": {
+                    "title": "Bildirimler",
+                    "desc": "Yüksek sesli raid alarmları çalmak için"
+                },
+                "notification_access": {
+                    "title": "Bildirim Erişimi",
+                    "desc": "Rust+'tan gelen raid uyarılarını tespit etmek için"
+                },
+                "battery_optimization": {
+                    "title": "Pil optimizasyonlarını yoksay",
+                    "desc": "Uyarıların kapanmasını önlemek için"
+                },
+                "overlay": {
+                    "title": "Diğer uygulamaların üzerinde göster",
+                    "desc": "Herhangi bir uygulamanın üzerinde uyarıları göstermek için"
+                },
+                "exact_alarms": {
+                    "title": "Tam Alarmlar",
+                    "desc": "Uyarıları kesin zamanlarda tetiklemek için"
+                },
+                "autostart": {
+                    "title": "Otomatik Başlatma",
+                    "desc": "Raid Alarm'ın telefonunuzla birlikte başladığından emin olmak için"
+                },
+                "full_screen_intent": {
+                    "title": "Tam Ekran İzni",
+                    "desc": "Telefon kilitliyken alarm ekranının gösterilmesi için"
+                }
+            }
+        },
+        "step8": {
+            "title": "HAZIRSINIZ",
+            "description": "Raid Alarm artık arka planda aktif.",
+            "subtitle": "Bir raid tespit edilirse sizi uyandıracağız.",
+            "dashboard_button": "PANEL'E GİT"
+        }
+    },
     "legal": {
         "privacy_policy": {
             "title": "Gizlilik Politikası",
@@ -891,25 +1266,55 @@
             "section16_content": "Uygulama, Google AdMob başta olmak üzere üçüncü taraf reklam ağları tarafından sunulan reklamların görüntülendiği Ücretsiz bir sürüm sunmaktadır. Bu reklamlar, Uygulamanın sürekli geliştirilmesini ve bakımını finanse etmeye yardımcı olur. Ömür Boyu Lisans satın alan kullanıcılar için reklamlar kaldırılır. Reklamı yapılan ürün veya hizmetleri onaylamıyoruz ve üçüncü taraf reklamlarının içeriğinden sorumlu değiliz."
         }
     },
+    "newsfeed": {
+        "title": "Haberler",
+        "try_again": "TEKRAR DENE",
+        "end_of_feed": "AKIŞIN SONU",
+        "errors": {
+            "fetch_failed": "Canlı haberler alınamadı.",
+            "connection_failed": "Bağlantı Hatası",
+            "connection_desc": "Rust sunucularından canlı haber akışı alınamadı."
+        }
+    },
+    "bug_report": {
+        "ui": {
+            "title": "HATA BİLDİR",
+            "subject": "Konu",
+            "subject_hint": "Konu hakkında kısa bir özet",
+            "description": "Açıklama",
+            "send": "RAPOR GÖNDER",
+            "error_empty": "Bu alan boş bırakılamaz",
+            "success": "Rapor başarıyla gönderildi",
+            "error_mail": "E-posta uygulaması açılamadı"
+        }
+    },
     "paywall": {
-        "title_line1": "ÖMÜR BOYU",
-        "title_line2": "ERİŞİM",
-        "subtitle": "Bir kez öde. Sonsuza kadar sahip ol.",
-        "no_subscriptions": "ABONELİK YOK.",
-        "secure_access": "SINIRSIZ KORUMAYI BAŞLAT",
-        "restore": "GERİ YÜKLE",
-        "privacy": "GİZLİLİK",
-        "terms": "HİZMET KOŞULLARI",
+        "title": "Start Your 7-Day Free Trial for Unlimited",
+        "table_features": "ÖZELLİKLER",
+        "table_free": "ÜCRETSİZ",
+        "table_pro": "PRO",
+        "features": {
+            "alarm": "Alarm Modu",
+            "fake_call": "Sahte Arama Modu",
+            "tracker": "Oyuncu Takibi",
+            "no_ads": "Reklamsız",
+            "wipe": "Wipe Bildirimi",
+            "tools": "Extra Araçlar"
+        },
+        "plan_lifetime": "ÖMÜR BOYU ERİŞİM",
+        "plan_lifetime_subtitle": "TEK SEFERLİK ÖDE",
+        "plan_monthly": "AYLIK PLAN",
+        "plan_trial": "7 GÜNLÜK ÜCRETSİZ DENE",
+        "plan_one_time": "TEK SEFERLİK",
+        "plan_best_value": "EN İYİ DEĞER",
+        "button_trial": "7 GÜN ÜCRETSİZ DENE",
+        "button_unlock": "ÖMÜR BOYU ERİŞİMİ AÇ",
+        "restore": "Geri Yükle",
+        "privacy": "Gizlilik",
+        "terms": "Koşullar",
         "plan_card": {
             "name": "ÖMÜR BOYU ERİŞİM",
-            "one_time": "TEK SEFERLİK ÖDEME"
-        },
-        "benefits": {
-            "critical_alarms": "Kritik Raid Alarmları (Sessiz Modu Aşar)",
-            "fake_call": "Sahte Gelen Arama Simülasyonu",
-            "enemy_notifications": "Düşman Çevrimiçi/Çevrimdışı Bildirimleri",
-            "server_notifications": "Sunucu Çevrimiçi/Çevrimdışı Bildirimleri",
-            "wipe_notifications": "Özel Wipe Bildirimleri"
+            "one_time": "TEK SEFERLİK ÖDE"
         },
         "errors": {
             "network": "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
@@ -920,11 +1325,11 @@
             "already_purchased": "Bu ürün zaten satın alındı.",
             "generic_failed": "Satın alma başarısız: {}",
             "purchase_failed_default": "Satın alma başarısız. Lütfen tekrar deneyin.",
+            "purchase_verification_failed": "Ödeme tamamlandı ancak ömür boyu erişim doğrulanamadı.",
             "restore_no_internet": "İnternet bağlantısı yok. Lütfen ağınızı kontrol edin.",
             "restore_timeout": "Geri yükleme zaman aşımına uğradı. Lütfen tekrar deneyin.",
             "restore_failed": "Geri yükleme başarısız: {}",
-            "no_lifetime_found": "Geri yüklenecek ömür boyu satın alma bulunamadı",
-            "purchase_verification_failed": "Ödeme tamamlandı ancak ömür boyu erişim doğrulanamadı."
+            "no_lifetime_found": "Geri yüklenecek ömür boyu satın alma bulunamadı"
         }
     }
 }

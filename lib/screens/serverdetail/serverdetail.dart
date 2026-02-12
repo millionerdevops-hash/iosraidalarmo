@@ -26,11 +26,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:raidalarm/providers/player_tracking_provider.dart';
 import 'package:raidalarm/core/router/app_router.dart';
 import 'package:raidalarm/services/local_notification_service.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/widgets/settings/settings_shared.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
 import 'package:raidalarm/core/utils/connectivity_helper.dart';
+import 'package:raidalarm/providers/notification_provider.dart';
 
 class ServerDetailScreen extends ConsumerStatefulWidget {
   final String initialTab;
@@ -189,33 +186,21 @@ class _ServerDetailScreenState extends ConsumerState<ServerDetailScreen> with Ro
     final serverName = _server!.name;
     final nextWipeStr = _server!.nextWipe!;
     
-    // Save to DB
-    await _db.saveWipeAlert(
-      serverId: serverId,
-      serverName: serverName,
-      wipeTime: nextWipeStr,
-      alertMinutes: _wipeAlertMinutes,
-      isEnabled: _wipeAlertEnabled,
-    );
-    
-    // Schedule/Cancel Notification
-    final notificationId = serverId.hashCode.abs();
-    final service = LocalNotificationService();
-    
-    if (_wipeAlertEnabled) {
-      final wipeTime = DateTime.parse(nextWipeStr);
-      final scheduledTime = wipeTime.subtract(Duration(minutes: _wipeAlertMinutes));
-      
-      if (scheduledTime.isAfter(DateTime.now())) {
-        await service.scheduleWipeAlert(
-          id: notificationId,
-          title: tr('server.notifications.wipe_alert_title', args: [serverName]), // Add this key or use generic
-          body: tr('server.notifications.wipe_alert_body', args: [_wipeAlertMinutes.toString()]),
-          scheduledDate: scheduledTime,
+    // Update via Server API
+    try {
+      await ref.read(playerTrackingProvider).updateWipeAlert(
+        serverId: serverId,
+        serverName: serverName,
+        wipeTime: nextWipeStr,
+        alertMinutes: _wipeAlertMinutes,
+        isEnabled: _wipeAlertEnabled,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+           SnackBar(content: Text(tr('server.detail.errors.connection'))),
         );
       }
-    } else {
-      await service.cancelNotification(notificationId);
     }
   }
 
@@ -252,13 +237,7 @@ class _ServerDetailScreenState extends ConsumerState<ServerDetailScreen> with Ro
 
   void _handleBack() {
     if (!mounted) return;
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
-    if (mounted) {
-      context.go('/server-search');
-    }
+    context.go('/server-search');
   }
 
   bool get _isFavorite => _server != null && _favorites.any((f) => f.id == _server!.id);
@@ -842,11 +821,8 @@ class _ServerDetailScreenState extends ConsumerState<ServerDetailScreen> with Ro
                     ),
                     Expanded(
                       child: _buildTabContent(),
-                    ),
-                    const BannerAdWidget(),
                   ],
                 ),
-                // Modals
                 if (_inspectingPlayer != null) _buildInspectionModal(),
                 if (_editingTarget != null) _buildEditingModal(),
               ],
@@ -890,12 +866,6 @@ class _ServerDetailScreenState extends ConsumerState<ServerDetailScreen> with Ro
               if (!granted) {
                 if (mounted) setState(() => _wipeAlertEnabled = false);
                 return;
-              }
-
-              // Show interstitial ad on toggle TRU E if not lifetime user
-              final hasLifetime = ref.read(notificationProvider).hasLifetime;
-              if (!hasLifetime) {
-                AdService().showInterstitialAd();
               }
             }
             

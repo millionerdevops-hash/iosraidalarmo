@@ -15,9 +15,6 @@ import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:raidalarm/core/utils/permission_helper.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
 import 'package:raidalarm/core/utils/connectivity_helper.dart';
 
 class PlayerSearchScreen extends ConsumerStatefulWidget {
@@ -289,13 +286,7 @@ class _PlayerSearchScreenState extends ConsumerState<PlayerSearchScreen> {
 
   void _handleBack() {
     if (!mounted) return;
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
-    if (mounted) {
-      context.go('/info');
-    }
+    context.go('/info');
   }
 
   @override
@@ -472,7 +463,7 @@ class _PlayerSearchScreenState extends ConsumerState<PlayerSearchScreen> {
                     ],
                   ),
                 ),
-                const BannerAdWidget(),
+
               ],
             ),
             if (_selectedPlayer != null)

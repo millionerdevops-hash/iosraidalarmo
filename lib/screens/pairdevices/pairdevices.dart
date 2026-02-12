@@ -19,6 +19,7 @@ import 'package:isar/isar.dart';
 import 'package:raidalarm/core/proto/rustplus.pb.dart' hide Color;
 import 'package:raidalarm/core/proto/rustplus.pbenum.dart';
 import 'package:raidalarm/core/theme/rust_colors.dart';
+import 'package:raidalarm/core/utils/haptic_helper.dart';
 
 
 class PairDevicesScreen extends ConsumerStatefulWidget {
@@ -34,6 +35,9 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
   @override
   void initState() {
     super.initState();
+    // Wake up backend to ensure smooth pairing
+    FcmService.wakeUpBackend();
+    
     WidgetsBinding.instance.addObserver(this);
     _checkLoginStatus();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -363,7 +367,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
         children: [
           Icon(
             LucideIcons.bluetooth,
-            size: 64.w,
+            size: 48.w,
             color: const Color(0xFF52525B),
           ),
           SizedBox(height: 24.h),
@@ -446,36 +450,44 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 48.w),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  'Devices',
-                  style: RustTypography.rustStyle(
-                    fontSize: 20.sp,
-                    color: Colors.white,
-                    weight: FontWeight.bold,
-                  ),
-                ),
-              ),
+          // Centered Logo
+          Center(
+            child: Image.asset(
+              'assets/logo/raidalarm-logo2.png',
+              height: 80.w,
+              fit: BoxFit.contain,
+              cacheWidth: 160,
             ),
           ),
           
           // Action Buttons (Right)
-          if (serverId != null)
           Align(
             alignment: Alignment.centerRight,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Automation - Navigate to Automation
-                IconButton(
-                  icon: const Icon(Icons.auto_fix_high, color: Colors.white),
-                  tooltip: "Automations",
-                  onPressed: () => context.push('/server/$serverId/automation'),
+
+                
+                // Settings Button
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      HapticHelper.mediumImpact();
+                      context.push('/settings');
+                    },
+                    borderRadius: BorderRadius.circular(999),
+                    child: Container(
+                      width: 40.w,
+                      height: 40.w,
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.settings,
+                        size: 20.w,
+                        color: const Color(0xFFA1A1AA),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

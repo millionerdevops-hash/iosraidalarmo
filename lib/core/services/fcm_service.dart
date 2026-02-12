@@ -111,4 +111,15 @@ class FcmService {
       return [];
     }
   }
+
+  /// Wake up the backend (Render.com free tier spins down)
+  static Future<void> wakeUpBackend() async {
+    try {
+      debugPrint("[FcmService] ⏰ Waking up backend...");
+      final response = await http.get(Uri.parse('$serverUrl/'));
+      debugPrint("[FcmService] ⏰ Backend Status: ${response.statusCode}");
+    } catch (e) {
+      debugPrint("[FcmService] ⚠️ Wake up failed (might be offline): $e");
+    }
+  }
 }

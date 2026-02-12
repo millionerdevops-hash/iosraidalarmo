@@ -121,6 +121,14 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                               context.push('/code-raider');
                             },
                           ),
+                          ToolsGridCard(
+                            title: tr('tools.blackjack.title'),
+                            subtitle: tr('tools.blackjack.subtitle'),
+                            imageUrl: 'assets/images/png/blackjack.png',
+                            onClick: () {
+                              context.push('/blackjack');
+                            },
+                          ),
                           
 
                         ],

@@ -216,21 +216,37 @@ async function handleNotification(user, data, db) {
             }
         }
 
-    } else if (payload.entityId) {
-        if (payload.entityType == "1") {
-            title = "Smart Switch";
-            body = `Switch "${payload.name || 'Device'}" state changed.`;
-        } else {
+        if (payload.entityType != "1" && payload.entityId) {
+            // RAID ALARM!
             title = "Smart Alarm!";
             body = `Alarm "${payload.name || 'Device'}" triggered!`;
-        }
-    }
 
-    sendPushNotification(user.onesignal_id, {
-        title,
-        body,
-        data: payload
-    });
-}
+            // 1. Send Standard OneSignal Push (Visual / History)
+            sendPushNotification(user.onesignal_id, {
+                title,
+                body,
+                data: { ...payload, type: 'raid' }
+            });
+
+            // 2. Send VoIP Push (Immediate Wake-up / CallKit)
+            if (user.ios_voip_token) {
+                const { sendVoipNotification } = require('./notifications');
+                sendVoipNotification(user.ios_voip_token, {
+                    title: "Raid Alarm",
+                    body: body,
+                    type: 'raid', // Key for AppDelegate to recognize
+                    ...payload
+                });
+            }
+        } else {
+            // Info / Switch / Pairing
+            sendPushNotification(user.onesignal_id, {
+                title,
+                body,
+                data: payload
+            });
+        }
+    } // End if (payload.ip && payload.playerToken)
+} // End handleNotification
 
 module.exports = { startMcsForUser, performFullRegistration };

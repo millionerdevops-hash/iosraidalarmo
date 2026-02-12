@@ -50,17 +50,16 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 		<string>audio</string>
+		<string>voip</string>
 	</array>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalized ads to you.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need access to your camera to allow you to take and upload photos of your base or profile.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your photo library to allow you to choose and upload photos.</string>
+	<string>Raid Alarm needs access to your photo library to allow you to select custom images for the Fake Call screen.</string>
+	<key>NSUserNotificationAlertStyleUsageDescription</key>
+	<string>Raid Alarm needs notification access to alert you during a raid.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>We need access to your microphone for alert voice features.</string>
+	<string>Raid Alarm needs microphone access to enable the fake call screen feature.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>

@@ -9,8 +9,7 @@ import 'package:raidalarm/data/recoil_data.dart';
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
+
 import 'package:go_router/go_router.dart';
 
 class RecoilTrainerScreen extends ConsumerStatefulWidget {
@@ -191,10 +190,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
             child: IconButton(
               onPressed: () {
                 HapticHelper.mediumImpact();
-                final hasLifetime = ref.read(notificationProvider).hasLifetime;
-                if (!hasLifetime) {
-                  AdService().showInterstitialAd();
-                }
+
                 context.go('/tools');
               },
               icon: Icon(LucideIcons.arrowLeft, color: const Color(0xFFA1A1AA), size: 22.w),

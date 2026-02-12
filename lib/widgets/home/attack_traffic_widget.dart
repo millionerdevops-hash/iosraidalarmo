@@ -79,7 +79,7 @@ class _AttackTrafficWidgetState extends State<AttackTrafficWidget> {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.all(20.w),
+            padding: EdgeInsets.all(16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -149,12 +149,12 @@ class _AttackTrafficWidgetState extends State<AttackTrafficWidget> {
                     ),
                   ],
                 ),
-                 ScreenUtilHelper.sizedBoxHeight(24.0),
+                 ScreenUtilHelper.sizedBoxHeight(12.0),
 
                 // Chart Visual
                 RepaintBoundary(
                   child: SizedBox(
-                    height: 192.h,
+                    height: 180.h,
                     child: Column(
                       children: [
                         Expanded(

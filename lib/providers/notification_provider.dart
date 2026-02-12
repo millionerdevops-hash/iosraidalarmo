@@ -34,7 +34,7 @@ class NotificationProvider extends ChangeNotifier {
   DateTime? _lastAttackTime;
   
 
-  bool _hasLifetime = AdaptyService.isPremiumCached;
+  bool _hasLifetime = false; // Initial value, updated in initialize
   bool _isInitialized = false;
   
   List<NotificationData> get notifications => List.unmodifiable(_notifications);
@@ -55,13 +55,13 @@ class NotificationProvider extends ChangeNotifier {
     try {
       _hasLifetime = await _db.getBoolSetting('has_lifetime');
     } catch (_) {
-      _hasLifetime = AdaptyService.isPremiumCached;
+      _hasLifetime = _ref.read(adaptyServiceProvider).isPremiumCached;
     }
     notifyListeners();
 
     // Subscribe to Adapty premium updates (purchase/restore) and self-heal local cache
     await _premiumStatusSubscription?.cancel();
-    _premiumStatusSubscription = AdaptyService.premiumStatusStream.listen((isPremium) async {
+    _premiumStatusSubscription = _ref.read(adaptyServiceProvider).premiumStatusStream.listen((isPremium) async {
       if (isPremium) {
         try {
           await _db.saveAppSetting('has_lifetime', 'true');
@@ -74,37 +74,16 @@ class NotificationProvider extends ChangeNotifier {
     });
 
     // Final refresh (may be slow/network) but should be correct; AdaptyService already has DB fallback too.
-    _hasLifetime = await AdaptyService.hasPremiumAccess();
+    _hasLifetime = await _ref.read(adaptyServiceProvider).hasPremiumAccess();
     
 
     
-    
-    await _checkForNewNotificationsFromDatabase();
     
     _isInitialized = true;
   }
   
   
-  Future<void> _checkForNewNotificationsFromDatabase() async {
-    try {
-      final lastNotificationTimestamp = _lastNotification?.timestamp ?? 0;
-      
-      // getLastNotification() ile timestamp kontrolü yeterli (COUNT query gereksiz)
-      final newestNotification = await _notificationRepo.getLastNotification();
-      final newestStorageTimestamp = newestNotification?.timestamp;
-      
-      // Yeni bildirim varsa timestamp daha büyük olacak
-      final hasNewNotifications = newestStorageTimestamp != null && 
-          newestStorageTimestamp > lastNotificationTimestamp;
-      
-      if (hasNewNotifications) {
-        await _loadNotificationHistory();
-        notifyListeners();
-      }
-    } catch (e) {
-      // Error checking for new notifications from database
-    }
-  }
+  // Method removed: _checkForNewNotificationsFromDatabase (Legacy polling)
   
   
   Future<void> _loadAttackStatistics() async {

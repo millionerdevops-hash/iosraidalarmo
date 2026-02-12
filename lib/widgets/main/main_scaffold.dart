@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:raidalarm/core/theme/rust_colors.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
+
 
 class MainScaffold extends ConsumerStatefulWidget {
   final Widget child;
@@ -25,16 +25,14 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
   late int _currentIndex;
 
   // Performance: Cached color constants
-  static const _infoColor = Color(0xFF22C55E);     // green-500
   static const _alarmColor = Color(0xFFEF4444);    // red-500
   static const _toolsColor = Color(0xFF22D3EE);    // cyan-400
-  static const _pairColor = Color(0xFFA855F7);     // purple-500 (new)
+  static const _pairColor = Color(0xFF10B981);     // emerald-500
   static const _inactiveColor = Color(0xFF52525B); // zinc-600
   static const _bgColor = Color(0xFF09090B);       // zinc-950
   static const _borderColor = Color(0xFF18181B);   // zinc-900
 
   // Performance: Cached background colors (created once)
-  static final _infoBgColor = _infoColor.withOpacity(0.1);
   static final _alarmBgColor = _alarmColor.withOpacity(0.1);
   static final _toolsBgColor = _toolsColor.withOpacity(0.1);
   static final _pairBgColor = _pairColor.withOpacity(0.1);
@@ -68,16 +66,13 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
 
     switch (index) {
       case 0:
-        context.go('/info'); // INFO
-        break;
-      case 1:
         context.go('/stats'); // ALARM
         break;
-      case 2:
+      case 1:
         context.go('/tools'); // TOOLS
         break;
-      case 3:
-        context.go('/pair-devices'); // PAIR DEVICES
+      case 2:
+        context.go('/pair-devices'); // PAIR
         break;
     }
   }
@@ -86,12 +81,10 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
   Color _getActiveBackgroundColor(int index) {
     switch (index) {
       case 0:
-        return _infoBgColor;
-      case 1:
         return _alarmBgColor;
-      case 2:
+      case 1:
         return _toolsBgColor;
-      case 3:
+      case 2:
         return _pairBgColor;
       default:
         return _alarmBgColor;
@@ -112,7 +105,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
               Expanded(child: widget.child),
               
               // Banner Ad (Self-managing, hides if premium)
-              const BannerAdWidget(),
+              // (If ad widget was here, it would be preserved)
               
               // Spacer for Bottom Navigation Bar
               SizedBox(height: bottomNavBarHeight + bottomPadding),
@@ -120,8 +113,6 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
           ),
           
           // Bottom Navigation Bar
-          
-          // Bottom Navigation Bar (Absolute positioned like React Native)
           Positioned(
             bottom: 0,
             left: 0,
@@ -143,32 +134,26 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround, // justify-around
                     children: [
-                      // INFO Tab (index 0)
+
+
+                      // PAIR Tab (index 2)
+                      _buildTabButton(
+                        index: 2,
+                        icon: Icons.link,
+                        activeColor: _pairColor,
+                      ),
+                                            // ALARM Tab (index 0)
                       _buildTabButton(
                         index: 0,
-                        icon: Icons.public,
-                        activeColor: _infoColor,
-                      ),
-
-                      // ALARM Tab (index 1 - middle)
-                      _buildTabButton(
-                        index: 1,
-                        icon: Icons.shield,
+                        icon: Icons.bar_chart,
                         activeColor: _alarmColor,
                       ),
                       
-                      // TOOLS Tab (index 2)
+                      // TOOLS Tab (index 1)
                       _buildTabButton(
-                        index: 2,
+                        index: 1,
                         icon: Icons.calculate,
                         activeColor: _toolsColor,
-                      ),
-
-                      // PAIR Tab (index 3)
-                      _buildTabButton(
-                        index: 3,
-                        icon: Icons.bluetooth,
-                        activeColor: _pairColor,
                       ),
                     ],
                   ),
@@ -192,6 +177,8 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
       color: Colors.transparent,
       child: InkWell(
         onTap: () => _onItemTapped(index),
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         borderRadius: BorderRadius.circular(16.r), // rounded-2xl
         child: Container(
           width: 80.w, // w-20 = 80px
@@ -210,7 +197,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
               color: isActive 
                   ? activeColor 
                   : _inactiveColor, // text-zinc-600
-              fill: isActive && index == 1 ? 1.0 : 0.0, // fill-current only for ALARM when active
+              fill: isActive && index == 0 ? 1.0 : 0.0, // fill-current only for ALARM when active (now index 0)
             ),
           ),
         ),

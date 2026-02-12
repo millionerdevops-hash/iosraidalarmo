@@ -18,8 +18,6 @@ import 'package:raidalarm/data/database/app_database.dart';
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
 part 'parts/settings_widgets.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -48,10 +46,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   void _handleBack() {
     if (!mounted) return;
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
     if (mounted) context.pop();
   }
 
@@ -130,6 +124,138 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 onPaywall: _handlePaywall,
                               ),
                               ScreenUtilHelper.sizedBoxHeight(20.0), // mb-3
+
+                              // Guides & Setup
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 8.w), // pl-2
+                                    child: FittedBox(
+                                      child: Text(
+                                        tr('settings.ui.guides_setup'),
+                                        style: RustTypography.monoStyle(
+                                          fontSize: 12.sp, // text-xs
+                                          weight: FontWeight.w700,
+                                          color: const Color(0xFF71717A), // zinc-500
+                                          letterSpacing: 2.w, // tracking-widest
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  ScreenUtilHelper.sizedBoxHeight(12.0), // mb-3
+
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF121214), // bg-zinc-900 (matched)
+                                      border: Border.all(
+                                        color: RustColors.divider,
+                                        width: 1.w,
+                                      ),
+                                      borderRadius: BorderRadius.circular(16.r), // rounded-2xl
+                                    ),
+                                    clipBehavior: Clip.antiAlias,
+                                    child: Column(
+                                      children: [
+                                        // How It Works
+                                        Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            onTap: () {
+                                              HapticHelper.mediumImpact();
+                                              context.push(Uri(path: '/how-it-works', queryParameters: {'fromSettings': 'true'}).toString());
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(20.w),
+                                              decoration: BoxDecoration(
+                                                border: Border(
+                                                  bottom: BorderSide(
+                                                    color: Colors.white.withOpacity(0.05),
+                                                    width: 1.h,
+                                                  ),
+                                                ),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Icon(
+                                                        LucideIcons.bookOpen,
+                                                        size: 20.w,
+                                                        color: const Color(0xFF3B82F6), // blue-500
+                                                      ),
+                                                      ScreenUtilHelper.sizedBoxWidth(16.0),
+                                                      FittedBox(
+                                                        child: Text(
+                                                          tr('settings.ui.how_it_works'),
+                                                          style: RustTypography.bodyMedium.copyWith(
+                                                            color: RustColors.textPrimary,
+                                                            fontWeight: FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Icon(
+                                                    LucideIcons.chevronRight,
+                                                    size: 16.w,
+                                                    color: const Color(0xFF52525B),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        // Bug Report
+                                        Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            onTap: () {
+                                              HapticHelper.mediumImpact();
+                                              context.push('/bug-report');
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(20.w),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Icon(
+                                                        LucideIcons.bug,
+                                                        size: 20.w,
+                                                        color: const Color(0xFFEF4444), // red-500
+                                                      ),
+                                                      ScreenUtilHelper.sizedBoxWidth(16.0),
+                                                      FittedBox(
+                                                        child: Text(
+                                                          tr('settings.ui.bug_report'),
+                                                          style: RustTypography.bodyMedium.copyWith(
+                                                            color: RustColors.textPrimary,
+                                                            fontWeight: FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Icon(
+                                                    LucideIcons.chevronRight,
+                                                    size: 16.w,
+                                                    color: const Color(0xFF52525B),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              ScreenUtilHelper.sizedBoxHeight(20.0),
 
                               // Alarm Mode Widget
                               AlarmModeWidget(),
@@ -216,7 +342,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                       ),
                     ),
-                    const BannerAdWidget(),
                   ],
                 ),
               ],

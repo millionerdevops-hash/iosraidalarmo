@@ -9,7 +9,6 @@ import 'package:raidalarm/widgets/server/tracked_targets_widget.dart';
 import 'package:raidalarm/widgets/tools/tools_menu_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:raidalarm/providers/player_tracking_provider.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:raidalarm/widgets/player/playerdetailsheet.dart';
 import 'package:easy_localization/easy_localization.dart';

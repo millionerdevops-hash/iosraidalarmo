@@ -10,11 +10,7 @@ import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
 
 class TeaCalculatorScreen extends ConsumerStatefulWidget {
   const TeaCalculatorScreen({super.key});
@@ -29,10 +25,6 @@ class _TeaCalculatorScreenState extends ConsumerState<TeaCalculatorScreen> {
   
   void _handleBack() {
     if (!mounted) return;
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
     if (mounted) context.go('/tools');
   }
 
@@ -120,7 +112,7 @@ class _TeaCalculatorScreenState extends ConsumerState<TeaCalculatorScreen> {
                   ),
                 ),
               ),
-              const BannerAdWidget(),
+
             ],
           ),
         ),

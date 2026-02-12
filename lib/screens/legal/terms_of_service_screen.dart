@@ -6,9 +6,6 @@ import 'package:raidalarm/core/theme/rust_typography.dart';
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TermsOfServiceScreen extends ConsumerStatefulWidget {
@@ -30,10 +27,6 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
   }
 
   void _handleBack() {
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
     if (widget.onBack != null) {
       widget.onBack!();
     } else {
@@ -153,7 +146,6 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
                     },
                   ),
                 ),
-                const BannerAdWidget(),
               ],
             ),
           ),

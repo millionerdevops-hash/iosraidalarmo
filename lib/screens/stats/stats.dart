@@ -223,10 +223,8 @@ class _StatsScreenState extends ConsumerState<StatsScreen>
                   opacity: _fadeAnimation,
                   child: SlideTransition(
                     position: _slideAnimation,
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 24.h),
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 0),
                         child: Column(
                           children: [
                             // CARD 1: ATTACK STATISTICS WIDGET
@@ -243,20 +241,20 @@ class _StatsScreenState extends ConsumerState<StatsScreen>
                               monthlyCounts: _monthlyCounts,
                               hourlyCounts: _hourlyCounts,
                             ),
-                            ScreenUtilHelper.sizedBoxHeight(16),
+                            ScreenUtilHelper.sizedBoxHeight(8),
 
                             // STOP ALARM BUTTON (Visible only when alarm is playing)
                             _buildAlarmStopButton(),
                             
 
-                            ScreenUtilHelper.sizedBoxHeight(24),
+                            ScreenUtilHelper.sizedBoxHeight(12),
                           ],
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
+
             ],
           ),
         ),

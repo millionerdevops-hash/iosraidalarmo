@@ -17,10 +17,6 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
-
-/// AlarmModeWidget - Alarm modu ayarları
-/// Connected to SettingsRepository
 class AlarmModeWidget extends ConsumerStatefulWidget {
   const AlarmModeWidget({
     Key? key,
@@ -270,13 +266,6 @@ class _AlarmModeWidgetState extends ConsumerState<AlarmModeWidget> {
                     HapticHelper.mediumImpact();
                     
                     final nextEnabled = !_alarmEnabled;
-                    if (nextEnabled) {
-                      final hasLifetime =
-                          ref.read(notificationProvider).hasLifetime;
-                      if (!hasLifetime) {
-                        AdService().showInterstitialAd();
-                      }
-                    }
                     _saveSettings(enabled: nextEnabled);
                   },
                   child: Container(

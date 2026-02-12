@@ -21,10 +21,6 @@ import 'package:path_provider/path_provider.dart'; // import path_provider
 import 'package:path/path.dart' as p; // import path
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
-
-/// FakeCallWidget - Sahte arama ayarları
-/// Connected to SettingsRepository
 class FakeCallWidget extends ConsumerStatefulWidget {
   const FakeCallWidget({
     Key? key,
@@ -306,13 +302,13 @@ class _FakeCallWidgetState extends ConsumerState<FakeCallWidget> {
                   onTap: () {
                     HapticHelper.mediumImpact();
                     final nextEnabled = !_fakeCallEnabled;
-                    if (nextEnabled) {
-                      final hasLifetime =
-                          ref.read(notificationProvider).hasLifetime;
-                      if (!hasLifetime) {
-                        AdService().showInterstitialAd();
-                      }
-                    }
+                    // if (nextEnabled) {
+                    //   final hasLifetime =
+                    //       ref.read(notificationProvider).hasLifetime;
+                    //   if (!hasLifetime) {
+                    //     AdService().showInterstitialAd();
+                    //   }
+                    // }
                     _saveSettings(enabled: nextEnabled);
                   },
                   child: Container(

@@ -8,7 +8,6 @@ import 'package:raidalarm/core/constants/app_constants.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
 import 'package:raidalarm/core/router/app_router.dart';
 import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/providers/player_tracking_provider.dart';
 import 'package:raidalarm/services/alarm_service.dart';
 
 class RaidAlarmApp extends ConsumerStatefulWidget {
@@ -61,9 +60,6 @@ class _RaidAlarmAppState extends ConsumerState<RaidAlarmApp> {
       if (!context.mounted) return;
       final notifProvider = ref.read(notificationProvider);
       await notifProvider.initialize();
-      
-      final trackingProvider = ref.read(playerTrackingProvider);
-      trackingProvider.loadPlayers();
     } catch (_) {
     }
   }

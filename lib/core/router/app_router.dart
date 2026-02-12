@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:raidalarm/screens/splash/splash_screen.dart';
+import 'package:raidalarm/data/database/app_database.dart';
 import 'package:raidalarm/screens/stats/stats.dart';
 import 'package:raidalarm/screens/paywall/paywall.dart';
 import 'package:raidalarm/screens/settings/settings_screen.dart';
-import 'package:raidalarm/screens/server/serverinfo.dart';
 import 'package:raidalarm/screens/tools/tools.dart';
 import 'package:raidalarm/screens/cctv_codes/cctv_codes_screen.dart';
 import 'package:raidalarm/screens/legal/privacy_policy_screen.dart';
@@ -15,10 +15,6 @@ import 'package:raidalarm/screens/legal/terms_of_service_screen.dart';
 import 'package:raidalarm/screens/raidcalculator/raidcalculator.dart';
 import 'package:raidalarm/screens/dieselcalculator/dieselcalculator.dart';
 import 'package:raidalarm/screens/teaguide/teacalculator.dart';
-import 'package:raidalarm/screens/playersearch/playersearch.dart';
-import 'package:raidalarm/screens/serverstatus/serverstatus.dart';
-import 'package:raidalarm/screens/serversearch/serversearch.dart';
-import 'package:raidalarm/screens/serverdetail/serverdetail.dart';
 import 'package:raidalarm/screens/recoiltrainer/recoiltrainer.dart';
 import 'package:raidalarm/screens/matchgame/matchgame.dart';
 import 'package:raidalarm/screens/codelock/codelock.dart';
@@ -29,6 +25,13 @@ import 'package:raidalarm/features/devices/device_pairing_screen.dart';
 import 'package:raidalarm/features/automation/automation_list_screen.dart';
 import 'package:raidalarm/features/automation/rule_editor_screen.dart';
 import 'package:raidalarm/features/automation/automation_info_screen.dart';
+import 'package:raidalarm/screens/blackjack/blackjack.dart';
+import 'package:raidalarm/screens/bugreport/bugreport.dart';
+import 'package:raidalarm/screens/criticalalertpermission/criticalalertpermission.dart';
+import 'package:raidalarm/screens/notifypermission/notificationpermissionscreen.dart';
+import 'package:raidalarm/screens/socialproof/socialproof.dart';
+import 'package:raidalarm/screens/howitworks/howitworks.dart';
+import 'package:raidalarm/screens/getstarted/getstarted.dart';
 
 final routerProvider = Provider((ref) => AppRouter.router);
 
@@ -40,7 +43,6 @@ class AppRouter {
   static const String _intentDismissAlarm = 'com.raidalarm.DISMISS_ALARM';
   static const String _pathSplash = '/splash';
   static const String _pathPaywall = '/paywall';
-  static const String _pathInfo = '/info';
   static const String _pathStats = '/stats';
   static const String _pathTools = '/tools';
   static const String _pathPairDevices = '/pair-devices';
@@ -49,10 +51,6 @@ class AppRouter {
   static const String _pathTermsOfService = '/terms-of-service';
   static const String _pathCCTVCodes = '/cctv-codes';
   static const String _pathRaidCalculator = '/raid-calculator';
-  static const String _pathPlayerSearch = '/player-search';
-  static const String _pathServerStatus = '/server-status';
-  static const String _pathServerSearch = '/server-search';
-  static const String _pathServerDetail = '/server-detail';
   static const String _pathTeaCalculator = '/tea-calculator';
   static const String _pathDieselCalculator = '/diesel-calculator';
   static const String _pathRecoilTrainer = '/recoil-trainer';
@@ -65,6 +63,13 @@ class AppRouter {
   static const String _pathAutomationAdd = 'add';
   static const String _pathAutomationInfo = 'info';
   static const String _pathDevicePairing = '/device-pairing';
+  static const String _pathBlackjack = '/blackjack';
+  static const String _pathBugReport = '/bug-report';
+  static const String _pathCriticalAlertPermission = '/critical-alert-permission';
+  static const String _pathNotifyPermission = '/notify-permission';
+  static const String _pathSocialProof = '/social-proof';
+  static const String _pathHowItWorks = '/how-it-works';
+  static const String _pathGetStarted = '/get-started';
 
   static final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
@@ -81,21 +86,30 @@ class AppRouter {
       GoRoute(
         path: _pathPaywall,
         name: 'paywall',
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: PaywallScreen(
-            onPurchaseComplete: () => context.go(_pathStats),
-            onSkip: () {
-              if (context.canPop()) {
-                context.pop();
-              } else {
-                context.go(_pathStats);
+        pageBuilder: (context, state) {
+          final isOffer = state.uri.queryParameters['isOffer'] == 'true';
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: PaywallScreen(
+              isOffer: isOffer,
+              onPurchaseComplete: () async {
+                await AppDatabase().saveAppSetting('paywall_completed', 'true');
+                if (context.mounted) context.go(_pathStats);
+              },
+            onSkip: () async {
+              // Don't save paywall_completed so it shows again next launch
+              if (context.mounted) {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.go(_pathStats);
+                }
               }
             },
             onPrivacyPolicy: () => context.push(_pathPrivacyPolicy),
             onTerms: () => context.push(_pathTermsOfService),
           ),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: animation.drive(
                 Tween<Offset>(
@@ -107,20 +121,19 @@ class AppRouter {
             );
           },
           transitionDuration: const Duration(milliseconds: 300),
-        ),
+        );
+      },
       ),
       ShellRoute(
         builder: (context, state, child) {
-          int currentIndex = 0; // Default: INFO (left)
+          int currentIndex = 0; // Default: STATS/ALARM
           final path = state.uri.path;
-          if (path == _pathInfo) {
-            currentIndex = 0; // INFO (left)
-          } else if (path == _pathStats) {
-            currentIndex = 1; // ALARM (middle)
+          if (path == _pathStats) {
+            currentIndex = 0; // ALARM
           } else if (path == _pathTools) {
-            currentIndex = 2; // TOOLS (right)
+            currentIndex = 1; // TOOLS
           } else if (path == _pathPairDevices) {
-            currentIndex = 3; // PAIR DEVICES
+            currentIndex = 2; // PAIR DEVICES
           }
           
           return MainScaffold(
@@ -129,11 +142,6 @@ class AppRouter {
           );
         },
         routes: [
-          GoRoute(
-            path: _pathInfo,
-            name: 'info',
-            builder: (context, state) => const ServerInfoScreen(),
-          ),
           GoRoute(
             path: _pathStats,
             name: 'stats',
@@ -181,30 +189,6 @@ class AppRouter {
         path: _pathTeaCalculator,
         name: 'tea-calculator',
         builder: (context, state) => const TeaCalculatorScreen(),
-      ),
-      GoRoute(
-        path: _pathPlayerSearch,
-        name: 'player-search',
-        builder: (context, state) => const PlayerSearchScreen(),
-      ),
-
-      GoRoute(
-        path: _pathServerStatus,
-        name: 'server-status',
-        builder: (context, state) => const ServerStatusScreen(),
-      ),
-      GoRoute(
-        path: _pathServerSearch,
-        name: 'server-search',
-        builder: (context, state) => const ServerSearchScreen(),
-      ),
-      GoRoute(
-        path: _pathServerDetail,
-        name: 'server-detail',
-        builder: (context, state) {
-          final tab = state.uri.queryParameters['tab'];
-          return ServerDetailScreen(initialTab: tab ?? 'OVERVIEW');
-        },
       ),
       GoRoute(
         path: _pathDieselCalculator,
@@ -258,7 +242,7 @@ class AppRouter {
           ),
         ],
       ),
-      GoRoute(
+    GoRoute(
         path: _pathDevicePairing,
         name: 'device-pairing',
         builder: (context, state) {
@@ -269,6 +253,41 @@ class AppRouter {
             entityType: extra['entityType'],
           );
         },
+      ),
+      GoRoute(
+        path: _pathBlackjack,
+        name: 'blackjack',
+        builder: (context, state) => const BlackjackScreen(),
+      ),
+      GoRoute(
+        path: _pathBugReport,
+        name: 'bug-report',
+        builder: (context, state) => const BugReportScreen(),
+      ),
+      GoRoute(
+        path: _pathCriticalAlertPermission,
+        name: 'critical-alert-permission',
+        builder: (context, state) => const CriticalAlertPermissionScreen(),
+      ),
+      GoRoute(
+        path: _pathNotifyPermission,
+        name: 'notify-permission',
+        builder: (context, state) => const NotificationPermissionScreen(),
+      ),
+      GoRoute(
+        path: _pathSocialProof,
+        name: 'social-proof',
+        builder: (context, state) => const SocialProofScreen(),
+      ),
+      GoRoute(
+        path: _pathHowItWorks,
+        name: 'how-it-works',
+        builder: (context, state) => const HowItWorksScreen(),
+      ),
+      GoRoute(
+        path: _pathGetStarted,
+        name: 'get-started',
+        builder: (context, state) => const GetStartedScreen(),
       ),
     ],
   );

@@ -26,6 +26,9 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
   @override
   void initState() {
     super.initState();
+    // Wake up backend to ensure smooth login
+    FcmService.wakeUpBackend();
+    
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setUserAgent("Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36")
@@ -128,11 +131,30 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Visibility(
-              visible: !_isLoading,
-              maintainState: true,
-              child: WebViewWidget(controller: _controller),
-            ),
+              Visibility(
+                visible: !_isLoading,
+                maintainState: true,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      color: const Color(0xFF171A21),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.lock_outline, size: 14, color: Colors.white54),
+                          SizedBox(width: 8),
+                          Text(
+                            "Uses Official Rust+ Companion API",
+                            style: TextStyle(color: Colors.white54, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(child: WebViewWidget(controller: _controller)),
+                  ],
+                ),
+              ),
             if (_isLoading)
               Container(
                 color: RustColors.background,

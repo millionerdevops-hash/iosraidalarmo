@@ -8,8 +8,6 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:raidalarm/core/theme/rust_typography.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
-import 'package:raidalarm/services/ad_service.dart';
 import 'package:raidalarm/providers/scrap_provider.dart';
 
 enum GameState { playing, won, lost }
@@ -43,6 +41,31 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
       vsync: this,
     );
     _startNewGame();
+    
+    // Check for refill
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAndRefillScrap();
+    });
+  }
+
+  void _checkAndRefillScrap() {
+    final currentScrap = ref.read(scrapProvider);
+    if (currentScrap < 20) {
+      ref.read(scrapProvider.notifier).setScrap(1000);
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+              'HQM Refilled to 1000 (Free Play Mode)',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            backgroundColor: const Color(0xFF22C55E),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -52,6 +75,11 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
   }
 
   void _startNewGame() {
+    // Check logic if we want to charge for playing? 
+    // Current logic doesn't seem to charge for playing, only rewards for winning.
+    // If user wants to enforce a cost to play, we would add it here.
+    // For now, adhering to existing logic but adding refill check.
+    
     setState(() {
       _targetCode = _generateCode();
       _currentGuess = '';
@@ -61,6 +89,9 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
       _shocked = false;
       _wonAmount = 0;
     });
+    
+     // Also check refill on new game start
+     _checkAndRefillScrap();
   }
 
   String _generateCode() {
@@ -156,30 +187,6 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
     });
   }
 
-  void _watchAdForCoins() {
-    HapticHelper.soft();
-    AdService().showRewardedAd(
-      onRewarded: (amount) {
-        if (!mounted) return;
-        ref.read(scrapProvider.notifier).addScrap(1000);
-        HapticHelper.heavyImpact();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              tr('tools.match_game.earned_coins', args: ['1000']),
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            backgroundColor: const Color(0xFF10B981), // Green
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      },
-      onAdClosed: () {
-        debugPrint('Rewarded ad closed');
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final scrapBalance = ref.watch(scrapProvider);
@@ -207,7 +214,6 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
                       ),
                     ),
                   ),
-                  const BannerAdWidget(),
                 ],
               ),
               if (_shocked)
@@ -274,45 +280,7 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: scrapBalance < 25
-                ? GestureDetector(
-                    onTap: _watchAdForCoins,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF10B981), Color(0xFF059669)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(20.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF10B981).withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(LucideIcons.play, color: Colors.white, size: 14.w),
-                          SizedBox(width: 4.w),
-                          Text(
-                            '+1000',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: 'monospace',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : Container(
+            child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
               decoration: BoxDecoration(
                 color: const Color(0xFF18181B),

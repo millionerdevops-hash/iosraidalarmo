@@ -11,6 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@liamcottle/push-receiver": "^0.0.3",
+    "apn": "^2.2.0",
     "axios": "^1.13.5",
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
@@ -18,7 +20,6 @@
     "express": "^5.2.1",
     "knex": "^3.1.0",
     "onesignal-node": "^3.4.0",
-    "@liamcottle/push-receiver": "^0.0.3",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
     "uuid": "^13.0.0"

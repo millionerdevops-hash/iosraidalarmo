@@ -30,7 +30,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   Future<bool> _restorePurchases() async {
     try {
-      final profile = await AdaptyService.restorePurchases().timeout(
+      final profile = await ref.read(adaptyServiceProvider).restorePurchases().timeout(
         const Duration(seconds: 15),
         onTimeout: () {
 
@@ -38,7 +38,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         },
       );
       
-      final isActive = profile.accessLevels['lifetime_access']?.isActive == true;
+      final isActive = profile.accessLevels.values.any((level) => level.isActive);
       if (isActive) {
         await AppDatabase().saveAppSetting('has_lifetime', 'true');
       }
@@ -62,7 +62,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     // --- ABONELİK KONTROL ZİNCİRİ (KESİN ÇÖZÜM) ---
     
     // 1. Deneme: Profil kontrolü
-    bool hasPremium = await AdaptyService.hasPremiumAccess().timeout(
+    bool hasPremium = await ref.read(adaptyServiceProvider).hasPremiumAccess().timeout(
       const Duration(seconds: 5),
       onTimeout: () => false,
     );
@@ -77,7 +77,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     if (!hasPremium) {
 
       await Future.delayed(const Duration(seconds: 2));
-      hasPremium = await AdaptyService.hasPremiumAccess().timeout(
+      hasPremium = await ref.read(adaptyServiceProvider).hasPremiumAccess().timeout(
         const Duration(seconds: 5),
         onTimeout: () => false,
       );
@@ -102,7 +102,44 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       return;
     }
 
-    // Premium değilse doğrudan Server Info'ya git
+    // ONBOARDING FLOW CHECKS
+    final getStartedCompleted = await AppDatabase().getBoolSetting('getstarted_completed');
+    if (!getStartedCompleted) {
+      if (mounted) context.go('/get-started');
+      return;
+    }
+
+    final howItWorksCompleted = await AppDatabase().getBoolSetting('howitworks_completed');
+    if (!howItWorksCompleted) {
+      if (mounted) context.go('/how-it-works');
+      return;
+    }
+
+    final notifyPermissionCompleted = await AppDatabase().getBoolSetting('notify_permission_completed');
+    if (!notifyPermissionCompleted) {
+      if (mounted) context.go('/notify-permission');
+      return;
+    }
+
+    final criticalAlertCompleted = await AppDatabase().getBoolSetting('critical_alert_permission_completed');
+    if (!criticalAlertCompleted) {
+      if (mounted) context.go('/critical-alert-permission');
+      return;
+    }
+
+    final socialProofCompleted = await AppDatabase().getBoolSetting('social_proof_completed');
+    if (!socialProofCompleted) {
+      if (mounted) context.go('/social-proof');
+      return;
+    }
+
+    final paywallCompleted = await AppDatabase().getBoolSetting('paywall_completed');
+    if (!paywallCompleted) {
+      if (mounted) context.go('/paywall');
+      return;
+    }
+
+    // All done, go to Home (ServerInfo)
     const String nextRoute = '/info';
     
     if (mounted) context.go(nextRoute);

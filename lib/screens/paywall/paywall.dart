@@ -1,33 +1,31 @@
-import 'dart:ui' as ui;
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:raidalarm/core/theme/rust_colors.dart';
+
 import 'package:raidalarm/core/theme/rust_typography.dart';
-// import 'package:raidalarm/core/theme/rust_effects.dart';
 import 'package:raidalarm/widgets/common/rust_button.dart';
+
 import 'package:raidalarm/services/adapty_service.dart';
 import 'package:adapty_flutter/adapty_flutter.dart';
-import 'package:raidalarm/data/database/app_database.dart';
-import 'package:raidalarm/screens/legal/privacy_policy_screen.dart';
-import 'package:raidalarm/screens/legal/terms_of_service_screen.dart';
-import 'package:raidalarm/services/onesignal_service.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:raidalarm/core/utils/throttler.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // Added riverpod
 import 'package:raidalarm/providers/notification_provider.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
 import 'dart:async';
+import 'package:raidalarm/data/database/app_database.dart';
 
 class PaywallScreen extends ConsumerStatefulWidget {
   final VoidCallback? onSkip;
   final VoidCallback? onPrivacyPolicy;
   final VoidCallback? onTerms;
   final VoidCallback? onPurchaseComplete;
+  final bool isOffer;
 
   const PaywallScreen({
     super.key,
@@ -35,6 +33,7 @@ class PaywallScreen extends ConsumerStatefulWidget {
     this.onPrivacyPolicy,
     this.onTerms,
     this.onPurchaseComplete,
+    this.isOffer = false,
   });
 
   @override
@@ -53,16 +52,14 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   @override
   void initState() {
     super.initState();
-    // OneSignal paywall tag is now set on close to trigger Drop-Off segment
+
     
-    // Attempt to use cached products first for instant UI
-    final cached = AdaptyService.getCachedProducts;
+    final cached = ref.read(adaptyServiceProvider).getCachedProducts;
     if (cached != null && cached.isNotEmpty) {
       _products = cached;
       _loading = false;
       _setInitialSelection(cached);
     }
-    
     
     _loadProducts();
     _initConnectivity();
@@ -75,11 +72,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   }
 
   Future<void> _initConnectivity() async {
-    // Initial check
     _hasConnection = await InternetConnectionChecker.instance.hasConnection;
     if (mounted) setState(() {});
 
-    // Listen for changes
     _connectionSubscription = InternetConnectionChecker.instance.onStatusChange.listen((status) {
       if (mounted) {
         setState(() {
@@ -91,24 +86,29 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
 
   void _setInitialSelection(List<AdaptyPaywallProduct> products) {
     if (products.isNotEmpty) {
-      _selectedProductId = products[0].vendorProductId;
+      if (_lifetimeProduct != null) {
+        _selectedProductId = _lifetimeProduct!.vendorProductId;
+      } else if (_monthlyProduct != null) {
+        _selectedProductId = _monthlyProduct!.vendorProductId;
+      } else {
+        _selectedProductId = products.first.vendorProductId;
+      }
     }
   }
 
   Future<void> _loadProducts() async {
     try {
-      // If we don't have products yet, show loading
       if (_products.isEmpty) {
         setState(() => _loading = true);
       }
 
-      final products = await AdaptyService.getProducts(placementId: 'main_paywall');
+        final placementId = widget.isOffer ? 'offer_paywall' : 'main_paywall';
+        final products = await ref.read(adaptyServiceProvider).getProducts(placementId: placementId);
       
       if (mounted) {
         setState(() {
           _products = products;
           _loading = false;
-          // Only set selection if not already set (don't overwrite user selection if they somehow selected it during background load)
           if (_selectedProductId == null) {
             _setInitialSelection(products);
           }
@@ -133,27 +133,21 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     try {
       setState(() => _purchasing = true);
       
-      // Add timeout similar to splash screen
-      final profile = await AdaptyService.restorePurchases().timeout(
+      final profile = await ref.read(adaptyServiceProvider).restorePurchases().timeout(
         const Duration(seconds: 5),
         onTimeout: () {
           throw TimeoutException('paywall.errors.restore_timeout'.tr());
         },
       );
       
-      // Check if user has lifetime access
-      final hasLifetime = profile.accessLevels['lifetime_access']?.isActive ?? false;
+      final hasPremium = profile.accessLevels.values.any((level) => level.isActive);
       
-      if (hasLifetime) {
-      // Save local
-      await AppDatabase().saveAppSetting('has_lifetime', 'true');
-      
-      if (mounted) {
-        ref.read(notificationProvider).updateLifetimeStatus(true);
-      }
-      
-      // Navigate immediately
-      widget.onPurchaseComplete?.call();
+      if (hasPremium) {
+        if (mounted) {
+          await ref.read(notificationProvider.notifier).updateLifetimeStatus(true);
+        }
+        
+        widget.onPurchaseComplete?.call();
       } else {
         _showError('paywall.errors.no_lifetime_found'.tr());
       }
@@ -177,41 +171,34 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     try {
       setState(() => _purchasing = true);
       
-      // Make purchase - this will throw AdaptyError if cancelled or failed
-      await AdaptyService.purchaseProduct(product);
+      await ref.read(adaptyServiceProvider).purchaseProduct(product);
       
-      // CRITICAL: Verify purchase using hasPremiumAccess as single source of truth
-      // This method handles cache, network, and fallback logic properly
-      final hasLifetime = await AdaptyService.hasPremiumAccess();
+
+
+      final hasLifetime = await ref.read(adaptyServiceProvider).hasPremiumAccess();
       
       if (hasLifetime) {
-        // Payment was successful and verified - grant access
-        OneSignalService.markAsPremium();
-        
-        // Save local - payment verified, user gets access
         await AppDatabase().saveAppSetting('has_lifetime', 'true');
 
         if (mounted) {
-          ref.read(notificationProvider).updateLifetimeStatus(true);
+          await ref.read(notificationProvider.notifier).updateLifetimeStatus(true);
         }
 
-        // Navigate immediately
         widget.onPurchaseComplete?.call();
-      } else {
-        // Purchase completed but verification failed
-        // This could happen if Adapty backend hasn't synced yet
-        _showError('paywall.errors.purchase_verification_failed'.tr());
       }
       
     } on AdaptyError catch (e) {
-      // Handle specific Adapty error codes
       if (e.code == AdaptyErrorCode.paymentCancelled) {
-        // User cancelled - do NOT grant access, just close loading state
+
+
         if (mounted) setState(() => _purchasing = false);
         return;
       }
       
-      String errorMessage = _getAdaptyErrorMessage(e);
+      final String errorMessage = _getAdaptyErrorMessage(e);
+
+
+
       _showError(errorMessage);
     } catch (e) {
       _showError('paywall.errors.generic_failed'.tr(args: [e.toString()]));
@@ -220,15 +207,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     }
   }
 
-
-  /// This doesn't block the UI - user can continue using the app
-
-
   String _getAdaptyErrorMessage(AdaptyError e) {
-    // Adapty Flutter SDK error message'ı kullanıcı dostu mesaja çevir
     final errorMessage = e.message.toLowerCase();
     
-    // Error message içeriğine göre özel mesajlar
     if (errorMessage.contains('network') || errorMessage.contains('connection')) {
       return 'paywall.errors.network'.tr();
     }
@@ -253,7 +234,6 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       return 'paywall.errors.already_purchased'.tr();
     }
     
-    // Adapty'nin kendi mesajını göster, yoksa generic mesaj
     return e.message.isNotEmpty ? 'paywall.errors.generic_failed'.tr(args: [e.message]) : 'paywall.errors.purchase_failed_default'.tr();
   }
 
@@ -267,22 +247,28 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     );
   }
 
-  void _showSuccess(String message) {
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.green,
-      ),
+
+
+  AdaptyPaywallProduct? get _lifetimeProduct {
+    return _products.firstWhere(
+      (p) => !p.vendorProductId.toLowerCase().contains('monthly'),
+      orElse: () => _products.first,
+    );
+  }
+
+  AdaptyPaywallProduct? get _monthlyProduct {
+    return _products.firstWhere(
+      (p) => p.vendorProductId.toLowerCase().contains('monthly'),
+      orElse: () => _products.first,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return Scaffold(
+      return const Scaffold(
         backgroundColor: RustColors.surface,
-        body: const Center(
+        body: Center(
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFDC2626)),
           ),
@@ -290,508 +276,564 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       );
     }
 
-    return PopScope(
-      canPop: true,
-      onPopInvoked: (didPop) {
-        if (didPop) {
-          // No-op: If system back was pressed, we just let it pop.
-          // onSkip should not be triggered here as it might cause double navigation/pop.
-        }
-      },
-      child: Scaffold(
-        backgroundColor: RustColors.surface,
-        body: RustScreenLayout(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // Background Image with Gradient Fade
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 0.55.sh, // responsive height
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Opacity(
-                      opacity: 0.6,
-                      child: ColorFiltered(
-                        colorFilter: const ColorFilter.matrix(<double>[
-                          0.2126, 0.7152, 0.0722, 0, 0,
-                          0.2126, 0.7152, 0.0722, 0, 0,
-                          0.2126, 0.7152, 0.0722, 0, 0,
-                          0,      0,      0,      1, 0,
-                        ]),
-                        child: Image.asset(
-                          'assets/getstarted.jpg',
-                          fit: BoxFit.cover,
-                          cacheWidth: 1080,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.black26,
-                            Color(0x99090B0B),
-                            RustColors.surface,
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
 
-              // Main Content Layer (SafeArea + Column)
-              SafeArea(
-                bottom: false, // Handle bottom padding manually for full control
+    if (_products.isEmpty) {
+      return Scaffold(
+        backgroundColor: const Color(0xFF0c0c0e),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'paywall.errors.unavailable'.tr(),
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 16),
+              RustButton(
+                 onPressed: widget.onSkip ?? () => context.go('/dashboard'),
+                 child: Text('Close'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final selectedProduct = _products.firstWhere(
+      (p) => p.vendorProductId == _selectedProductId,
+      orElse: () => _products.first,
+    );
+    final isMonthlySelected = selectedProduct.vendorProductId.toLowerCase().contains('monthly');
+
+    return PopScope(
+      child: Scaffold(
+        backgroundColor: const Color(0xFF0c0c0e),
+        body: Stack(
+          children: [
+            // Background Image with Gradient Fade
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 0.55.sh, // responsive height
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Opacity(
+                    opacity: 0.6,
+                    child: ColorFiltered(
+                      colorFilter: const ColorFilter.matrix(<double>[
+                        0.2126, 0.7152, 0.0722, 0, 0,
+                        0.2126, 0.7152, 0.0722, 0, 0,
+                        0.2126, 0.7152, 0.0722, 0, 0,
+                        0,      0,      0,      1, 0,
+                      ]),
+                      child: Image.asset(
+                        'assets/getstarted.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.black.withValues(alpha: 0.7), // Much darker at top
+                          const Color(0xFF09090B).withValues(alpha: 0.8),
+                          const Color(0xFF0c0c0e),
+                        ],
+                        stops: const [0.0, 0.4, 1.0], // Adjusted stops for better coverage
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            // Main Content
+            SafeArea(
+              minimum: EdgeInsets.only(bottom: 24.h),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   children: [
-                    // Header (Close Button)
+                    SizedBox(height: 0.10.sh),
+                    // Header
+                    // Header
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                HapticHelper.mediumImpact();
-                                OneSignalService.paywallClosed();
-                                _throttler.run(() => widget.onSkip?.call());
-                              },
-                              borderRadius: BorderRadius.circular(16.r),
-                              child: Container(
-                                width: 32.w,
-                                height: 32.w, // Ensure circular aspect ratio
+                      padding: EdgeInsets.only(bottom: 24.h),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 32.w),
+                        child: Column(
+                          children: [
+                            if (widget.isOffer) ...[
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+                                margin: EdgeInsets.only(bottom: 12.h),
                                 decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.black.withOpacity(0.4),
-                                  border: Border.all(
-                                    color: Colors.white.withOpacity(0.1),
-                                  ),
+                                  color: const Color(0xFFDC2626),
+                                  borderRadius: BorderRadius.circular(8.r),
                                 ),
-                                child: ClipOval(
-                                  child: BackdropFilter(
-                                    filter: ui.ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                                    child: Icon(
-                                      Icons.close,
-                                      size: 16.w,
-                                      color: const Color(0xFFD4D4D8),
-                                    ),
+                                child: Text(
+                                  'SPECIAL LOCK-IN OFFER',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 2.w,
                                   ),
                                 ),
                               ),
+                            ],
+                            Text(
+                              widget.isOffer ? 'ACTIVATE YOUR 60% DISCOUNT' : 'paywall.title'.tr(),
+                              textAlign: TextAlign.center,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: RustTypography.rustStyle(
+                                    fontSize: 19.sp,
+                                    color: Colors.white,
+                                  ).copyWith(height: 1.1),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
+
+                    // Comparison table
+                    _buildComparisonTable(),
+                    
+                    ScreenUtilHelper.sizedBoxHeight(32),
+                    
+                    // Plan selection
+                    if (_products.length >= 2) ...[
+                      if (_lifetimeProduct != null)
+                        _buildPlanCard(
+                          product: _lifetimeProduct!,
+                          title: 'paywall.plan_lifetime'.tr(),
+                          subtitle: 'paywall.plan_lifetime_subtitle'.tr(),
+                          badge: 'paywall.plan_best_value'.tr(),
+                          badgeColor: const LinearGradient(
+                            colors: [Color(0xFFDC2626), Color(0xFFEA580C)],
+                          ),
+                          isSelected: _selectedProductId == _lifetimeProduct!.vendorProductId,
+                          onTap: () {
+                            HapticHelper.mediumImpact();
+                            setState(() => _selectedProductId = _lifetimeProduct!.vendorProductId);
+                          },
+                        ),
+                      ScreenUtilHelper.sizedBoxHeight(8),
+                      if (_monthlyProduct != null)
+                        _buildPlanCard(
+                          product: _monthlyProduct!,
+                          title: 'paywall.plan_monthly'.tr(),
+                          subtitle: 'paywall.plan_trial'.tr(),
+                          subtitleColor: const Color(0xFFFB923C),
+                          isSelected: _selectedProductId == _monthlyProduct!.vendorProductId,
+                          onTap: () {
+                            HapticHelper.mediumImpact();
+                            setState(() => _selectedProductId = _monthlyProduct!.vendorProductId);
+                          },
+                        ),
+                    ] else if (_products.isNotEmpty) ...[
+                      _buildPlanCard(
+                        product: _products.first,
+                        title: _products.first.vendorProductId.toLowerCase().contains('lifetime') 
+                            ? 'paywall.plan_lifetime'.tr() 
+                            : 'paywall.plan_card.name'.tr(),
+                        subtitle: _products.first.vendorProductId.toLowerCase().contains('lifetime')
+                            ? 'paywall.plan_lifetime_subtitle'.tr()
+                            : 'paywall.plan_card.one_time'.tr(),
+                        badge: 'paywall.plan_best_value'.tr(),
+                        badgeColor: const LinearGradient(
+                          colors: [Color(0xFFDC2626), Color(0xFFEA580C)],
+                        ),
+                        isSelected: true,
+                        onTap: () {},
                       ),
-                    ),
+                    ],                    
+                    ScreenUtilHelper.sizedBoxHeight(24),
+                    
+                    // Purchase button
+                    RustButton(
+                      onPressed: (_purchasing || !_hasConnection) ? null : () {
+                        HapticHelper.mediumImpact();
+                        _throttler.run(() {
 
-                    // Spacer to push Title down initially (simulating top padding)
-                    ScreenUtilHelper.sizedBoxHeight(64), 
-
-                    // Flexible Content Area
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 24.h),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            // 1. Title Area
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 24.w),
-                              child: Column(
+                          _handlePurchase(selectedProduct);
+                        });
+                      },
+                      child: _purchasing
+                          ? SizedBox(
+                              height: 20.w,
+                              width: 20.w,
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            )
+                          : FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: RichText(
-                                      textAlign: TextAlign.center,
-                                      text: TextSpan(
-                                        style: RustTypography.rustStyle(
-                                          fontSize: 40.sp, 
-                                          color: Colors.white,
-                                          weight: FontWeight.w900,
-                                        ).copyWith(
-                                          height: 1.1,
-                                          shadows: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.5),
-                                              blurRadius: 20.r,
-                                              offset: Offset(0, 10.h),
-                                            )
-                                          ],
-                                        ),
-                                        children: [
-                                          TextSpan(text: 'paywall.title_line1'.tr() + '\n'),
-                                          TextSpan(
-                                            text: 'paywall.title_line2'.tr(),
-                                            style: TextStyle(color: const Color(0xFFDC2626)),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  ScreenUtilHelper.sizedBoxHeight(12),
-                                  FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      'paywall.subtitle'.tr(),
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: const Color(0xFFD4D4D8),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  ScreenUtilHelper.sizedBoxHeight(4),
-                                  FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      'paywall.no_subscriptions'.tr(),
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        color: const Color(0xFF71717A),
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 1.5.w,
-                                      ),
-                                    ),
+                                    Text(
+                                    isMonthlySelected 
+                                        ? 'paywall.button_trial'.tr()
+                                        : 'paywall.button_unlock'.tr(),
+                                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w900),
                                   ),
                                 ],
                               ),
                             ),
-                            
-                            const Spacer(flex: 3),
-
-                            // 2. Product/Plan Card
-                            if (_products.isNotEmpty)
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    HapticHelper.mediumImpact();
-                                    setState(() => _selectedProductId = _products.first.vendorProductId);
-                                  },
-                                  child: PlanCard(
-                                    name: 'paywall.plan_card.name'.tr(),
-                                    price: _products.first.price.localizedString ?? '${_products.first.price}',
-                                    popular: true, 
-                                    selected: true,
-                                  ),
-                                ),
-                              ),
-
-                            const Spacer(flex: 4),
-
-                            // 3. Footer Area
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 24.w),
-                              child: SafeArea( // Bottom safe area
-                                top: false,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black45,
-                                            blurRadius: 20.r,
-                                            offset: Offset(0, 10.h),
-                                          ),
-                                        ],
-                                      ),
-                                      child: RustButton(
-                                          onPressed: (_purchasing || !_hasConnection) ? null : () {
-                                            HapticHelper.mediumImpact();
-                                            _throttler.run(() {
-                                              if (_products.isNotEmpty) {
-                                                  final selectedProduct = _products.first;
-                                                  _handlePurchase(selectedProduct);
-                                              }
-                                            });
-                                          },
-                                        variant: RustButtonVariant.primary, // Check if this needs .w/.h inside
-                                        child: _purchasing
-                                            ? SizedBox(
-                                                height: 20.w,
-                                                width: 20.w,
-                                                child: const CircularProgressIndicator(
-                                                  strokeWidth: 2,
-                                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                                ),
-                                              )
-                                            : FittedBox(
-                                                fit: BoxFit.scaleDown,
-                                                child: Text(
-                                                  'paywall.secure_access'.tr(),
-                                                  style: TextStyle(fontSize: 13.sp),
-                                                ),
-                                              ),
-                                      ),
-                                    ),
-                                    
-                                    ScreenUtilHelper.sizedBoxHeight(16),
-                                    
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Flexible(
-                                          child: _buildFooterLink(
-                                            'paywall.privacy'.tr(),
-                                            widget.onPrivacyPolicy ?? () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen()),
-                                            ),
-                                          ),
-                                        ),
-                                        ScreenUtilHelper.sizedBoxWidth(5),
-                                        Container(
-                                          width: 4.w,
-                                          height: 4.w,
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xFF27272A),
-                                            shape: BoxShape.circle,
-                                          ),
-                                        ),
-                                        ScreenUtilHelper.sizedBoxWidth(5),
-                                        Flexible(
-                                          child: _buildFooterLink(
-                                            'paywall.terms'.tr(),
-                                            widget.onTerms ?? () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(builder: (context) => const TermsOfServiceScreen()),
-                                            ),
-                                          ),
-                                        ),
-                                        ScreenUtilHelper.sizedBoxWidth(5),
-                                        Container(
-                                          width: 4.w,
-                                          height: 4.w,
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xFF27272A),
-                                            shape: BoxShape.circle,
-                                          ),
-                                        ),
-                                        ScreenUtilHelper.sizedBoxWidth(5),
-                                        Flexible(
-                                          child: _buildFooterLink(
-                                            'paywall.restore'.tr(),
-                                            _purchasing ? null : () => _throttler.run(_handleRestore),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
+                    
+                    ScreenUtilHelper.sizedBoxHeight(24),
+                    
+                    // Footer links
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildFooterLink('paywall.privacy'.tr(), widget.onPrivacyPolicy ?? () => context.push('/privacy-policy')),
+                        ScreenUtilHelper.sizedBoxWidth(24),
+                        _buildFooterLink('paywall.restore'.tr(), _purchasing ? null : () => _throttler.run(_handleRestore)),
+                        ScreenUtilHelper.sizedBoxWidth(24),
+                        _buildFooterLink('paywall.terms'.tr(), widget.onTerms ?? () => context.push('/terms-of-service')),
+                      ],
+                    ),
+                    
                   ],
+                ),
+              ),
+              Positioned(
+                top: 16.h,
+                right: 24.w,
+                child: GestureDetector(
+                  onTap: () {
+                    HapticHelper.mediumImpact();
+                    _throttler.run(() => widget.onSkip?.call());
+                  },
+                  child: Container(
+                    width: 28.w,
+                    height: 28.w,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF18181B),
+                      border: Border.all(color: const Color(0xFF27272A)),
+                      borderRadius: BorderRadius.circular(14.r),
+                    ),
+                    child: Icon(
+                      Icons.close,
+                      size: 18.w,
+                      color: const Color(0xFF71717A),
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
         ),
-      ),
+      ],
+    ),
+  ),
+);
+  }
+
+  Widget _buildComparisonTable() {
+    final features = [
+      {'name': 'paywall.features.alarm'.tr(), 'free': false, 'premium': true},
+      {'name': 'paywall.features.fake_call'.tr(), 'free': false, 'premium': true},
+      {'name': 'paywall.features.tracker'.tr(), 'free': true, 'premium': true},
+      {'name': 'paywall.features.wipe'.tr(), 'free': true, 'premium': true},
+      {'name': 'paywall.features.tools'.tr(), 'free': true, 'premium': true},
+    ];
+
+    return Column(
+      children: [
+        // Table header
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h), // Reduced vertical padding
+          child: Row(
+            children: [
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'paywall.table_features'.tr(),
+                    style: TextStyle(
+                      fontSize: 9.sp,
+                      fontWeight: FontWeight.w900,
+                      color: const Color(0xFF52525B),
+                      letterSpacing: 1.5.w,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 56.w,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'paywall.table_free'.tr(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w900,
+                      color: const Color(0xFF71717A),
+                      letterSpacing: 0.5.w,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 56.w,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'paywall.table_pro'.tr(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                      letterSpacing: 0.5.w,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        
+        Container(
+          height: 1.h,
+          color: const Color(0xFF27272A),
+        ),
+        
+        // Table rows
+        Column(
+          children: features.map((feature) {
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h), // Reduced row vertical padding
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: const Color(0xFF18181B).withOpacity(0.5),
+                    width: 1.h,
+                  ),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        feature['name'] as String,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFFD4D4D8),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 56.w,
+                    child: Center(
+                      child: feature['free'] as bool
+                          ? Icon(LucideIcons.check, size: 14.w, color: const Color(0xFF71717A))
+                          : Icon(LucideIcons.minus, size: 10.w, color: const Color(0xFF27272A)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 56.w,
+                    child: Center(
+                      child: feature['premium'] as bool
+                          ? Container(
+                              padding: EdgeInsets.all(2.w),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFDC2626),
+                                borderRadius: BorderRadius.circular(10.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0xFF7C2D12).withOpacity(0.5),
+                                    blurRadius: 6.r,
+                                  ),
+                                ],
+                              ),
+                              child: Icon(LucideIcons.check, size: 10.w, color: Colors.white),
+                            )
+                          : const SizedBox(),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPlanCard({
+    required AdaptyPaywallProduct product,
+    required String title,
+    required String subtitle,
+    required bool isSelected, required VoidCallback onTap, Color? subtitleColor,
+    String? badge,
+    LinearGradient? badgeColor,
+  }) {
+    
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 12.h),
+            decoration: BoxDecoration(
+              color: isSelected 
+                  ? const Color(0xFF7C2D12).withValues(alpha: 0.1)
+                  : const Color(0xFF18181B),
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                color: isSelected ? const Color(0xFFDC2626) : const Color(0xFF27272A),
+                width: 2.w,
+              ),
+              boxShadow: isSelected
+                  ? [
+                      BoxShadow(
+                        color: const Color(0xFFDC2626).withValues(alpha: 0.15),
+                        blurRadius: 24.r,
+                        spreadRadius: -4.r,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Row(
+              children: [
+                // Checkbox
+                Container(
+                  width: 22.w,
+                  height: 22.w,
+                  decoration: BoxDecoration(
+                    color: isSelected ? const Color(0xFFDC2626) : Colors.transparent,
+                    border: Border.all(
+                      color: isSelected ? const Color(0xFFDC2626) : const Color(0xFF52525B),
+                      width: 2.w,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: isSelected
+                      ? Icon(LucideIcons.check, size: 14.w, color: Colors.white)
+                      : null,
+                ),
+                
+                ScreenUtilHelper.sizedBoxWidth(16),
+                
+                // Text Content
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          title.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
+                            letterSpacing: 0.5.w,
+                          ),
+                        ),
+                      ),
+                      ScreenUtilHelper.sizedBoxHeight(4),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          subtitle,
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.w700,
+                            color: subtitleColor ?? const Color(0xFF71717A),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                ScreenUtilHelper.sizedBoxWidth(12),
+                
+                // Price
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerRight,
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: product.price.localizedString ?? '${product.price}',
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
+                            letterSpacing: 0.5.w,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        
+        // Badge
+        if (badge != null && badgeColor != null)
+          Positioned(
+          top: -10.h,
+          right: 16.w,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+            decoration: BoxDecoration(
+              gradient: badgeColor,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            child: Text(
+              badge,
+              style: TextStyle(
+                fontSize: 9.sp,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+                letterSpacing: 0.5.w,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
   Widget _buildFooterLink(String text, VoidCallback? onTap) {
     return GestureDetector(
       onTap: onTap,
-      child: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Text(
-          text.toUpperCase(),
-          style: TextStyle(
-            fontSize: 10.sp, // Responsive font size
-            fontWeight: FontWeight.bold,
-            color: const Color(0xFF71717A),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class PlanCard extends StatelessWidget {
-  final String name;
-  final String price;
-  final bool popular;
-  final bool selected;
-
-  const PlanCard({
-    super.key,
-    required this.name,
-    required this.price,
-    this.popular = false,
-    this.selected = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // Defines the precise "Benefits" list for the UI
-    final benefits = [
-      {'icon': LucideIcons.shieldCheck, 'text': "paywall.benefits.critical_alarms".tr()},
-      {'icon': LucideIcons.smartphone, 'text': "paywall.benefits.fake_call".tr()},
-      {'icon': LucideIcons.crosshair, 'text': "paywall.benefits.enemy_notifications".tr()},
-      {'icon': LucideIcons.timer, 'text': "paywall.benefits.wipe_notifications".tr()},
-    ];
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(32.r),
-      child: BackdropFilter(
-        filter: ui.ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF09090B).withOpacity(0.85), // Very dark background
-            borderRadius: BorderRadius.circular(32.r),
-            border: Border.all(
-              color: const Color(0xFFDC2626).withOpacity(0.5), // Red border
-              width: 1.w,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                blurRadius: 40.r,
-                spreadRadius: 0,
-              ),
-            ],
-          ),
-          child: Stack(
-            children: [
-               // Glow Effect removed as requested
-               
-               // 2. Subtle Red Gradient Overlay from top
-               Positioned.fill(
-                 child: Container(
-                   decoration: BoxDecoration(
-                     borderRadius: BorderRadius.circular(32.r),
-                     gradient: LinearGradient(
-                       begin: Alignment.topCenter,
-                       end: Alignment.bottomCenter,
-                       colors: [
-                         const Color(0xFFDC2626).withOpacity(0.1),
-                         Colors.transparent,
-                         Colors.transparent,
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-
-              // 3. Content
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min, // Wrap content height
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Price Header
-                    Column(
-                      children: [
-                        ScreenUtilHelper.sizedBoxHeight(8),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            price,
-                            style: TextStyle(
-                                fontFamily: RustTypography.fontFamily,
-                                fontSize: 22.sp,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white,
-                                letterSpacing: -1.w,
-                                height: 1.0,
-                            ),
-                          ),
-                        ),
-                        ScreenUtilHelper.sizedBoxHeight(8),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            'paywall.plan_card.one_time'.tr(),
-                            style: TextStyle(
-                              fontFamily: 'GeistMono', // Monospace for technical look
-                              fontSize: 11.sp,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xFF71717A), // zinc-500
-                              letterSpacing: 4.w, // Wide tracking
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ScreenUtilHelper.sizedBoxHeight(12),
-                    
-                    // Divider
-                    Container(
-                      height: 1.h, 
-                      color: const Color(0xFF27272A), // Subtle separator
-                    ),
-                    
-                    ScreenUtilHelper.sizedBoxHeight(12),
-
-                    // Benefits List
-                    ...benefits.map((b) => Padding(
-                      padding: EdgeInsets.only(bottom: 12.h),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // Icon Box
-                          Container(
-                            width: 32.w,
-                            height: 32.w,
-                            padding: EdgeInsets.all(7.w),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF27272A).withOpacity(0.5), // zinc-800/50
-                              borderRadius: BorderRadius.circular(10.r), // squircle
-                              border: Border.all(
-                                color: const Color(0xFF3F3F46), // zinc-700
-                                width: 1.w,
-                              ),
-                            ),
-                            child: FittedBox(
-                              child: Icon(
-                                b['icon'] as IconData,
-                                color: const Color(0xFFD4D4D8), // lighter icon
-                              ),
-                            ),
-                          ),
-                          ScreenUtilHelper.sizedBoxWidth(12),
-                          // Text
-                          Expanded(
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                b['text'] as String,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  color: const Color(0xFFE4E4E7), // zinc-200
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.3,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                  ],
-                ),
-              ),
-            ],
-          ),
+      child: Text(
+        text.toUpperCase(),
+        style: TextStyle(
+          fontSize: 10.sp,
+          fontWeight: FontWeight.w900,
+          color: const Color(0xFF71717A),
         ),
       ),
     );

@@ -13,9 +13,7 @@ import 'package:raidalarm/core/utils/haptic_helper.dart';
 
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
+
 
 class RaidCalculatorScreen extends ConsumerStatefulWidget {
   const RaidCalculatorScreen({super.key});
@@ -104,13 +102,7 @@ class _RaidCalculatorScreenState extends ConsumerState<RaidCalculatorScreen>
   
   void _handleBack() {
     if (!mounted) return;
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
-    if (mounted) {
-       context.go('/tools');
-    }
+    context.go('/tools');
   }
 
   // --- CALCULATION LOGIC ---
@@ -396,7 +388,7 @@ class _RaidCalculatorScreenState extends ConsumerState<RaidCalculatorScreen>
                 ],
               ),
             ),
-             const BannerAdWidget(),
+
           ],
         ),
       ),

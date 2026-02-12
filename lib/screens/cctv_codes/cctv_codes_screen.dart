@@ -10,9 +10,8 @@ import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:raidalarm/providers/notification_provider.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
+
+
 
 class CCTVCodesScreen extends ConsumerStatefulWidget {
   const CCTVCodesScreen({super.key});
@@ -26,10 +25,6 @@ class _CCTVCodesScreenState extends ConsumerState<CCTVCodesScreen> {
   
   void _handleBack() {
     if (!mounted) return;
-    final hasLifetime = ref.read(notificationProvider).hasLifetime;
-    if (!hasLifetime) {
-      AdService().showInterstitialAd();
-    }
     if (mounted) context.go('/tools');
   }
 
@@ -68,7 +63,7 @@ class _CCTVCodesScreenState extends ConsumerState<CCTVCodesScreen> {
                   activeCategory: _activeCategory,
                 ),
               ),
-              const BannerAdWidget(),
+
             ],
           ),
         ),

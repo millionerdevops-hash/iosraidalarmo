@@ -7,17 +7,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:raidalarm/providers/scrap_provider.dart';
-
-// Import extracted components
 import 'models/match_game_models.dart';
 import 'widgets/match_card_widget.dart';
 import 'widgets/match_game_menu.dart';
 import 'widgets/match_game_over.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
-import 'package:raidalarm/services/ad_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-// --- SCREEN ---
 
 enum GameState { menu, preview, playing, won, lost }
 
@@ -41,6 +35,31 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
   @override
   void initState() {
     super.initState();
+    
+    // Check refill after build
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAndRefillScrap();
+    });
+  }
+
+  void _checkAndRefillScrap() {
+    final currentScrap = ref.read(scrapProvider);
+    if (currentScrap < 20) {
+      ref.read(scrapProvider.notifier).setScrap(1000);
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+              'HQM Refilled to 1000 (Free Play Mode)',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            backgroundColor: const Color(0xFF22C55E),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -53,13 +72,15 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
     final config = DIFFICULTIES[_difficulty]!;
     
     final scrapBalance = ref.read(scrapProvider);
-
-    // If coins are below 25, show rewarded ad first
-    if (scrapBalance < 25) {
-      _watchAdForCoins();
-      return;
-    }
     
+    // Auto-refill check before starting
+    if (scrapBalance < 20) {
+       _checkAndRefillScrap();
+       // Return early to let user see refill, they can click start again or we could auto-retry
+       // For better UX, let's just return and let them click again now that they have scraps
+       return;
+    }
+
     if (scrapBalance < config.bet) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -192,32 +213,6 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
     }
   }
 
-  void _watchAdForCoins() {
-    HapticHelper.soft();
-    AdService().showRewardedAd(
-      onRewarded: (amount) {
-        if (!mounted) return;
-        // User watched the ad successfully, give 1000 coins
-        ref.read(scrapProvider.notifier).addScrap(1000);
-        HapticHelper.heavyImpact();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              tr('tools.match_game.earned_coins', args: ['1000']),
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            backgroundColor: const Color(0xFF10B981),
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      },
-      onAdClosed: () {
-        // Ad was closed (whether rewarded or not)
-        debugPrint('Rewarded ad closed');
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final scrapBalance = ref.watch(scrapProvider);
@@ -238,7 +233,6 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                 Expanded(
                   child: _buildMainContent(),
                 ),
-                const BannerAdWidget(),
               ],
             ),
           ),
@@ -304,9 +298,6 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
   }
 
   Widget _buildHeader(int scrapBalance) {
-    final bool showAdButton = scrapBalance < 25 && 
-        (_gameState == GameState.menu || _gameState == GameState.won || _gameState == GameState.lost);
-    
     return Container(
       height: 60.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -347,83 +338,45 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
             ),
           ),
 
-          // Right: Scrap Balance + Ad Button
+          // Right: Scrap Balance
           Align(
             alignment: Alignment.centerRight,
-            child: showAdButton
-                ? GestureDetector(
-                    onTap: _watchAdForCoins,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF10B981), Color(0xFF059669)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(20.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF10B981).withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(LucideIcons.play, color: Colors.white, size: 14.w),
-                          SizedBox(width: 4.w),
-                          Text(
-                            '+1000',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: 'monospace',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF18181B),
-                      borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(
-                        color: const Color(0xFF27272A),
-                        width: 1,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(maxWidth: 60.w),
-                            child: FittedBox(
-                              alignment: Alignment.centerRight,
-                              fit: BoxFit.scaleDown,
-                              child: Text(
-                                '$scrapBalance',
-                                style: TextStyle(
-                                  color: const Color(0xFFEAB308),
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: 'monospace',
-                                ),
-                              ),
-                            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+              decoration: BoxDecoration(
+                color: const Color(0xFF18181B),
+                borderRadius: BorderRadius.circular(20.r),
+                border: Border.all(
+                  color: const Color(0xFF27272A),
+                  width: 1,
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 60.w),
+                      child: FittedBox(
+                        alignment: Alignment.centerRight,
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          '$scrapBalance',
+                          style: TextStyle(
+                            color: const Color(0xFFEAB308),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'monospace',
                           ),
                         ),
-                        SizedBox(width: 6.w),
-                        Icon(LucideIcons.coins, color: const Color(0xFFCA8A04), size: 16.w),
-                      ],
+                      ),
                     ),
                   ),
+                  SizedBox(width: 6.w),
+                  Icon(LucideIcons.coins, color: const Color(0xFFCA8A04), size: 16.w),
+                ],
+              ),
+            ),
           ),
         ],
       ),

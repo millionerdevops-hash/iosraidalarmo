@@ -75,6 +75,37 @@
             "clear": "CLEAR",
             "enter": "ENTER",
             "code_lock": "CODE_LOCK"
+        },
+        "news_feed": {
+            "title": "NEWS",
+            "subtitle": "Game Updates"
+        },
+        "blackjack": {
+            "title": "BLACKJACK",
+            "subtitle": "21 Casino Game",
+            "score_you": "You: {}",
+            "score_dealer": "Dealer: {}",
+            "dealer": "Dealer",
+            "player": "Player",
+            "place_bet": "PLACE YOUR BET",
+            "deal_cards": "DEAL CARDS",
+            "hit": "HIT",
+            "stand": "STAND",
+            "double": "DOUBLE",
+            "dealing": "DEALING...",
+            "dealer_turn": "DEALER TURN...",
+            "results": {
+                "busted": "BUSTED",
+                "busted_sub": "You went over 21",
+                "blackjack": "BLACKJACK!",
+                "blackjack_sub": "Payout 3:2",
+                "you_win": "YOU WIN",
+                "dealer_busted": "Dealer Busted",
+                "score_vs_score": "{} vs {}",
+                "dealer_wins": "DEALER WINS",
+                "push": "PUSH",
+                "scrap_returned": "HQM Returned"
+            }
         }
     },
     "recoil_trainer": {
@@ -563,12 +594,15 @@
         "limited_features": "Limited Features",
         "lifetime_license": "Lifetime License Active",
         "duration": "DURATION",
-        "forever_free": "FREE",
-        "lifetime": "LIFETIME",
+        "duration_weekly": "Weekly",
+        "duration_monthly": "Monthly",
+        "duration_3month": "3 Months",
+        "license_weekly": "Weekly License Active",
+        "license_monthly": "Monthly License Active",
+        "license_3month": "3-Month License Active",
         "status": "STATUS",
-        "locked": "LOCKED",
         "active": "ACTIVE",
-        "upgrade_button": "UPGRADE TO UNLOCK"
+        "restore_purchases": "RESTORE PURCHASES"
     },
     "settings": {
         "premium_lock": {
@@ -817,6 +851,347 @@
             "low_grade": "Low Grade Fuel"
         }
     },
+    "get_started": {
+        "title": "<DETECT>\nOFFLINE\nPLAYERS.",
+        "button_text": "GET STARTED"
+    },
+    "onboarding": {
+        "profile_config": "CONFIGURING PROFILE",
+        "questions": {
+            "q1": {
+                "text": "Which Rust server type do you main?",
+                "options": {
+                    "official": "ğŸ ›️ Official",
+                    "community": "ğŸ ˜️ Community",
+                    "modded": "🔧 Modded",
+                    "private": "🔐 Private / Friends",
+                    "jump": "ğŸŽ¢ I jump between servers"
+                }
+            },
+            "q2": {
+                "text": "What server rate do you usually play on?",
+                "options": {
+                    "vanilla": "ğŸ ¦ Vanilla (1x)",
+                    "2x": "ğŸ“ˆ 2x",
+                    "3x": "ğŸ“ˆ 3x",
+                    "5x": "ğŸ“ˆ 5x",
+                    "10x": "ğŸ“ˆ 10x+",
+                    "wipe_dependent": "ğŸ“‰ Depends on the wipe"
+                }
+            },
+            "q3": {
+                "text": "What wipe cycle do you prefer?",
+                "options": {
+                    "weekly": "ğŸ“… Weekly wipe",
+                    "biweekly": "ğŸ—“️ Bi-weekly wipe",
+                    "monthly": "ğŸ“Š Monthly wipe",
+                    "pvp_only": "⚔️ I donâ€™t care, just PvP"
+                }
+            },
+            "q4": {
+                "text": "How do you usually play Rust?",
+                "options": {
+                    "solo": "ğŸ º Solo",
+                    "duo": "ğŸ¤  Duo",
+                    "trio": "ğŸ‘¥ Trio",
+                    "small_group": "ğŸ‘¨â€ ğŸ‘©â€ ğŸ‘§â€ ğŸ‘¦ Small group (4â€“5)",
+                    "clan": "ğŸ›¡️ Clan (6â€“12)",
+                    "zerg": "ğŸ œ Zerg (12â€“âˆž)"
+                }
+            },
+            "q5": {
+                "text": "When do you get raided most?",
+                "options": {
+                    "offline": "ğŸ˜´ Offline (most of the time)",
+                    "online": "⚔️ Online raids",
+                    "both": "ğŸ˜­ Both",
+                    "raider": "ğŸ˜ˆ Iâ€™m the one raiding others"
+                }
+            },
+            "q6": {
+                "text": "What’s your biggest Rust nightmare?",
+                "options": {
+                    "wiped": "ğŸ’€ Waking up to a fully wiped base",
+                    "lost_loot": "ğŸ’£ Losing all my sulfur & loot",
+                    "sleeping": "ğŸ˜´ Getting raided while sleeping",
+                    "work_school": "ğŸ « Being raided during work/school",
+                    "missed_boom": "ğŸ‘‚ Missing the first boom sound"
+                }
+            },
+            "q7": {
+                "text": "When are you usually offline?",
+                "options": {
+                    "sleeping": "ğŸ˜´ Sleeping",
+                    "work_school": "ğŸ « At work/school",
+                    "traveling": "âœˆ️ Traveling",
+                    "all_day": "ğŸŽ® I play almost all day",
+                    "random": "ğŸ”€ Random hours"
+                }
+            },
+            "q8": {
+                "text": "How do you usually build your base?",
+                "options": {
+                    "small": "Small hidden base",
+                    "bunker": "ğŸ§± Bunker base",
+                    "compound": "ğŸ”« Compound with turrets",
+                    "multiple": "ğŸ   Multiple small bases",
+                    "whatever": "ğŸŽ² Whatever survives the wipe"
+                }
+            },
+            "q9": {
+                "text": "Do you use Rust+ for raid notifications?",
+                "options": {
+                    "yes_unreliable": "âš ️ Yes, but notifications are unreliable",
+                    "no_trust": "ğŸ¤¨ I tried it, didnâ€™t trust it",
+                    "too_late": "ğŸ•’ I get notifications too late",
+                    "no": "â Œ I donâ€™t use Rust+ at all"
+                }
+            },
+            "q10": {
+                "text": "Have you ever missed a raid because you didn’t hear Rust+?",
+                "options": {
+                    "yes_many": "ğŸ˜ž Yesâ€¦ more times than Iâ€™d like",
+                    "yes_wiped": "ğŸ’€ Yes, and it wiped my base",
+                    "almost": "ğŸ˜° Almost â€” barely logged in on time"
+                }
+            },
+            "q11": {
+                "text": "Why do you usually miss raid notifications?",
+                "options": {
+                    "silent": "ğŸ”• My phone is on silent/vibrate",
+                    "another_room": "ğŸ“± My phone is in another room",
+                    "battery_saver": "ğŸ”‹ Battery saver kills notifications",
+                    "sleeping": "ğŸ˜´ Iâ€™m sleeping through alerts"
+                }
+            },
+            "q12": {
+                "text": "What would actually wake you up during a raid?",
+                "options": {
+                    "loud_alarm": "ğŸ”” Loud, unstoppable alarm",
+                    "repeating_alarm": "ğŸ”  Repeating alarm until you stop it",
+                    "phone_call": "ğŸ“ž Incoming phone call simulation",
+                    "all": "⭐ Iâ€™d use all of them for maximum safety"
+                }
+            },
+            "q13": {
+                "text": "Which feature are you most excited to use?",
+                "options": {
+                    "alarm_only": "ğŸš¨ Raid Alarm only",
+                    "tracking_wipe": "ğŸŽ¯ Player tracking & server wipe notifications",
+                    "both": "⭐ Both features"
+                }
+            }
+        }
+    },
+    "risk_analysis": {
+        "status": {
+            "analyzing": "ANALYZING...",
+            "danger_detected": "DANGER DETECTED"
+        },
+        "stats": {
+            "threat_level": "Threat Level",
+            "threat_value": "Critical",
+            "vulnerable_time": "Vulnerable Time",
+            "vulnerable_time_format": "{} - {}",
+            "wipe_risk": "Wipe Risk",
+            "wipe_risk_value": "High",
+            "raid_probability": "Raid Probability",
+            "percentage_format": "{}%"
+        },
+        "calculating_odds": "CALCULATING ODDS...",
+        "button_view_solution": "VIEW SOLUTION"
+    },
+    "how_it_works": {
+        "title": "Rust+ Detects",
+        "description": "Rust+ detects the raid and sends the alert.",
+        "subtitle": "We Take Control",
+        "mode_alarm": "ALARM MODE",
+        "mode_call": "FAKE CALL",
+        "button_continue": "CONTINUE",
+        "demo": {
+            "notification_title": "Alarm",
+            "notification_message": "Your base is under attack!",
+            "rust_plus": "RUST+",
+            "time_now": "now",
+            "raid_alarm_title": "RAID\nALARM",
+            "activated": "ACTIVATED",
+            "incoming_call_name": "Raid Alarm",
+            "calling_status": "Calling...",
+            "lock_screen_date": "Monday, Oct 29"
+        }
+    },
+    "player_tracking": {
+        "max_limit_reached": "Maximum {} players can be tracked",
+        "status": {
+            "just_added": "Just added"
+        },
+        "preview": {
+            "title": "Live Tracking",
+            "description": "Real-time status updates for your enemies.",
+            "app_header": "Targets",
+            "system_active": "SYSTEM ACTIVE",
+            "status": {
+                "online": "ONLINE",
+                "offline": "OFFLINE"
+            },
+            "time": {
+                "active_now": "Active Now",
+                "seen_5m": "Seen 5m ago",
+                "seen_4h": "Seen 4h ago"
+            },
+            "notification": {
+                "online_title": "TARGET ONLINE",
+                "offline_title": "TARGET OFFLINE",
+                "now": "now",
+                "online_message": "Player 1 ONLINE",
+                "offline_message": "Player 1 OFFLINE"
+            },
+            "button_continue": "CONTINUE"
+        }
+    },
+    "partners": {
+        "title": "PARTNERS",
+        "subtitle": "Trusted Server Hosting",
+        "pine": {
+            "description": "Premium Rust hosting. Industry-leading performance with custom control panel designed for serious server owners."
+        },
+        "hosthavoc": {
+            "description": "Enterprise hardware with 99.9% uptime. 24/7 support with <10min response times. The reliable choice for modded servers."
+        },
+        "gportal": {
+            "description": "Official host for Rust servers. Instant setup, DDoS protection included, and switch between games anytime. Great for beginners."
+        }
+    },
+    "setup_ready": {
+        "ui": {
+            "configuration": "CONFIGURATION",
+            "step_format": "{} / {}",
+            "continue": "CONTINUE",
+            "back": "BACK"
+        },
+        "step1": {
+            "title": "Install Rust+",
+            "description": "Raid Alarm works together with Rust+.",
+            "how_it_works": "HOW IT WORKS",
+            "signal": "SIGNAL",
+            "protection": "PROTECTION",
+            "installed_continue": "Rust+ detected. Reduce setup time.",
+            "hero": {
+                "rust_plus": "Rust+ sends the raid signal.",
+                "raid_alarm": "Raid Alarm makes sure you hear it."
+            },
+            "status": {
+                "detected": "Rust+ app detected successfully.",
+                "not_found": "Rust+ app not found. Please install first.",
+                "already_installed": "If Rust+ is already installed, you can continue."
+            },
+            "buttons": {
+                "check": "CHECK INSTALLATION",
+                "install": "INSTALL RUST+"
+            }
+        },
+        "step2": {
+            "title": "Connect Rust+",
+            "subtitle": "Link your server to receive events",
+            "items": {
+                "1": "Open Rust+ and log in with your Steam account",
+                "2": "Join a server -> ESC Menu -> Pair with App",
+                "3": "Ensure your server shows as 'Connected' in the app",
+                "4": "Place 'Smart Alarms' in-game to receive alerts"
+            },
+            "button": "I'VE CONNECTED"
+        },
+        "step3": {
+            "title": "Enable Notifications",
+            "description": "Make sure raid alerts can actually reach your phone.",
+            "check": {
+                "in_app": "Rust+ in-app notifications enabled",
+                "system": "System notifications allowed"
+            },
+            "buttons": {
+                "check_settings": "CHECK NOTIFICATION SETTINGS",
+                "open_app": "OPEN RUST+ APP",
+                "open_settings": "OPEN RUST+ SETTINGS"
+            }
+        },
+        "step4": {
+            "title_line1": "Why Rust+ Alone",
+            "title_line2": "Is Not Enough",
+            "description": "Rust+ does send notifications — but when:",
+            "reasons": {
+                "silent": "Your phone is on silent or vibrate",
+                "sleeping": "You’re sleeping",
+                "battery": "Battery saver is active",
+                "dnd": "Do Not Disturb is active"
+            },
+            "boom": "You never hear the first boom.",
+            "fail_reason": "Most offline raids succeed because alerts go unnoticed.",
+            "missed_button": "I'VE MISSED ALERTS"
+        },
+        "step5": {
+            "title": "Raid Alarm Upgrades",
+            "subtitle": "Converting Rust+ notifications into loud alarms",
+            "features": {
+                "loud_alarms": "Loud alarms",
+                "fake_calls": "Fake incoming calls",
+                "repeating": "Repeating alerts"
+            },
+            "notice": "So when Rust+ sends a notification —\nyou're sure to notice it."
+        },
+        "step6": {
+            "title": "Prepare Raid Alarm",
+            "description": "To make sure you never miss a raid, Raid Alarm needs a few permissions to work properly.",
+            "allow_us": "THESE ALLOW US TO:",
+            "reasons": {
+                "trigger": "Trigger loud alarms",
+                "simulate": "Simulate incoming calls",
+                "override": "Override silent & battery restrictions"
+            },
+            "warning": "Without these, alerts may still be missed.",
+            "button": "CONTINUE SETUP"
+        },
+        "step7": {
+            "title": "Grant Permissions",
+            "description": "Click the options in order to grant permissions.",
+            "grant_button": "GRANT REMAINING",
+            "permissions": {
+                "notifications": {
+                    "title": "Notifications",
+                    "desc": "To play loud raid alarms"
+                },
+                "notification_access": {
+                    "title": "Notification Access",
+                    "desc": "To detect raid alerts from Rust+"
+                },
+                "battery_optimization": {
+                    "title": "Ignore battery optimizations",
+                    "desc": "To prevent alerts from being killed"
+                },
+                "overlay": {
+                    "title": "Display over other apps",
+                    "desc": "To show alerts over any application"
+                },
+                "exact_alarms": {
+                    "title": "Exact Alarms",
+                    "desc": "To trigger alerts at precise times"
+                },
+                "autostart": {
+                    "title": "Auto Start",
+                    "desc": "To ensure Raid Alarm starts with your phone"
+                },
+                "full_screen_intent": {
+                    "title": "Full Screen Intent",
+                    "desc": "To show the alarm screen while the phone is locked"
+                }
+            }
+        },
+        "step8": {
+            "title": "YOU'RE READY",
+            "description": "Raid Alarm is now active in the background.",
+            "subtitle": "We'll wake you up if a raid is detected.",
+            "dashboard_button": "GO TO DASHBOARD"
+        }
+    },
     "legal": {
         "privacy_policy": {
             "title": "Privacy Policy",
@@ -891,25 +1266,55 @@
             "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
         }
     },
+    "newsfeed": {
+        "title": "News Feed",
+        "try_again": "TRY AGAIN",
+        "end_of_feed": "END OF FEED",
+        "errors": {
+            "fetch_failed": "Unable to fetch live news.",
+            "connection_failed": "Connection Failed",
+            "connection_desc": "Could not retrieve live news feed from Rust servers."
+        }
+    },
+    "bug_report": {
+        "ui": {
+            "title": "REPORT A BUG",
+            "subject": "Subject",
+            "subject_hint": "Short summary of the issue",
+            "description": "Description",
+            "send": "SEND REPORT",
+            "error_empty": "This field cannot be empty",
+            "success": "Report sent successfully",
+            "error_mail": "Could not open mail app"
+        }
+    },
     "paywall": {
-        "title_line1": "LIFETIME",
-        "title_line2": "ACCESS",
-        "subtitle": "Pay once. Own it forever.",
-        "no_subscriptions": "NO SUBSCRIPTIONS.",
-        "secure_access": "START UNLIMITED PROTECTION",
-        "restore": "RESTORE",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
+        "title": "Start Your 7-Day Free Trial for Unlimited",
+        "table_features": "FEATURES",
+        "table_free": "FREE",
+        "table_pro": "PRO",
+        "features": {
+            "alarm": "Alarm Mode",
+            "fake_call": "Fake Call Mode",
+            "tracker": "Player Tracker",
+            "no_ads": "No Ads",
+            "wipe": "Wipe Notification",
+            "tools": "Extra Tools"
+        },
+        "plan_lifetime": "LIFETIME ACCESS",
+        "plan_lifetime_subtitle": "ONE-TIME PAYMENT",
+        "plan_monthly": "MONTHLY PLAN",
+        "plan_trial": "7-DAY FREE TRIAL",
+        "plan_one_time": "ONE-TIME",
+        "plan_best_value": "BEST VALUE",
+        "button_trial": "TRY 7 DAYS FREE",
+        "button_unlock": "UNLOCK LIFETIME ACCESS",
+        "restore": "Restore",
+        "privacy": "Privacy",
+        "terms": "Terms",
         "plan_card": {
             "name": "LIFETIME ACCESS",
             "one_time": "ONE-TIME PAYMENT"
-        },
-        "benefits": {
-            "critical_alarms": "Critical Raid Alarms (Bypasses Silent Mode)",
-            "fake_call": "Fake Incoming Call Simulation",
-            "enemy_notifications": "Enemy Online/Offline Notifications",
-            "server_notifications": "Server Online/Offline Notifications",
-            "wipe_notifications": "Custom Wipe Notifications"
         },
         "errors": {
             "network": "Network error. Please check your internet connection and try again.",
@@ -920,11 +1325,11 @@
             "already_purchased": "This product has already been purchased.",
             "generic_failed": "Purchase failed: {}",
             "purchase_failed_default": "Purchase failed. Please try again.",
+            "purchase_verification_failed": "Payment completed but could not verify lifetime access.",
             "restore_no_internet": "No internet connection. Please check your network.",
             "restore_timeout": "Restore timed out. Please try again.",
             "restore_failed": "Restore failed: {}",
-            "no_lifetime_found": "No lifetime purchase found to restore",
-            "purchase_verification_failed": "Payment completed but could not verify lifetime access."
+            "no_lifetime_found": "No lifetime purchase found to restore"
         }
     }
 }

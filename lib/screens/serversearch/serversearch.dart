@@ -12,8 +12,6 @@ import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
-import 'package:raidalarm/services/ad_service.dart';
-import 'package:raidalarm/widgets/ads/banner_ad_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:raidalarm/providers/notification_provider.dart';
 import 'package:raidalarm/core/utils/connectivity_helper.dart';
@@ -384,10 +382,6 @@ class _ServerSearchScreenState extends ConsumerState<ServerSearchScreen> {
         if (didPop) return;
         if (!mounted) return;
         HapticHelper.mediumImpact();
-        final hasLifetime = ref.read(notificationProvider).hasLifetime;
-        if (!hasLifetime) {
-          AdService().showInterstitialAd();
-        }
         if (mounted) {
           if (context.canPop()) {
             context.pop(_refreshOnBack);
@@ -421,7 +415,7 @@ class _ServerSearchScreenState extends ConsumerState<ServerSearchScreen> {
                         ),
                       ),
                     ),
-                    const BannerAdWidget(),
+                    // BannerAdWidget removed
                   ],
                 ),
 

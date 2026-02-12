@@ -4,8 +4,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:raidalarm/data/database/app_database.dart';
 import 'package:raidalarm/services/alarm_service.dart' show AlarmSettings, AlarmMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:raidalarm/services/notification_listener_service.dart';
-
 final settingsRepoProvider = Provider((ref) => SettingsRepository(ref.read(appDatabaseProvider)));
 
 class SettingsRepository {
