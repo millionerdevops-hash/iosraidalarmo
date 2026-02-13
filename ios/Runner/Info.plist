@@ -52,14 +52,10 @@
 		<string>audio</string>
 		<string>voip</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to allow you to take and upload photos of your base or profile.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Raid Alarm needs access to your photo library to allow you to select custom images for the Fake Call screen.</string>
 	<key>NSUserNotificationAlertStyleUsageDescription</key>
 	<string>Raid Alarm needs notification access to alert you during a raid.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Raid Alarm needs microphone access to enable the fake call screen feature.</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Raid Alarm needs access to your media library to allow you to select custom audio files for alarms and fake calls.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
