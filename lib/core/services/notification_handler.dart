@@ -182,7 +182,6 @@ class NotificationHandler {
               },
             );
          }
-      }
     } catch (e) {
       debugPrint("[NotificationHandler] ❌ Pairing Error: $e");
     }
