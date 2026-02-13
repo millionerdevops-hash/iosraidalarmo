@@ -139,7 +139,7 @@ class _DieselCalculatorScreenState extends ConsumerState<DieselCalculatorScreen>
   void _changeFuelType(String type) {
     if (_selectedFuelType == type) return;
     
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     
     setState(() {
       _selectedFuelType = type;
@@ -172,7 +172,7 @@ class _DieselCalculatorScreenState extends ConsumerState<DieselCalculatorScreen>
   }
 
   void _addAmount(int amount) {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     int current = int.tryParse(_dieselController.text) ?? 0;
     _dieselController.text = (current + amount).toString();
     setState(() {});
@@ -226,7 +226,7 @@ class _DieselCalculatorScreenState extends ConsumerState<DieselCalculatorScreen>
                       child: IconButton(
                         icon: Icon(LucideIcons.arrowLeft, color: const Color(0xFFA1A1AA), size: 24.w),
                         onPressed: () {
-                          HapticHelper.mediumImpact();
+                          HapticHelper.lightImpact();
                           _handleBack();
                         },
                         padding: EdgeInsets.zero,
@@ -489,7 +489,7 @@ class _DieselCalculatorScreenState extends ConsumerState<DieselCalculatorScreen>
 
                           return GestureDetector(
                             onTap: () {
-                              HapticHelper.mediumImpact();
+                              HapticHelper.lightImpact();
                               setState(() => _selectedMachineId = machine['id']);
                             },
                             child: Container(

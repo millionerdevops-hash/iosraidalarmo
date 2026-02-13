@@ -77,24 +77,24 @@ class _RaidCalculatorScreenState extends ConsumerState<RaidCalculatorScreen>
   }
 
   void _increment() {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     setState(() => _count = (_count + 1).clamp(1, 99));
   }
 
   void _decrement() {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     setState(() => _count = (_count - 1).clamp(1, 99));
   }
 
   void _removeFromCart(String id) {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     setState(() {
       _raidCart.removeWhere((item) => item.id == id);
     });
   }
 
   void _clearCart() {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     setState(() {
       _raidCart.clear();
     });
@@ -299,7 +299,7 @@ class _RaidCalculatorScreenState extends ConsumerState<RaidCalculatorScreen>
                             child: RaidCategoryTabs(
                               activeCategory: _activeCategory,
                               onSelect: (cat) {
-                                HapticHelper.mediumImpact();
+                                HapticHelper.lightImpact();
                                 setState(() {
                                   _activeCategory = cat;
                                   _selectedTargetId = targets.firstWhere((t) => t.category == cat).id;
@@ -327,7 +327,7 @@ class _RaidCalculatorScreenState extends ConsumerState<RaidCalculatorScreen>
                                 targets: _filteredTargets,
                                 selectedId: _selectedTargetId,
                                 onSelect: (id) {
-                                  HapticHelper.mediumImpact();
+                                  HapticHelper.lightImpact();
                                   setState(() => _selectedTargetId = id);
                                 },
                               ),
@@ -431,7 +431,7 @@ class _Header extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: IconButton(
               onPressed: () {
-                HapticHelper.mediumImpact();
+                HapticHelper.lightImpact();
                 onBack();
               },
               icon: Icon(LucideIcons.arrowLeft, color: const Color(0xFFA1A1AA), size: 22.w),

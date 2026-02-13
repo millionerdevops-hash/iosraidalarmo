@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -185,11 +186,9 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                               // ALARM MODE Button
                               Expanded(
                                 child: GestureDetector(
-                                  onTap: () {
-                                    HapticHelper.mediumImpact();
-
-                                    _throttler.run(() => setState(() => _demoMode = 'ALARM'));
-                                  },
+                                    onTap: () {
+                                      _throttler.run(() => setState(() => _demoMode = 'ALARM'));
+                                    },
                                   behavior: HitTestBehavior.opaque,
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -225,8 +224,6 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                               Expanded(
                                 child: GestureDetector(
                                   onTap: () {
-                                    HapticHelper.mediumImpact();
-
                                     _throttler.run(() => setState(() => _demoMode = 'CALL'));
                                   },
                                   behavior: HitTestBehavior.opaque,
@@ -486,7 +483,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                     children: [
                       RustButton(
                         onPressed: () {
-                          HapticHelper.mediumImpact();
+                          HapticHelper.lightImpact();
                           _throttler.run(() {
 
                             _handleContinue();

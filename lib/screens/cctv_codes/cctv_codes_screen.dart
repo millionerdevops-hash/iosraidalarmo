@@ -35,7 +35,7 @@ class _CCTVCodesScreenState extends ConsumerState<CCTVCodesScreen> {
 
   void _onCategoryChanged(String category) {
     if (_activeCategory != category) {
-      HapticHelper.mediumImpact();
+      HapticHelper.lightImpact();
       setState(() => _activeCategory = category);
     }
   }
@@ -99,7 +99,7 @@ class _CCTVHeader extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: IconButton(
               onPressed: () {
-                HapticHelper.mediumImpact();
+                HapticHelper.lightImpact();
                 onBack();
               },
               icon: Icon(Icons.arrow_back, color: const Color(0xFFA1A1AA), size: 24.w),
@@ -300,7 +300,7 @@ class _CCTVGridState extends State<_CCTVGrid> {
                 key: ValueKey(item.id),
                 item: item,
                 onTap: () {
-                  HapticHelper.mediumImpact();
+                  HapticHelper.lightImpact();
                   // Clipboard logic removed/not present in original, just generic tap for now
                 },
               ),

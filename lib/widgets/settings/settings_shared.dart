@@ -80,7 +80,7 @@ class SettingsDropdown extends StatelessWidget {
                     value: value,
                     onChanged: (newValue) {
                       if (newValue != null) {
-                        HapticHelper.mediumImpact();
+                        HapticHelper.lightImpact();
                         onChange(newValue);
                       }
                     },
@@ -169,7 +169,7 @@ class SettingsToggle extends StatelessWidget {
         // Right: Toggle
         GestureDetector(
           onTap: () {
-          HapticHelper.mediumImpact();
+          HapticHelper.lightImpact();
           onChange(!checked);
         },
           child: Container(

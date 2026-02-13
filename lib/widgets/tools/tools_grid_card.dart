@@ -28,7 +28,7 @@ class _ToolsGridCardState extends State<ToolsGridCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        HapticHelper.mediumImpact();
+        HapticHelper.lightImpact();
         widget.onClick();
       },
       onTapDown: (_) => setState(() => _isPressed = true),

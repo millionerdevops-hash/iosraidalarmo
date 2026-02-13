@@ -162,7 +162,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                           color: Colors.transparent,
                                           child: InkWell(
                                             onTap: () {
-                                              HapticHelper.mediumImpact();
+                                              HapticHelper.lightImpact();
                                               context.push(Uri(path: '/how-it-works', queryParameters: {'fromSettings': 'true'}).toString());
                                             },
                                             child: Container(
@@ -213,7 +213,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                           color: Colors.transparent,
                                           child: InkWell(
                                             onTap: () {
-                                              HapticHelper.mediumImpact();
+                                              HapticHelper.lightImpact();
                                               context.push('/bug-report');
                                             },
                                             child: Container(

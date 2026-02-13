@@ -40,7 +40,7 @@ class _PrivacyPolicyScreenState extends ConsumerState<PrivacyPolicyScreen> {
       canPop: false,
       onPopInvoked: (didPop) {
         if (didPop) return;
-        HapticHelper.mediumImpact();
+        // HapticHelper.mediumImpact();
         _handleBack();
       },
       child: RustScreenLayout(
@@ -71,7 +71,7 @@ class _PrivacyPolicyScreenState extends ConsumerState<PrivacyPolicyScreen> {
                         alignment: Alignment.centerLeft,
                         child: IconButton(
                           onPressed: () {
-                            HapticHelper.mediumImpact();
+                            // HapticHelper.mediumImpact();
                             _handleBack();
                           },
                           icon: Icon(Icons.arrow_back,

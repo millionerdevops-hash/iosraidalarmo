@@ -9,12 +9,16 @@ import SQLite3
 @main
 @objc class AppDelegate: FlutterAppDelegate {
     
+    // Extracted components
     private let fakeCallOverlay = FakeCallOverlay()
     private let alarmManager = AlarmManager()
+    
+    // CallKit & Services
     private var callController = CXCallController()
     private var providerDelegate: ProviderDelegate?
     private var pushRegistry: PKPushRegistry?
     
+    // Channels
     private var methodChannel: FlutterMethodChannel?
     private var voipChannel: FlutterMethodChannel?
     private var storedVoipToken: String?
@@ -44,6 +48,13 @@ import SQLite3
         // 1. Setup Audio
         alarmManager.setupAudioSession()
         
+        // Ensure UI dismisses if Alarm stops (e.g. Duration Timer ends)
+        alarmManager.onStop = { [weak self] in
+            DispatchQueue.main.async {
+                self?.fakeCallOverlay.dismissFakeCall()
+            }
+        }
+        
         // 2. Setup CallKit Provider
         providerDelegate = ProviderDelegate(callManager: callController)
         
@@ -54,13 +65,8 @@ import SQLite3
         
         // 4. Register for Standard Notifications (Fallback)
         UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if granted {
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
-            }
-        }
+        // Removed automatic authorization request to allow Flutter side to handle it contextually
+        // UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in ... }
         
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -72,9 +78,19 @@ import SQLite3
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
-        // If standard push comes with "raid" type, we can still trigger overlay if foreground
-        // But mainly we rely on VoIP for background
-        if let type = userInfo["type"] as? String, (type == "raid" || type == "alarm") {
+        // Trigger logic based on Server Payload
+        // Check for 'channelId' == 'alarm' OR 'type' == 'alarm'
+        let channelId = userInfo["channelId"] as? String
+        let type = userInfo["type"] as? String
+        let androidChannelId = userInfo["gcm.notification.android_channel_id"] as? String // Optional check
+        
+        if channelId == "alarm" || type == "alarm" || androidChannelId == "alarm" {
+             print("🔔 Alarm Triggered via Notification (Channel: \(channelId ?? "nil"), Type: \(type ?? "nil"))")
+             
+             // 1. Record Attack Stats
+             SettingsManager.shared.recordAttack()
+             
+             // 2. Handle Payload (Play Sound, Show UI)
              handleRaidPayload(userInfo)
         }
         completionHandler(.newData)
@@ -83,10 +99,16 @@ import SQLite3
     func handleRaidPayload(_ payload: [AnyHashable: Any]) {
         let title = payload["title"] as? String ?? "RAID ALERT"
         
-        // 1. Get Settings from SQLite
-        let settings = getSQLiteAlarmSettings()
+        // 1. Get Settings from SQLite using new Manager
+        let settings = SettingsManager.shared.getSQLiteAlarmSettings()
+        
         let fakeCallEnabled = settings["fakeCallEnabled"] as? Bool ?? false
         let mode = settings["mode"] as? String ?? "sound"
+        
+        // Extra Settings
+        let vibrate = settings["vibration"] as? Bool ?? true
+        let duration = settings["duration"] as? Double ?? 30.0
+        let loop = settings["infiniteLoop"] as? Bool ?? true
         
         // Custom Sound & Background Logic
         let customAlarmSoundPath = settings["alarmSound"] as? String
@@ -95,24 +117,45 @@ import SQLite3
         
         let callerName = settings["fakeCallerName"] as? String ?? title
         
+        // 1.1 Save Notification to History (Sync with Flutter UI)
+        // We use the 'body' from payload if available, or generate a default message
+        let body = payload["body"] as? String ?? "Your base is under attack!"
+        let channelId = payload["channelId"] as? String ?? "alarm"
+        
+        SettingsManager.shared.saveNotification(
+            title: title,
+            body: body,
+            channelId: channelId
+        )
+        
         DispatchQueue.main.async {
             // 2. Play Sound (if mode is sound or vibration)
+            // Note: Our AlarmManager now handles vibration internally if 'vibrate' is true
+            // regardless of mode string, but we should respect 'silent' mode too.
+            
             if mode != "silent" {
-                // If fake call is enabled, maybe we play ringtone instead of alarm?
-                // But request logic: alarm sound for raid, fake call sound for ringtone.
-                // Here we are handling "RAID ALERT".
-                // Usually Raid Alarm plays ALARM sound.
-                // Fake Call plays RINGTONE.
-                
-                // If Fake Call is enabled, we show the screen. The screen implies a "Ring" state.
-                // So if fakeCallEnabled -> Play Fake Call Sound (Ringtone)
-                // If NOT enabled -> Play Alarm Sound
-                
-                if fakeCallEnabled {
-                    self.alarmManager.playCustomSound(customFakeCallSoundPath, defaultName: "raid_alarm")
-                } else {
-                    self.alarmManager.playCustomSound(customAlarmSoundPath, defaultName: "raid_alarm")
-                }
+                let soundPath = fakeCallEnabled ? customFakeCallSoundPath : customAlarmSoundPath
+                self.alarmManager.playCustomSound(
+                    soundPath,
+                    defaultName: "raid_alarm",
+                    vibrate: vibrate,
+                    duration: duration,
+                    loop: loop
+                )
+            } else if vibrate {
+                // If silent but vibrate is ON (if app logic allows silent+vibrate)
+                 // For now, if mode is silent, we might just want vibration?
+                 // Let's assume 'silent' means NO sound. But maybe Vibration?
+                 // The 'mode' in SQLite might be 'sound', 'vibrate', 'silent'.
+                 if mode == "vibrate" {
+                     self.alarmManager.playCustomSound(
+                         nil, // No sound
+                         defaultName: "raid_alarm",
+                         vibrate: true,
+                         duration: duration,
+                         loop: loop
+                     )
+                 }
             }
             
             // 3. Show Overlay (if enabled)
@@ -124,50 +167,14 @@ import SQLite3
                 }
                 
                 self.fakeCallOverlay.showFakeCall(callerName: callerName, image: customImage)
-            }
-        }
-    }
-    
-    // Helper to read form SQLite directly
-    private func getSQLiteAlarmSettings() -> [String: Any] {
-        var settings: [String: Any] = [:]
-        
-        // Path to Documents/raidalarm.db
-        guard let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [:] }
-        let dbPath = documentsPath.appendingPathComponent("raidalarm.db").path
-        
-        var db: OpaquePointer?
-        if sqlite3_open(dbPath, &db) == SQLITE_OK {
-            let query = "SELECT value FROM app_settings WHERE key = 'alarmSettings'"
-            var statement: OpaquePointer?
-            
-            if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
-                if sqlite3_step(statement) == SQLITE_ROW {
-                    if let cString = sqlite3_column_text(statement, 0) {
-                        let jsonString = String(cString: cString)
-                        if let data = jsonString.data(using: .utf8) {
-                            do {
-                                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                                    settings = json
-                                }
-                            } catch {
-                                print("Error parsing SQLite JSON: \(error)")
-                            }
-                        }
-                    }
+                
+                // IMPORTANT: Handle Dismissal to Stop Sound
+                self.fakeCallOverlay.onDismiss = { [weak self] in
+                    print("🔕 Fake Call Dismissed. Stopping Sound.")
+                    self?.alarmManager.stopSound()
                 }
             }
-            sqlite3_finalize(statement)
         }
-        sqlite3_close(db)
-        
-        if settings.isEmpty {
-             print("⚠️ No settings found in SQLite, using defaults.")
-        } else {
-             print("✅ Loaded Settings from SQLite: \(settings)")
-        }
-        
-        return settings
     }
 }
 
@@ -466,4 +473,49 @@ class AlarmManager {
     }
 }
 
+// MARK: - Settings Manager
+class SettingsManager {
+    static let shared = SettingsManager()
+    private init() {} // Ensure singleton
 
+    func getSQLiteAlarmSettings() -> [String: Any] {
+        var settings: [String: Any] = [:]
+        
+        // Path to Documents/raidalarm.db
+        guard let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [:] }
+        let dbPath = documentsPath.appendingPathComponent("raidalarm.db").path
+        
+        var db: OpaquePointer?
+        if sqlite3_open(dbPath, &db) == SQLITE_OK {
+            let query = "SELECT value FROM app_settings WHERE key = 'alarmSettings'"
+            var statement: OpaquePointer?
+            
+            if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
+                if sqlite3_step(statement) == SQLITE_ROW {
+                    if let cString = sqlite3_column_text(statement, 0) {
+                        let jsonString = String(cString: cString)
+                        if let data = jsonString.data(using: .utf8) {
+                            do {
+                                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                                    settings = json
+                                }
+                            } catch {
+                                print("Error parsing SQLite JSON: \(error)")
+                            }
+                        }
+                    }
+                }
+            }
+            sqlite3_finalize(statement)
+        }
+        sqlite3_close(db)
+        
+        if settings.isEmpty {
+             print("⚠️ No settings found in SQLite, using defaults.")
+        } else {
+             print("✅ Loaded Settings from SQLite: \(settings)")
+        }
+        
+        return settings
+    }
+}

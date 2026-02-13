@@ -107,7 +107,7 @@ class _AttackTrafficWidgetState extends State<AttackTrafficWidget> {
                     // Dropdown Button
                     GestureDetector(
                       onTap: () {
-                        HapticHelper.mediumImpact();
+                        HapticHelper.lightImpact();
                         setState(() {
                           _isDropdownOpen = !_isDropdownOpen;
                         });
@@ -208,7 +208,7 @@ class _AttackTrafficWidgetState extends State<AttackTrafficWidget> {
                                           Expanded(
                                             child: GestureDetector(
                                               onTap: () {
-                                                HapticHelper.mediumImpact();
+                                                HapticHelper.lightImpact();
                                                 setState(() {
                                                   _activeBarIndex =
                                                       isActive ? null : idx;
@@ -455,7 +455,7 @@ class _AttackTrafficWidgetState extends State<AttackTrafficWidget> {
                           final isSelected = _selectedTimeRange == range;
                           return GestureDetector(
                             onTap: () {
-                              HapticHelper.mediumImpact();
+                              HapticHelper.lightImpact();
                               setState(() {
                                 _selectedTimeRange = range;
                                 _isDropdownOpen = false;

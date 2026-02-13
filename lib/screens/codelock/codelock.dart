@@ -101,7 +101,6 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
   void _handleInput(String num) {
     if (_gameState != GameState.playing) return;
     if (_currentGuess.length < 4) {
-      HapticHelper.soft();
       setState(() {
         _currentGuess += num;
       });
@@ -110,7 +109,7 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
 
   void _handleClear() {
     if (_gameState != GameState.playing) return;
-    HapticHelper.selection();
+    HapticHelper.lightImpact();
     setState(() {
       _currentGuess = '';
     });
@@ -128,7 +127,7 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
 
   void _executeSubmit(String guess) {
     if (guess.length != 4) return;
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
 
     setState(() {
       _attempts++;
@@ -164,7 +163,7 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
       _history.insert(0, {'guess': guess, 'result': result});
 
       if (guess == _targetCode) {
-        HapticHelper.success();
+        HapticHelper.lightImpact();
         _gameState = GameState.won;
         _wonAmount = max(50, baseReward - ((_attempts - 1) * 50));
         ref.read(scrapProvider.notifier).addScrap(_wonAmount);
@@ -179,7 +178,7 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
   }
 
   void _triggerShock() {
-    HapticHelper.heavyImpact();
+    HapticHelper.lightImpact();
     setState(() => _shocked = true);
     _shakeController.forward(from: 0.0);
     Future.delayed(const Duration(milliseconds: 300), () {
@@ -249,7 +248,7 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
             alignment: Alignment.centerLeft,
             child: IconButton(
               onPressed: () {
-                HapticHelper.mediumImpact();
+                HapticHelper.lightImpact();
                 context.go('/tools');
               },
               icon: Icon(Icons.arrow_back, color: const Color(0xFFA1A1AA), size: 24.w),
@@ -508,7 +507,7 @@ class _CodeBreakerScreenState extends ConsumerState<CodeBreakerScreen> with Sing
     bool disabled = label == 'ENTER' && _currentGuess.length != 4;
     return GestureDetector(
       onTap: disabled ? null : () {
-        HapticHelper.mediumImpact();
+        HapticHelper.lightImpact();
         onTap();
       },
       child: Opacity(

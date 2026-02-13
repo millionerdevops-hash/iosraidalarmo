@@ -157,7 +157,7 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
     if (_cards[index].isFlipped || _cards[index].isMatched) return;
     if (_flippedIndices.length >= 2) return;
 
-    HapticHelper.soft();
+    HapticHelper.lightImpact();
     setState(() {
       _cards[index].isFlipped = true;
       _flippedIndices.add(index);
@@ -172,7 +172,7 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
         // Match!
         Future.delayed(const Duration(milliseconds: 500), () {
           if (!mounted) return;
-          HapticHelper.heavyImpact();
+          HapticHelper.lightImpact();
           setState(() {
             _cards[firstIdx].isMatched = true;
             _cards[secondIdx].isMatched = true;

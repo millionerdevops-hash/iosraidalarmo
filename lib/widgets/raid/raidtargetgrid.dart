@@ -81,7 +81,7 @@ class _TargetTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        HapticHelper.mediumImpact();
+        HapticHelper.lightImpact();
         onTap();
       },
       child: AnimatedContainer(

@@ -223,7 +223,7 @@ class _PlayButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
-          HapticHelper.mediumImpact();
+          HapticHelper.lightImpact();
           onPressed();
         },
         style: ElevatedButton.styleFrom(

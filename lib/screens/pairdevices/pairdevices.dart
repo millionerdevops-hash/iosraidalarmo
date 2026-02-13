@@ -520,7 +520,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      HapticHelper.mediumImpact();
+                      HapticHelper.lightImpact();
                       context.push('/settings');
                     },
                     borderRadius: BorderRadius.circular(999),

@@ -191,7 +191,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
             alignment: Alignment.centerLeft,
             child: IconButton(
               onPressed: () {
-                HapticHelper.mediumImpact();
+                HapticHelper.lightImpact();
 
                 context.go('/tools');
               },
@@ -590,7 +590,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
               SizedBox(width: 12.w),
               _buildControlBtn(
                 onTap: () {
-                  HapticHelper.mediumImpact();
+                  HapticHelper.lightImpact();
                   _reset();
                 },
                 child: Icon(LucideIcons.rotateCcw, size: 20.w, color: const Color(0xFF71717A)),

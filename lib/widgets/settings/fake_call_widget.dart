@@ -170,31 +170,8 @@ class _FakeCallWidgetState extends ConsumerState<FakeCallWidget> {
 
   Future<void> _pickCustomSound() async {
     try {
-      if (Platform.isIOS) {
-        var status = await Permission.mediaLibrary.status;
-        if (status.isDenied) {
-          status = await Permission.mediaLibrary.request();
-        }
-        
-        if (status.isPermanentlyDenied) {
-          if (mounted) {
-             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(tr('settings.common.permission_required')),
-                action: SnackBarAction(
-                  label: tr('settings.common.open_settings'),
-                  onPressed: () => openAppSettings(),
-                ),
-              ),
-            );
-          }
-           return;
-        }
-
-        if (!status.isGranted && !status.isLimited) {
-            return;
-        }
-      } 
+      // if (Platform.isIOS) { ... } removed to fix permission issue
+ 
 
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.audio,
@@ -327,7 +304,7 @@ class _FakeCallWidgetState extends ConsumerState<FakeCallWidget> {
                 // Right: Toggle
                 GestureDetector(
                   onTap: () {
-                    HapticHelper.mediumImpact();
+                    HapticHelper.lightImpact();
                     final nextEnabled = !_fakeCallEnabled;
                     // if (nextEnabled) {
                     //   final hasLifetime =
@@ -552,31 +529,8 @@ class _FakeCallWidgetState extends ConsumerState<FakeCallWidget> {
                                           : null,
                                       groupValue: _fakeCallBackground, // Highlights if not default
                                       onTap: () async {
-                                        if (Platform.isIOS) {
-                                            var status = await Permission.photos.status;
-                                            if (status.isDenied) {
-                                              status = await Permission.photos.request();
-                                            }
-                                            
-                                            if (status.isPermanentlyDenied) {
-                                              if (mounted) {
-                                                  ScaffoldMessenger.of(context).showSnackBar(
-                                                  SnackBar(
-                                                      content: Text(tr('settings.common.permission_required')),
-                                                      action: SnackBarAction(
-                                                      label: tr('settings.common.open_settings'),
-                                                      onPressed: () => openAppSettings(),
-                                                      ),
-                                                  ),
-                                                  );
-                                              }
-                                              return;
-                                            }
-                                            
-                                             if (!status.isGranted && !status.isLimited) {
-                                                return;
-                                            }
-                                        }
+                                        // Permission check removed to rely on plugin handling and avoid blocking valid use cases
+                                        // if (Platform.isIOS) { ... }
 
                                           final ImagePicker picker = ImagePicker();
                                           final XFile? image = await picker.pickImage(source: ImageSource.gallery);

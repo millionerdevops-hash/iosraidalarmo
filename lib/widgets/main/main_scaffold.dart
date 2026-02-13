@@ -59,7 +59,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
   void _onItemTapped(int index) {
     if (_currentIndex == index) return;
 
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     setState(() {
       _currentIndex = index;
     });

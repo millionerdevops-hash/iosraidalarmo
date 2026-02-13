@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:go_router/go_router.dart';
@@ -398,7 +399,7 @@ class _StickyFooterState extends State<_StickyFooter> {
           children: [
             RustButton.primary(
               onPressed: () async {
-                HapticHelper.mediumImpact();
+                HapticHelper.lightImpact();
 
                 // Step 1: Request Review if not done yet
                 if (!_reviewRequested) {

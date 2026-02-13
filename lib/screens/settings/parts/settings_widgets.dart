@@ -8,7 +8,7 @@ class _SettingsBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        HapticHelper.mediumImpact();
+        HapticHelper.lightImpact();
         if (onTap != null) {
           onTap!();
         } else {
@@ -53,7 +53,7 @@ class _LegalLinkItem extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          HapticHelper.mediumImpact();
+          HapticHelper.lightImpact();
           context.push(path);
         },
         child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -118,7 +119,7 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
                           ),
                           child: RustButton(
                             onPressed: () => _throttler.run(() async {
-                              HapticHelper.mediumImpact();
+                              HapticHelper.lightImpact();
 
                               
                               // Save progress to database

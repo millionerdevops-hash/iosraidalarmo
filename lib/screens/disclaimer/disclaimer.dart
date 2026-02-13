@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/theme/rust_colors.dart';
 
+import '../../core/utils/haptic_helper.dart';
+
 class DisclaimerScreen extends StatefulWidget {
   const DisclaimerScreen({super.key});
 
@@ -17,6 +19,7 @@ class _DisclaimerScreenState extends State<DisclaimerScreen> {
   bool _isChecked = false;
 
   Future<void> _handleAccept() async {
+    HapticHelper.lightImpact();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('disclaimer_accepted', true);
     if (mounted) {

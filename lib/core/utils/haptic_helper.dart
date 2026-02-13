@@ -103,5 +103,11 @@ class HapticHelper {
       amplitude: 255,
     );
   }
+  /// Light impact feedback
+  /// Used for: subtle interactions, generic taps
+  /// Duration: 20ms, Amplitude: 150 (60% intensity)
+  static Future<bool> lightImpact() async {
+    return _vibrate(duration: 20, amplitude: 150);
+  }
 }
 

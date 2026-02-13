@@ -276,7 +276,7 @@ class _UpgradeToUnlockButtonState extends State<_UpgradeToUnlockButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        HapticHelper.mediumImpact();
+        HapticHelper.lightImpact();
         widget.onTap();
       },
       onTapDown: (_) => setState(() => _pressed = true),

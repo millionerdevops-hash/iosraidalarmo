@@ -205,7 +205,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen>
 
 
   void _handleStopAlarm() {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     ref.read(notificationProvider).stopAlarm();
   }
   @override
@@ -294,7 +294,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen>
             color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  HapticHelper.mediumImpact();
+                  HapticHelper.lightImpact();
                   context.push('/settings');
                 },
                 borderRadius: BorderRadius.circular(999),

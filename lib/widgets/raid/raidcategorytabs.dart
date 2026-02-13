@@ -136,7 +136,7 @@ class _HoverableTabButton extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        HapticHelper.mediumImpact();
+        HapticHelper.lightImpact();
         onTap();
       },
       borderRadius: BorderRadius.circular(12.r),

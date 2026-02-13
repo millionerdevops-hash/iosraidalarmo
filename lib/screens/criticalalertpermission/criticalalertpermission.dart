@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -9,11 +10,12 @@ import 'package:raidalarm/data/database/app_database.dart';
 import 'package:raidalarm/core/theme/rust_typography.dart';
 import 'package:raidalarm/widgets/common/rust_button.dart';
 import 'package:raidalarm/widgets/common/rust_screen_layout.dart';
-import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'dart:ui';
 import 'dart:math' as math;
 
 import 'package:raidalarm/core/utils/permission_helper.dart';
+
+import 'package:raidalarm/core/utils/haptic_helper.dart';
 
 class CriticalAlertPermissionScreen extends ConsumerStatefulWidget {
   const CriticalAlertPermissionScreen({super.key});
@@ -24,7 +26,7 @@ class CriticalAlertPermissionScreen extends ConsumerStatefulWidget {
 
 class _CriticalAlertPermissionScreenState extends ConsumerState<CriticalAlertPermissionScreen> {
   Future<void> _handleRequest() async {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     final platform = Theme.of(context).platform;
     if (platform == TargetPlatform.iOS) {
       await Permission.criticalAlerts.request();

@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raidalarm/core/utils/screen_util_helper.dart';
 import 'package:raidalarm/data/raidData.dart';
+import 'package:raidalarm/core/utils/haptic_helper.dart';
 
 class ExplosiveCard extends StatefulWidget {
   const ExplosiveCard({
@@ -352,7 +353,10 @@ class _ExplosiveCardState extends State<ExplosiveCard> {
         : card;
 
     return GestureDetector(
-      onTapDown: (_) => setState(() => _pressed = true),
+      onTapDown: (_) {
+        HapticHelper.lightImpact();
+        setState(() => _pressed = true);
+      },
       onTapCancel: () => setState(() => _pressed = false),
       onTapUp: (_) => setState(() => _pressed = false),
       child: AnimatedScale(

@@ -171,12 +171,11 @@ class _BlackjackScreenState extends ConsumerState<BlackjackScreen> {
         _dealerHand.add(card);
       }
     });
-    HapticHelper.selection();
   }
 
   Future<void> _hit() async {
     if (_phase != BlackjackGamePhase.playerTurn) return;
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     _drawCard(isPlayer: true);
     
     if (_calculateScore(_playerHand) > 21) {
@@ -186,7 +185,7 @@ class _BlackjackScreenState extends ConsumerState<BlackjackScreen> {
   }
 
   void _stand() {
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     setState(() => _phase = BlackjackGamePhase.dealerTurn);
     _runDealerAI();
   }
@@ -194,7 +193,7 @@ class _BlackjackScreenState extends ConsumerState<BlackjackScreen> {
   Future<void> _doubleDown() async {
     final currentScrap = ref.read(scrapProvider);
     if (currentScrap < _bet || _playerHand.length > 2) return;
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     
     ref.read(scrapProvider.notifier).removeScrap(_bet);
     
@@ -299,10 +298,10 @@ class _BlackjackScreenState extends ConsumerState<BlackjackScreen> {
     });
 
     if (winAmount > _bet) {
-      HapticHelper.heavyImpact();
-      Future.delayed(const Duration(milliseconds: 100), () => HapticHelper.success());
+      HapticHelper.lightImpact();
+      // Future.delayed(const Duration(milliseconds: 100), () => HapticHelper.success());
     } else if (winAmount == 0) {
-      HapticHelper.error();
+      HapticHelper.lightImpact();
     }
 
     Future.delayed(const Duration(milliseconds: 2500), () {
@@ -325,7 +324,7 @@ class _BlackjackScreenState extends ConsumerState<BlackjackScreen> {
       setState(() {
         _bet += amount;
       });
-      HapticHelper.mediumImpact();
+      HapticHelper.lightImpact();
     } else {
         // If they can't afford, check if they need a refill
         _checkAndRefillScrap();
@@ -730,7 +729,7 @@ class _BlackjackScreenState extends ConsumerState<BlackjackScreen> {
               width: 60.w,
               child: _buildActionButton(
                 onPressed: () {
-                  HapticHelper.mediumImpact();
+                  HapticHelper.lightImpact();
                   setState(() => _bet = 10);
                 },
                 icon: LucideIcons.circleX,
@@ -741,7 +740,7 @@ class _BlackjackScreenState extends ConsumerState<BlackjackScreen> {
             Expanded(
               child: _buildActionButton(
                 onPressed: () {
-                  HapticHelper.mediumImpact();
+                  HapticHelper.lightImpact();
                   _dealGame();
                 },
                 label: tr('tools.blackjack.deal_cards'),

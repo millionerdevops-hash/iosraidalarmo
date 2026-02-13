@@ -47,7 +47,7 @@ class _TeaCalculatorScreenState extends ConsumerState<TeaCalculatorScreen> {
 
   void _setActiveCategory(String categoryId) {
     if (_activeCategory != categoryId) {
-      HapticHelper.mediumImpact();
+      HapticHelper.lightImpact();
       setState(() {
         _activeCategory = categoryId;
       });
@@ -140,7 +140,7 @@ class _TeaCalculatorScreenState extends ConsumerState<TeaCalculatorScreen> {
             alignment: Alignment.centerLeft,
             child: IconButton(
               onPressed: () {
-                HapticHelper.mediumImpact();
+                HapticHelper.lightImpact();
                 _handleBack();
               },
               icon: Icon(Icons.arrow_back, color: const Color(0xFFA1A1AA), size: 24.w),
@@ -565,7 +565,7 @@ class _TeaCalculatorScreenState extends ConsumerState<TeaCalculatorScreen> {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  HapticHelper.mediumImpact();
+                  HapticHelper.lightImpact();
                   setState(() => _selectedTea = tea);
                 },
                 borderRadius: BorderRadius.circular(12.r),

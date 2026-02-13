@@ -422,7 +422,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                           ),
                           isSelected: _selectedProductId == _lifetimeProduct!.vendorProductId,
                           onTap: () {
-                            HapticHelper.mediumImpact();
+                            HapticHelper.lightImpact();
                             setState(() => _selectedProductId = _lifetimeProduct!.vendorProductId);
                           },
                         ),
@@ -435,7 +435,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                           subtitleColor: const Color(0xFFFB923C),
                           isSelected: _selectedProductId == _monthlyProduct!.vendorProductId,
                           onTap: () {
-                            HapticHelper.mediumImpact();
+                            HapticHelper.lightImpact();
                             setState(() => _selectedProductId = _monthlyProduct!.vendorProductId);
                           },
                         ),
@@ -461,7 +461,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     // Purchase button
                     RustButton(
                       onPressed: (_purchasing || !_hasConnection) ? null : () {
-                        HapticHelper.mediumImpact();
+                        HapticHelper.lightImpact();
                         _throttler.run(() {
 
                           _handlePurchase(selectedProduct);
@@ -514,7 +514,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 right: 24.w,
                 child: GestureDetector(
                   onTap: () {
-                    HapticHelper.mediumImpact();
+                    HapticHelper.lightImpact();
                     _throttler.run(() => widget.onSkip?.call());
                   },
                   child: Container(

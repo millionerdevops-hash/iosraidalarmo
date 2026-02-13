@@ -33,12 +33,12 @@ class _BugReportScreenState extends ConsumerState<BugReportScreen> {
 
   Future<void> _handleSend() async {
     if (!(_formKey.currentState?.validate() ?? false)) {
-      HapticHelper.error();
+      HapticHelper.lightImpact();
       return;
     }
 
     setState(() => _isSending = true);
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
 
     final subject = _subjectController.text.trim();
     final description = _descriptionController.text.trim();

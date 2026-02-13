@@ -47,12 +47,12 @@ class _CCTVCardWidgetState extends ConsumerState<CCTVCardWidget>
 
   Future<void> _handleTap() async {
     if (widget.item.isRandom) {
-      HapticHelper.mediumImpact();
+      HapticHelper.lightImpact();
       widget.onTap();
       return;
     }
 
-    HapticHelper.mediumImpact();
+    HapticHelper.lightImpact();
     await Clipboard.setData(ClipboardData(text: widget.item.code));
     
     if (mounted) {
