@@ -16,6 +16,7 @@ class QuickActionsService {
     });
 
     _quickActions.setShortcutItems(<ShortcutItem>[
+      const ShortcutItem(
         type: _actionOffer,
         localizedTitle: 'Claim Your Offer 🎁',
         icon: 'gift', // Using Vending Machine as Gift/Offer icon

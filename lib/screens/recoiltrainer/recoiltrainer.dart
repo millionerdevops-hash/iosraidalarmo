@@ -11,6 +11,7 @@ import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:raidalarm/core/utils/screen_util_helper.dart';
 
 class RecoilTrainerScreen extends ConsumerStatefulWidget {
   const RecoilTrainerScreen({Key? key}) : super(key: key);

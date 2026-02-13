@@ -21,6 +21,7 @@ import 'package:raidalarm/core/proto/rustplus.pb.dart' hide Color;
 import 'package:raidalarm/core/proto/rustplus.pbenum.dart';
 import 'package:raidalarm/core/theme/rust_colors.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
+import 'package:raidalarm/services/voip_token_service.dart';
 
 
 class PairDevicesScreen extends ConsumerStatefulWidget {
