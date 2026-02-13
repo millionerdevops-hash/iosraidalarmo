@@ -169,6 +169,32 @@ class _FakeCallWidgetState extends ConsumerState<FakeCallWidget> {
 
   Future<void> _pickCustomSound() async {
     try {
+      if (Platform.isIOS) {
+        var status = await Permission.mediaLibrary.status;
+        if (status.isDenied) {
+          status = await Permission.mediaLibrary.request();
+        }
+        
+        if (status.isPermanentlyDenied) {
+          if (mounted) {
+             ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(tr('settings.common.permission_required')),
+                action: SnackBarAction(
+                  label: tr('settings.common.open_settings'),
+                  onPressed: () => openAppSettings(),
+                ),
+              ),
+            );
+          }
+           return;
+        }
+
+        if (!status.isGranted && !status.isLimited) {
+            return;
+        }
+      } 
+
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.audio,
       );
@@ -525,40 +551,66 @@ class _FakeCallWidgetState extends ConsumerState<FakeCallWidget> {
                                           : null,
                                       groupValue: _fakeCallBackground, // Highlights if not default
                                       onTap: () async {
-                                        final ImagePicker picker = ImagePicker();
-                                        final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-                                        if (image != null) {
-                                          try {
-                                            // Copy to permanent storage
-                                            final directory = await getApplicationDocumentsDirectory();
-                                            
-                                            // Delete old custom backgrounds to save space
-                                            try {
-                                              final files = directory.listSync();
-                                              for (var file in files) {
-                                                if (file is File && p.basename(file.path).startsWith('custom_fake_call_bg_')) {
-                                                  await file.delete();
-                                                }
-                                              }
-                                            } catch (e) {
-                                              // Ignore cleanup errors
+                                        if (Platform.isIOS) {
+                                            var status = await Permission.photos.status;
+                                            if (status.isDenied) {
+                                              status = await Permission.photos.request();
                                             }
-
-                                            final timestamp = DateTime.now().millisecondsSinceEpoch;
-                                            final fileName = 'custom_fake_call_bg_$timestamp${p.extension(image.path)}';
-                                            final savedImage = await File(image.path).copy('${directory.path}/$fileName');
                                             
-                                            // Clear image cache to ensure immediate update if needed (though new filename solves most caching)
-                                            PaintingBinding.instance.imageCache.clear();
-                                            PaintingBinding.instance.imageCache.clearLiveImages();
+                                            if (status.isPermanentlyDenied) {
+                                              if (mounted) {
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(
+                                                      content: Text(tr('settings.common.permission_required')),
+                                                      action: SnackBarAction(
+                                                      label: tr('settings.common.open_settings'),
+                                                      onPressed: () => openAppSettings(),
+                                                      ),
+                                                  ),
+                                                  );
+                                              }
+                                              return;
+                                            }
                                             
-                                            _saveSettings(background: savedImage.path);
-                                          } catch (e) {
-                                            
-                                            // Fallback to original path if copy fails (less reliable but works temporarily)
-                                            _saveSettings(background: image.path);
-                                          }
+                                             if (!status.isGranted && !status.isLimited) {
+                                                return;
+                                            }
                                         }
+
+                                          final ImagePicker picker = ImagePicker();
+                                          final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                                          if (image != null) {
+                                            try {
+                                              // Copy to permanent storage
+                                              final directory = await getApplicationDocumentsDirectory();
+                                              
+                                              // Delete old custom backgrounds to save space
+                                              try {
+                                                final files = directory.listSync();
+                                                for (var file in files) {
+                                                  if (file is File && p.basename(file.path).startsWith('custom_fake_call_bg_')) {
+                                                    await file.delete();
+                                                  }
+                                                }
+                                              } catch (e) {
+                                                // Ignore cleanup errors
+                                              }
+  
+                                              final timestamp = DateTime.now().millisecondsSinceEpoch;
+                                              final fileName = 'custom_fake_call_bg_$timestamp${p.extension(image.path)}';
+                                              final savedImage = await File(image.path).copy('${directory.path}/$fileName');
+                                              
+                                              // Clear image cache to ensure immediate update if needed (though new filename solves most caching)
+                                              PaintingBinding.instance.imageCache.clear();
+                                              PaintingBinding.instance.imageCache.clearLiveImages();
+                                              
+                                              _saveSettings(background: savedImage.path);
+                                            } catch (e) {
+                                              
+                                              // Fallback to original path if copy fails (less reliable but works temporarily)
+                                              _saveSettings(background: image.path);
+                                            }
+                                          }
                                       },
                                     ),
                                   ],

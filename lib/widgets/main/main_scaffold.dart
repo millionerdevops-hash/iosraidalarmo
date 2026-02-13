@@ -185,15 +185,15 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
           height: 60.h, // Match new navbar height
           alignment: Alignment.center,
           child: Container(
-            width: 40.w, // w-10 = 40px
-            height: 40.h, // h-10 = 40px
+            width: 48.w, // Increased from 40.w
+            height: 48.w, // Increased from 40.h (Using .w for square aspect relative to width)
             decoration: BoxDecoration(
               color: isActive ? _getActiveBackgroundColor(index) : Colors.transparent,
-              borderRadius: BorderRadius.circular(12.r), // rounded-xl
+              borderRadius: BorderRadius.circular(16.r), // Increased radius
             ),
             child: Icon(
               icon,
-              size: 24.w, // w-6 h-6 = 24px
+              size: 28.w, // Increased from 24.w
               color: isActive 
                   ? activeColor 
                   : _inactiveColor, // text-zinc-600

@@ -41,10 +41,37 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
     
     WidgetsBinding.instance.addObserver(this);
     _checkLoginStatus();
+    _silentDeviceRegistration(); // Ensure this device is the active one
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(serverListViewModelProvider.notifier).scanForServers(); // Check on init
     });
   }
+
+  // Prevent conflict if user logged in on another device (Android vs iOS)
+  Future<void> _silentDeviceRegistration() async {
+    try {
+      final dbService = DatabaseService();
+      final isar = await dbService.db;
+      final cred = await isar.steamCredentials.get(1);
+      
+      if (cred != null && cred.steamId != null && cred.steamToken != null) {
+         // Silently update backend with this device's token (OneSignal/VoIP)
+         // This makes "this" device the active receiver for notifications
+         final voipToken = VoipTokenService.getVoipToken();
+         await ApiService.registerUser(
+           steamId: cred.steamId!,
+           steamToken: cred.steamToken!,
+           iosVoipToken: voipToken,
+         );
+         debugPrint("[PairDevices] ✅ Silent device registration complete (Active Device updated)");
+      }
+    } catch (e) {
+      debugPrint("[PairDevices] ⚠️ Silent registration failed: $e");
+    }
+  }
+
+  // ... (dispose and didChangeAppLifecycleState remain same)
+
 
   @override
   void dispose() {
@@ -306,7 +333,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
       case AppEntityType.Alarm: assetName = 'smart-alarm.png'; break;
       default: assetName = 'smart-switch.png';
     }
-    return Image.asset('assets/png/ingame/pairing/$assetName', width: 48.w, height: 48.w, errorBuilder: (c,e,s) => const Icon(LucideIcons.zap, size: 32, color: Colors.white));
+    return Image.asset('assets/images/png/ingame/pairing/$assetName', width: 48.w, height: 48.w, errorBuilder: (c,e,s) => const Icon(LucideIcons.zap, size: 32, color: Colors.white));
   }
 
   void _showDeleteConfirmation(BuildContext context, WidgetRef ref, SmartDevice device) {
@@ -407,10 +434,27 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
                 Navigator.of(context, rootNavigator: true).push(
                   MaterialPageRoute(
                     builder: (context) => SteamLoginScreen(
-                      onSuccess: () {
+                      onSuccess: () async {
                         Navigator.of(context).pop();
                         _checkLoginStatus(); // Re-check login status
-                        ref.read(serverListViewModelProvider.notifier).scanForServers();
+                        
+                        // Retry scanning multiple times to catch the backend sync/notification
+                        final notifier = ref.read(serverListViewModelProvider.notifier);
+                        
+                        // Attempt 1: Immediate
+                        await notifier.scanForServers(); 
+                        if (ref.read(serverListViewModelProvider).valueOrNull?.isNotEmpty ?? false) return;
+
+                        // Attempt 2: After 2s
+                        await Future.delayed(const Duration(seconds: 2));
+                        await notifier.scanForServers();
+                        if (ref.read(serverListViewModelProvider).valueOrNull?.isNotEmpty ?? false) return;
+
+                        // Attempt 3: After 5s (Total)
+                        if (mounted) {
+                           await Future.delayed(const Duration(seconds: 3));
+                           await notifier.scanForServers();
+                        }
                       },
                     ),
                   ),

@@ -45,7 +45,7 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
       },
       child: RustScreenLayout(
         child: Scaffold(
-          backgroundColor: Colors.transparent, // Transparent to show layout bg
+          backgroundColor: RustColors.background, // Opaque background to prevent overlap
           body: SafeArea(
             bottom: true,
             child: Column(

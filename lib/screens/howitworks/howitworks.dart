@@ -95,6 +95,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
     return Scaffold(
       backgroundColor: const Color(0xFF09090B), // zinc-950
       body: RustScreenLayout(
@@ -103,7 +104,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
             children: [
               // Header
               Padding(
-                padding: EdgeInsets.fromLTRB(24.w, 48.h, 24.w, 24.h),
+                padding: EdgeInsets.fromLTRB(24.w, isSmall ? 16.h : 48.h, 24.w, isSmall ? 16.h : 24.h),
                 child: Column(
                   children: [
                     // Main Title
@@ -112,7 +113,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                       child: Text(
                         tr('how_it_works.title'),
                         style: RustTypography.rustStyle(
-                          fontSize: 22.sp,
+                          fontSize: isSmall ? 18.sp : 22.sp,
                           color: Colors.white,
                         ),
                         textAlign: TextAlign.center,
@@ -126,7 +127,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                       child: Text(
                         tr('how_it_works.description'),
                         style: TextStyle(
-                          fontSize: 14.sp,
+                          fontSize: isSmall ? 12.sp : 14.sp,
                           color: const Color(0xFFA1A1AA),
                         ),
                         textAlign: TextAlign.center,
@@ -138,7 +139,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                     Text(
                         tr('how_it_works.subtitle'),
                         style: RustTypography.rustStyle(
-                          fontSize: 16.sp,
+                          fontSize: isSmall ? 14.sp : 16.sp,
                           color: Colors.white,
                         ),
                         textAlign: TextAlign.center,
@@ -266,7 +267,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
                   ),
                 ),
 
-                ScreenUtilHelper.sizedBoxHeight(32),
+                ScreenUtilHelper.sizedBoxHeight(isSmall ? 16 : 32),
 
                 // Dynamic Preview Container
                 Expanded(
@@ -480,7 +481,7 @@ class _HowItWorksScreenState extends ConsumerState<HowItWorksScreen> {
 
                 // Button
                 Padding(
-                  padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 32.h),
+                  padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, isSmall ? 16.h : 32.h),
                   child: Column(
                     children: [
                       RustButton(
@@ -526,14 +527,15 @@ class _PhoneShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      width: 288.w, // w-72
-      height: 460.h,
+      width: isSmall ? 220.w : 288.w, // reduced width for small devices
+      height: isSmall ? 340.h : 460.h, // reduced height for small devices
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(48.r), // rounded-[3rem]
-        border: Border.all(color: borderColor, width: 8.w),
+        borderRadius: BorderRadius.circular(isSmall ? 32.r : 48.r), // rounded-[3rem]
+        border: Border.all(color: borderColor, width: isSmall ? 6.w : 8.w),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.5),
@@ -543,7 +545,7 @@ class _PhoneShell extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(40.r),
+        borderRadius: BorderRadius.circular(isSmall ? 28.r : 40.r),
         child: Stack(
           children: [
             child,
@@ -554,8 +556,8 @@ class _PhoneShell extends StatelessWidget {
               right: 0,
               child: Center(
                 child: Container(
-                  width: 128.w, // w-32
-                  height: 28.h, // h-7
+                  width: isSmall ? 100.w : 128.w, // w-32
+                  height: isSmall ? 22.h : 28.h, // h-7
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.r)),
@@ -586,10 +588,11 @@ class _InternalNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
-      top: visible ? 180.h : 160.h,
+      top: visible ? (isSmall ? 120.h : 180.h) : (isSmall ? 100.h : 160.h),
       left: 12.w,
       right: 12.w,
       child: AnimatedOpacity(

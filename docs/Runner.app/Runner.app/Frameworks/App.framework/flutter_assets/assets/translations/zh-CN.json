@@ -1,0 +1,930 @@
+{
+    "common": {
+        "subscription_required": "启用保护需要订阅",
+        "error_service_not_enabled": "通知服务未启用。",
+        "no_internet": "网络连接失败，请检查您的网络。",
+        "thousand_suffix": "K",
+        "million_suffix": "M",
+        "errors": {
+            "no_internet": "没有网络连接。请检查您的网络。"
+        },
+        "loading": "加载中...",
+        "fauna_guide": "动物指南",
+        "select_species": "选择物种"
+    },
+    "tools": {
+        "section_utilities": "工具",
+        "raid_cost": {
+            "title": "成本",
+            "subtitle": "炸药 & 硫磺"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "遗迹摄像头"
+        },
+        "tea_guide": {
+            "title": "茶",
+            "subtitle": "增益 & 配方"
+        },
+        "diesel_calc": {
+            "title": "燃料计算",
+            "subtitle": "挖掘机 & 采石场"
+        },
+        "animal_guide": {
+            "title": "动物",
+            "subtitle": "狩猎与资源"
+        },
+        "match_game": {
+            "title": "配对",
+            "subtitle": "记忆游戏",
+            "earned_coins": "你获得了{}金币!",
+            "not_enough_scrap": "金币不足",
+            "victory": "胜利",
+            "defeat": "失败",
+            "net_result": "净结果",
+            "play_again": "再玩一次",
+            "return_to_menu": "返回菜单",
+            "timer": "计时器",
+            "potential": "潜力",
+            "memorize": "记住！",
+            "menu_title": "配对游戏",
+            "menu_subtitle": "寻找配对来增加你的废料。\n高风险，高回报。",
+            "play_action": "开始 (-{} 废料)",
+            "entry": "入场",
+            "pairs_count": "{} 对",
+            "exit_warning_title": "退出游戏？",
+            "exit_warning_message": "如果现在退出，您的下注将会丢失。是否继续？",
+            "yes": "是",
+            "no": "否"
+        },
+        "code_raider": {
+            "title": "密码锁",
+            "subtitle": "破解密码锁",
+            "battery_level": "电池电量",
+            "correct": "正确",
+            "wrong_spot": "位置错误",
+            "invalid": "无效",
+            "waiting_input": "等待输入...",
+            "access_granted": "允许访问",
+            "system_lockout": "系统锁定",
+            "reward_scrap": "奖励: +{} 废料",
+            "code_changed": "代码已更改",
+            "hack_another": "再次入侵",
+            "retry_hack": "重试",
+            "open": "开启",
+            "clear": "清除",
+            "enter": "输入",
+            "code_lock": "密码锁"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "茶配方",
+            "mixing_table_recipe": "混合台",
+            "select_tier": "选择等级"
+        },
+        "stats": {
+            "rad_res": "辐射抗性",
+            "hydration": "水分",
+            "temp": "温度",
+            "max_temp": "最高温度",
+            "min_temp": "最低温度",
+            "quality": "品质",
+            "yield": "产量",
+            "hot": "持续回血 (HoT)",
+            "inst_hp": "瞬间回血",
+            "max_hp": "最大生命值"
+        },
+        "durations": {
+            "instant": "瞬间",
+            "30m": "30分",
+            "20m": "20分",
+            "45m": "45分",
+            "1h": "1小时",
+            "3m_20s": "3分 20秒",
+            "5m": "5分",
+            "6m_40s": "6分 40秒"
+        },
+        "categories": {
+            "Ore": "矿石",
+            "Wood": "木材",
+            "Scrap": "废料",
+            "Harvesting": "采集",
+            "MaxHealth": "最大生命",
+            "Healing": "治疗",
+            "Rad": "抗辐射",
+            "Cooling": "降温",
+            "Warming": "保暖",
+            "Crafting": "制作"
+        },
+        "tiers": {
+            "Basic": "基",
+            "Advanced": "高",
+            "Pure": "纯"
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "基抗辐射茶",
+                "desc": "基础等级的抗辐射茶。"
+            },
+            "Rad_adv": {
+                "name": "高抗辐射茶",
+                "desc": "高级等级的抗辐射茶。"
+            },
+            "Rad_pure": {
+                "name": "纯抗辐射茶",
+                "desc": "纯正等级的抗辐射茶。"
+            },
+            "Cooling_basic": {
+                "name": "基降温茶",
+                "desc": "基础等级的降温茶。"
+            },
+            "Cooling_adv": {
+                "name": "高降温茶",
+                "desc": "高级等级的降温茶。"
+            },
+            "Cooling_pure": {
+                "name": "纯降温茶",
+                "desc": "纯正等级的降温茶。"
+            },
+            "Crafting_basic": {
+                "name": "基制作茶",
+                "desc": "基础等级的制作加速茶。"
+            },
+            "Crafting_adv": {
+                "name": "高制作茶",
+                "desc": "高级等级的制作加速茶。"
+            },
+            "Crafting_pure": {
+                "name": "纯制作茶",
+                "desc": "纯正等级的制作加速茶。"
+            },
+            "Harvesting_basic": {
+                "name": "基采集茶",
+                "desc": "基础等级的资源采集茶。"
+            },
+            "Harvesting_adv": {
+                "name": "高采集茶",
+                "desc": "高级等级的资源采集茶。"
+            },
+            "Harvesting_pure": {
+                "name": "纯采集茶",
+                "desc": "纯正等级的资源采集茶。"
+            },
+            "Healing_basic": {
+                "name": "基治疗茶",
+                "desc": "基础等级的治疗茶。"
+            },
+            "Healing_adv": {
+                "name": "高治疗茶",
+                "desc": "高级等级的治疗茶。"
+            },
+            "Healing_pure": {
+                "name": "纯治疗茶",
+                "desc": "纯正等级的治疗茶。"
+            },
+            "MaxHealth_basic": {
+                "name": "基最大生命茶",
+                "desc": "基础等级的增加最大生命值茶。"
+            },
+            "MaxHealth_adv": {
+                "name": "高最大生命茶",
+                "desc": "高级等级的增加最大生命值茶。"
+            },
+            "MaxHealth_pure": {
+                "name": "纯最大生命茶",
+                "desc": "纯正等级的增加最大生命值茶。"
+            },
+            "Ore_basic": {
+                "name": "基矿石茶",
+                "desc": "基础等级的矿石采集茶。"
+            },
+            "Ore_adv": {
+                "name": "高矿石茶",
+                "desc": "高级等级的矿石采集茶。"
+            },
+            "Ore_pure": {
+                "name": "纯矿石茶",
+                "desc": "纯正等级的矿石采集茶。"
+            },
+            "Scrap_basic": {
+                "name": "基废料茶",
+                "desc": "基础等级的废料采集茶。"
+            },
+            "Scrap_adv": {
+                "name": "高废料茶",
+                "desc": "高级等级的废料采集茶。"
+            },
+            "Scrap_pure": {
+                "name": "纯废料茶",
+                "desc": "纯正等级的废料采集茶。"
+            },
+            "Warming_basic": {
+                "name": "基保暖茶",
+                "desc": "基础等级的保暖茶。"
+            },
+            "Warming_adv": {
+                "name": "高保暖茶",
+                "desc": "高级等级的保暖茶。"
+            },
+            "Warming_pure": {
+                "name": "纯保暖茶",
+                "desc": "纯正等级的保暖茶。"
+            },
+            "Wood_basic": {
+                "name": "基木材茶",
+                "desc": "基础等级的木材采集茶。"
+            },
+            "Wood_adv": {
+                "name": "高木材茶",
+                "desc": "高级等级的木材采集茶。"
+            },
+            "Wood_pure": {
+                "name": "纯木材茶",
+                "desc": "纯正等级的木材采集茶。"
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "红浆果",
+            "Blue_Berry": "蓝浆果",
+            "Green_Berry": "绿浆果",
+            "Yellow_Berry": "黄浆果",
+            "White_Berry": "白浆果",
+            "Basic_Rad_Tea": "基·抗辐射茶",
+            "Adv_Rad_Tea": "高·抗辐射茶",
+            "Basic_Cooling_Tea": "基·降温茶",
+            "Adv_Cooling_Tea": "高·降温茶",
+            "Basic_Crafting_Tea": "基·制作茶",
+            "Adv_Crafting_Tea": "高·制作茶",
+            "Basic_Harvesting_Tea": "基·采集茶",
+            "Adv_Harvesting_Tea": "高·采集茶",
+            "Basic_Healing_Tea": "基·治疗茶",
+            "Adv_Healing_Tea": "高·治疗茶",
+            "Basic_MaxHealth_Tea": "基·最大生命茶",
+            "Adv_MaxHealth_Tea": "高·最大生命茶",
+            "Basic_Ore_Tea": "基·矿石茶",
+            "Adv_Ore_Tea": "高·矿石茶",
+            "Basic_Scrap_Tea": "基·废料茶",
+            "Adv_Scrap_Tea": "高·废料茶",
+            "Basic_Warming_Tea": "基·保暖茶",
+            "Adv_Warming_Tea": "高·保暖茶",
+            "Basic_Wood_Tea": "基·木材茶",
+            "Adv_Wood_Tea": "高·木材茶"
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "CCTV 代码",
+            "no_signal": "未发现信号",
+            "copied": "已复制",
+            "randomized": "随机代码",
+            "rec": "录制"
+        },
+        "categories": {
+            "all": "所有摄像头",
+            "large_oil": "大型石油钻井",
+            "small_oil": "小型石油钻井",
+            "cargo": "货轮",
+            "silo": "导弹发射井 (Silo)",
+            "airfield": "机场",
+            "labs": "实验室",
+            "outpost": "前哨站",
+            "bandit": "强盗营地",
+            "dome": "球形储罐 (Dome)",
+            "radtown": "辐射城",
+            "ferry": "渡轮",
+            "town": "城镇"
+        },
+        "labels": {
+            "dock": "码头",
+            "exhaust": "排气口",
+            "helipad": "停机坪",
+            "level_1": "1层",
+            "level_2": "2层",
+            "level_3": "3层",
+            "level_3a": "3A层",
+            "level_3b": "3B层",
+            "level_4": "4层",
+            "level_5": "5层",
+            "level_6a": "6A层",
+            "level_6b": "6B层",
+            "level_6c": "6C层",
+            "level_6d": "6D层",
+            "deck": "甲板",
+            "bridge": "舰桥",
+            "stern": "船尾",
+            "hold_1": "货舱 1",
+            "hold_2": "货舱 2",
+            "exit_1": "出口 1",
+            "exit_2": "出口 2",
+            "missile": "导弹",
+            "tower": "塔楼",
+            "shipping": "运输",
+            "casino": "赌场",
+            "chill_zone": "休息区",
+            "crude_oil": "原油",
+            "music": "音乐",
+            "street": "街道",
+            "logistics": "物流",
+            "parking": "停车场",
+            "utilities": "设施",
+            "apartments": "公寓",
+            "house": "房屋",
+            "sbl": "SBL",
+            "dome_1": "圆顶 1",
+            "top": "顶部",
+            "weapons": "武器",
+            "lab": "实验室",
+            "security": "安保"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "搜索玩家",
+            "search_hint": "玩家名称或 ID...",
+            "loading_text": "正在搜索 BATTLEMETRICS...",
+            "error_title": "搜索失败",
+            "retry_button": "重试",
+            "empty_state": "未找到玩家。",
+            "error_snackbar": "错误: {}",
+            "global": "全球",
+            "player_id": "玩家 ID"
+        },
+        "details": {
+            "tracking_id": "正在追踪",
+            "current_state": "当前状态",
+            "online": "在线",
+            "offline": "离线",
+            "last_seen": "上次在线",
+            "unknown": "未知",
+            "alert_triggers": "警报触发:",
+            "update_tracking": "关注玩家"
+        },
+        "list_item": {
+            "playing_on": "正在游玩:",
+            "not_in_server": "不在服务器中"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "攻击统计",
+            "total_attacks": "攻击总数",
+            "last_attack": "上次攻击",
+            "recent_alerts": "最近警报",
+            "no_notification": "未发现通知。",
+            "unknown_source": "未知来源",
+            "time_ago": {
+                "just_now": "刚刚",
+                "minutes": "{}分前",
+                "hours": "{}小时前",
+                "days": "{}天前",
+                "months": "{}个月前"
+            }
+        },
+        "traffic": {
+            "title": "攻击流量",
+            "ranges": {
+                "day": "日",
+                "week": "周",
+                "month": "月"
+            }
+        },
+        "overlay": {
+            "premium_data": "高级数据",
+            "upgrade_button": "升级以查看"
+        },
+        "alarm": {
+            "stop": "停止警报"
+        },
+        "notifications": {
+            "base_attack": "你的基地正在受到攻击！"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "无效",
+            "total_required": "总共需要",
+            "cannot_damage": "无法造成伤害",
+            "loot_only": "仅限战利品",
+            "raw_sulfur": "硫磺原料"
+        },
+        "materials": {
+            "charcoal": "木炭",
+            "fragments": "金属碎片",
+            "stones": "石头",
+            "wood": "木头",
+            "bone": "骨头",
+            "low_grade_fuel": "低级燃油",
+            "cloth": "布",
+            "rope": "绳子",
+            "pipe": "管子",
+            "tech_trash": "科技零件",
+            "sulfur": "Sulfur"
+        },
+        "categories": {
+            "construction": "建筑",
+            "door": "门",
+            "placeable": "放置物",
+            "item": "陷阱"
+        },
+        "explosives": {
+            "c4": "C4 炸药",
+            "rocket": "火箭弹",
+            "satchel": "豆罐炸药包",
+            "beancan": "豆罐手雷",
+            "explo556": "5.56 爆炸弹",
+            "he_grenade": "F1 手雷",
+            "he_grenade_40mm": "40mm 高爆弹",
+            "molotov": "燃烧瓶",
+            "hv_rocket": "高速火箭弹",
+            "incen_rocket": "燃烧火箭弹",
+            "homing_rocket": "自导火箭弹",
+            "mlrs_rocket": "多管火箭弹",
+            "survey_charge": "勘探炸药包",
+            "propane_bomb": "丙烷罐",
+            "ammo_rifle": "步枪弹",
+            "ammo_rifle_hv": "高速步枪弹",
+            "ammo_rifle_incen": "燃烧步枪弹",
+            "ammo_pistol": "手枪弹",
+            "ammo_pistol_hv": "高速手枪弹",
+            "ammo_pistol_incen": "燃烧手枪弹",
+            "ammo_buckshot": "鹿弹",
+            "ammo_slug": "独头弹",
+            "ammo_incen_shell": "燃烧霰弹",
+            "ammo_handmade": "手工弹",
+            "arrow_fire": "火箭矢",
+            "arrow_bone": "骨箭",
+            "arrow_wooden": "木箭",
+            "arrow_hv": "高速箭"
+        },
+        "calculator": {
+            "title": "抄家计算器",
+            "select_target": "选择目标",
+            "materials_breakdown": "材料明细",
+            "total_sulfur": "总硫磺需求",
+            "min_cost": "最低成本",
+            "best_for_sulfur": "硫磺性价比最高",
+            "custom_plan": "自定义抄家计划",
+            "clear_all": "清除所有"
+        },
+        "targets": {
+            "wood_wall": "木墙",
+            "stone_wall": "石墙",
+            "metal_wall": "铁墙",
+            "hqm_wall": "装甲墙",
+            "wood_foundation": "木地基",
+            "stone_foundation": "石地基",
+            "metal_foundation": "铁地基",
+            "hqm_foundation": "装甲地基",
+            "wood_floor": "木地板",
+            "stone_floor": "石地板",
+            "metal_floor": "铁地板",
+            "hqm_floor": "装甲地板",
+            "ext_wood_wall": "高木墙",
+            "ext_stone_wall": "高石墙",
+            "ext_gate_wood": "木门",
+            "ext_gate_stone": "石门",
+            "wood_door": "木门",
+            "metal_door": "铁门",
+            "garage_door": "卷帘门",
+            "armored_door": "装甲门",
+            "ladder_hatch": "梯子盖板",
+            "triangle_ladder_hatch": "三角梯盖",
+            "wood_bars": "木栏杆",
+            "metal_bars": "铁栏杆",
+            "strengthened_glass": "强化玻璃窗",
+            "reinforced_glass": "加固玻璃窗",
+            "shutter_wood": "木窗板",
+            "metal_shop_front": "金属店面",
+            "vending_machine": "自动售货机",
+            "tc": "领地柜 (TC)",
+            "small_box": "小木箱",
+            "large_box": "大木箱",
+            "sleeping_bag": "睡袋",
+            "bed": "床",
+            "furnace_small": "熔炉",
+            "furnace_large": "大熔炉",
+            "refinery": "炼油机",
+            "autoturret": "自动炮塔",
+            "flame_turret": "火焰炮塔",
+            "shotgun_trap": "霰弹陷阱",
+            "sam_site": "防空导弹萨姆转塔",
+            "tesla_coil": "特斯拉线圈",
+            "landmine": "地雷",
+            "beartrap": "捕兽夹",
+            "windmill": "风力发电机",
+            "solar_panel": "太阳能板",
+            "battery_small": "小电池",
+            "battery_medium": "中电池",
+            "battery_large": "大电池",
+            "locker": "储物柜",
+            "fridge": "冰箱",
+            "hearth": "壁炉",
+            "search_light": "探照灯",
+            "drop_box": "投递箱",
+            "mailbox": "邮箱",
+            "sub_all_shapes": "所有形状",
+            "cctv_camera": "CCTV 摄像头",
+            "workbench_level1": "1工作台",
+            "workbench_level2": "2工作台",
+            "workbench_level3": "3工作台",
+            "cooking_workbench": "烹饪工作台",
+            "engineering_workbench": "工程工作台",
+            "planter": "种植箱",
+            "sleepingbag": "睡袋",
+            "wicker_barrel": "柳条桶",
+            "wooden_ladder": "木梯",
+            "wood_shelter": "木制避难所"
+        }
+    },
+    "subscription": {
+        "free_tier": "免费层级",
+        "limited_features": "功能受限",
+        "lifetime_license": "终身许可证已激活",
+        "duration": "时长",
+        "forever_free": "免费",
+        "lifetime": "终身",
+        "status": "状态",
+        "locked": "已锁定",
+        "active": "已激活",
+        "upgrade_button": "升级以解锁"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "高级功能",
+            "description": "升级以解锁高级控制",
+            "unlock_button": "立即解锁"
+        },
+        "ui": {
+            "title": "设置",
+            "guides_setup": "指南与设置",
+            "how_it_works": "如何工作",
+            "setup_config": "设置配置",
+            "legal": "法律信息",
+            "tos": "条款",
+            "privacy": "隐私",
+            "version": "RAID ALARM V{}"
+        },
+        "common": {
+            "error": "错误",
+            "durations": {
+                "sec_30": "30 秒",
+                "min_1": "1 分钟",
+                "min_3": "3 分钟",
+                "min_5": "5 分钟",
+                "sec_short": "{}秒",
+                "min_short": "{}分",
+                "hour_short": "{}小时"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "无",
+                "alarm_1": "警报 1",
+                "alarm_2": "警报 2",
+                "alarm_3": "警报 3",
+                "alarm_4": "警报 4",
+                "alarm_5": "警报 5",
+                "alarm_6": "警报 6",
+                "custom_label": "自定义",
+                "pick_custom": "自定义..."
+            }
+        },
+        "alarm_mode": {
+            "title": "抄家警报",
+            "subtitle": "持续响亮的警报",
+            "sound": "警报声音",
+            "infinite_loop": "无限循环",
+            "duration": "警报时长"
+        },
+        "fake_call": {
+            "title": "虚拟来电",
+            "subtitle": "模拟来电",
+            "caller_name": "来电人姓名",
+            "show_number": "显示号码",
+            "background": "通话背景",
+            "background_options": {
+                "default": "默认",
+                "gallery": "图库"
+            },
+            "sound": "铃声",
+            "duration": "通话时长",
+            "infinite_loop": "无限循环"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "在线",
+            "offline": "离线",
+            "official": "官方",
+            "modded": "模组",
+            "community": "社区"
+        },
+        "monitor": {
+            "title": "服务器监控",
+            "select_server": "选择服务器"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "寻找服务器",
+                "subtitle": "浏览并追踪清档"
+            },
+            "find_player": {
+                "title": "寻找玩家",
+                "subtitle": "名称 & 在线状态"
+            }
+        },
+        "map": {
+            "info_unavailable": "该服务器暂无地图信息",
+            "failed_load": "地图加载失败",
+            "check_connection": "请检查您的网络连接",
+            "loading": "正在加载地图...",
+            "open_browser": "在浏览器中打开",
+            "procedural": "程序生成",
+            "retry": "重试"
+        },
+        "live": {
+            "auto_refresh_active": "自动刷新已激活",
+            "auto_refresh_desc": "每15秒更新一次。",
+            "activity_title": "玩家活动",
+            "no_signal": "无信号",
+            "fetching_data": "正在获取玩家数据..."
+        },
+        "overview": {
+            "population": "玩家",
+            "map": "地图",
+            "fps": "FPS",
+            "uptime": "运行时间",
+            "next_wipe": "下次清档",
+            "last_wipe": "上次清档",
+            "wipe_notification": "清档通知",
+            "alert_me_before": "提前通知我:",
+            "force_refresh": "强制刷新",
+            "unknown": "未知",
+            "overdue": "已过期",
+            "size_label": "大小:",
+            "seed_label": "种子:",
+            "active": "活跃",
+            "disabled": "禁用",
+            "na": "N/A",
+            "time_ago_days": "{}天 {}小时",
+            "time_ago_hours": "{}小时"
+        },
+        "notifications": {
+            "wipe_alert_title": "删档提醒: {}",
+            "wipe_alert_body": "服务器将在 {} 分钟后删档！请做好准备。"
+        },
+        "wipe": {
+            "next_wipe_in": "下次清档倒计时",
+            "wipe_alarm": "清档闹钟"
+        },
+        "targets": {
+            "enter_player_name": "输入确切的玩家名称...",
+            "no_targets": "没有追踪的目标。",
+            "go_to_live": "前往实时动态",
+            "title": "目标",
+            "active_badge": "活跃",
+            "empty": "目前没有追踪任何玩家。",
+            "search_link": "搜索玩家",
+            "online_now": "当前在线",
+            "stop_tracking": {
+                "title": "停止追踪？",
+                "confirm": "您确定要停止追踪 {} 吗？",
+                "button": "停止追踪",
+                "cancel": "取消"
+            }
+        },
+        "featured": {
+            "title": "精选社区"
+        },
+        "search": {
+            "title": "服务器搜索",
+            "tabs": {
+                "search": "搜索",
+                "favorites": "收藏",
+                "featured": "精选"
+            },
+            "placeholder": "搜索服务器名称...",
+            "searching": "搜索中...",
+            "no_results": "未找到 \"{}\"",
+            "no_favorites": "没有收藏的服务器。",
+            "favorites_help": "搜索服务器并点击星号以此在此处追踪。",
+            "results_label": "结果",
+            "official_section": {
+                "title": "官方服务器",
+                "desc": "官方服务器每月清档一次，可靠性高。"
+            },
+            "sort": {
+                "title": "排序方式",
+                "relevance": "相关性",
+                "high_pop": "高人数",
+                "low_pop": "低人数",
+                "just_wiped": "刚刚清档"
+            },
+            "error": {
+                "title": "搜索失败",
+                "retry": "重试"
+            }
+        },
+        "active_widget": {
+            "select": "选择活跃服务器",
+            "wiped": "已清档"
+        },
+        "logs": {
+            "connected": "已连接",
+            "disconnected": "已断开",
+            "recently": "最近",
+            "just_now": "刚刚"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "概览",
+                "map": "地图",
+                "live": "直播",
+                "targets": "目标",
+                "wipe": "清档"
+            },
+            "errors": {
+                "unstable": "连接不稳定。数据可能已过时。",
+                "signal_lost": "信号丢失。重试中...",
+                "connection": "连接错误。请重试。"
+            },
+            "tracking": {
+                "max_limit": "最多只能追踪 3 名玩家",
+                "not_found_exact": "未找到名为 \"{}\" 的玩家",
+                "not_found_on_server": "在此服务器上未找到该玩家。",
+                "select_player": "选择玩家"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "燃料计算器",
+        "input_amount": "数量",
+        "runtime": "{} 时长",
+        "select_machine": "选择机器",
+        "total_output": "总产出",
+        "estimated_yield": "预计产量",
+        "per_barrel": "每桶: {}",
+        "per_lgf": "每 LGF: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "柴油",
+            "low_grade": "低级燃料"
+        },
+        "machines": {
+            "excavator": "巨型挖掘机",
+            "hqm_quarry": "高金采掘机",
+            "sulfur_quarry": "硫磺采掘机",
+            "stone_quarry": "石矿采掘机",
+            "pump_jack": "抽油机",
+            "deploy_pump_jack": "便携抽油机",
+            "deploy_quarry": "便携采矿机",
+            "types": {
+                "monument": "遗迹",
+                "static": "固定设施",
+                "deployable": "便携设施"
+            }
+        },
+        "resources": {
+            "diesel": "柴油燃料",
+            "sulfur": "硫磺矿",
+            "hqm": "高品质金属矿",
+            "metal_frags": "金属碎片",
+            "stones": "石头",
+            "metal_ore": "铁矿石",
+            "crude_oil": "原油",
+            "low_grade": "低级燃油"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "隐私政策",
+            "last_updated": "最后更新：{year}",
+            "contact_title": "联系方式",
+            "contact_email": "有关隐私问题、数据请求或行使您的权利，请联系我们：\n\n电子邮件：alcstackdev@gmail.com",
+            "section1_title": "1. 我们收集的信息",
+            "section1_content": "Raid Alarm 仅收集应用程序功能所需的最低限度数据：用于许可证验证的匿名设备 ID、来自 Rust+ 应用程序的特定抄家通知、终身许可证状态（通过 Google Play 结算处理）以及存储在您设备本地的应用程序设置。我们不收集个人姓名、电子邮件、电话号码、位置数据、生物识别数据或支付卡信息。",
+            "section2_title": "2. 处理的法律依据",
+            "section2_content": "我们将基于以下法律依据处理您的个人数据：\n\n• 合同履行：提供您请求的应用程序服务所需的处理\n• 合法利益：用于应用程序功能和改进的处理\n• 同意：在明确说明的情况下，我们在处理之前会征求您的同意",
+            "section3_title": "3. 通知数据处理",
+            "section3_content": "我们仅处理来自 Rust+ 应用程序的特定抄家通知。通知数据完全在您的设备上处理并本地存储。我们无权访问来自任何其他应用程序的通知。我们在征得您明确同意的情况下使用标准的 Android NotificationListenerService API。我们与 Rust+ 应用程序、Facepunch Studios Limited 或任何相关实体没有任何关联。",
+            "section4_title": "4. 权限",
+            "section4_content": "Raid Alarm 仅请求最低限度的必要权限：用于监控来自 Rust+ 应用程序的警报的通知访问权限、用于后台操作的电池优化豁免以及用于触发警报的闹钟权限。",
+            "section5_title": "5. 我们如何使用您的信息",
+            "section5_content": "收集的数据仅用于操作警报系统、验证许可证和改进应用程序。对于免费层级用户，Google AdMob 可能会使用匿名数据来提供核心广告服务。我们不会为了第三方营销人员的自身目的而向其出售或共享您的个人数据。我们不会使用标准广告功能之外的自动决策或剖析。",
+            "section6_title": "6. 数据存储和保留",
+            "section6_content": "所有通知数据、设置和统计信息均本地存储在您的设备上。只有购买数据存储在安全的加密数据库中。通知数据永远不会传输到我们的服务器。通知历史记录将保留在本地，直到您将其清除或卸载应用程序。许可证信息将无限期保留，以验证您的终身购买。您可以通过卸载应用程序删除所有本地数据，或联系我们请求删除购买数据。",
+            "section7_title": "7. 数据共享和第三方",
+            "section7_content": "我们不会出售您的个人数据。数据共享仅限于用于支付处理的 Google Play 商店、用于向免费层级用户投放广告的 Google AdMob 以及用于许可证验证的安全第三方服务。我们不会向任何第三方共享您的通知数据。用户有权选择退出数据销售（我们不销售数据）并通过设备设置管理广告偏好。",
+            "section8_title": "8. 国际数据传输",
+            "section8_content": "购买数据可能会在位于安全数据中心的服务器上进行处理。所有国际传输均符合相关的数据保护法律和适当的保障措施。数据在传输过程中使用行业标准加密进行加密。",
+            "section9_title": "9. 安全措施",
+            "section9_content": "我们实施技术和管理安全措施来保护您的数据，包括本地加密、安全通信协议、加密数据库存储和受限访问控制。但是，没有任何传输或存储方法是 100% 安全的。虽然我们努力保护您的数据，但我们不能保证绝对安全。",
+            "section10_title": "10. 您的权利",
+            "section10_content": "您有权访问、更正、删除、限制处理、数据可移植性、反对处理以及撤回有关您个人数据的同意。您有知情权、删除权、选择不出售权（我们不出售数据）以及不受歧视的权利。通过下面的电子邮件地址联系我们以行使您的权利。我们将根据法律要求在合理的时间范围内做出回应。",
+            "section11_title": "11. 儿童隐私",
+            "section11_content": "我们的应用程序不针对 18 岁以下（或某些司法管辖区为 13 岁）的儿童。我们不会故意收集儿童的个人数据。如果我们发现我们收集了儿童的数据，我们将立即将其删除。对于 18 岁以下（或其司法管辖区的成年年龄）个人的购买行为，我们不承担任何责任和义务。父母或监护人全权负责监督其子女对应用程序的使用和任何购买行为。如果未成年人进行了未经授权的购买，父母或监护人必须联系 Google Play Store 获取退款，因为我们不处理退款。",
+            "section12_title": "12. 数据泄露通知",
+            "section12_content": "如果发生可能影响您权利的数据泄露，我们将按法律要求通知相关监管机构，如果对受影响用户的权利存在高风险，我们将毫无延误地通知他们。",
+            "section13_title": "13. 本政策的变更",
+            "section13_content": "本隐私政策可能会不时更新。重大变更将通知用户。在变更后继续使用应用程序即表示接受。最后更新日期显示在本页顶部。",
+            "section14_title": "14. 广告",
+            "section14_content": "Raid Alarm 的免费层级由广告支持。我们使用 Google AdMob 投放广告。AdMob 可能会收集并使用诸如您的设备广告 ID 之类的数据，以显示相关广告并用于分析目的。购买终身许可证的用户将从应用程序中移除所有第三方广告。"
+        },
+        "terms_of_service": {
+            "title": "服务条款",
+            "last_updated": "最后更新：{year}",
+            "contact_title": "联系方式",
+            "contact_email": "问题：alcstackdev@gmail.com",
+            "section1_title": "1. 条款的接受",
+            "section1_content": "通过下载、安装、访问或使用 Raid Alarm，您同意受这些服务条款的约束。如果您不同意，请勿使用该应用程序。您必须年满 18 岁（或在您所在司法管辖区即为成年年龄）才能使用此应用程序。如果您未满 18 岁，您只能在父母或监护人的同意下使用此应用程序。",
+            "section2_title": "2. 服务描述",
+            "section2_content": "Raid Alarm 是一款仅在 Google Play Store 上可用的移动应用程序，它监控来自 Rust+ 应用程序的通知，并在收到抄家通知时触发警报。该应用程序“按原样”提供，没有任何保证。该应用程序的功能完全取决于 Rust+ 应用程序。如果 Rust+ 未安装、被禁用、从 Google Play Store 移除、停止发送通知、出现延迟或 Rust 游戏服务器遇到问题，该应用程序将无法运行，我们对因此产生的问题概不负责。",
+            "section3_title": "3. 无关联",
+            "section3_content": "Raid Alarm 与 Rust 游戏、Rust+ 应用程序、Facepunch Studios Limited 或任何相关实体没有关联、合作、连接、认可或赞助关系。Raid Alarm 是一个独立的应用程序。我们使用“Rust+”、“Rust”、“Facepunch”和相关术语仅用于描述和识别目的，以解释应用程序的功能（名义合理使用）。我们在这些商标上没有任何权利主张。我们未获得 Facepunch Studios Limited 的授权、认可或关联。如果 Facepunch Studios Limited 反对我们使用这些术语，我们将立即遵守他们的要求。任何使用这些术语纯粹是描述性的，并不暗示任何关系、授权或认可。",
+            "section4_title": "4. 外部依赖和限制",
+            "section4_content": "重要依赖通知：Raid Alarm 的功能完全且无条件地取决于 Rust+ 应用程序。在以下任何情况下，该应用程序将无效：\n\n- 您的设备上未安装 Rust+ 应用程序\n- Rust+ 应用程序被禁用或卸载\n- Rust+ 应用程序从 Google Play Store 移除\n- Rust+ 应用程序变得不可用或停止工作\n- Rust+ 应用程序停止发送通知或通知延迟\n- Rust+ 应用程序中的“智能警报”或通知功能被移除、禁用或更改\n- Rust 游戏服务器遇到问题、停机或崩溃\n- Facepunch Studios Limited 限制或禁止通知功能\n- 互联网连接问题阻止接收 Rust+ 通知\n- 任何影响 Rust+ 应用程序传递通知能力的其他问题\n\n通过使用该应用程序，您明确承认并同意：\n\n- 应用程序的功能完全依赖于我们无法控制的外部服务（Rust+ 应用程序和 Rust 游戏服务器）\n- 我们对 Rust+ 应用程序的可用性、功能、从 Google Play Store 移除、通知延迟或 Facepunch Studios Limited 所做的任何更改概不负责\n- 我们对 Rust 游戏服务器问题、停机或崩溃概不负责\n- 如果 Facepunch Studios Limited 限制、禁止或更改 Rust+ 应用程序的通知功能，我们概不负责\n- 您将不会因 Rust+ 应用程序问题、Rust 游戏服务器问题、通知延迟或任何其他外部依赖问题而究责我们、要求退款或对我们提出任何索赔\n- 您了解如果 Rust+ 应用程序从 Google Play Store 移除或停止工作，该应用程序将立即停止工作，并且您无权获得退款、补偿或其他补救措施",
+            "section5_title": "5. 对第三方服务不承担责任",
+            "section5_content": "我们拒绝承担任何责任，并且不承担任何义务，对于因以下原因引起的任何问题、损害、损失或后果：\n\n- Rust 游戏、Rust+ 应用程序、Facepunch Studios Limited 或任何相关实体\n- Rust+ 应用程序从 Google Play Store 移除\n- Rust+ 应用程序停止发送通知或通知延迟\n- Rust+ 应用程序中移除、禁用或修改“智能警报”或通知功能\n- Rust 游戏服务器问题、停机或崩溃\n- Facepunch Studios Limited 进行的任何更改、限制或修改\n- 其他第三方服务、应用程序或依赖项\n\n您就所有外部依赖项自行承担风险使用该应用程序。我们对 Rust+ 应用程序、Rust 游戏服务器或 Facepunch Studios Limited 没有任何控制权，并且我们对因这些外部依赖项引起的任何问题概不负责。",
+            "section6_title": "6. 服务保证",
+            "section6_content": "仅当以下条件全部同时满足时，我们保证 Raid Alarm 将正常运行：\n\n- Rust 游戏服务器已启动且运行正常\n- Rust+ 应用程序在您的设备上已安装、激活且运行正常\n- Rust+ 应用程序在 Google Play Store 中可用且未被移除\n- Rust+ 应用程序发送通知无延迟\n- Rust+ 应用程序通知功能（包括“智能警报”，如果适用）已激活且未被禁用\n- 您的设备符合所有技术要求\n- 已授予并维护所有必要的权限\n- 您有活跃的互联网连接\n- Facepunch Studios Limited 未限制或禁止通知功能\n\n如果这些条件中的任何一个未得到满足，我们无法且不保证应用程序将运行，并且我们对由此产生的任何问题、损失或损害概不负责",
+            "section7_title": "7. 权限",
+            "section7_content": "Raid Alarm 仅请求最低限度的必要权限：用于监控来自 Rust+ 应用程序的警报的通知访问权限、用于后台操作的电池优化豁免以及用于触发警报的闹钟权限。",
+            "section8_title": "8. 终身许可证条款",
+            "section8_content": "可用性：该应用程序仅在 Google Play Store 上可用。所有购买均通过 Google Play Store 的支付系统处理。\n\n终身许可证：高级功能需要一次性购买。我们提供“终身许可证”，授予对所有高级功能的永久访问权限。这是一次性付款，不包含经常性费用或订阅。\n\n年龄要求：您必须年满 18 岁（或在您所在司法管辖区即为成年年龄）才能购买许可证。如果您未满 18 岁，您只能在父母或监护人的同意下购买。对于未成年人在没有适当许可的情况下进行的购买，我们概不负责。父母或监护人全权负责监督其子女的购买行为。如果未成年人进行了未经授权的购买，请联系 Google Play Store 获取退款。\n\n支付处理：所有付款均通过 Google Play Store 安全处理。我们不存储也无权访问您的支付卡数据。支付信息完全由 Google Play Store 管理。\n\n定价：价格可能会因国家/地区而异，并且可能会在不另行通知的情况下更改。当前价格显示在应用程序和 Google Play Store 中。\n\n服务修改：我们保留随时修改、添加或删除功能的权利，恕不另行通知且不予退款。我们保留因违反这些条款或非法活动而随时终止或暂停您的许可证的权利。\n\n服务可用性：该应用程序的功能完全取决于 Rust+ 应用程序。如果 Rust+ 应用程序从 Google Play Store 移除、停止工作或停止发送通知，该应用程序将无法运行，无论您的许可证状态如何，并且您无权获得退款或补偿。\n\n#### 退款政策\n\n所有销售均为最终销售。在任何情况下均不提供退款，包括但不限于：\n\n- Rust+ 应用程序从 Google Play Store 移除、不可用或任何问题\n- Rust+ 应用程序停止发送通知或通知延迟\n- Facepunch Studios Limited 移除、禁用或修改 Rust+ 应用程序通知功能\n- Rust 游戏服务器问题、停机或崩溃\n- 应用程序功能问题（崩溃、错误、通知延迟、警报不响）\n- 应用程序因 Rust+ 应用程序问题或移除而停止工作\n- 用户对应用程序或功能不满意\n- 用户在购买后改变主意\n- 用户设备与应用程序不兼容\n- 用户拒绝授予必要的权限\n- 未成年人未经授权的购买（联系 Google Play Store 获取退款）\n- 任何其他原因\n\n在 Google Play Store 退款期（通常为 48 小时）过期后，无论出于何种原因，我们都不会在任何情况下发放任何退款。\n\n通过购买许可证，您明确放弃除标准 GOOGLE PLAY STORE 退款期（通常为 48 小时）之外的所有退款权利，之后将不提供任何退款。\n\n#### 重要确认\n\n通过购买许可证，您明确且不可撤销地承认、理解并同意：该应用程序完全依赖于 Rust+ 应用程序（见第 4 节）。如果 Rust+ 应用程序变得不可用、被移除或停止工作，该应用程序将无法运行，并且您无权获得退款或补偿。您接受与外部依赖相关的所有风险，并且不会因 Rust+ 问题、Rust 游戏服务器问题或外部依赖问题（在 Google Play Store 48 小时标准退款窗口之外）寻求退款。",
+            "section9_title": "9. 知识产权和商标合理使用",
+            "section9_content": "Raid Alarm 应用程序和内容受版权和商标法保护。我们保留所有权利。\n\n商标免责声明：“Rust+”、“Rust”、“Facepunch”和相关徽标、名称和商标是 Facepunch Studios Limited 的唯一财产。我们与 Facepunch Studios Limited 没有任何关联、认可、授权或连接。我们仅出于识别和描述目的使用这些商标（名义合理使用）。我们在这些商标上没有任何权利主张。如果 Facepunch Studios Limited 反对我们的使用，我们将立即遵守他们的要求。有关更多信息，请参阅第 3 节。",
+            "section10_title": "10. 保证免责声明",
+            "section10_content": "该应用程序“按原样”和“按可用状态”提供，没有任何形式的明示或暗示保证，包括但不限于适销性、特定用途适用性、不侵权或该应用程序将正常运行的保证。\n\n我们不保证该应用程序将始终正常运行，第三方服务将始终可用，或者该应用程序将不间断或无错误。该应用程序的功能完全取决于 Rust+ 应用程序（见第 4 节）。我们就应用程序的功能、可用性或可靠性不作任何陈述或保证。您自行承担使用该应用程序的风险。",
+            "section11_title": "11. 责任限制",
+            "section11_content": "在法律允许的最大范围内，我们对因以下原因引起的任何损害、损失或后果概不负责：\n\n- Rust+ 应用程序问题、从 Google Play Store 移除、不可用或任何问题\n- Rust+ 应用程序停止发送通知或通知延迟\n- Facepunch Studios Limited 移除、禁用或修改 Rust+ 应用程序通知功能\n- Rust 游戏服务器问题、停机或崩溃\n- Facepunch Studios Limited 或相关实体限制或禁止功能\n- 应用程序因 Rust+ 应用程序问题或移除而停止工作\n- 间接、附带、特殊、后果性或惩罚性损害\n- 利润、数据、商誉损失或其他无形损失\n- 超过您为许可证支付金额的任何损害\n- 与外部依赖项或第三方服务相关的任何损害\n- 未成年人未经授权的购买（父母/监护人全权负责）\n\n在任何情况下，我们的总责任都不会超过您在索赔前 12 个月内为许可证支付的金额。",
+            "section12_title": "12. 用户责任",
+            "section12_content": "您全权负责：\n\n- 在您的设备上安装和维护 Rust+ 应用程序\n- 确保 Rust+ 应用程序可用、已安装且运行正常\n- 向 Raid Alarm 和 Rust+ 应用程序授予所有必要的权限\n- 确保您的设备兼容 Raid Alarm 和 Rust+ 应用程序\n- 了解该应用程序完全依赖于 Rust+ 应用程序和外部服务\n- 了解如果 Rust+ 应用程序从 Google Play Store 移除或停止工作，该应用程序将无法运行，并且您无权获得退款\n- 遵守 Rust+ 应用程序服务条款和所有适用法律\n- 确保您的使用不违反 Rust+ 应用程序服务条款\n- 监督和批准购买（如果您是父母或监护人）\n- 在购买前确保您已年满 18 岁（或获得父母/监护人同意）\n\n如果您的使用违反了 RUST+ 应用程序服务条款，您将对所有后果承担全部且唯一的责任，并且我们对产生的任何问题概不负责",
+            "section13_title": "13. 条款的修改",
+            "section13_content": "这些服务条款可能会不时更新。重大变更将通知用户。您在任何更改后继续使用应用程序即表示您接受新条款。",
+            "section14_title": "14. 终止",
+            "section14_content": "如果不遵守这些条款或出于我们的自行决定，我们可以立即终止或暂停您对应用程序的访问，恕不另行通知。我们对因终止而造成的损害概不负责。",
+            "section15_title": "15. 适用法律和管辖权",
+            "section15_content": "这些服务条款受适用于您所在位置的法律管辖。争议将根据适用法律和管辖权解决。",
+            "section16_title": "16. 广告",
+            "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
+        }
+    },
+    "paywall": {
+        "title_line1": "终身",
+        "title_line2": "访问",
+        "subtitle": "一次付款，永久拥有。",
+        "no_subscriptions": "无订阅。",
+        "secure_access": "开启无限保护",
+        "restore": "恢复",
+        "privacy": "隐私政策",
+        "terms": "服务条款",
+        "plan_card": {
+            "name": "终身访问",
+            "one_time": "一次性付款"
+        },
+        "benefits": {
+            "critical_alarms": "关键突袭警报（绕过静音模式）",
+            "fake_call": "模拟虚拟来电",
+            "enemy_notifications": "敌人在线/离线通知",
+            "server_notifications": "服务器在线/离线通知",
+            "wipe_notifications": "自定义清档通知"
+        },
+        "errors": {
+            "network": "网络错误。请检查您的互联网连接并重试。",
+            "pending": "付款处理中。确认付款后，您的购买将被激活。",
+            "invalid": "付款无效。请重试或联系支持。",
+            "unavailable": "该产品目前无法购买。",
+            "store": "商店问题。请稍后重试或联系支持。",
+            "already_purchased": "该产品已购买。",
+            "generic_failed": "购买失败：{}",
+            "purchase_failed_default": "购买失败。请重试。",
+            "restore_no_internet": "无互联网连接。请检查您的网络。",
+            "restore_timeout": "恢复超时。请重试。",
+            "restore_failed": "恢复失败：{}",
+            "no_lifetime_found": "未找到可恢复的终身购买",
+            "purchase_verification_failed": "付款已完成，但无法验证终身访问权限。"
+        }
+    },
+    "recoil_trainer": {
+        "title": "压枪训练",
+        "subtitle": "弹道可视化",
+        "mouse_move": "鼠标移动",
+        "impact_point": "着弹点",
+        "fire": "开火",
+        "pause": "暂停",
+        "shot": "射击",
+        "ready": "准备",
+        "complete": "完成",
+        "pull_down": "下拉",
+        "pull_left": "左拉",
+        "pull_right": "右拉",
+        "stabilize": "稳住",
+        "difficulty": {
+            "easy": "简单",
+            "medium": "中等",
+            "hard": "困难",
+            "extreme": "极度困难"
+        }
+    }
+}

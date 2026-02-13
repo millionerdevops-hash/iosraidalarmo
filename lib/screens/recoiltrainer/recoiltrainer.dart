@@ -169,8 +169,9 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
   }
 
   Widget _buildHeader() {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
     return Container(
-      height: 60.h,
+      height: isSmall ? 50.h : 60.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
         color: const Color(0xFF0C0C0E),
@@ -193,7 +194,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
 
                 context.go('/tools');
               },
-              icon: Icon(LucideIcons.arrowLeft, color: const Color(0xFFA1A1AA), size: 22.w),
+              icon: Icon(LucideIcons.arrowLeft, color: const Color(0xFFA1A1AA), size: isSmall ? 20.w : 22.w),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
             ),
@@ -209,7 +210,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
                 child: Text(
                   tr('recoil_trainer.title'),
                   style: TextStyle(
-                    fontSize: 18.sp, 
+                    fontSize: isSmall ? 16.sp : 18.sp, 
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Rust', 
@@ -224,8 +225,12 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
   }
 
   Widget _buildWeaponSelector() {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
+    final itemWidth = isSmall ? 70.w : 90.w;
+    final height = isSmall ? 70.h : 90.h;
+    
     return SizedBox(
-      height: 90.h,
+      height: height,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -245,8 +250,8 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 90.w,
-              padding: EdgeInsets.all(8.w),
+              width: itemWidth,
+              padding: EdgeInsets.all(isSmall ? 6.w : 8.w),
               decoration: BoxDecoration(
                 color: isSelected ? const Color(0xFF18181B) : const Color(0xFF09090B),
                 borderRadius: BorderRadius.circular(16.r),
@@ -271,7 +276,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
                       w.name.toUpperCase(),
                       style: TextStyle(
                         color: isSelected ? Colors.white : const Color(0xFF71717A),
-                        fontSize: 9.sp,
+                        fontSize: isSmall ? 8.sp : 9.sp,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
@@ -286,9 +291,12 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
   }
 
   Widget _buildVisualizer() {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
+    final height = isSmall ? 280.h : 370.h;
+    
     return Container(
-      height: 370.h,
-      margin: EdgeInsets.symmetric(vertical: 12.h),
+      height: height,
+      margin: EdgeInsets.symmetric(vertical: isSmall ? 8.h : 12.h),
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(24.r),
@@ -500,8 +508,9 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
   }
 
   Widget _buildControls() {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(isSmall ? 12.w : 16.w),
       decoration: BoxDecoration(
         color: const Color(0xFF111114),
         borderRadius: BorderRadius.circular(20.r),
@@ -515,7 +524,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_weapon.name.toUpperCase(), style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.w900)),
+                  Text(_weapon.name.toUpperCase(), style: TextStyle(color: Colors.white, fontSize: isSmall ? 14.sp : 16.sp, fontWeight: FontWeight.w900)),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
@@ -528,7 +537,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
               ),
             ],
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: isSmall ? 12.h : 20.h),
           Row(
             children: [
               _buildControlBtn(
@@ -548,7 +557,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
                     Text('${_speedMultiplier}X', style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.w900, color: _speedMultiplier < 1.0 ? Colors.blue : const Color(0xFF71717A))),
                   ],
                 ),
-                width: 60.w,
+                width: isSmall ? 50.w : 60.w,
                 isActive: _speedMultiplier < 1.0,
               ),
               SizedBox(width: 12.w),
@@ -584,7 +593,7 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
                   _reset();
                 },
                 child: Icon(LucideIcons.rotateCcw, size: 20.w, color: const Color(0xFF71717A)),
-                width: 60.w,
+                width: isSmall ? 50.w : 60.w,
               ),
             ],
           ),
@@ -623,11 +632,12 @@ class _RecoilTrainerScreenState extends ConsumerState<RecoilTrainerScreen> {
   }
 
   Widget _buildControlBtn({required VoidCallback onTap, required Widget child, double? width, Color color = const Color(0xFF18181B), bool isActive = false}) {
+    final isSmall = ScreenUtilHelper.isSmallDevice;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: width,
-        height: 54.h,
+        height: isSmall ? 48.h : 54.h,
         decoration: BoxDecoration(
           color: isActive ? Colors.blue.withOpacity(0.1) : color,
           borderRadius: BorderRadius.circular(14.r),

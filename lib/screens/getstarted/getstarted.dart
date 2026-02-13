@@ -66,7 +66,7 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
                             child: RichText(
                               text: TextSpan(
                                 style: RustTypography.rustStyle(
-                                  fontSize: 48.sp,
+                                  fontSize: ScreenUtilHelper.isSmallDevice ? 38.sp : 48.sp,
                                   color: Colors.white,
                                 ).copyWith(
                                   height: 1.1,

@@ -1,0 +1,930 @@
+{
+    "common": {
+        "loading": "Memuat...",
+        "subscription_required": "Langganan diperlukan untuk mengaktifkan perlindungan",
+        "error_service_not_enabled": "Layanan notifikasi tidak diaktifkan.",
+        "no_internet": "No internet connection. Please check your network.",
+        "errors": {
+            "no_internet": "No internet connection. Please check your network."
+        },
+        "million_suffix": "M",
+        "fauna_guide": "PANDUAN FAUNA",
+        "select_species": "PILIH SPESIES",
+        "thousand_suffix": "K"
+    },
+    "tools": {
+        "section_utilities": "ALAT",
+        "raid_cost": {
+            "title": "BIAYA",
+            "subtitle": "Bahan Peledak & Sulfur"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "Kamera Monumen"
+        },
+        "tea_guide": {
+            "title": "TEH",
+            "subtitle": "Buff & Resep"
+        },
+        "diesel_calc": {
+            "title": "DIESEL",
+            "subtitle": "Ekskavator & Tambang"
+        },
+        "animal_guide": {
+            "title": "HEWAN",
+            "subtitle": "Berburu & Sumber Daya"
+        },
+        "match_game": {
+            "title": "COCOKKAN",
+            "subtitle": "Permainan Memori",
+            "earned_coins": "Kamu mendapatkan {} koin!",
+            "not_enough_scrap": "Koin tidak cukup!",
+            "victory": "KEMENANGAN",
+            "defeat": "KEKALAHAN",
+            "net_result": "HASIL BERSIH",
+            "play_again": "MAIN LAGI",
+            "return_to_menu": "KEMBALI KE MENU",
+            "timer": "WAKTU",
+            "potential": "POTENSI",
+            "memorize": "HAFALKAN!",
+            "menu_title": "GAME COCOK",
+            "menu_subtitle": "Temukan pasangan untuk melipatgandakan barang rongsokan Anda.\nRisiko tinggi, imbalan tinggi.",
+            "play_action": "MAIN (-{} RONGSOKAN)",
+            "entry": "MASUK",
+            "pairs_count": "{} Pasang",
+            "exit_warning_title": "Keluar Permainan?",
+            "exit_warning_message": "Taruhan Anda akan hilang jika Anda keluar sekarang. Lanjutkan?",
+            "yes": "Ya",
+            "no": "Tidak"
+        },
+        "code_raider": {
+            "title": "KUNCI KODE",
+            "subtitle": "Retak Kunci Kode",
+            "battery_level": "LEVEL BATERAI",
+            "correct": "Benar",
+            "wrong_spot": "Posisi Salah",
+            "invalid": "Tidak Valid",
+            "waiting_input": "Menunggu input...",
+            "access_granted": "AKSES DITERIMA",
+            "system_lockout": "SISTEM TERKUNCI",
+            "reward_scrap": "Hadiah: +{} Scrap",
+            "code_changed": "Kode diubah",
+            "hack_another": "HACK LAGI",
+            "retry_hack": "COBA LAGI",
+            "open": "BUKA",
+            "clear": "HAPUS",
+            "enter": "MASUK",
+            "code_lock": "KUNCI_KODE"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "Resep Teh",
+            "mixing_table_recipe": "MEJA CAMPURAN",
+            "select_tier": "PILIH TINGKAT"
+        },
+        "stats": {
+            "rad_res": "Anti Rad",
+            "hydration": "Hidrasi",
+            "temp": "Suhu",
+            "max_temp": "Suhu Maks",
+            "min_temp": "Suhu Min",
+            "quality": "Kualitas",
+            "yield": "Hasil",
+            "hot": "HoT",
+            "inst_hp": "HP Instan",
+            "max_hp": "Max HP"
+        },
+        "durations": {
+            "instant": "Instan",
+            "30m": "30m",
+            "20m": "20m",
+            "45m": "45m",
+            "1h": "1j",
+            "3m_20s": "3m 20d",
+            "5m": "5m",
+            "6m_40s": "6m 40d"
+        },
+        "categories": {
+            "Ore": "BIJIH",
+            "Wood": "KAYU",
+            "Scrap": "SCRAP",
+            "Harvesting": "PANEN",
+            "MaxHealth": "MAX HP",
+            "Healing": "PENYEMBUHAN",
+            "Rad": "ANTI RAD",
+            "Cooling": "PENDINGINAN",
+            "Warming": "PENGHANGAT",
+            "Crafting": "CRAFTING"
+        },
+        "tiers": {
+            "Basic": "D.",
+            "Advanced": "L.",
+            "Pure": "M."
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "Teh Anti-Rad D.",
+                "desc": "Teh ketahanan radiasi dasar."
+            },
+            "Rad_adv": {
+                "name": "Teh Anti-Rad L.",
+                "desc": "Teh ketahanan radiasi lanjutan."
+            },
+            "Rad_pure": {
+                "name": "Teh Anti-Rad M.",
+                "desc": "Teh ketahanan radiasi murni."
+            },
+            "Cooling_basic": {
+                "name": "Teh Pendingin D.",
+                "desc": "Teh pendingin dasar."
+            },
+            "Cooling_adv": {
+                "name": "Teh Pendingin L.",
+                "desc": "Teh pendingin lanjutan."
+            },
+            "Cooling_pure": {
+                "name": "Teh Pendingin M.",
+                "desc": "Teh pendingin murni."
+            },
+            "Crafting_basic": {
+                "name": "Teh Crafting D.",
+                "desc": "Teh kecepatan crafting dasar."
+            },
+            "Crafting_adv": {
+                "name": "Teh Crafting L.",
+                "desc": "Teh kecepatan crafting lanjutan."
+            },
+            "Crafting_pure": {
+                "name": "Teh Crafting M.",
+                "desc": "Teh kecepatan crafting murni."
+            },
+            "Harvesting_basic": {
+                "name": "Teh Panen D.",
+                "desc": "Teh hasil panen dasar."
+            },
+            "Harvesting_adv": {
+                "name": "Teh Panen L.",
+                "desc": "Teh hasil panen lanjutan."
+            },
+            "Harvesting_pure": {
+                "name": "Teh Panen M.",
+                "desc": "Teh hasil panen murni."
+            },
+            "Healing_basic": {
+                "name": "Teh Penyembuhan D.",
+                "desc": "Teh penyembuhan dasar."
+            },
+            "Healing_adv": {
+                "name": "Teh Penyembuhan L.",
+                "desc": "Teh penyembuhan lanjutan."
+            },
+            "Healing_pure": {
+                "name": "Teh Penyembuhan M.",
+                "desc": "Teh penyembuhan murni."
+            },
+            "MaxHealth_basic": {
+                "name": "Teh Max HP D.",
+                "desc": "Teh peningkatan kesehatan maksimal dasar."
+            },
+            "MaxHealth_adv": {
+                "name": "Teh Max HP L.",
+                "desc": "Teh peningkatan kesehatan maksimal lanjutan."
+            },
+            "MaxHealth_pure": {
+                "name": "Teh Max HP M.",
+                "desc": "Teh peningkatan kesehatan maksimal murni."
+            },
+            "Ore_basic": {
+                "name": "Teh Bijih D.",
+                "desc": "Teh hasil bijih dasar."
+            },
+            "Ore_adv": {
+                "name": "Teh Bijih L.",
+                "desc": "Teh hasil bijih lanjutan."
+            },
+            "Ore_pure": {
+                "name": "Teh Bijih M.",
+                "desc": "Teh hasil bijih murni."
+            },
+            "Scrap_basic": {
+                "name": "Teh Scrap D.",
+                "desc": "Teh hasil scrap dasar."
+            },
+            "Scrap_adv": {
+                "name": "Teh Scrap L.",
+                "desc": "Teh hasil scrap lanjutan."
+            },
+            "Scrap_pure": {
+                "name": "Teh Scrap M.",
+                "desc": "Teh hasil scrap murni."
+            },
+            "Warming_basic": {
+                "name": "Teh Penghangat D.",
+                "desc": "Teh penghangat dasar."
+            },
+            "Warming_adv": {
+                "name": "Teh Penghangat L.",
+                "desc": "Teh penghangat lanjutan."
+            },
+            "Warming_pure": {
+                "name": "Teh Penghangat M.",
+                "desc": "Teh penghangat murni."
+            },
+            "Wood_basic": {
+                "name": "Teh Kayu D.",
+                "desc": "Teh hasil kayu dasar."
+            },
+            "Wood_adv": {
+                "name": "Teh Kayu L.",
+                "desc": "Teh hasil kayu lanjutan."
+            },
+            "Wood_pure": {
+                "name": "Teh Kayu M.",
+                "desc": "Teh hasil kayu murni."
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "Berry Merah",
+            "Blue_Berry": "Berry Biru",
+            "Green_Berry": "Berry Hijau",
+            "Yellow_Berry": "Berry Kuning",
+            "White_Berry": "Berry Putih",
+            "Basic_Rad_Tea": "Teh Rad Dsr",
+            "Adv_Rad_Tea": "Teh Rad Ljt",
+            "Basic_Cooling_Tea": "Teh Dingin Dsr",
+            "Adv_Cooling_Tea": "Teh Dingin Ljt",
+            "Basic_Crafting_Tea": "Teh Craft Dsr",
+            "Adv_Crafting_Tea": "Teh Craft Ljt",
+            "Basic_Harvesting_Tea": "Teh Panen Dsr",
+            "Adv_Harvesting_Tea": "Teh Panen Ljt",
+            "Basic_Healing_Tea": "Teh Sembuh Dsr",
+            "Adv_Healing_Tea": "Teh Sembuh Ljt",
+            "Basic_MaxHealth_Tea": "Teh HP Dsr",
+            "Adv_MaxHealth_Tea": "Teh HP Ljt",
+            "Basic_Ore_Tea": "Teh Bijih Dsr",
+            "Adv_Ore_Tea": "Teh Bijih Ljt",
+            "Basic_Scrap_Tea": "Teh Scrap Dsr",
+            "Adv_Scrap_Tea": "Teh Scrap Ljt",
+            "Basic_Warming_Tea": "Teh Hangat Dsr",
+            "Adv_Warming_Tea": "Teh Hangat Ljt",
+            "Basic_Wood_Tea": "Teh Kayu Dsr",
+            "Adv_Wood_Tea": "Teh Kayu Ljt"
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "KODE CCTV",
+            "no_signal": "TIDAK ADA SINYAL",
+            "copied": "DI SALIN",
+            "randomized": "Kode Acak",
+            "rec": "REC"
+        },
+        "categories": {
+            "all": "SEMUA KAMERA",
+            "large_oil": "RIG MINYAK BESAR",
+            "small_oil": "RIG MINYAK KECIL",
+            "cargo": "KAPAL KARGO",
+            "silo": "SILO RUDAL",
+            "airfield": "LAPANGAN TERBANG",
+            "labs": "LAB BAWAH AIR",
+            "outpost": "OUTPOST",
+            "bandit": "KAMP BANDIT",
+            "dome": "KUBAH",
+            "radtown": "RADTOWN",
+            "ferry": "TERMINAL FERI",
+            "town": "KOTA"
+        },
+        "labels": {
+            "dock": "Dermaga",
+            "exhaust": "Knalpot",
+            "helipad": "Landasan Helikopter",
+            "level_1": "Level 1",
+            "level_2": "Level 2",
+            "level_3": "Level 3",
+            "level_3a": "Level 3A",
+            "level_3b": "Level 3B",
+            "level_4": "Level 4",
+            "level_5": "Level 5",
+            "level_6a": "Level 6A",
+            "level_6b": "Level 6B",
+            "level_6c": "Level 6C",
+            "level_6d": "Level 6D",
+            "deck": "Dek",
+            "bridge": "Jembatan",
+            "stern": "Buritan",
+            "hold_1": "Palka 1",
+            "hold_2": "Palka 2",
+            "exit_1": "Keluar 1",
+            "exit_2": "Keluar 2",
+            "missile": "Rudal",
+            "tower": "Menara",
+            "shipping": "Pengiriman",
+            "casino": "Kasino",
+            "chill_zone": "Zona Santai",
+            "crude_oil": "Minyak Mentah",
+            "music": "Musik",
+            "street": "Jalan",
+            "logistics": "Logistik",
+            "parking": "Parkir",
+            "utilities": "Utilitas",
+            "apartments": "Apartemen",
+            "house": "Rumah",
+            "sbl": "mSBL",
+            "dome_1": "Kubah 1",
+            "top": "Atas",
+            "weapons": "Senjata",
+            "lab": "Lab",
+            "security": "Keamanan"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "Cari Pemain",
+            "search_hint": "Nama pemain atau ID...",
+            "loading_text": "MENCARI DI BATTLEMETRICS...",
+            "error_title": "Pencarian Gagal",
+            "retry_button": "COBA LAGI",
+            "empty_state": "Pemain tidak ditemukan.",
+            "error_snackbar": "Kesalahan: {}",
+            "global": "GLOBAL",
+            "player_id": "ID PEMAIN"
+        },
+        "details": {
+            "tracking_id": "PELACAKAN",
+            "current_state": "STATUS SAAT INI",
+            "online": "TERHUBUNG",
+            "offline": "TERPUTUS",
+            "last_seen": "TERAKHIR DILIHAT",
+            "unknown": "Tidak Diketahui",
+            "alert_triggers": "PEMICU PERINGATAN:",
+            "update_tracking": "IKUTI PEMAIN"
+        },
+        "list_item": {
+            "playing_on": "BERMAIN DI:",
+            "not_in_server": "Tidak di server"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "STATISTIK SERANGAN",
+            "total_attacks": "TOTAL SERANGAN",
+            "last_attack": "SERANGAN TERAKHIR",
+            "recent_alerts": "PERINGATAN TERBARU",
+            "no_notification": "Tidak ada notifikasi ditemukan.",
+            "unknown_source": "Sumber Tidak Diketahui",
+            "time_ago": {
+                "just_now": "Baru saja",
+                "minutes": "{}m yang lalu",
+                "hours": "{}j yang lalu",
+                "days": "{}h yang lalu",
+                "months": "{}bln yang lalu"
+            }
+        },
+        "traffic": {
+            "title": "Lalu Lintas Serangan",
+            "ranges": {
+                "day": "Hari",
+                "week": "Minggu",
+                "month": "Bulan"
+            }
+        },
+        "overlay": {
+            "premium_data": "DATA PREMIUM",
+            "upgrade_button": "TINGKATKAN UNTUK MELIHAT"
+        },
+        "alarm": {
+            "stop": "HENTIKAN ALARM"
+        },
+        "notifications": {
+            "base_attack": "Markasmu sedang diserang!"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "TIDAK EFEKTIF",
+            "total_required": "Total Diperlukan",
+            "cannot_damage": "Tidak dapat merusak",
+            "loot_only": "HANYA LOOT",
+            "raw_sulfur": "SULFUR MENTAH"
+        },
+        "materials": {
+            "charcoal": "Arang",
+            "fragments": "Pecahan Logam",
+            "stones": "Batu",
+            "wood": "Kayu",
+            "bone": "Tulang",
+            "low_grade_fuel": "LGF (Bahan Bakar)",
+            "cloth": "Kain",
+            "rope": "Tali",
+            "pipe": "Pipa",
+            "tech_trash": "Sampah Tech",
+            "sulfur": "Sulfur"
+        },
+        "categories": {
+            "construction": "Konstruksi",
+            "door": "Pintu",
+            "placeable": "Dapat Diletakkan",
+            "item": "Perangkap"
+        },
+        "explosives": {
+            "c4": "Peledak C4",
+            "rocket": "Roket",
+            "satchel": "Tas Peledak",
+            "beancan": "Beancan",
+            "explo556": "Peluru Peledak 5.56",
+            "he_grenade": "Granat F1",
+            "he_grenade_40mm": "40mm HE",
+            "molotov": "Molotov",
+            "hv_rocket": "Roket HV",
+            "incen_rocket": "Roket Pembakar",
+            "homing_rocket": "Roket Pelacak",
+            "mlrs_rocket": "Roket MLRS",
+            "survey_charge": "Survey Charge",
+            "propane_bomb": "Tangki Propana",
+            "ammo_rifle": "Amunisi Senapan",
+            "ammo_rifle_hv": "Senapan HV",
+            "ammo_rifle_incen": "Senapan Pembakar",
+            "ammo_pistol": "Amunisi Pistol",
+            "ammo_pistol_hv": "Pistol HV",
+            "ammo_pistol_incen": "Pistol Pembakar",
+            "ammo_buckshot": "Buckshot",
+            "ammo_slug": "Slug",
+            "ammo_incen_shell": "Incendiary Shell",
+            "ammo_handmade": "Handmade Shell",
+            "arrow_fire": "Panah Api",
+            "arrow_bone": "Panah Tulang",
+            "arrow_wooden": "Panah Kayu",
+            "arrow_hv": "Panah HV"
+        },
+        "calculator": {
+            "title": "KALKULATOR RAID",
+            "select_target": "PILIH TARGET",
+            "materials_breakdown": "RINCIAN MATERIAL",
+            "total_sulfur": "TOTAL SULFUR",
+            "min_cost": "BIAYA MINIMUM",
+            "best_for_sulfur": "Terbaik untuk Sulfur",
+            "custom_plan": "RENCANA RAID KUSTOM",
+            "clear_all": "HAPUS SEMUA"
+        },
+        "targets": {
+            "wood_wall": "Dinding Kayu",
+            "stone_wall": "Dinding Batu",
+            "metal_wall": "Dinding Logam",
+            "hqm_wall": "Dinding Lapis Baja",
+            "wood_foundation": "Fondasi Kayu",
+            "stone_foundation": "Fondasi Batu",
+            "metal_foundation": "Fondasi Logam",
+            "hqm_foundation": "Fondasi Lapis Baja",
+            "wood_floor": "Lantai Kayu",
+            "stone_floor": "Lantai Batu",
+            "metal_floor": "Lantai Logam",
+            "hqm_floor": "Lantai Lapis Baja",
+            "ext_wood_wall": "Dinding Kayu Tinggi",
+            "ext_stone_wall": "Dinding Batu Tinggi",
+            "ext_gate_wood": "Gerbang Kayu",
+            "ext_gate_stone": "Gerbang Batu",
+            "wood_door": "Pintu Kayu",
+            "metal_door": "Pintu Logam",
+            "garage_door": "Pintu Garasi",
+            "armored_door": "Pintu Lapis Baja",
+            "ladder_hatch": "Pintu Palka",
+            "triangle_ladder_hatch": "Pintu Palka Segitiga",
+            "wood_bars": "Jeruji Kayu",
+            "metal_bars": "Jeruji Logam",
+            "strengthened_glass": "Kaca Diperkuat",
+            "reinforced_glass": "Kaca Lapis Baja",
+            "shutter_wood": "Jendela Kayu",
+            "metal_shop_front": "Toko Logam",
+            "vending_machine": "Mesin Penjual",
+            "tc": "Lemari Perkakas",
+            "small_box": "Kotak Kecil",
+            "large_box": "Kotak Besar",
+            "sleeping_bag": "Kantong Tidur",
+            "bed": "Tempat Tidur",
+            "furnace_small": "Tungku",
+            "furnace_large": "Tungku Besar",
+            "refinery": "Kilang Minyak",
+            "autoturret": "Auto Turret",
+            "flame_turret": "Flame Turret",
+            "shotgun_trap": "Perangkap Shotgun",
+            "sam_site": "Situs SAM",
+            "tesla_coil": "Koil Tesla",
+            "landmine": "Ranjau",
+            "beartrap": "Perangkap Beruang",
+            "windmill": "Kincir Angin",
+            "solar_panel": "Panel Surya",
+            "battery_small": "Baterai Kecil",
+            "battery_medium": "Baterai Sedang",
+            "battery_large": "Baterai Besar",
+            "locker": "Loker",
+            "fridge": "Kulkas",
+            "hearth": "Perapian",
+            "search_light": "Lampu Sorot",
+            "drop_box": "Kotak Drop",
+            "mailbox": "Kotak Surat",
+            "sub_all_shapes": "Semua Bentuk",
+            "cctv_camera": "Kamera CCTV",
+            "workbench_level1": "Meja Kerja 1",
+            "workbench_level2": "Meja Kerja 2",
+            "workbench_level3": "Meja Kerja 3",
+            "cooking_workbench": "Meja Masak",
+            "engineering_workbench": "Meja Teknik",
+            "planter": "Kotak Tanaman",
+            "sleepingbag": "Kantong Tidur",
+            "wicker_barrel": "Tong Anyaman",
+            "wooden_ladder": "Tangga Kayu",
+            "wood_shelter": "Perlindungan Kayu"
+        }
+    },
+    "subscription": {
+        "free_tier": "TINGKAT GRATIS",
+        "limited_features": "Fitur Terbatas",
+        "lifetime_license": "Lisensi Seumur Hidup Aktif",
+        "duration": "DURASI",
+        "forever_free": "GRATIS",
+        "lifetime": "SEUMUR HIDUP",
+        "status": "STATUS",
+        "locked": "TERKUNCI",
+        "active": "AKTIF",
+        "upgrade_button": "TINGKATKAN UNTUK MEMBUKA"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "FITUR PREMIUM",
+            "description": "Tingkatkan untuk membuka kontrol lanjutan",
+            "unlock_button": "BUKA SEKARANG"
+        },
+        "ui": {
+            "title": "Pengaturan",
+            "guides_setup": "PANDUAN & PENYETELAN",
+            "how_it_works": "Cara Kerja",
+            "setup_config": "Konfigurasi Penyetelan",
+            "legal": "Hukum",
+            "tos": "KETENTUAN",
+            "privacy": "PRIVASI",
+            "version": "RAID ALARM V{}"
+        },
+        "common": {
+            "error": "Kesalahan",
+            "durations": {
+                "sec_30": "30 dtk",
+                "min_1": "1 mnt",
+                "min_3": "3 mnt",
+                "min_5": "5 mnt",
+                "sec_short": "{}d",
+                "min_short": "{}m",
+                "hour_short": "{}j"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "Tidak Ada",
+                "alarm_1": "Alarm 1",
+                "alarm_2": "Alarm 2",
+                "alarm_3": "Alarm 3",
+                "alarm_4": "Alarm 4",
+                "alarm_5": "Alarm 5",
+                "alarm_6": "Alarm 6",
+                "custom_label": "Kustom",
+                "pick_custom": "Kustom..."
+            }
+        },
+        "alarm_mode": {
+            "title": "Alarm Raid",
+            "subtitle": "Alarm keras terus menerus",
+            "sound": "Suara Alarm",
+            "infinite_loop": "Loop Tak Terbatas",
+            "duration": "Durasi Alarm"
+        },
+        "fake_call": {
+            "title": "Panggilan Palsu",
+            "subtitle": "Simulasi panggilan",
+            "caller_name": "Nama Penelepon",
+            "show_number": "Tampilkan Nomor",
+            "background": "Latar Belakang Panggilan",
+            "background_options": {
+                "default": "Default",
+                "gallery": "Galeri"
+            },
+            "sound": "Nada Dering",
+            "duration": "Durasi Panggilan",
+            "infinite_loop": "Loop Tak Terbatas"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "TERHUBUNG",
+            "offline": "TERPUTUS",
+            "official": "RESMI",
+            "modded": "MODIFIKASI",
+            "community": "KOMUNITAS"
+        },
+        "monitor": {
+            "title": "Monitor Server",
+            "select_server": "PILIH SERVER"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "CARI SERVER",
+                "subtitle": "Jelajahi & Wipes"
+            },
+            "find_player": {
+                "title": "CARI PEMAIN",
+                "subtitle": "Nama & Status"
+            }
+        },
+        "map": {
+            "info_unavailable": "Info peta tidak tersedia untuk server ini",
+            "failed_load": "Gagal memuat peta",
+            "check_connection": "Periksa koneksi Anda",
+            "loading": "Memuat peta...",
+            "open_browser": "Buka di Browser",
+            "procedural": "Procedural",
+            "retry": "Coba lagi"
+        },
+        "live": {
+            "auto_refresh_active": "REFRESH OTOMATIS",
+            "auto_refresh_desc": "Feed diperbarui setiap 15d.",
+            "activity_title": "Aktivitas Pemain",
+            "no_signal": "TIDAK ADA SINYAL",
+            "fetching_data": "Mengambil data pemain..."
+        },
+        "overview": {
+            "population": "PEMAIN",
+            "map": "PETA",
+            "fps": "FPS",
+            "uptime": "WAKTU AKTIF",
+            "next_wipe": "WIPE BERIKUTNYA",
+            "last_wipe": "WIPE TERAKHIR",
+            "wipe_notification": "Notifikasi Wipe",
+            "alert_me_before": "PERINGATKAN SAYA SEBELUM:",
+            "force_refresh": "PAKSA REFRESH",
+            "unknown": "TIDAK DIKETAHUI",
+            "overdue": "Terlewat",
+            "size_label": "Ukuran:",
+            "seed_label": "Seed:",
+            "active": "AKTIF",
+            "disabled": "NONAKTIF",
+            "na": "N/A",
+            "time_ago_days": "{}h {}j",
+            "time_ago_hours": "{}j"
+        },
+        "notifications": {
+            "wipe_alert_title": "Peringatan Wipe: {}",
+            "wipe_alert_body": "Server akan di-wipe dalam {} menit! Bersiaplah."
+        },
+        "wipe": {
+            "next_wipe_in": "WIPE BERIKUTNYA DALAM",
+            "wipe_alarm": "Alarm Wipe"
+        },
+        "targets": {
+            "enter_player_name": "Masukkan nama persis...",
+            "no_targets": "Tidak ada target.",
+            "go_to_live": "Buka Live Feed",
+            "title": "TARGET",
+            "active_badge": "AKTIF",
+            "empty": "Kamu tidak melacak pemain mana pun.",
+            "search_link": "CARI PEMAIN",
+            "online_now": "Online Sekarang",
+            "stop_tracking": {
+                "title": "Hentikan Pelacakan?",
+                "confirm": "Yakin ingin berhenti melacak {}?",
+                "button": "Berhenti",
+                "cancel": "Batal"
+            }
+        },
+        "featured": {
+            "title": "Unggulan"
+        },
+        "search": {
+            "title": "Pencarian Server",
+            "tabs": {
+                "search": "Cari",
+                "favorites": "Favorit",
+                "featured": "Unggulan"
+            },
+            "placeholder": "Cari nama server...",
+            "searching": "Mencari...",
+            "no_results": "Tidak ada hasil untuk \"{}\"",
+            "no_favorites": "Tidak ada server favorit.",
+            "favorites_help": "Cari server dan ketuk bintang untuk menonton.",
+            "results_label": "Hasil",
+            "official_section": {
+                "title": "Server Resmi",
+                "desc": "Server resmi dengan siklus wipe bulanan dan keandalan tinggi."
+            },
+            "sort": {
+                "title": "URUTKAN BERDASARKAN",
+                "relevance": "Relevansi",
+                "high_pop": "Pop Tinggi",
+                "low_pop": "Pop Rendah",
+                "just_wiped": "Baru Di-Wipe"
+            },
+            "error": {
+                "title": "Pencarian Gagal",
+                "retry": "Coba Lagi"
+            }
+        },
+        "active_widget": {
+            "select": "Pilih Server Aktif",
+            "wiped": "Di-Wipe"
+        },
+        "logs": {
+            "connected": "Terhubung",
+            "disconnected": "Terputus",
+            "recently": "Baru-baru ini",
+            "just_now": "Baru saja"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "Ikhtisar",
+                "map": "Peta",
+                "live": "Live",
+                "targets": "Target",
+                "wipe": "Wipe"
+            },
+            "errors": {
+                "unstable": "Koneksi tidak stabil. Data mungkin lama.",
+                "signal_lost": "Sinyal hilang. Mencoba lagi...",
+                "connection": "Kesalahan koneksi. Coba lagi."
+            },
+            "tracking": {
+                "max_limit": "Batas 3 pemain dilacak",
+                "not_found_exact": "Pemain \"{}\" tidak ditemukan",
+                "not_found_on_server": "Pemain tidak ditemukan di server ini.",
+                "select_player": "Pilih pemain"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "KALKULATOR BAHAN BAKAR",
+        "input_amount": "Jumlah",
+        "runtime": "{} Durasi",
+        "select_machine": "Pilih Mesin",
+        "total_output": "Total Output",
+        "estimated_yield": "Perkiraan Hasil",
+        "per_barrel": "Per Barel: {}",
+        "per_lgf": "Per LGF: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "Diesel",
+            "low_grade": "BB Kual. Rendah"
+        },
+        "machines": {
+            "excavator": "Ekskavator",
+            "hqm_quarry": "Tambang HQM",
+            "sulfur_quarry": "Tambang Belerang",
+            "stone_quarry": "Tambang Batu",
+            "pump_jack": "Pompa Minyak",
+            "deploy_pump_jack": "Pompa Portabel",
+            "deploy_quarry": "Tambang Portabel",
+            "types": {
+                "monument": "Monumen",
+                "static": "Statis",
+                "deployable": "Portabel"
+            }
+        },
+        "resources": {
+            "diesel": "Bahan Bakar Diesel",
+            "sulfur": "Bijih Sulfur",
+            "hqm": "HQM (Logam Berkualitas Tinggi)",
+            "metal_frags": "Pecahan Logam",
+            "stones": "Batu",
+            "metal_ore": "Bijih Logam",
+            "crude_oil": "Minyak Mentah",
+            "low_grade": "Low Grade Fuel (LGF)"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "Kebijakan Privasi",
+            "last_updated": "Terakhir Diperbarui: {year}",
+            "contact_title": "Kontak",
+            "contact_email": "Untuk pertanyaan terkait privasi, permintaan data, atau untuk menggunakan hak Anda:\n\nEmail: alcstackdev@gmail.com",
+            "section1_title": "1. Informasi yang Kami Kumpulkan",
+            "section1_content": "Raid Alarm hanya mengumpulkan data minimum yang diperlukan agar aplikasi berfungsi: ID perangkat anonim untuk validasi lisensi, notifikasi serangan spesifik dari aplikasi Rust+, status lisensi seumur hidup (diproses melalui Google Play Billing), dan pengaturan aplikasi yang disimpan secara lokal di perangkat Anda. Kami tidak mengumpulkan nama pribadi, alamat email, nomor telepon, data lokasi, data biometrik, atau informasi kartu pembayaran.",
+            "section2_title": "2. Dasar Hukum Pemrosesan",
+            "section2_content": "Kami memproses data pribadi Anda berdasarkan alasan hukum berikut:\n\n• Pelaksanaan Kontrak: Pemrosesan yang diperlukan untuk menyediakan layanan aplikasi yang Anda minta\n• Kepentingan Sah: Pemrosesan untuk fungsionalitas dan peningkatan aplikasi\n• Persetujuan: Jika diwajibkan secara eksplisit, kami mendapatkan persetujuan Anda sebelum pemrosesan",
+            "section3_title": "3. Pemrosesan Data Notifikasi",
+            "section3_content": "Kami hanya memproses notifikasi serangan spesifik dari aplikasi Rust+. Data notifikasi diproses sepenuhnya di perangkat Anda dan disimpan secara lokal. Kami tidak mengakses notifikasi dari aplikasi lain. Kami menggunakan API NotificationListenerService standar Android dengan persetujuan eksplisit Anda. Kami tidak memiliki afiliasi dengan aplikasi Rust+, Facepunch Studios Limited, atau entitas terkait mana pun.",
+            "section4_title": "4. Izin",
+            "section4_content": "Raid Alarm hanya meminta izin minimum yang diperlukan: akses notifikasi untuk memantau notifikasi dari aplikasi Rust+, pengecualian pengoptimalan baterai untuk operasi latar belakang, dan izin alarm untuk memicu alarm.",
+            "section5_title": "5. Bagaimana Kami Menggunakan Informasi Anda",
+            "section5_content": "Data yang dikumpulkan hanya digunakan untuk menjalankan sistem alarm, validasi lisensi, dan peningkatan aplikasi. Bagi pengguna Tingkat Gratis, data anonim dapat digunakan oleh Google AdMob untuk menyediakan layanan periklanan inti. Kami tidak menjual atau membagikan data pribadi Anda dengan pemasar pihak ketiga untuk tujuan mereka sendiri. Kami tidak menggunakan pengambilan keputusan otomatis atau pembuatan profil di luar fitur periklanan standar.",
+            "section6_title": "6. Penyimpanan dan Retensi Data",
+            "section6_content": "Semua data notifikasi, pengaturan, dan statistik disimpan secara lokal di perangkat Anda. Hanya informasi pembelian yang disimpan di database aman terenkripsi. Data notifikasi tidak pernah dikirim ke server kami. Riwayat notifikasi disimpan secara lokal sampai Anda menghapusnya atau menghapus instalan aplikasi. Informasi lisensi disimpan tanpa batas waktu untuk memvalidasi pembelian seumur hidup Anda. Anda dapat menghapus semua data lokal dengan menghapus instalan aplikasi atau meminta penghapusan data pembelian dengan menghubungi kami.",
+            "section7_title": "7. Berbagi Data dan Pihak Ketiga",
+            "section7_content": "Kami tidak menjual data pribadi Anda. Pembagian data terbatas pada Google Play Store untuk pemrosesan pembayaran, Google AdMob untuk menayangkan iklan kepada pengguna Tingkat Gratis, dan layanan pihak ketiga yang aman untuk validasi lisensi. Kami tidak membagikan data notifikasi Anda dengan pihak ketiga mana pun. Pengguna memiliki hak untuk menolak penjualan data (kami tidak menjual data) dan mengelola preferensi iklan melalui pengaturan perangkat.",
+            "section8_title": "8. Transfer Data Internasional",
+            "section8_content": "Data pembelian dapat diproses di server yang berlokasi di pusat data yang aman. Semua transfer internasional mematuhi undang-undang perlindungan data yang berlaku dan perlindungan yang sesuai. Data dienkripsi selama transfer menggunakan enkripsi standar industri.",
+            "section9_title": "9. Langkah Keamanan",
+            "section9_content": "Kami menerapkan langkah-langkah keamanan teknis dan administratif untuk melindungi data Anda, termasuk enkripsi lokal, protokol komunikasi yang aman, penyimpanan database terenkripsi, dan kontrol akses terbatas. Namun, tidak ada metode transmisi atau penyimpanan yang 100% aman. Meskipun kami berusaha untuk melindungi data Anda, kami tidak dapat menjamin keamanan mutlak.",
+            "section10_title": "10. Hak Anda",
+            "section10_content": "Anda berhak untuk mengakses, memperbaiki, menghapus, membatasi pemrosesan, portabilitas data, menolak pemrosesan, dan menarik persetujuan terkait data pribadi Anda. Anda berhak mengetahui, menghapus, menolak penjualan (kami tidak menjual data), dan non-diskriminasi. Untuk menggunakan hak Anda, hubungi kami di alamat email yang diberikan di bawah ini. Kami akan menanggapi dalam jangka waktu yang wajar sebagaimana diwajibkan oleh hukum yang berlaku.",
+            "section11_title": "11. Privasi Anak",
+            "section11_content": "Aplikasi kami tidak ditujukan untuk anak-anak di bawah usia 18 tahun (atau 13 tahun di beberapa yurisdiksi). Kami tidak secara sengaja mengumpulkan data pribadi dari anak-anak. Jika kami menemukan bahwa kami telah mengumpulkan data dari seorang anak, kami akan segera menghapusnya. Kami tidak bertanggung jawab atas, dan tidak menerima kewajiban apa pun atas, pembelian apa pun yang dilakukan oleh individu di bawah usia 18 tahun (atau usia dewasa di yurisdiksi mereka). Orang tua atau wali bertanggung jawab sepenuhnya untuk memantau penggunaan aplikasi oleh anak-anak mereka dan pembelian apa pun yang dilakukan. Jika anak di bawah umur melakukan pembelian tanpa otorisasi yang tepat, orang tua atau wali harus menghubungi Google Play Store untuk permintaan pengembalian dana, karena kami tidak memproses pengembalian dana.",
+            "section12_title": "12. Notifikasi Pelanggaran Data",
+            "section12_content": "Jika terjadi pelanggaran data yang dapat memengaruhi hak Anda, kami akan memberi tahu otoritas pengawas terkait sebagaimana diwajibkan oleh hukum yang berlaku, dan memberi tahu pengguna yang terpengaruh tanpa penundaan yang tidak semestinya jika ada risiko tinggi terhadap hak mereka.",
+            "section13_title": "13. Perubahan pada Kebijakan Ini",
+            "section13_content": "Kebijakan Privasi ini dapat diperbarui dari waktu ke waktu. Perubahan signifikan akan diberitahukan kepada pengguna. Penggunaan berkelanjutan atas aplikasi setelah perubahan merupakan penerimaan terhadap perubahan tersebut. Tanggal pembaruan terakhir ditampilkan di bagian atas halaman ini.",
+            "section14_title": "14. Periklanan",
+            "section14_content": "Tingkat Gratis dari Raid Alarm didukung oleh periklanan. Kami menggunakan Google AdMob untuk menayangkan iklan. AdMob dapat mengumpulkan dan menggunakan data seperti ID iklan perangkat Anda untuk menampilkan iklan yang relevan dan untuk tujuan analitik. Pengguna yang membeli Lisensi Seumur Hidup akan mendapati semua iklan pihak ketiga dihapus dari aplikasi."
+        },
+        "terms_of_service": {
+            "title": "Ketentuan Layanan",
+            "last_updated": "Terakhir Diperbarui: {year}",
+            "contact_title": "Kontak",
+            "contact_email": "Untuk pertanyaan: alcstackdev@gmail.com",
+            "section1_title": "1. Penerimaan Ketentuan",
+            "section1_content": "Dengan mengunduh, menginstal, mengakses, atau menggunakan Raid Alarm, Anda setuju untuk terikat oleh Ketentuan Layanan ini. Jika Anda tidak setuju, jangan gunakan Aplikasi. Anda harus berusia minimal 18 tahun (atau usia dewasa di yurisdiksi Anda) untuk menggunakan aplikasi ini. Jika Anda berusia di bawah 18 tahun, Anda hanya boleh menggunakan aplikasi ini dengan persetujuan orang tua atau wali.",
+            "section2_title": "2. Deskripsi Layanan",
+            "section2_content": "Raid Alarm adalah aplikasi seluler yang tersedia secara eksklusif di Google Play Store yang memantau notifikasi dari aplikasi Rust+ dan memicu alarm saat notifikasi serangan diterima. Aplikasi ini disediakan \"sebagaimana adanya\" tanpa jaminan apa pun. Fungsionalitas Aplikasi sepenuhnya bergantung pada aplikasi Rust+. Jika Rust+ tidak diinstal, dinonaktifkan, dihapus dari Google Play Store, berhenti mengirim notifikasi, mengalami penundaan, atau jika server game Rust mengalami masalah, Aplikasi tidak akan berfungsi dan kami tidak bertanggung jawab atas masalah yang diakibatkannya.",
+            "section3_title": "3. Tidak Ada Afiliasi atau Hubungan",
+            "section3_content": "Raid Alarm tidak memiliki afiliasi, hubungan, kemitraan, koneksi, dukungan, atau sponsor dengan game Rust, aplikasi Rust+, Facepunch Studios Limited, atau entitas terkait mana pun. Raid Alarm adalah aplikasi independen. Kami menggunakan referensi untuk \"Rust+\", \"Rust\", \"Facepunch\", dan istilah terkait HANYA untuk tujuan identifikasi dan deskriptif untuk menjelaskan apa yang dilakukan Aplikasi (penggunaan wajar nominatif berdasarkan undang-undang merek dagang). Kami tidak mengklaim hak apa pun atas merek dagang ini. Kami tidak diizinkan oleh, didukung oleh, atau terhubung dengan Facepunch Studios Limited dengan cara apa pun. Jika Facepunch Studios Limited keberatan dengan penggunaan istilah-istilah ini oleh kami, kami akan mematuhi permintaan mereka dengan segera. Setiap penggunaan istilah-istilah ini murni deskriptif dan tidak menyiratkan hubungan, otorisasi, atau dukungan apa pun.",
+            "section4_title": "4. Ketergantungan Eksternal dan Batasan",
+            "section4_content": "PEMBERITAHUAN KETERGANTUNGAN KRITIS: Fungsionalitas Raid Alarm SEPENUHNYA DAN SECARA MUTLAK BERGANTUNG pada aplikasi Rust+. Aplikasi TIDAK AKAN BERFUNGSI dalam keadaan apa pun berikut:\n\n- Aplikasi Rust+ tidak diinstal di perangkat Anda\n- Aplikasi Rust+ dinonaktifkan atau dihapus instalannya\n- Aplikasi Rust+ dihapus dari Google Play Store\n- Aplikasi Rust+ menjadi tidak tersedia atau berhenti berfungsi\n- Aplikasi Rust+ berhenti mengirim notifikasi atau notifikasi tertunda\n- Fitur \"Smart Alarm\" atau notifikasi aplikasi Rust+ dihapus, dinonaktifkan, atau dimodifikasi\n- Server game Rust mengalami masalah, pemadaman, atau gangguan\n- Facepunch Studios Limited membatasi, atau melarang fungsionalitas notifikasi\n- Masalah koneksi internet mencegah notifikasi Rust+ diterima\n- Masalah lain apa pun yang memengaruhi kemampuan aplikasi Rust+ untuk mengirim notifikasi\n\nDENGAN MENGGUNAKAN APLIKASI, ANDA SECARA EKSPLISIT MENGAKUI DAN SETUJU BAHWA:\n\n- Fungsionalitas Aplikasi bergantung SEPENUHNYA pada layanan eksternal (aplikasi Rust+ dan server game Rust) yang kami miliki NOL KONTROL\n- Kami TIDAK BERTANGGUNG JAWAB atas ketersediaan aplikasi Rust+, fungsionalitas, penghapusan dari Google Play Store, penundaan notifikasi, atau perubahan apa pun yang dibuat oleh Facepunch Studios Limited\n- Kami TIDAK BERTANGGUNG JAWAB atas masalah, pemadaman, atau gangguan server game Rust\n- Kami TIDAK BERTANGGUNG JAWAB jika Facepunch Studios Limited membatasi, melarang, atau memodifikasi fungsionalitas notifikasi aplikasi Rust+\n- Anda TIDAK AKAN meminta pertanggungjawaban kami, meminta pengembalian dana, atau mengajukan klaim apa pun terhadap kami karena masalah aplikasi Rust+, masalah server game Rust, penundaan notifikasi, atau masalah ketergantungan eksternal lainnya\n- Anda memahami bahwa jika aplikasi Rust+ dihapus dari Google Play Store atau berhenti berfungsi, Aplikasi akan segera berhenti berfungsi dan Anda TIDAK MEMILIKI HAK atas pengembalian dana, kompensasi, atau solusi lainnya",
+            "section5_title": "5. Tidak Ada Tanggung Jawab atas Layanan Pihak Ketiga",
+            "section5_content": "Kami TIDAK BERTANGGUNG JAWAB atas, dan TIDAK MENERIMA KEWAJIBAN atas, masalah, kerusakan, kerugian, atau konsekuensi apa pun yang timbul dari:\n\n- Game Rust, aplikasi Rust+, Facepunch Studios Limited, atau entitas terkait mana pun\n- Aplikasi Rust+ dihapus dari Google Play Store\n- Aplikasi Rust+ berhenti mengirim notifikasi atau notifikasi tertunda\n- Fitur \"Smart Alarm\" atau notifikasi aplikasi Rust+ dihapus, dinonaktifkan, atau dimodifikasi\n- Masalah, pemadaman, atau gangguan server game Rust\n- Perubahan, pembatasan, atau modifikasi apa pun yang dibuat oleh Facepunch Studios Limited\n- Layanan, aplikasi, atau ketergantungan pihak ketiga lainnya\n\nAnda menggunakan Aplikasi DENGAN RISIKO ANDA SENDIRI terkait semua ketergantungan eksternal. Kami memiliki NOL KONTROL atas aplikasi Rust+, server game Rust, atau Facepunch Studios Limited, dan kami TIDAK BERTANGGUNG JAWAB atas masalah apa pun yang timbul dari ketergantungan eksternal ini.",
+            "section6_title": "6. Jaminan Layanan",
+            "section6_content": "Kami menjamin bahwa Raid Alarm akan berfungsi dengan benar HANYA jika SEMUA kondisi berikut terpenuhi secara bersamaan:\n\n- Server game Rust beroperasi dan berfungsi normal\n- Aplikasi Rust+ diinstal, diaktifkan, dan berfungsi normal di perangkat Anda\n- Aplikasi Rust+ tersedia di Google Play Store dan belum dihapus\n- Aplikasi Rust+ mengirim notifikasi tanpa penundaan\n- Fitur notifikasi aplikasi Rust+ (termasuk \"Smart Alarm\" jika berlaku) aktif dan tidak dinonaktifkan\n- Perangkat Anda memenuhi semua persyaratan teknis\n- Semua izin yang diperlukan diberikan dan dipertahankan\n- Anda memiliki koneksi internet aktif\n- Facepunch Studios Limited belum membatasi, atau melarang fungsionalitas notifikasi\n\nJika SALAH SATU dari kondisi ini tidak terpenuhi, KAMI TIDAK DAPAT dan TIDAK MENJAMIN Aplikasi akan berfungsi, dan kami TIDAK BERTANGGUNG JAWAB atas masalah, kerugian, atau kerusakan yang diakibatkannya.",
+            "section7_title": "7. Izin",
+            "section7_content": "Raid Alarm hanya meminta izin minimum yang diperlukan: akses notifikasi untuk memantau notifikasi dari aplikasi Rust+, pengecualian pengoptimalan baterai untuk operasi latar belakang, dan izin alarm untuk memicu alarm.",
+            "section8_title": "8. Ketentuan Lisensi Seumur Hidup",
+            "section8_content": "Ketersediaan: Aplikasi ini tersedia secara eksklusif di Google Play Store. Semua pembelian diproses melalui sistem penagihan Google Play Store.\n\nLisensi Seumur Hidup: Fitur premium memerlukan pembelian satu kali. Kami menawarkan 'Lisensi Seumur Hidup' yang memberi Anda akses permanen ke semua fitur premium. Ini adalah pembayaran satu kali tanpa biaya berulang atau langganan.\n\nPersyaratan Usia: Anda harus berusia minimal 18 tahun (atau usia dewasa di yurisdiksi Anda) untuk membeli lisensi. Jika Anda berusia di bawah 18 tahun, Anda hanya boleh membeli dengan persetujuan orang tua atau wali. KAMI TIDAK BERTANGGUNG JAWAB atas pembelian apa pun yang dilakukan oleh anak di bawah umur tanpa otorisasi yang tepat. Orang tua atau wali bertanggung jawab sepenuhnya untuk memantau pembelian anak-anak mereka. Jika anak di bawah umur melakukan pembelian tanpa otorisasi, hubungi Google Play Store untuk permintaan pengembalian dana.\n\nPemrosesan Pembayaran: Semua pembayaran diproses secara aman melalui Google Play Store. Kami tidak menyimpan atau memiliki akses ke informasi kartu pembayaran Anda. Informasi pembayaran ditangani sepenuhnya oleh Google Play Store.\n\nHarga: Harga dapat bervariasi menurut negara dan dapat berubah dengan pemberitahuan sebelumnya. Harga saat ini ditampilkan di Aplikasi dan di Google Play Store.\n\nModifikasi Layanan: Kami berhak mengubah, menambah, atau menghapus fitur kapan saja tanpa pemberitahuan atau pengembalian dana. Kami berhak mengakhiri atau menangguhkan lisensi Anda kapan saja karena pelanggaran Ketentuan ini atau aktivitas ilegal.\n\nKetersediaan Layanan: Fungsionalitas Aplikasi sepenuhnya bergantung pada aplikasi Rust+. Jika aplikasi Rust+ dihapus dari Google Play Store, berhenti berfungsi, atau berhenti mengirim notifikasi, Aplikasi tidak akan berfungsi terlepas dari status lisensi Anda, dan Anda TIDAK AKAN MEMILIKI HAK atas pengembalian dana atau kompensasi.\n\n#### Kebijakan Pengembalian Dana\n\nSEMUA PENJUALAN BERSIFAT FINAL. TIDAK ADA PENGEMBALIAN DANA YANG AKAN DIBERIKAN DALAM KEADAAN APA PUN, TERMASUK NAMUN TIDAK TERBATAS PADA:\n\n- Penghapusan aplikasi Rust+ dari Google Play Store, ketidaktersediaan, atau masalah apa pun\n- Aplikasi Rust+ berhenti mengirim notifikasi atau notifikasi tertunda\n- Fitur notifikasi aplikasi Rust+ dihapus, dinonaktifkan, atau dimodifikasi oleh Facepunch Studios Limited\n- Masalah, pemadaman, atau gangguan server game Rust\n- Masalah fungsionalitas aplikasi (crash, bug, penundaan notifikasi, alarm tidak memicu)\n- Aplikasi berhenti berfungsi karena masalah atau penghapusan aplikasi Rust+\n- Ketidakpuasan pengguna dengan Aplikasi atau fungsionalitasnya\n- Pengguna berubah pikiran setelah pembelian\n- Perangkat pengguna tidak kompatibel dengan Aplikasi\n- Pengguna menolak izin yang diperlukan\n- Anak di bawah umur melakukan pembelian tidak sah (hubungi Google Play Store untuk permintaan pengembalian dana)\n- Alasan lain apa pun\n\nSetelah jendela pengembalian dana Google Play Store (biasanya 48 jam), TIDAK ADA PENGEMBALIAN DANA yang akan diberikan oleh kami dalam keadaan APA PUN, terlepas dari alasannya.\n\nDENGAN MEMBELI LISENSI, ANDA SECARA EKSPLISIT MELEPASKAN SEMUA HAK ATAS PENGEMBALIAN DANA, kecuali untuk jendela pengembalian dana standar Google Play Store (biasanya 48 jam), yang setelah itu TIDAK ADA PENGEMBALIAN DANA YANG AKAN DIBERIKAN.\n\n#### Pengakuan Kritis\n\nDENGAN MEMBELI LISENSI, ANDA SECARA EKSPLISIT MENGAKUI, MEMAHAMI, DAN SETUJU SECARA TIDAK DAPAT DIBATALKAN BAHWA: Aplikasi sepenuhnya bergantung pada aplikasi Rust+ (lihat Bagian 4). Jika aplikasi Rust+ tidak tersedia, dihapus, atau berhenti berfungsi, Aplikasi tidak akan berfungsi dan Anda TIDAK AKAN MEMILIKI HAK atas pengembalian dana atau kompensasi. Anda menerima SEMUA RISIKO yang terkait dengan ketergantungan eksternal dan TIDAK AKAN meminta pengembalian dana karena masalah Rust+, masalah server game Rust, atau masalah ketergantungan eksternal apa pun (kecuali jendela pengembalian dana standar 48 jam Google Play Store).",
+            "section9_title": "9. Kekayaan Intelektual dan Penggunaan Wajar Merek Dagang",
+            "section9_content": "Aplikasi Raid Alarm dan kontennya dilindungi oleh undang-undang hak cipta dan merek dagang. Semua hak milik kami.\n\nPemberitahuan Merek Dagang: \"Rust+\", \"Rust\", \"Facepunch\", dan logo, nama, dan merek dagang terkait adalah milik eksklusif Facepunch Studios Limited. Kami TIDAK berafiliasi dengan, didukung oleh, diizinkan oleh, atau terhubung dengan Facepunch Studios Limited dengan cara apa pun. Kami menggunakan merek dagang ini HANYA untuk tujuan identifikasi dan deskriptif (penggunaan wajar nominatif berdasarkan undang-undang merek dagang). Kami TIDAK mengklaim hak apa pun atas merek dagang ini. Jika Facepunch Studios Limited keberatan dengan penggunaan kami, kami akan segera mematuhinya. Lihat Bagian 3 untuk informasi tambahan.",
+            "section10_title": "10. Penafian Jaminan",
+            "section10_content": "APLIKASI DISEDIAKAN \"SEBAGAIMANA ADANYA\" DAN \"SEBAGAIMANA TERSEDIA\" TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN TERSIRAT, TERMASUK NAMUN TIDAK TERBATAS PADA JAMINAN KELAYAKAN UNTUK DIPERDAGANGKAN, KESESUAIAN UNTUK TUJUAN TERTENTU, NON-PELANGGARAN, ATAU BAHWA APLIKASI AKAN BERFUNGSI DENGAN BENAR.\n\nKami tidak menjamin bahwa Aplikasi akan selalu berfungsi dengan benar, bahwa layanan pihak ketiga akan selalu tersedia, atau bahwa Aplikasi akan beroperasi terus menerus, tidak terganggu, atau bebas kesalahan. Fungsionalitas Aplikasi sepenuhnya bergantung pada aplikasi Rust+ (lihat Bagian 4). Kami tidak membuat pernyataan atau jaminan apa pun terkait fungsionalitas, ketersediaan, atau keandalan Aplikasi. ANDA MENGGUNAKAN APLIKASI DENGAN RISIKO ANDA SENDIRI.",
+            "section11_title": "11. Batasan Tanggung Jawab",
+            "section11_content": "SEJAUH DIIZINKAN OLEH HUKUM, KAMI TIDAK AKAN BERTANGGUNG JAWAB ATAS KERUSAKAN, KERUGIAN, ATAU KONSEKUENSI APA PUN YANG DITIMBULKAN DARI:\n\n- Masalah aplikasi Rust+, penghapusan dari Google Play Store, ketidaktersediaan, atau masalah apa pun\n- Aplikasi Rust+ berhenti mengirim notifikasi atau notifikasi tertunda\n- Fitur notifikasi aplikasi Rust+ dihapus, dinonaktifkan, atau dimodifikasi oleh Facepunch Studios Limited\n- Masalah, pemadaman, atau gangguan server game Rust\n- Facepunch Studios Limited atau entitas terkait membatasi, atau melarang fungsionalitas\n- Aplikasi berhenti berfungsi karena masalah atau penghapusan aplikasi Rust+\n- Kerusakan tidak langsung, insidental, khusus, konsekuensial, atau menghukum\n- Kehilangan keuntungan, data, niat baik, atau kerugian tidak berwujud lainnya\n- Kerusakan apa pun yang melebihi jumlah yang Anda bayarkan untuk lisensi\n- Kerusakan apa pun yang terkait dengan ketergantungan eksternal atau layanan pihak ketiga\n- Anak di bawah umur melakukan pembelian tidak sah (orang tua/wali bertanggung jawab sepenuhnya)\n\nDALAM KEADAAN APA PUN TOTAL KEWAJIBAN KAMI TIDAK AKAN MELEBIHI JUMLAH YANG ANDA BAYARKAN UNTUK LISENSI DALAM 12 BULAN SEBELUM KLAIM.",
+            "section12_title": "12. Tanggung Jawab Pengguna",
+            "section12_content": "Anda BERTANGGUNG JAWAB SEPENUHNYA untuk:\n\n- Menginstal dan memelihara aplikasi Rust+ di perangkat Anda\n- Memastikan aplikasi Rust+ tersedia, diinstal, dan berfungsi dengan baik\n- Memberikan semua izin yang diperlukan untuk Raid Alarm dan aplikasi Rust+\n- Memastikan perangkat Anda kompatibel dengan Raid Alarm dan aplikasi Rust+\n- Memahami bahwa Aplikasi SEPENUHNYA BERGANTUNG pada aplikasi Rust+ dan layanan eksternal\n- Memahami bahwa jika aplikasi Rust+ dihapus dari Google Play Store atau berhenti berfungsi, Aplikasi tidak akan berfungsi dan Anda TIDAK MEMILIKI HAK atas pengembalian dana\n- Mematuhi Ketentuan Layanan aplikasi Rust+ dan semua hukum yang berlaku\n- Memastikan penggunaan Anda tidak melanggar Ketentuan Layanan aplikasi Rust+\n- Memantau dan mengotorisasi pembelian jika Anda adalah orang tua atau wali\n- Memastikan Anda berusia minimal 18 tahun (atau memiliki persetujuan orang tua/wali) sebelum membeli\n\nJika penggunaan Anda melanggar Ketentuan Layanan aplikasi Rust+, Anda BERTANGGUNG JAWAB SEPENUHNYA atas segala konsekuensi, dan kami TIDAK BERTANGGUNG JAWAB atas masalah yang diakibatkannya.",
+            "section13_title": "13. Perubahan Ketentuan",
+            "section13_content": "Ketentuan Layanan ini dapat diperbarui dari waktu ke waktu. Perubahan signifikan akan diberitahukan kepada pengguna. Penggunaan Aplikasi yang berkelanjutan oleh Anda setelah perubahan merupakan penerimaan terhadap Ketentuan baru.",
+            "section14_title": "14. Pengakhiran",
+            "section14_content": "Kami dapat mengakhiri atau menangguhkan akses Anda ke Aplikasi dengan segera, tanpa pemberitahuan sebelumnya, karena pelanggaran Ketentuan ini atau atas kebijakan kami sendiri. Kami tidak bertanggung jawab atas segala kerusakan yang diakibatkan oleh pengakhiran.",
+            "section15_title": "15. Hukum yang Berlaku dan Yurisdiksi",
+            "section15_content": "Ketentuan Layanan ini diatur oleh hukum yang berlaku berdasarkan lokasi Anda. Sengketa akan diselesaikan sesuai dengan hukum dan yurisdiksi yang berlaku.",
+            "section16_title": "16. Iklan",
+            "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
+        }
+    },
+    "paywall": {
+        "title_line1": "AKSES",
+        "title_line2": "SEUMUR HIDUP",
+        "subtitle": "Bayar sekali. Miliki selamanya.",
+        "no_subscriptions": "TANPA BERLANGGANAN.",
+        "secure_access": "MULAI PERLINDUNGAN TANPA BATAS",
+        "restore": "PULIHKAN",
+        "privacy": "KEBIJAKAN PRIVASI",
+        "terms": "SYARAT LAYANAN",
+        "plan_card": {
+            "name": "AKSES SEUMUR HIDUP",
+            "one_time": "PEMBAYARAN SEKALI"
+        },
+        "benefits": {
+            "critical_alarms": "Alarm Raid Kritis (Bypass Mode Diam)",
+            "fake_call": "Simulasi Panggilan Masuk Palsu",
+            "enemy_notifications": "Notifikasi Musuh Online/Offline",
+            "server_notifications": "Notifikasi Server Online/Offline",
+            "wipe_notifications": "Notifikasi Wipe Kustom"
+        },
+        "errors": {
+            "network": "Kesalahan jaringan. Periksa koneksi internet Anda.",
+            "pending": "Pembayaran tertunda. Pembelian akan diaktifkan setelah dikonfirmasi.",
+            "invalid": "Pembayaran tidak valid. Silakan coba lagi.",
+            "unavailable": "Produk tidak tersedia saat ini.",
+            "store": "Masalah toko. Silakan coba lagi nanti.",
+            "already_purchased": "Produk ini sudah dibeli.",
+            "generic_failed": "Pembelian gagal: {}",
+            "purchase_failed_default": "Pembelian gagal. Silakan coba lagi.",
+            "restore_no_internet": "Tidak ada koneksi internet.",
+            "restore_timeout": "Waktu pemulihan habis.",
+            "restore_failed": "Pemulihan gagal: {}",
+            "no_lifetime_found": "Tidak ditemukan pembelian seumur hidup untuk dipulihkan",
+            "purchase_verification_failed": "Pembayaran selesai tetapi tidak dapat memverifikasi akses seumur hidup."
+        }
+    },
+    "recoil_trainer": {
+        "title": "PELATIH RECOIL",
+        "subtitle": "Visualisasi",
+        "mouse_move": "Gerakan Mouse",
+        "impact_point": "Titik Dampak",
+        "fire": "TEMBAK",
+        "pause": "JEDA",
+        "shot": "TEMBAKAN",
+        "ready": "Siap",
+        "complete": "Selesai",
+        "pull_down": "TARIK BAWAH",
+        "pull_left": "TARIK KIRI",
+        "pull_right": "TARIK KANAN",
+        "stabilize": "STABILKAN",
+        "difficulty": {
+            "easy": "MUDAH",
+            "medium": "SEDANG",
+            "hard": "SULIT",
+            "extreme": "EKSTREM"
+        }
+    }
+}

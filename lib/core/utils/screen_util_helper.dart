@@ -65,6 +65,11 @@ class ScreenUtilHelper {
 
   static double get appBarHeight => 56.0.h;
 
+  static double get bottomBarHeight => 80.h;
+  
+  /// Returns true if the device width is less than or equal to 375 (iPhone SE/Mini size)
+  static bool get isSmallDevice => ScreenUtil().screenWidth <= 375;
+
   static double get cardMinHeight => 80.0.h;
 
   static EdgeInsets paddingAll(double value) => EdgeInsets.all(value.w);

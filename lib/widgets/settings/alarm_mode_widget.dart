@@ -131,6 +131,33 @@ class _AlarmModeWidgetState extends ConsumerState<AlarmModeWidget> {
 
   Future<void> _pickCustomSound() async {
     try {
+      if (Platform.isIOS) {
+        var status = await Permission.mediaLibrary.status;
+        if (status.isDenied) {
+          status = await Permission.mediaLibrary.request();
+        }
+        
+        if (status.isPermanentlyDenied) {
+          if (mounted) {
+             ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(tr('settings.common.permission_required')),
+                action: SnackBarAction(
+                  label: tr('settings.common.open_settings'),
+                  onPressed: () => openAppSettings(),
+                ),
+              ),
+            );
+          }
+          return;
+        }
+        
+        // If not granted and not permanently denied (e.g. just denied once), return.
+        if (!status.isGranted && !status.isLimited) {
+            return;
+        }
+      }
+
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.audio,
       );

@@ -60,6 +60,11 @@ class ServerListViewModel extends _$ServerListViewModel {
   Future<void> deleteServer(int serverId) async {
     final dbService = DatabaseService();
     final isar = await dbService.db;
+    
+    // Get SteamID before transaction (needed for sync)
+    final cred = await isar.steamCredentials.get(1);
+    final steamId = cred?.steamId;
+
     await isar.writeTxn(() async {
       // Cascade delete: Remove all devices and automations linked to this server
       await isar.smartDevices.filter().serverIdEqualTo(serverId).deleteAll();
@@ -68,5 +73,10 @@ class ServerListViewModel extends _$ServerListViewModel {
       // Finally delete the server itself
       await isar.serverInfos.delete(serverId);
     });
+
+    // Valid sync request to remove from backend
+    if (steamId != null) {
+      await ApiService.syncServersToServer(steamId);
+    }
   }
 }

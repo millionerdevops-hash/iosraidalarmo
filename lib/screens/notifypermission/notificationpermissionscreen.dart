@@ -11,6 +11,7 @@ import 'package:raidalarm/core/theme/rust_typography.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 
 import 'package:raidalarm/core/utils/permission_helper.dart';
+import 'package:raidalarm/services/onesignal_service.dart';
 
 class NotificationPermissionScreen extends ConsumerStatefulWidget {
   const NotificationPermissionScreen({super.key});
@@ -27,7 +28,7 @@ class _NotificationPermissionScreenState extends ConsumerState<NotificationPermi
 
   Future<void> _handleAllow() async {
     HapticHelper.mediumImpact();
-    await Permission.notification.request();
+    await OneSignalService.requestPermission();
     if (!mounted) return;
     await AppDatabase().saveAppSetting('notify_permission_completed', 'true');
     

@@ -10,9 +10,13 @@ class OneSignalService {
     if (_initialized) return;
 
     OneSignal.initialize('c1b0af52-be00-48a1-aec6-5f2a040c6ded');
-    OneSignal.Notifications.requestPermission(true);
+    // Removed automatic requestPermission call to prevent early dialog
 
     _initialized = true;
+  }
+
+  static Future<bool> requestPermission() async {
+    return await OneSignal.Notifications.requestPermission(true);
   }
 
   static void login(String userId) {

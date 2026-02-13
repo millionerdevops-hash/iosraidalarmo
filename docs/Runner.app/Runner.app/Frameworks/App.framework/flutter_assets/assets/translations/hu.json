@@ -1,0 +1,930 @@
+{
+    "common": {
+        "loading": "Betöltés...",
+        "subscription_required": "Védelem bekapcsolásához előfizetés szükséges",
+        "error_service_not_enabled": "Az értesítési szolgáltatás nincs engedélyezve.",
+        "no_internet": "No internet connection. Please check your network.",
+        "errors": {
+            "no_internet": "No internet connection. Please check your network."
+        },
+        "million_suffix": "M",
+        "fauna_guide": "ÁLLATKALAUZ",
+        "select_species": "FAJ KIVÁLASZTÁSA",
+        "thousand_suffix": "K"
+    },
+    "tools": {
+        "section_utilities": "ESZKÖZÖK",
+        "raid_cost": {
+            "title": "KÖLTSÉG",
+            "subtitle": "Boom kalkulátor eszközökhöz"
+        },
+        "cctv_codes": {
+            "title": "CCTV",
+            "subtitle": "Műemlék kamera kódok"
+        },
+        "tea_guide": {
+            "title": "TEÁK",
+            "subtitle": "Bogyó és keverési receptek"
+        },
+        "diesel_calc": {
+            "title": "DIESEL",
+            "subtitle": "Excavator & Quarries"
+        },
+        "animal_guide": {
+            "title": "ÁLLATOK",
+            "subtitle": "Vadászat és Erőforrások"
+        },
+        "match_game": {
+            "title": "PÁROSÍTÓ",
+            "subtitle": "Memóriajáték",
+            "earned_coins": "{} érmét szereztél!",
+            "not_enough_scrap": "Nincs elég érme!",
+            "victory": "GYŐZELEM",
+            "defeat": "VERESÉG",
+            "net_result": "NETTÓ EREDMÉNY",
+            "play_again": "JÁTÉK ÚJRA",
+            "return_to_menu": "VISSZA A MENÜBE",
+            "timer": "IDŐZÍTŐ",
+            "potential": "POTENCIÁLIS",
+            "memorize": "JEGYEZD MEG!",
+            "menu_title": "PÁROSÍTÓ JÁTÉK",
+            "menu_subtitle": "Találj párokat, hogy megsokszorozd a hulladékodat.\nNagy kockázat, nagy jutalom.",
+            "play_action": "JÁTÉK (-{} HULLADÉK)",
+            "entry": "BELÉPÉS",
+            "pairs_count": "{} Pár",
+            "exit_warning_title": "Kilépés a játékból?",
+            "exit_warning_message": "A téted elvész, ha most kilépsz. Folytatod?",
+            "yes": "Igen",
+            "no": "Nem"
+        },
+        "code_raider": {
+            "title": "KÓDZÁR",
+            "subtitle": "Kódzárak Feltörése",
+            "battery_level": "AKKU SZINT",
+            "correct": "Helyes",
+            "wrong_spot": "Rossz hely",
+            "invalid": "Érvénytelen",
+            "waiting_input": "Várakozás...",
+            "access_granted": "HOZZÁFÉRÉS MEGADVA",
+            "system_lockout": "RENDSZERZÁR",
+            "reward_scrap": "Jutalom: +{} Scrap",
+            "code_changed": "Kód megváltozott",
+            "hack_another": "ÚJABB HACK",
+            "retry_hack": "ÚJRA",
+            "open": "NYITVA",
+            "clear": "TÖRLÉS",
+            "enter": "BELÉPÉS",
+            "code_lock": "KÓDZÁR"
+        }
+    },
+    "tea_guide_details": {
+        "ui": {
+            "title": "Tea Receptek",
+            "mixing_table_recipe": "KEVERŐASZTAL",
+            "select_tier": "SZINT KIVÁLASZTÁSA"
+        },
+        "stats": {
+            "rad_res": "Sug. Ell.",
+            "hydration": "Hidratáció",
+            "temp": "Hőm.",
+            "max_temp": "Max Hőm.",
+            "min_temp": "Min Hőm.",
+            "quality": "Minőség",
+            "yield": "Hozam",
+            "hot": "HoT",
+            "inst_hp": "Azonnali HP",
+            "max_hp": "Max HP"
+        },
+        "durations": {
+            "instant": "Azonnali",
+            "30m": "30p",
+            "20m": "20p",
+            "45m": "45p",
+            "1h": "1ó",
+            "3m_20s": "3p 20mp",
+            "5m": "5p",
+            "6m_40s": "6p 40mp"
+        },
+        "categories": {
+            "Ore": "ÉRC",
+            "Wood": "FA",
+            "Scrap": "SCRAP",
+            "Harvesting": "BETAKARÍTÁS",
+            "MaxHealth": "MAX HP",
+            "Healing": "GYÓGYÍTÁS",
+            "Rad": "SUGÁRZÁS",
+            "Cooling": "HŰTÉS",
+            "Warming": "MELEGÍTÉS",
+            "Crafting": "BARKÁCSOLÁS"
+        },
+        "tiers": {
+            "Basic": "A.",
+            "Advanced": "H.",
+            "Pure": "T."
+        },
+        "teas": {
+            "Rad_basic": {
+                "name": "A. Sugárzás Elleni Tea",
+                "desc": "Alap sugárzás elleni tea."
+            },
+            "Rad_adv": {
+                "name": "H. Sugárzás Elleni Tea",
+                "desc": "Haladó sugárzás elleni tea."
+            },
+            "Rad_pure": {
+                "name": "T. Sugárzás Elleni Tea",
+                "desc": "Tiszta sugárzás elleni tea."
+            },
+            "Cooling_basic": {
+                "name": "A. Hűtő Tea",
+                "desc": "Alap hűtő tea."
+            },
+            "Cooling_adv": {
+                "name": "H. Hűtő Tea",
+                "desc": "Haladó hűtő tea."
+            },
+            "Cooling_pure": {
+                "name": "T. Hűtő Tea",
+                "desc": "Tiszta hűtő tea."
+            },
+            "Crafting_basic": {
+                "name": "A. Barkács Tea",
+                "desc": "Alap barkácsolási sebesség tea."
+            },
+            "Crafting_adv": {
+                "name": "H. Barkács Tea",
+                "desc": "Haladó barkácsolási sebesség tea."
+            },
+            "Crafting_pure": {
+                "name": "T. Barkács Tea",
+                "desc": "Tiszta barkácsolási sebesség tea."
+            },
+            "Harvesting_basic": {
+                "name": "A. Betakarító Tea",
+                "desc": "Alap betakarítási hozam tea."
+            },
+            "Harvesting_adv": {
+                "name": "H. Betakarító Tea",
+                "desc": "Haladó betakarítási hozam tea."
+            },
+            "Harvesting_pure": {
+                "name": "T. Betakarító Tea",
+                "desc": "Tiszta betakarítási hozam tea."
+            },
+            "Healing_basic": {
+                "name": "A. Gyógyító Tea",
+                "desc": "Alap gyógyító tea."
+            },
+            "Healing_adv": {
+                "name": "H. Gyógyító Tea",
+                "desc": "Haladó gyógyító tea."
+            },
+            "Healing_pure": {
+                "name": "T. Gyógyító Tea",
+                "desc": "Tiszta gyógyító tea."
+            },
+            "MaxHealth_basic": {
+                "name": "A. Max HP Tea",
+                "desc": "Alap maximális életnövelő tea."
+            },
+            "MaxHealth_adv": {
+                "name": "H. Max HP Tea",
+                "desc": "Haladó maximális életnövelő tea."
+            },
+            "MaxHealth_pure": {
+                "name": "T. Max HP Tea",
+                "desc": "Tiszta maximális életnövelő tea."
+            },
+            "Ore_basic": {
+                "name": "A. Érc Tea",
+                "desc": "Alap érc hozam tea."
+            },
+            "Ore_adv": {
+                "name": "H. Érc Tea",
+                "desc": "Haladó érc hozam tea."
+            },
+            "Ore_pure": {
+                "name": "T. Érc Tea",
+                "desc": "Tiszta érc hozam tea."
+            },
+            "Scrap_basic": {
+                "name": "A. Scrap Tea",
+                "desc": "Alap scrap hozam tea."
+            },
+            "Scrap_adv": {
+                "name": "H. Scrap Tea",
+                "desc": "Haladó scrap hozam tea."
+            },
+            "Scrap_pure": {
+                "name": "T. Scrap Tea",
+                "desc": "Tiszta scrap hozam tea."
+            },
+            "Warming_basic": {
+                "name": "A. Melegítő Tea",
+                "desc": "Alap melegítő tea."
+            },
+            "Warming_adv": {
+                "name": "H. Melegítő Tea",
+                "desc": "Haladó melegítő tea."
+            },
+            "Warming_pure": {
+                "name": "T. Melegítő Tea",
+                "desc": "Tiszta melegítő tea."
+            },
+            "Wood_basic": {
+                "name": "A. Fa Tea",
+                "desc": "Alap fa hozam tea."
+            },
+            "Wood_adv": {
+                "name": "H. Fa Tea",
+                "desc": "Haladó fa hozam tea."
+            },
+            "Wood_pure": {
+                "name": "T. Fa Tea",
+                "desc": "Tiszta fa hozam tea."
+            }
+        },
+        "ingredients": {
+            "Red_Berry": "Piros Bogyó",
+            "Blue_Berry": "Kék Bogyó",
+            "Green_Berry": "Zöld Bogyó",
+            "Yellow_Berry": "Sárga Bogyó",
+            "White_Berry": "Fehér Bogyó",
+            "Basic_Rad_Tea": "Al. Sug. Tea",
+            "Adv_Rad_Tea": "Hal. Sug. Tea",
+            "Basic_Cooling_Tea": "Al. Hűtő Tea",
+            "Adv_Cooling_Tea": "Hal. Hűtő Tea",
+            "Basic_Crafting_Tea": "Al. Bark. Tea",
+            "Adv_Crafting_Tea": "Hal. Bark. Tea",
+            "Basic_Harvesting_Tea": "Al. Bet. Tea",
+            "Adv_Harvesting_Tea": "Hal. Bet. Tea",
+            "Basic_Healing_Tea": "Al. Gyógy. Tea",
+            "Adv_Healing_Tea": "Hal. Gyógy. Tea",
+            "Basic_MaxHealth_Tea": "Al. MaxHP Tea",
+            "Adv_MaxHealth_Tea": "Hal. MaxHP Tea",
+            "Basic_Ore_Tea": "Al. Érc Tea",
+            "Adv_Ore_Tea": "Hal. Érc Tea",
+            "Basic_Scrap_Tea": "Al. Scrap Tea",
+            "Adv_Scrap_Tea": "Hal. Scrap Tea",
+            "Basic_Warming_Tea": "Al. Meleg. Tea",
+            "Adv_Warming_Tea": "Hal. Meleg. Tea",
+            "Basic_Wood_Tea": "Al. Fa Tea",
+            "Adv_Wood_Tea": "Hal. Fa Tea"
+        }
+    },
+    "cctv_codes": {
+        "ui": {
+            "title": "CCTV KÓDOK",
+            "no_signal": "NINCS JEL",
+            "copied": "MÁSOLVA",
+            "randomized": "Véletlenszerű Kód",
+            "rec": "FELV"
+        },
+        "categories": {
+            "all": "ÖSSZES KAMERA",
+            "large_oil": "NAGY OLAJFÚRÓ",
+            "small_oil": "KIS OLAJFÚRÓ",
+            "cargo": "TEHERHAJÓ",
+            "silo": "RAKÉTA SILÓ",
+            "airfield": "REPÜLŐTÉR",
+            "labs": "VÍZALATTI LABOR",
+            "outpost": "OUTPOST",
+            "bandit": "BANDIT TÁBOR",
+            "dome": "KUPOLA",
+            "radtown": "RADVÁROS",
+            "ferry": "KOMP TERMINÁL",
+            "town": "VÁROS"
+        },
+        "labels": {
+            "dock": "Dokk",
+            "exhaust": "Kipufogó",
+            "helipad": "Helikopter Leszálló",
+            "level_1": "Szint 1",
+            "level_2": "Szint 2",
+            "level_3": "Szint 3",
+            "level_3a": "Szint 3A",
+            "level_3b": "Szint 3B",
+            "level_4": "Szint 4",
+            "level_5": "Szint 5",
+            "level_6a": "Szint 6A",
+            "level_6b": "Szint 6B",
+            "level_6c": "Szint 6C",
+            "level_6d": "Szint 6D",
+            "deck": "Fedélzet",
+            "bridge": "Híd",
+            "stern": "Tat",
+            "hold_1": "Raktér 1",
+            "hold_2": "Raktér 2",
+            "exit_1": "Kijárat 1",
+            "exit_2": "Kijárat 2",
+            "missile": "Rakéta",
+            "tower": "Torony",
+            "shipping": "Szállítás",
+            "casino": "Kaszinó",
+            "chill_zone": "Pihenő Zóna",
+            "crude_oil": "Nyersolaj",
+            "music": "Zene",
+            "street": "Utca",
+            "logistics": "Logisztika",
+            "parking": "Parkoló",
+            "utilities": "Közművek",
+            "apartments": "Apartmanok",
+            "house": "Ház",
+            "sbl": "mSBL",
+            "dome_1": "Kupola 1",
+            "top": "Tető",
+            "weapons": "Fegyverek",
+            "lab": "Labor",
+            "security": "Biztonság"
+        }
+    },
+    "player_search": {
+        "ui": {
+            "title": "Játékos keresése",
+            "search_hint": "Játékosnév vagy ID...",
+            "loading_text": "KERESÉS A BATTLEMETRICS-EN...",
+            "error_title": "Keresés Sikertelen",
+            "retry_button": "ÚJRAPRÓBÁLKOZÁS",
+            "empty_state": "Nincs találat.",
+            "error_snackbar": "Hiba: {}",
+            "global": "GLOBÁLIS",
+            "player_id": "JÁTÉKOS ID"
+        },
+        "details": {
+            "tracking_id": "KÖVETÉS",
+            "current_state": "JELENLEGI VILÁG",
+            "online": "ELÉRHETŐ",
+            "offline": "NEM ELÉRHETŐ",
+            "last_seen": "UTOLJÁRA LÁTVA",
+            "unknown": "Ismeretlen",
+            "alert_triggers": "RIASZTÁS KIVÁLTÓK:",
+            "update_tracking": "JÁTÉKOS KÖVETÉSE"
+        },
+        "list_item": {
+            "playing_on": "JÁTSZIK EBBEN:",
+            "not_in_server": "Nincs szerveren"
+        }
+    },
+    "home": {
+        "stats": {
+            "title": "TÁMADÁSI STATISZTIKA",
+            "total_attacks": "ÖSSZES TÁMADÁS",
+            "last_attack": "UTOLSÓ TÁMADÁS",
+            "recent_alerts": "LEGUTÓBBI ÉRTESÍTÉSEK",
+            "no_notification": "Nincs értesítés.",
+            "unknown_source": "Ismeretlen Forrás",
+            "time_ago": {
+                "just_now": "Épp most",
+                "minutes": "{} perce",
+                "hours": "{} órája",
+                "days": "{} napja",
+                "months": "{} hónapja"
+            }
+        },
+        "traffic": {
+            "title": "Támadási Forgalom",
+            "ranges": {
+                "day": "Nap",
+                "week": "Hét",
+                "month": "Hónap"
+            }
+        },
+        "overlay": {
+            "premium_data": "PREMIUM ADATOK",
+            "upgrade_button": "FRISSÍTÉS A MEGTEKINTÉSHEZ"
+        },
+        "alarm": {
+            "stop": "RIASZTÁS LEÁLLÍTÁSA"
+        },
+        "notifications": {
+            "base_attack": "A bázisodat támadás érte!"
+        }
+    },
+    "raid": {
+        "explosive_card": {
+            "ineffective": "HATÁSTALAN",
+            "total_required": "Összes Szükséges",
+            "cannot_damage": "Nem okozhat kárt",
+            "loot_only": "CSAK LOOT",
+            "raw_sulfur": "NYERS KÉN"
+        },
+        "materials": {
+            "charcoal": "Faszén",
+            "fragments": "Fém Töredék",
+            "stones": "Kő",
+            "wood": "Fa",
+            "bone": "Csont",
+            "low_grade_fuel": "LGF",
+            "cloth": "Szövet",
+            "rope": "Kötél",
+            "pipe": "Cső",
+            "tech_trash": "Tech Trash",
+            "sulfur": "Sulfur"
+        },
+        "categories": {
+            "construction": "Építés",
+            "door": "Ajtók",
+            "placeable": "Lerakható",
+            "item": "Csapdák"
+        },
+        "explosives": {
+            "c4": "Időzített C4",
+            "rocket": "Rakéta",
+            "satchel": "Táskás Töltet",
+            "beancan": "Beancan Gránát",
+            "explo556": "Robbanó 5.56",
+            "he_grenade": "F1 Gránát",
+            "he_grenade_40mm": "40mm HE",
+            "molotov": "Molotov",
+            "hv_rocket": "HV Rakéta",
+            "incen_rocket": "Gyújtó Rakéta",
+            "homing_rocket": "Homing Rakéta",
+            "mlrs_rocket": "MLRS Rakéta",
+            "survey_charge": "Felmérő Töltet",
+            "propane_bomb": "Propán Tartály",
+            "ammo_rifle": "Puska Lőszer",
+            "ammo_rifle_hv": "HV Puska Lőszer",
+            "ammo_rifle_incen": "Gyújtó Puska Lőszer",
+            "ammo_pistol": "Pisztoly Lőszer",
+            "ammo_pistol_hv": "HV Pisztoly Lőszer",
+            "ammo_pistol_incen": "Gyújtó Pisztoly Lőszer",
+            "ammo_buckshot": "Sörétes",
+            "ammo_slug": "Slug",
+            "ammo_incen_shell": "Gyújtó Sörétes",
+            "ammo_handmade": "Kézi Sörétes",
+            "arrow_fire": "Tűz Nyíl",
+            "arrow_bone": "Csont Nyíl",
+            "arrow_wooden": "Fa Nyíl",
+            "arrow_hv": "HV Nyíl"
+        },
+        "calculator": {
+            "title": "RAID KALKULÁTOR",
+            "select_target": "CÉLPONT KIVÁLASZTÁSA",
+            "materials_breakdown": "ANYAG BONTÁS",
+            "total_sulfur": "ÖSSZES KÉN",
+            "min_cost": "MINIMUM KÖLTSÉG",
+            "best_for_sulfur": "Legjobb Kénhez",
+            "custom_plan": "EGYEDI RAID TERV",
+            "clear_all": "MINDENT TÖRÖL"
+        },
+        "targets": {
+            "wood_wall": "Fa Fal",
+            "stone_wall": "Kő Fal",
+            "metal_wall": "Fémlemez Fal",
+            "hqm_wall": "Páncélozott Fal",
+            "wood_foundation": "Fa Alap",
+            "stone_foundation": "Kő Alap",
+            "metal_foundation": "Fémlemez Alap",
+            "hqm_foundation": "Páncélozott Alap",
+            "wood_floor": "Fa Padló",
+            "stone_floor": "Kő Padló",
+            "metal_floor": "Fémlemez Padló",
+            "hqm_floor": "Páncélozott Padló",
+            "ext_wood_wall": "Magas Fa Fal",
+            "ext_stone_wall": "Magas Kő Fal",
+            "ext_gate_wood": "Fa Kapu",
+            "ext_gate_stone": "Kő Kapu",
+            "wood_door": "Fa Ajtó",
+            "metal_door": "Fémlemez Ajtó",
+            "garage_door": "Garázs Ajtó",
+            "armored_door": "Páncélozott Ajtó",
+            "ladder_hatch": "Létra Csapóajtó",
+            "triangle_ladder_hatch": "Háromszög Létra Csapóajtó",
+            "wood_bars": "Fa Rács",
+            "metal_bars": "Fém Rács",
+            "strengthened_glass": "Erősített Üveg",
+            "reinforced_glass": "Páncélozott Üveg",
+            "shutter_wood": "Fa Zsalu",
+            "metal_shop_front": "Fém Bolt Front",
+            "vending_machine": "Automata",
+            "tc": "Szerszámos Szekrény",
+            "small_box": "Kis Doboz",
+            "large_box": "Nagy Doboz",
+            "sleeping_bag": "Hálózsák",
+            "bed": "Ágy",
+            "furnace_small": "Kemence",
+            "furnace_large": "Nagy Kemence",
+            "refinery": "Olajfinomító",
+            "autoturret": "Automata Torony",
+            "flame_turret": "Lángszóró Torony",
+            "shotgun_trap": "Sörétes Csapda",
+            "sam_site": "SAM Állvány",
+            "tesla_coil": "Tesla Tekercs",
+            "landmine": "Taposóakna",
+            "beartrap": "Medve Csapda",
+            "windmill": "Szélmalom",
+            "solar_panel": "Napelem",
+            "battery_small": "Kis Akkumulátor",
+            "battery_medium": "Közepes Akkumulátor",
+            "battery_large": "Nagy Akkumulátor",
+            "locker": "Szekrény",
+            "fridge": "Hűtő",
+            "hearth": "Kandalló",
+            "search_light": "Keresőfény",
+            "drop_box": "Bedobó Doboz",
+            "mailbox": "Postaláda",
+            "sub_all_shapes": "Minden Forma",
+            "cctv_camera": "CCTV Kamera",
+            "workbench_level1": "Munkapad 1.",
+            "workbench_level2": "Munkapad 2.",
+            "workbench_level3": "Munkapad 3.",
+            "cooking_workbench": "Főzőpult",
+            "engineering_workbench": "Mérnöki Asztal",
+            "planter": "Ültetőláda",
+            "sleepingbag": "Hálózsák",
+            "wicker_barrel": "Fonott Hordó",
+            "wooden_ladder": "Fa Létra",
+            "wood_shelter": "Fa Menedék"
+        }
+    },
+    "subscription": {
+        "free_tier": "INGYENES SZINT",
+        "limited_features": "Korlátozott Funkciók",
+        "lifetime_license": "Élettartam Licensz Aktív",
+        "duration": "IDŐTARTAM",
+        "forever_free": "INGYENES",
+        "lifetime": "ÉLETTARTAM",
+        "status": "STÁTUSZ",
+        "locked": "ZÁROLT",
+        "active": "AKTÍV",
+        "upgrade_button": "FRISSÍTÉS A FELOLDÁSHOZ"
+    },
+    "settings": {
+        "premium_lock": {
+            "title": "PREMIUM FUNKCIÓ",
+            "description": "Frissíts a haladó vezérlés feloldásához",
+            "unlock_button": "FELOLDÁS MOST"
+        },
+        "ui": {
+            "title": "Beállítások",
+            "guides_setup": "ÚTMUTATÓK ÉS BEÁLLÍTÁS",
+            "how_it_works": "Hogy működik",
+            "setup_config": "Beállítás Konfigurálása",
+            "legal": "Jogi",
+            "tos": "ÁSZF",
+            "privacy": "ADATVÉDELEM",
+            "version": "RAID ALARM V{}"
+        },
+        "common": {
+            "error": "Hiba",
+            "durations": {
+                "sec_30": "30 mp",
+                "min_1": "1 perc",
+                "min_3": "3 perc",
+                "min_5": "5 perc",
+                "sec_short": "{}mp",
+                "min_short": "{}p",
+                "hour_short": "{}ó"
+            }
+        },
+        "alarm": {
+            "sounds": {
+                "none": "Nincs",
+                "alarm_1": "Riasztás 1",
+                "alarm_2": "Riasztás 2",
+                "alarm_3": "Riasztás 3",
+                "alarm_4": "Riasztás 4",
+                "alarm_5": "Riasztás 5",
+                "alarm_6": "Riasztás 6",
+                "custom_label": "Egyéni",
+                "pick_custom": "Egyéni..."
+            }
+        },
+        "alarm_mode": {
+            "title": "Raid Riasztás",
+            "subtitle": "Folyamatos hangos riasztás",
+            "sound": "Riasztás Hangja",
+            "infinite_loop": "Végtelen Ismétlés",
+            "duration": "Riasztás Időtartama"
+        },
+        "fake_call": {
+            "title": "Kamu Hívás",
+            "subtitle": "Hívás szimulálása",
+            "caller_name": "Hívó Neve",
+            "show_number": "Szám Megjelenítése",
+            "background": "Hívás Háttér",
+            "background_options": {
+                "default": "Alapértelmezett",
+                "gallery": "Galéria"
+            },
+            "sound": "Ringtone",
+            "duration": "Hívás Időtartama",
+            "infinite_loop": "Végtelen Ismétlés"
+        }
+    },
+    "server": {
+        "status": {
+            "online": "ELÉRHETŐ",
+            "offline": "NEM ELÉRHETŐ",
+            "official": "HIVATALOS",
+            "modded": "MODDOLT",
+            "community": "KÖZÖSSÉGI"
+        },
+        "monitor": {
+            "title": "Szerver Figyelő",
+            "select_server": "SZERVER VÁLASZTÁS"
+        },
+        "discovery": {
+            "find_server": {
+                "title": "SZERVERKERESÉS",
+                "subtitle": "Böngészés és Wipe-ok"
+            },
+            "find_player": {
+                "title": "JÁTÉKOSKERESÉS",
+                "subtitle": "Név és Státusz"
+            }
+        },
+        "map": {
+            "info_unavailable": "Térkép adatok nem elérhetőek ehhez a szerverhez",
+            "failed_load": "A térkép betöltése sikertelen",
+            "check_connection": "Ellenőrizd a kapcsolatot",
+            "loading": "Térkép betöltése...",
+            "open_browser": "Megnyitás Böngészőben",
+            "procedural": "Procedurális",
+            "retry": "Újra"
+        },
+        "live": {
+            "auto_refresh_active": "AUTO FRISSÍTÉS",
+            "auto_refresh_desc": "A feed 15mp-enként frissül.",
+            "activity_title": "Játékos Aktivitás",
+            "no_signal": "NINCS JEL",
+            "fetching_data": "Játékos adatok lekérése..."
+        },
+        "overview": {
+            "population": "JÁTÉKOSOK",
+            "map": "TÉRKÉP",
+            "fps": "FPS",
+            "uptime": "UPTIME",
+            "next_wipe": "KÖVETKEZŐ WIPE",
+            "last_wipe": "UTOLSÓ WIPE",
+            "wipe_notification": "Wipe Értesítés",
+            "alert_me_before": "ÉRTESÍTÉS ELŐTTE:",
+            "force_refresh": "KÉNYSZERÍTETT FRISSÍTÉS",
+            "unknown": "ISMERETLEN",
+            "overdue": "Lejárt",
+            "size_label": "Méret:",
+            "seed_label": "Seed:",
+            "active": "AKTÍV",
+            "disabled": "LETILTVA",
+            "na": "N/A",
+            "time_ago_days": "{}n {}ó",
+            "time_ago_hours": "{}ó"
+        },
+        "notifications": {
+            "wipe_alert_title": "Wipe Riasztás: {}",
+            "wipe_alert_body": "A szerver {} perc múlva wipe-ol! Készülj fel."
+        },
+        "wipe": {
+            "next_wipe_in": "KÖVETKEZŐ WIPE",
+            "wipe_alarm": "Wipe Riasztás"
+        },
+        "targets": {
+            "enter_player_name": "Írd be a pontos nevet...",
+            "no_targets": "Nincs célpont.",
+            "go_to_live": "Ugrás az Élő Feedre",
+            "title": "CÉLOK",
+            "active_badge": "AKTÍV",
+            "empty": "Nem figyelsz egyetlen játékost sem.",
+            "search_link": "KERESS EGY JÁTÉKOST",
+            "online_now": "Online Most",
+            "stop_tracking": {
+                "title": "Követés Leállítása?",
+                "confirm": "Biztosan leállítod {} követését?",
+                "button": "Leállítás",
+                "cancel": "Mégse"
+            }
+        },
+        "featured": {
+            "title": "Kiemelt"
+        },
+        "search": {
+            "title": "Szerver Keresés",
+            "tabs": {
+                "search": "Keresés",
+                "favorites": "Kedvencek",
+                "featured": "Kiemelt"
+            },
+            "placeholder": "Szerver név keresése...",
+            "searching": "Keresés...",
+            "no_results": "Nincs találat erre: \"{}\"",
+            "no_favorites": "Nincsenek kedvenc szerverek.",
+            "favorites_help": "Keress egy szervert és nyomd meg a csillagot a figyeléshez.",
+            "results_label": "Eredmények",
+            "official_section": {
+                "title": "Hivatalos Szerverek",
+                "desc": "Hivatalos szerverek havi wipe ciklussal és magas megbízhatósággal."
+            },
+            "sort": {
+                "title": "RENDEZÉS",
+                "relevance": "Relevancia",
+                "high_pop": "Magas Pop",
+                "low_pop": "Alacsony Pop",
+                "just_wiped": "Frissen Wipelt"
+            },
+            "error": {
+                "title": "Keresés Sikertelen",
+                "retry": "Újra"
+            }
+        },
+        "active_widget": {
+            "select": "Válassz Aktív Szervert",
+            "wiped": "Wiped"
+        },
+        "logs": {
+            "connected": "Csatlakozott",
+            "disconnected": "Lecsatlakozott",
+            "recently": "Nemrég",
+            "just_now": "Épp most"
+        },
+        "detail": {
+            "tabs": {
+                "overview": "Áttekintés",
+                "map": "Térkép",
+                "live": "Élő",
+                "targets": "Célok",
+                "wipe": "Wipe"
+            },
+            "errors": {
+                "unstable": "Instabil kapcsolat. Az adatok régiek lehetnek.",
+                "signal_lost": "Jel elveszett. Próbálkozás...",
+                "connection": "Kapcsolódási hiba. Próbáld újra."
+            },
+            "tracking": {
+                "max_limit": "Limit 3 követett játékos",
+                "not_found_exact": "A játékos \"{}\" nem található",
+                "not_found_on_server": "A játékos nem található ezen a szerveren.",
+                "select_player": "Játékos kiválasztása"
+            }
+        }
+    },
+    "diesel_calculator": {
+        "title": "ÜZEMANYAG KALKULÁTOR",
+        "input_amount": "Mennyiség",
+        "runtime": "{} Idő",
+        "select_machine": "Gép Kiválasztása",
+        "total_output": "Összes Kimenet",
+        "estimated_yield": "Becsült Hozam",
+        "per_barrel": "Hordónként: {}",
+        "per_lgf": "LGF-enként: {}",
+        "placeholder": "0",
+        "fuel_types": {
+            "diesel": "Dízel",
+            "low_grade": "A.M. Üzemanyag"
+        },
+        "machines": {
+            "excavator": "Exkavátor",
+            "hqm_quarry": "HQM Bánya",
+            "sulfur_quarry": "Kén Bánya",
+            "stone_quarry": "Kő Bánya",
+            "pump_jack": "Olajpumpa",
+            "deploy_pump_jack": "Mobil Pumpa",
+            "deploy_quarry": "Mobil Bánya",
+            "types": {
+                "monument": "Műemlék",
+                "static": "Statikus",
+                "deployable": "Mobil"
+            }
+        },
+        "resources": {
+            "diesel": "Dízel Üzemanyag",
+            "sulfur": "Kén Érc",
+            "hqm": "HQM (Kiváló Minőségű Fém)",
+            "metal_frags": "Fém Töredék",
+            "stones": "Kövek",
+            "metal_ore": "Fém Érc",
+            "crude_oil": "Nyersolaj",
+            "low_grade": "Low Grade Fuel (LGF)"
+        }
+    },
+    "legal": {
+        "privacy_policy": {
+            "title": "Adatvédelmi Irányelvek",
+            "last_updated": "Utolsó frissítés: {year}",
+            "contact_title": "Kapcsolat",
+            "contact_email": "Az adatvédelemmel kapcsolatos kérdésekben, adatkérésekben vagy jogai gyakorlásához:\n\nEmail: alcstackdev@gmail.com",
+            "section1_title": "1. Az általunk gyűjtött információk",
+            "section1_content": "A Raid Alarm csak a minimális adatokat gyűjti össze az alkalmazás működéséhez: anonimizált eszközazonosító a licenc érvényesítéséhez, konkrét támadási értesítések a Rust+ alkalmazásból, élettartam licenc állapota (a Google Play számlázáson keresztül feldolgozva), és az eszközön helyileg tárolt alkalmazásbeállítások. Nem gyűjtünk személyes neveket, e-mail címeket, telefonszámokat, helymeghatározási adatokat, biometrikus adatokat vagy fizetési kártya információkat.",
+            "section2_title": "2. Az adatkezelés jogalapja",
+            "section2_content": "Személyes adatait a következő jogalapokon kezeljük:\n\n• Szerződés teljesítése: Az Ön által kért alkalmazásszolgáltatások nyújtásához szükséges feldolgozás\n• Jogos érdekek: Feldolgozás az alkalmazás működése és fejlesztése érdekében\n• Hozzájárulás: Ahol kifejezetten szükséges, a feldolgozás előtt beszerezzük hozzájárulását",
+            "section3_title": "3. Értesítési adatok feldolgozása",
+            "section3_content": "Kizárólag a Rust+ alkalmazásból származó konkrét támadási értesítéseket dolgozzuk fel. Az értesítési adatokat teljes egészében az eszközén dolgozzuk fel és helyileg tároljuk. Nem férünk hozzá más alkalmazások értesítéseihez. Az Android szabványos NotificationListenerService API-ját használjuk az Ön kifejezett hozzájárulásával. Nem állunk kapcsolatban a Rust+ alkalmazással, a Facepunch Studios Limiteddel vagy bármely kapcsolódó jogalannyal.",
+            "section4_title": "4. Engedélyek",
+            "section4_content": "A Raid Alarm csak a szükséges minimális engedélyeket kéri: hozzáférést az értesítésekhez a Rust+ alkalmazás értesítéseinek figyeléséhez, akkumulátor-optimalizálási kivételt a háttérben történő működéshez, és riasztási engedélyt a riasztás indításához.",
+            "section5_title": "5. Hogyan használjuk fel adatait",
+            "section5_content": "Az összegyűjtött adatokat kizárólag a riasztórendszer működtetésére, a licenc érvényesítésére és az alkalmazás fejlesztésére használjuk. Az ingyenes szintet használók esetében a Google AdMob anonimizált adatokat használhat az alapvető hirdetési szolgáltatások nyújtásához. Nem adjuk el és nem osztjuk meg személyes adatait harmadik fél marketingesekkel saját céljaikra. Nem használunk automatizált döntéshozatalt vagy profilalkotást a standard hirdetési funkciókon túl.",
+            "section6_title": "6. Adattárolás és megőrzés",
+            "section6_content": "Minden értesítési adatot, beállítást és statisztikát helyileg tárolunk az eszközén. Csak a vásárlási információkat tároljuk egy titkosított, biztonságos adatbázisban. Az értesítési adatokat soha nem továbbítjuk szervereinkre. Az értesítési előzményeket helyileg tároljuk, amíg törli őket vagy eltávolítja az alkalmazást. A licencinformációkat határozatlan ideig megőrizzük az élettartamra szóló vásárlás érvényesítéséhez. Törölheti az összes helyi adatot az alkalmazás eltávolításával, vagy kérheti a vásárlási adatok törlését, ha kapcsolatba lép velünk.",
+            "section7_title": "7. Adatmegosztás és harmadik felek",
+            "section7_content": "Nem adjuk el az Ön személyes adatait. Az adatmegosztás a Google Play Áruházra korlátozódik a fizetés feldolgozása érdekében, a Google AdMob-ra az ingyenes szintet használóknak megjelenített hirdetésekhez, valamint biztonságos harmadik féltől származó szolgáltatásokra a licenc érvényesítéséhez. Nem osztjuk meg az Ön értesítési adatait harmadik féllel. A felhasználóknak jogukban áll leiratkozni az adatok eladásáról (nem adunk el adatokat), és kezelhetik hirdetési beállításaikat az eszköz beállításaiban.",
+            "section8_title": "8. Nemzetközi adattovábbítás",
+            "section8_content": "A vásárlási adatok feldolgozása biztonságos adatközpontokban található szervereken történhet. Minden nemzetközi adattovábbítás megfelel az alkalmazandó adatvédelmi törvényeknek és a megfelelő garanciáknak. Az adatokat az átvitel során iparági szabványos titkosítással titkosítjuk.",
+            "section9_title": "9. Biztonsági intézkedések",
+            "section9_content": "Technikai és adminisztrációs biztonsági intézkedéseket alkalmazunk adatai védelme érdekében, ideértve a helyi titkosítást, a biztonságos kommunikációs protokollokat, a titkosított adatbázis-tárolást és a korlátozott hozzáférés-ellenőrzést. Azonban egyetlen átviteli vagy tárolási módszer sem 100%-ban biztonságos. Bár törekszünk adatai védelmére, nem tudjuk garantálni a teljes biztonságot.",
+            "section10_title": "10. Az Ön jogai",
+            "section10_content": "Joga van hozzáférni, helyesbíteni, törölni, korlátozni a feldolgozást, az adathordozhatósághoz, tiltakozni a feldolgozás ellen, és visszavonni a személyes adataira vonatkozó hozzájárulását. Joga van tudni, törölni, lemondani az értékesítésről (nem árulunk adatokat) és a megkülönböztetésmentességhez. Jogai gyakorlásához lépjen kapcsolatba velünk az alább megadott e-mail címen. Az alkalmazandó jogszabályok által előírt ésszerű időn belül válaszolunk.",
+            "section11_title": "11. Gyermekek adatvédelme",
+            "section11_content": "Alkalmazásunk nem 18 éven aluli (vagy egyes joghatóságokban 13 éven aluli) gyermekek számára készült. Tudatosan nem gyűjtünk személyes adatokat gyermekektől. Ha felfedezzük, hogy adatokat gyűjtöttünk egy gyermektől, azonnal töröljük azokat. Nem vagyunk felelősek és nem vállalunk felelősséget a 18 éven aluli (vagy a joghatóságuk szerinti nagykorúságot el nem ért) személyek által végzett vásárlásokért. A szülők vagy gondviselők kizárólagos felelőssége gyermekeik alkalmazáshasználatának és vásárlásainak felügyelete. Ha kiskorú megfelelő engedély nélkül vásárol, a szülőnek vagy gondviselőnek kapcsolatba kell lépnie a Google Play Áruházzal visszatérítési kérelmek céljából, mivel mi nem dolgozunk fel visszatérítéseket.",
+            "section12_title": "12. Értesítés adatvédelmi incidensről",
+            "section12_content": "Adatvédelmi incidens esetén, amely érintheti jogait, értesítjük az illetékes felügyeleti hatóságokat az alkalmazandó jogszabályok előírásai szerint, és indokolatlan késedelem nélkül értesítjük az érintett felhasználókat, ha magas kockázat áll fenn jogaikra nézve.",
+            "section13_title": "13. A szabályzat változásai",
+            "section13_content": "Ez az Adatvédelmi Irányelv időről időre frissülhet. A jelentős változásokról értesítjük a felhasználókat. Az alkalmazás változások utáni folyamatos használata a módosítások elfogadását jelenti. Az utolsó frissítés dátuma az oldal tetején látható.",
+            "section14_title": "14. Hirdetés",
+            "section14_content": "A Raid Alarm ingyenes szintjét hirdetések támogatják. A Google AdMob szolgáltatást használjuk hirdetések megjelenítésére. Az AdMob adatokat gyűjthet és használhat fel, például az eszköz hirdetési azonosítóját a releváns hirdetések megjelenítéséhez és elemzési célokból. Azok a felhasználók, akik Élethosszig tartó licencet vásárolnak, minden harmadik féltől származó hirdetést eltávolítanak az alkalmazásból."
+        },
+        "terms_of_service": {
+            "title": "Szolgáltatási Feltételek",
+            "last_updated": "Utolsó frissítés: {year}",
+            "contact_title": "Kapcsolat",
+            "contact_email": "Kérdések esetén: alcstackdev@gmail.com",
+            "section1_title": "1. A feltételek elfogadása",
+            "section1_content": "A Raid Alarm letöltésével, telepítésével, elérésével vagy használatával Ön elfogadja, hogy magára nézve kötelezőnek ismeri el a jelen Szolgáltatási Feltételeket. Ha nem ért egyet, ne használja az alkalmazást. Az alkalmazás használatához legalább 18 évesnek (vagy a joghatósága szerinti nagykorúnak) kell lennie. Ha 18 éven aluli, csak szülői vagy gondviselői beleegyezéssel használhatja ezt az alkalmazást.",
+            "section2_title": "2. A szolgáltatás leírása",
+            "section2_content": "A Raid Alarm egy kizárólag a Google Play Áruházban elérhető mobilalkalmazás, amely figyeli a Rust+ alkalmazás értesítéseit, és riasztást indít, amikor támadási értesítések érkeznek. Az alkalmazást \"ahogy van\" biztosítjuk, mindenféle garancia nélkül. Az alkalmazás működése teljes mértékben a Rust+ alkalmazástól függ. Ha a Rust+ nincs telepítve, le van tiltva, eltávolítják a Google Play Áruházból, leállítja az értesítések küldését, késéseket tapasztal, vagy ha a Rust játékszerverekkel problémák merülnek fel, az alkalmazás nem fog működni, és nem vagyunk felelősek az ebből eredő problémákért.",
+            "section3_title": "3. Nincs kapcsolat vagy viszony",
+            "section3_content": "A Raid Alarm nem áll kapcsolatban, viszonyban, partnerségben, összeköttetésben, támogatásban vagy szponzorációban a Rust játékkal, a Rust+ alkalmazással, a Facepunch Studios Limiteddel vagy bármely kapcsolódó jogalannyal. A Raid Alarm egy független alkalmazás. A \"Rust+\", \"Rust\", \"Facepunch\" és a kapcsolódó kifejezéseket CSAK azonosítási és leíró célokra használjuk annak magyarázatára, hogy mit csinál az alkalmazás (védjegyhasználat szerinti nominatív méltányos használat). Nem tartunk igényt ezen védjegyekre vonatkozó jogokra. A Facepunch Studios Limited semmilyen módon nem engedélyezett, támogatott vagy kapcsolódik hozzánk. Ha a Facepunch Studios Limited ellenzi ezen kifejezések használatát, haladéktalanul eleget teszünk kéréseiknek. Ezen kifejezések bármilyen használata pusztán leíró jellegű, és nem jelent semmilyen kapcsolatot, felhatalmazást vagy jóváhagyást.",
+            "section4_title": "4. Külső függőség és korlátozások",
+            "section4_content": "KRITIKUS FÜGGŐSÉGI FIGYELMEZTETÉS: A Raid Alarm működése TELJES MÉRTÉKBEN ÉS ABSZOLÚT MÓDON FÜGG a Rust+ alkalmazástól. Az alkalmazás NEM FOG MŰKÖDNI az alábbi körülmények bármelyike esetén:\n\n- A Rust+ alkalmazás nincs telepítve az eszközére\n- A Rust+ alkalmazás le van tiltva vagy el van távolítva\n- A Rust+ alkalmazást eltávolították a Google Play Áruházból\n- A Rust+ alkalmazás elérhetetlenné válik vagy leáll\n- A Rust+ alkalmazás leállítja az értesítések küldését vagy az értesítések késnek\n- A Rust+ alkalmazás \"Smart Alarm\" vagy értesítési funkcióit eltávolítják, letiltják vagy módosítják\n- A Rust játékszerverekkel problémák, kimaradások vagy hibák merülnek fel\n- A Facepunch Studios Limited korlátozza, limitálja vagy tiltja az értesítési funkciókat\n- Internetkapcsolati problémák megakadályozzák a Rust+ értesítések fogadását\n- Bármely egyéb probléma, amely befolyásolja a Rust+ alkalmazás értesítésküldési képességét\n\nAZ ALKALMAZÁS HASZNÁLATÁVAL ÖN KIFEJEZETTEN TUDOMÁSUL VESZI ÉS ELFOGADJA, HOGY:\n\n- Az alkalmazás működése TELJES MÉRTÉKBEN külső szolgáltatásoktól függ (Rust+ alkalmazás és Rust játékszerverek), amelyek felett SEMMILYEN ELLENŐRZÉSÜNK NINCS\n- NEM VAGYUNK FELELŐSEK a Rust+ alkalmazás elérhetőségéért, működéséért, a Google Play Áruházból való eltávolításáért, az értesítési késésekért vagy a Facepunch Studios Limited által végrehajtott bármilyen változtatásért\n- NEM VAGYUNK FELELŐSEK a Rust játékszerver problémákért, kimaradásokért vagy hibákért\n- NEM VAGYUNK FELELŐSEK, ha a Facepunch Studios Limited korlátozza, limitálja, tiltja vagy módosítja a Rust+ alkalmazás értesítési funkcióit\n- Ön NEM tart minket felelősnek, nem kér visszatérítést és nem nyújt be követelést ellenünk a Rust+ alkalmazás problémái, a Rust játékszerver problémái, az értesítési késések vagy más külső függőségi problémák miatt\n- Megérti, hogy ha a Rust+ alkalmazást eltávolítják a Google Play Áruházból vagy leáll, az alkalmazás azonnal leáll, és Önnek NINCS JOGA visszatérítésre, kártérítésre vagy egyéb jogorvoslatra",
+            "section5_title": "5. Nincs felelősség harmadik fél szolgáltatásaiért",
+            "section5_content": "NEM VAGYUNK FELELŐSEK és SEMMILYEN FELELŐSSÉGET NEM VÁLLALUNK semmilyen problémáért, kárért, veszteségért vagy következményért, amely az alábbiakból ered:\n\n- Rust játék, Rust+ alkalmazás, Facepunch Studios Limited vagy bármely kapcsolódó jogalany\n- A Rust+ alkalmazás eltávolítása a Google Play Áruházból\n- A Rust+ alkalmazás leállítja az értesítések küldését vagy az értesítések késnek\n- A Rust+ alkalmazás \"Smart Alarm\" vagy értesítési funkcióinak eltávolítása, letiltása vagy módosítása\n- Rust játékszerver problémák, kimaradások vagy hibák\n- Bármilyen változtatás, korlátozás vagy módosítás a Facepunch Studios Limited részéről\n- Bármely egyéb harmadik fél szolgáltatás, alkalmazás vagy függőség\n\nAz alkalmazást SAJÁT FELELŐSSÉGÉRE használja minden külső függőség tekintetében. SEMMILYEN ELLENŐRZÉSÜNK NINCS a Rust+ alkalmazás, a Rust játékszerverek vagy a Facepunch Studios Limited felett, és NEM VAGYUNK FELELŐSEK az ezen külső függőségekből eredő problémákért.",
+            "section6_title": "6. Szolgáltatási garancia",
+            "section6_content": "Garantáljuk, hogy a Raid Alarm CSAK akkor fog megfelelően működni, ha az alábbi feltételek MINDEGYIKE egyidejűleg teljesül:\n\n- A Rust játékszerverek működnek és normálisan üzemelnek\n- A Rust+ alkalmazás telepítve van, engedélyezve van és normálisan működik az eszközén\n- A Rust+ alkalmazás elérhető a Google Play Áruházban, és nem távolították el\n- A Rust+ alkalmazás késedelem nélkül küld értesítéseket\n- A Rust+ alkalmazás értesítési funkciói (beleértve a \"Smart Alarm\"-ot, ha alkalmazható) aktívak és nincsenek letiltva\n- Eszköze megfelel minden műszaki követelménynek\n- Minden szükséges engedélyt megadott és fenntart\n- Aktív internetkapcsolattal rendelkezik\n- A Facepunch Studios Limited nem korlátozta, limitálta vagy tiltotta az értesítési funkciókat\n\nHa ezen feltételek BÁRMELYIKE nem teljesül, NEM TUDJUK GARANTÁLNI és NEM GARANTÁLJUK az alkalmazás működését, és NEM VAGYUNK FELELŐSEK semmilyen ebből eredő problémáért, veszteségért vagy kárért.",
+            "section7_title": "7. Engedélyek",
+            "section7_content": "A Raid Alarm csak a szükséges minimális engedélyeket kéri: hozzáférést az értesítésekhez a Rust+ alkalmazás értesítéseinek figyeléséhez, akkumulátor-optimalizálási kivételt a háttérben történő működéshez, és riasztási engedélyt a riasztás indításához.",
+            "section8_title": "8. Élettartam Licenc Feltételek",
+            "section8_content": "Elérhetőség: Ez az alkalmazás kizárólag a Google Play Áruházban érhető el. Minden vásárlást a Google Play Áruház számlázási rendszerén keresztül dolgoznak fel.\n\nÉlettartam Licenc: A prémium funkciók egyszeri vásárlást igényelnek. 'Élettartam Licencet' kínálunk, amely állandó hozzáférést biztosít az összes prémium funkcióhoz. Ez egy egyszeri fizetés, nincsenek ismétlődő díjak vagy előfizetések.\n\nKorhatár: A licenc megvásárlásához legalább 18 évesnek (vagy a joghatósága szerinti nagykorúnak) kell lennie. Ha 18 éven aluli, csak szülői vagy gondviselői beleegyezéssel vásárolhat. NEM VAGYUNK FELELŐSEK a kiskorúak által megfelelő engedély nélkül végzett vásárlásokért. A szülők vagy gondviselők kizárólagos felelőssége gyermekeik vásárlásainak felügyelete. Ha kiskorú engedély nélkül vásárol, lépjen kapcsolatba a Google Play Áruházzal visszatérítési kérelmek céljából.\n\nFizetésfeldolgozás: Minden fizetést biztonságosan dolgoznak fel a Google Play Áruházon keresztül. Nem tárolunk és nem férünk hozzá fizetési kártya adataihoz. A fizetési információkat teljes egészében a Google Play Áruház kezeli.\n\nÁrazás: Az árak országonként eltérhetnek, és előzetes értesítéssel változhatnak. Az aktuális árak az alkalmazásban és a Google Play Áruházban jelennek meg.\n\nSzolgáltatás módosításai: Fenntartjuk a jogot a funkciók bármikori módosítására, hozzáadására vagy eltávolítására előzetes értesítés vagy visszatérítés nélkül. Fenntartjuk a jogot, hogy bármikor megszüntessük vagy felfüggesszük licencét a jelen feltételek megsértése vagy illegális tevékenység miatt.\n\nSzolgáltatás elérhetősége: Az alkalmazás működése teljes mértékben a Rust+ alkalmazástól függ. Ha a Rust+ alkalmazást eltávolítják a Google Play Áruházból, leáll vagy leállítja az értesítések küldését, az alkalmazás a licenc állapotától függetlenül nem fog működni, és Önnek NINCS JOGA visszatérítésre vagy kártérítésre.\n\n#### Visszatérítési Szabályzat\n\nMINDEN ELADÁS VÉGLEGES. SEMMILYEN KÖRÜLMÉNYEK KÖZÖTT NEM ADUNK VISSZATÉRÍTÉST, IDEÉRTVE, DE NEM KIZÁRÓLAGOSAN:\n\n- A Rust+ alkalmazás eltávolítása a Google Play Áruházból, elérhetetlensége vagy bármilyen probléma\n- A Rust+ alkalmazás leállítja az értesítések küldését vagy az értesítések késnek\n- A Facepunch Studios Limited eltávolítja, letiltja vagy módosítja a Rust+ alkalmazás értesítési funkcióit\n- Rust játékszerver problémák, kimaradások vagy hibák\n- Alkalmazás funkcionális problémák (összeomlások, hibák, értesítési késések, riasztás nem indul)\n- Az alkalmazás leállása Rust+ alkalmazás problémák vagy eltávolítás miatt\n- A felhasználó elégedetlensége az alkalmazással vagy annak működésével\n- A felhasználó meggondolta magát a vásárlás után\n- A felhasználó eszköze nem kompatibilis az alkalmazással\n- A felhasználó megtagadta a szükséges engedélyeket\n- Kiskorú jogosulatlan vásárlása (lépjen kapcsolatba a Google Play Áruházzal visszatérítési kérelemért)\n- Bármely egyéb ok\n\nA Google Play Áruház visszatérítési időszaka (általában 48 óra) után SEMMILYEN körülmények között NEM adunk visszatérítést, függetlenül az októl.\n\nA LICENC MEGVÁSÁRLÁSÁVAL ÖN KIFEJEZETTEN LEMOND MINDEN VISSZATÉRÍTÉSI JOGRÓL, kivéve a Google Play Áruház szokásos visszatérítési időszakát (általában 48 óra), amely után L VISSZATÉRÍTÉS NEM ADHATÓ.\n\n#### Kritikus elismerés\n\nA LICENC MEGVÁSÁRLÁSÁVAL ÖN KIFEJEZETTEN ELISMERI, MEGÉRTI ÉS VISSZAVONHATATLANUL ELFOGADJA, HOGY: Az alkalmazás teljes mértékben a Rust+ alkalmazástól függ (lásd 4. szakasz). Ha a Rust+ alkalmazás nem elérhető, eltávolítják vagy leáll, az alkalmazás nem fog működni, és Önnek NINCS JOGA visszatérítésre vagy kártérítésre. Ön elfogadja a külső függőségekkel kapcsolatos ÖSSZES KOCKÁZATOT, és NEM kér visszatérítést Rust+ problémák, Rust játékszerver problémák vagy bármilyen külső függőségi probléma miatt (kivéve a Google Play Áruház szokásos 48 órás visszatérítési ablakát).",
+            "section9_title": "9. Szellemi tulajdon és védjegy méltányos használata",
+            "section9_content": "A Raid Alarm alkalmazást és annak tartalmát szerzői jogi és védjegy törvények védik. Minden jog minket illet.\n\nVédjegy nyilatkozat: A \"Rust+\", \"Rust\", \"Facepunch\" és a kapcsolódó logók, nevek és védjegyek a Facepunch Studios Limited kizárólagos tulajdonát képezik. Mi NEM állunk kapcsolatban, nem támogatjuk, nem vagyunk felhatalmazva, és nem kapcsolódunk a Facepunch Studios Limitedhez semmilyen módon. Ezeket a védjegyeket CSAK azonosítási és leíró célokra használjuk (védjegyhasználat szerinti nominatív méltányos használat). NEM tartunk igényt ezen védjegyekre vonatkozó jogokra. Ha a Facepunch Studios Limited ellenzi a használatunkat, azonnal eleget teszünk. További információkért lásd a 3. szakaszt.",
+            "section10_title": "10. Garancia kizárása",
+            "section10_content": "AZ ALKALMAZÁST \"AHOGY VAN\" ÉS \"AHOGY ELÉRHETŐ\" BIZTOSÍTJUK, BÁRMILYEN KIFEJEZETT VAGY HALLGATÓLAGOS GARANCIA NÉLKÜL, IDEÉRTVE, DE NEM KIZÁRÓLAGOSAN AZ ELADHATÓSÁGRA, EGY ADOTT CÉLRA VALÓ ALKALMASSÁGRA, A JOGSÉRTÉS HIÁNYÁRA VAGY AZ ALKALMAZÁS MEGFELELŐ MŰKÖDÉSÉRE VONATKOZÓ GARANCIÁKAT.\n\nNem garantáljuk, hogy az alkalmazás mindig megfelelően fog működni, hogy a harmadik fél szolgáltatások mindig elérhetők lesznek, vagy hogy az alkalmazás folyamatosan, megszakítás nélkül vagy hibamentesen fog működni. Az alkalmazás működése teljes mértékben a Rust+ alkalmazástól függ (lásd 4. szakasz). Nem teszünk semmilyen kijelentést vagy garanciát az alkalmazás működésére, elérhetőségére vagy megbízhatóságára vonatkozóan. AZ ALKALMAZÁST SAJÁT FELELŐSSÉGÉRE HASZNÁLJA.",
+            "section11_title": "11. Felelősség korlátozása",
+            "section11_content": "A TÖRVÉNY ÁLTAL ENGEDÉLYEZETT MAXIMÁLIS MÉRTÉKBEN NEM VÁLLALUNK FELELŐSSÉGET SEMMILYEN KÁRÉRT, VESZTESÉGÉRT VAGY KÖVETKEZMÉNYÉRT, AMELY AZ ALÁBBIAKBÓL ERED:\n\n- Rust+ alkalmazás problémák, eltávolítás a Google Play Áruházból, elérhetetlenség vagy bármilyen probléma\n- A Rust+ alkalmazás leállítja az értesítések küldését vagy az értesítések késnek\n- A Facepunch Studios Limited eltávolítja, letiltja vagy módosítja a Rust+ alkalmazás értesítési funkcióit\n- Rust játékszerver problémák, kimaradások vagy hibák\n- A Facepunch Studios Limited vagy kapcsolódó jogalanyok korlátozzák, limitálják vagy tiltják a funkciókat\n- Az alkalmazás leállása Rust+ alkalmazás problémák vagy eltávolítás miatt\n- Közvetett, véletlen, különleges, következményes vagy büntető jellegű károk\n- Nyereség, adatok, goodwill vagy egyéb immateriális veszteségek elvesztése\n- Bármilyen kár, amely meghaladja a licencért fizetett összeget\n- Bármilyen kár, amely külső függőségekhez vagy harmadik fél szolgáltatásokhoz kapcsolódik\n- Kiskorú jogosulatlan vásárlása (kizárólag a szülők/gondviselők felelősek)\n\nSEMMILYEN ESETBEN NEM HALADJA MEG TELJES FELELŐSSÉGÜNK A KÖVETELÉST MEGELŐZŐ 12 HÓNAPBAN A LICENCÉRT FIZETETT ÖSSZEGET.",
+            "section12_title": "12. Felhasználói kötelezettségek",
+            "section12_content": "Ön KIZÁRÓLAGOSAN FELELŐS a következőkért:\n\n- A Rust+ alkalmazás telepítése és karbantartása az eszközén\n- Annak biztosítása, hogy a Rust+ alkalmazás elérhető, telepítve van és megfelelően működik\n- Minden szükséges engedély megadása mind a Raid Alarm, mind a Rust+ alkalmazás számára\n- Annak biztosítása, hogy eszköze kompatibilis mind a Raid Alarmmal, mind a Rust+ alkalmazással\n- Annak megértése, hogy az alkalmazás TELJES MÉRTÉKBEN a Rust+ alkalmazástól és külső szolgáltatásoktól függ\n- Annak megértése, hogy ha a Rust+ alkalmazást eltávolítják a Google Play Áruházból vagy leáll, az alkalmazás nem fog működni, és Önnek NINCS JOGA visszatérítésre\n- A Rust+ alkalmazás Szolgáltatási Feltételeinek és minden vonatkozó törvénynek a betartása\n- Annak biztosítása, hogy használata nem sérti a Rust+ alkalmazás Szolgáltatási Feltételeit\n- A vásárlások felügyelete és jóváhagyása, ha Ön szülő vagy gondviselő\n- Annak biztosítása, hogy vásárlás előtt legalább 18 éves (vagy rendelkezik szülői/gondviselői beleegyezéssel)\n\nHa használata sérti a Rust+ alkalmazás Szolgáltatási Feltételeit, Ön KIZÁRÓLAGOSAN FELELŐS minden következményért, és mi NEM VAGYUNK FELELŐSEK semmilyen ebből eredő problémáért.",
+            "section13_title": "13. A feltételek változásai",
+            "section13_content": "Ezek a Szolgáltatási Feltételek időről időre frissülhetnek. A jelentős változásokról tájékoztatjuk a felhasználókat. Az alkalmazás változások utáni folyamatos használata az új Feltételek elfogadását jelenti.",
+            "section14_title": "14. Megszüntetés",
+            "section14_content": "Azonnal, előzetes értesítés nélkül megszüntethetjük vagy felfüggeszthetjük az alkalmazáshoz való hozzáférését a jelen Feltételek megsértése miatt vagy saját belátásunk szerint. Nem vagyunk felelősek a megszüntetésből eredő károkért.",
+            "section15_title": "15. Irányadó jog és joghatóság",
+            "section15_content": "A jelen Szolgáltatási Feltételekre az Ön tartózkodási helye szerinti irányadó törvények vonatkoznak. A vitákat az alkalmazandó jog és joghatóság szerint rendezik.",
+            "section16_title": "16. Hirdetések",
+            "section16_content": "The App offers a Free Tier which displays advertisements served by third-party ad networks, primarily Google AdMob. These advertisements help fund the continued development and maintenance of the App. Advertisements are removed for users who purchase a Lifetime License. We do not endorse the products or services advertised and are not responsible for the content of any third-party advertisements."
+        }
+    },
+    "paywall": {
+        "title_line1": "ÉLETHOSSZIG",
+        "title_line2": "TARTÓ",
+        "subtitle": "Fizessen egyszer. Birtokolja örökre.",
+        "no_subscriptions": "NINCS ELŐFIZETÉS.",
+        "secure_access": "KORLÁTLAN VÉDELEM INDÍTÁSA",
+        "restore": "VISSZAÁLLÍTÁS",
+        "privacy": "ADATVÉDELMI IRÁNYELVEK",
+        "terms": "FELHASZNÁLÁSI FELTÉTELEK",
+        "plan_card": {
+            "name": "ÉLETHOSSZIG TARTÓ HOZZÁFÉRÉS",
+            "one_time": "EGYSZERI FIZETÉS"
+        },
+        "benefits": {
+            "critical_alarms": "Kritikus Raid Riasztások (Némítás Megkerülése)",
+            "fake_call": "Hamis Bejövő Hívás Szimuláció",
+            "enemy_notifications": "Ellenség Online/Offline Értesítések",
+            "server_notifications": "Szerver Online/Offline Értesítések",
+            "wipe_notifications": "Egyéni Wipe értesítések"
+        },
+        "errors": {
+            "network": "Hálózati hiba. Kérjük, ellenőrizze internetkapcsolatát.",
+            "pending": "Fizetés függőben. A vásárlás a fizetés megerősítése után aktiválódik.",
+            "invalid": "Érvénytelen fizetés. Próbálja újra vagy lépjen kapcsolatba az ügyfélszolgálattal.",
+            "unavailable": "A termék jelenleg nem megvásárolható.",
+            "store": "Áruház probléma. Próbálja újra később.",
+            "already_purchased": "Ezt a terméket már megvásárolta.",
+            "generic_failed": "Vásárlás sikertelen: {}",
+            "purchase_failed_default": "Vásárlás sikertelen. Kérjük, próbálja újra.",
+            "restore_no_internet": "Nincs internetkapcsolat.",
+            "restore_timeout": "Visszaállítás időtúllépés.",
+            "restore_failed": "Visszaállítás sikertelen: {}",
+            "no_lifetime_found": "Nem található visszaállítható élethosszig tartó vásárlás",
+            "purchase_verification_failed": "Fizetés befejezve, de az élethosszig tartó hozzáférést nem sikerült ellenőrizni."
+        }
+    },
+    "recoil_trainer": {
+        "title": "VISSZARÚGÁS TRÉNER",
+        "subtitle": "Minta Viz",
+        "mouse_move": "Egér Mozgás",
+        "impact_point": "Becsapódási Pont",
+        "fire": "TŰZ",
+        "pause": "SZÜNET",
+        "shot": "LÖVÉS",
+        "ready": "Kész",
+        "complete": "Kész",
+        "pull_down": "HÚZD LE",
+        "pull_left": "HÚZD BALRA",
+        "pull_right": "HÚZD JOBBRA",
+        "stabilize": "STABILIZÁLÁS",
+        "difficulty": {
+            "easy": "KÖNNYŰ",
+            "medium": "KÖZEPES",
+            "hard": "NEHÉZ",
+            "extreme": "EXTRÉM"
+        }
+    }
+}

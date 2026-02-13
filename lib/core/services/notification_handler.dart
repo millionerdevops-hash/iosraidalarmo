@@ -142,19 +142,27 @@ class NotificationHandler {
       }
 
       // 2. Not paired -> Show Pairing Dialog
-      final context = AppRouter.router.routerDelegate.navigatorKey.currentContext;
-      if (context != null) {
-         final server = await isar.collection<ServerInfo>().filter().isSelectedEqualTo(true).findFirst() 
-                        ?? await isar.collection<ServerInfo>().where().findFirst();
-                        
-         if (server != null) {
-            showGeneralDialog(
-              context: context,
-              barrierDismissible: true,
-              barrierLabel: "Pair Device",
-              barrierColor: Colors.black54,
-              transitionDuration: const Duration(milliseconds: 200),
-              pageBuilder: (context, anim1, anim2) {
+      final context = AppRouter.navigatorKey.currentContext;
+      
+      if (context == null) {
+        debugPrint("[NotificationHandler] ❌ Context is null! Cannot show pairing dialog. App might be in background.");
+        return;
+      }
+      
+      final server = await isar.collection<ServerInfo>().filter().isSelectedEqualTo(true).findFirst() 
+                     ?? await isar.collection<ServerInfo>().where().findFirst();
+                     
+      if (server != null) {
+         debugPrint("[NotificationHandler] 📱 Showing pairing dialog for ${server.name} (Entity: $entityId)");
+         showGeneralDialog(
+           context: context,
+           // Ensure it shows over everything
+           useRootNavigator: true, 
+           barrierDismissible: true,
+           barrierLabel: "Pair Device",
+           barrierColor: Colors.black54,
+           transitionDuration: const Duration(milliseconds: 200),
+           pageBuilder: (context, anim1, anim2) {
                 return Center(
                   child: Material(
                     color: Colors.transparent,

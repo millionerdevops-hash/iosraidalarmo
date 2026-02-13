@@ -365,8 +365,15 @@ class _ReviewCard extends StatelessWidget {
   }
 }
 
-class _StickyFooter extends StatelessWidget {
+class _StickyFooter extends StatefulWidget {
   const _StickyFooter();
+
+  @override
+  State<_StickyFooter> createState() => _StickyFooterState();
+}
+
+class _StickyFooterState extends State<_StickyFooter> {
+  bool _reviewRequested = false;
 
   @override
   Widget build(BuildContext context) {
@@ -392,18 +399,32 @@ class _StickyFooter extends StatelessWidget {
             RustButton.primary(
               onPressed: () async {
                 HapticHelper.mediumImpact();
-                final InAppReview inAppReview = InAppReview.instance;
-                if (await inAppReview.isAvailable()) {
-                  await inAppReview.requestReview();
+
+                // Step 1: Request Review if not done yet
+                if (!_reviewRequested) {
+                  final InAppReview inAppReview = InAppReview.instance;
+                  if (await inAppReview.isAvailable()) {
+                    // iOS limitation: we can't await the dialog close.
+                    // So we show it, and force user to tap again to proceed.
+                    inAppReview.requestReview(); 
+                    
+                    if (mounted) {
+                      setState(() {
+                        _reviewRequested = true;
+                      });
+                    }
+                    return; // Stop here, don't navigate yet
+                  }
                 }
 
+                // Step 2: Navigate (or if Review wasn't available)
                 await AppDatabase().saveAppSetting('social_proof_completed', 'true');
                 if (context.mounted) {
                   context.go('/paywall');
                 }
               },
               child: Text(
-                'JOIN THE SQUAD',
+                _reviewRequested ? 'CONTINUE' : 'JOIN THE SQUAD',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.sp,
