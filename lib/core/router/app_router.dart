@@ -15,7 +15,7 @@ import 'package:raidalarm/screens/legal/terms_of_service_screen.dart';
 import 'package:raidalarm/screens/raidcalculator/raidcalculator.dart';
 import 'package:raidalarm/screens/dieselcalculator/dieselcalculator.dart';
 import 'package:raidalarm/screens/teaguide/teacalculator.dart';
-import 'package:raidalarm/screens/recoiltrainer/recoiltrainer.dart';
+
 import 'package:raidalarm/screens/matchgame/matchgame.dart';
 import 'package:raidalarm/screens/codelock/codelock.dart';
 import 'package:raidalarm/screens/pairdevices/pairdevices.dart';
@@ -25,13 +25,15 @@ import 'package:raidalarm/features/devices/device_pairing_screen.dart';
 import 'package:raidalarm/features/automation/automation_list_screen.dart';
 import 'package:raidalarm/features/automation/rule_editor_screen.dart';
 import 'package:raidalarm/features/automation/automation_info_screen.dart';
-import 'package:raidalarm/screens/blackjack/blackjack.dart';
+
 import 'package:raidalarm/screens/bugreport/bugreport.dart';
 import 'package:raidalarm/screens/criticalalertpermission/criticalalertpermission.dart';
 import 'package:raidalarm/screens/notifypermission/notificationpermissionscreen.dart';
 import 'package:raidalarm/screens/socialproof/socialproof.dart';
 import 'package:raidalarm/screens/howitworks/howitworks.dart';
 import 'package:raidalarm/screens/getstarted/getstarted.dart';
+import 'package:raidalarm/screens/disclaimer/disclaimer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final routerProvider = Provider((ref) => AppRouter.router);
 
@@ -70,6 +72,7 @@ class AppRouter {
   static const String _pathSocialProof = '/social-proof';
   static const String _pathHowItWorks = '/how-it-works';
   static const String _pathGetStarted = '/get-started';
+  static const String _pathDisclaimer = '/disclaimer';
 
   static final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
@@ -198,11 +201,7 @@ class AppRouter {
         name: 'diesel-calculator',
         builder: (context, state) => const DieselCalculatorScreen(),
       ),
-      GoRoute(
-        path: _pathRecoilTrainer,
-        name: 'recoil-trainer',
-        builder: (context, state) => const RecoilTrainerScreen(),
-      ),
+
       GoRoute(
         path: _pathMatchGame,
         name: 'match-game',
@@ -257,11 +256,7 @@ class AppRouter {
           );
         },
       ),
-      GoRoute(
-        path: _pathBlackjack,
-        name: 'blackjack',
-        builder: (context, state) => const BlackjackScreen(),
-      ),
+
       GoRoute(
         path: _pathBugReport,
         name: 'bug-report',
@@ -292,6 +287,11 @@ class AppRouter {
         name: 'get-started',
         builder: (context, state) => const GetStartedScreen(),
       ),
+      GoRoute(
+        path: _pathDisclaimer,
+        name: 'disclaimer',
+        builder: (context, state) => const DisclaimerScreen(),
+      ),
     ],
   );
 
@@ -321,6 +321,15 @@ class AppRouter {
         } catch (e) {
         }
       }
+      
+      // Check if disclaimer has been accepted
+      final prefs = await SharedPreferences.getInstance();
+      final disclaimerAccepted = prefs.getBool('disclaimer_accepted') ?? false;
+      
+      if (!disclaimerAccepted) {
+        return _pathDisclaimer;
+      }
+      
       return null;
     }
 

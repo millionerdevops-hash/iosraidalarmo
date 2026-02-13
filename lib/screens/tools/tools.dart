@@ -73,14 +73,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                               context.push('/raid-calculator');
                             },
                           ),
-                          ToolsGridCard(
-                            title: tr('recoil_trainer.title'),
-                            subtitle: tr('recoil_trainer.subtitle'),
-                            imageUrl: 'assets/images/png/recoiltrainer.png',
-                            onClick: () {
-                              context.push('/recoil-trainer');
-                            },
-                          ),
+
                           ToolsGridCard(
                             title: tr('tools.cctv_codes.title'),
                             subtitle: tr('tools.cctv_codes.subtitle'),
@@ -121,14 +114,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                               context.push('/code-raider');
                             },
                           ),
-                          ToolsGridCard(
-                            title: tr('tools.blackjack.title'),
-                            subtitle: tr('tools.blackjack.subtitle'),
-                            imageUrl: 'assets/images/png/blackjack.png',
-                            onClick: () {
-                              context.push('/blackjack');
-                            },
-                          ),
+
                           
 
                         ],
