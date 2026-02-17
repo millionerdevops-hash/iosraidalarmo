@@ -1,17 +1,14 @@
-const sqlite3 = require('sqlite3');
-const { open } = require('sqlite');
+const Database = require('better-sqlite3');
 const path = require('path');
 
 async function setupDb() {
     const dbPath = process.env.DB_PATH || path.join(__dirname, 'database.sqlite');
     console.log(`[Database] 📂 Using database at: ${dbPath}`);
 
-    const db = await open({
-        filename: dbPath,
-        driver: sqlite3.Database
-    });
+    const db = new Database(dbPath);
 
-    await db.exec(`
+    // Create tables
+    db.exec(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             steam_id TEXT UNIQUE,
@@ -37,7 +34,13 @@ async function setupDb() {
         );
     `);
 
-    return db;
+    // Wrap db to match previous API usage (async wrapper not needed for better-sqlite3 but keeps compatibility)
+    return {
+        run: async (sql, params = []) => db.prepare(sql).run(...params),
+        get: async (sql, params = []) => db.prepare(sql).get(...params),
+        all: async (sql, params = []) => db.prepare(sql).all(...params),
+        exec: async (sql) => db.exec(sql)
+    };
 }
 
 module.exports = { setupDb };
