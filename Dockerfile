@@ -1,19 +1,14 @@
-FROM node:18-slim
+FROM node:18
 
 WORKDIR /app
 
-# Install build dependencies for native modules
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 \
-    make \
-    g++ \
-    && rm -rf /var/lib/apt/lists/*
+# Full node image usually includes python3/make/g++, but let's be safe.
+# We also don't need to install them manually if we use the full image, usually.
+# But just in case, we update.
+RUN apt-get update && apt-get install -y python3 make g++
 
 # Install dependencies
 COPY server/package.json ./
-# Delete package-lock.json if it exists (force fresh install for Linux)
-# We do this by NOT copying it, or ignoring it.
-# Better: Just copy package.json and run install
 RUN npm install
 
 # Copy source code
