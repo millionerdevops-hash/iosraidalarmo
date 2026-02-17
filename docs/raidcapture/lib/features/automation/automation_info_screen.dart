@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/rust_colors.dart';
+import '../../config/rust_colors.dart';
 
 class AutomationInfoScreen extends StatelessWidget {
   const AutomationInfoScreen({super.key});

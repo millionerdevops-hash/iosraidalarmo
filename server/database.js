@@ -30,7 +30,8 @@ async function setupDb() {
             player_id TEXT,
             player_token TEXT,
             name TEXT,
-            FOREIGN KEY(user_id) REFERENCES users(id)
+            FOREIGN KEY(user_id) REFERENCES users(id),
+            UNIQUE(user_id, ip, port)
         );
 
         CREATE TABLE IF NOT EXISTS devices (

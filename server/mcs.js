@@ -345,6 +345,24 @@ async function handleNotification(user, data, db) {
                     server_port: payload.port
                 };
 
+                // Auto-save to database (Critical Fix #4 for Data Reliability)
+                try {
+                    const entityType = payload.entityType || 1; // Default to Switch if not provided
+                    const name = payload.name || `Device ${payload.entityId}`;
+
+                    await db.run(`
+                        INSERT INTO devices (user_id, server_ip, server_port, entity_id, entity_type, name, is_active)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                        ON CONFLICT(user_id, server_ip, server_port, entity_id) DO UPDATE SET
+                        name = excluded.name,
+                        entity_type = excluded.entity_type
+                    `, [user.id, payload.ip, payload.port, payload.entityId, entityType, name, 0]);
+
+                    console.log(`[MCS] ✅ Auto-paired device for user ${user.steam_id}: ${name} (ID: ${payload.entityId})`);
+                } catch (e) {
+                    console.error('[MCS] ❌ Device auto-save error:', e.message);
+                }
+
                 sendPushNotification(user.onesignal_id, {
                     title: "Device Pairing",
                     body: "New device detected",

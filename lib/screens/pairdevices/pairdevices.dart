@@ -371,8 +371,19 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
               final dbService = DatabaseService();
               final isar = await dbService.db;
               await isar.writeTxn(() async {
-                await isar.smartDevices.delete(device.id);
+                await isar.collection<SmartDevice>().delete(device.id);
               });
+              
+              // NEW: Sync deletion to backend (Critical Fix #5 for Data Reliability)
+              try {
+                final cred = await isar.collection<SteamCredential>().where().findFirst();
+                if (cred != null && cred.steamId != null) {
+                   await ApiService.syncDevicesToServer(cred.steamId!);
+                }
+              } catch (e) {
+                debugPrint("[PairDevices] ⚠️ Backend sync failed after delete: $e");
+              }
+
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Deleted ${device.name}"), backgroundColor: RustColors.surface),
@@ -453,24 +464,19 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
                     builder: (context) => SteamLoginScreen(
                       onSuccess: () async {
                         Navigator.of(context).pop();
-                        _checkLoginStatus(); // Re-check login status
+                        _checkLoginStatus(); 
                         
-                        // Retry scanning multiple times to catch the backend sync/notification
                         final notifier = ref.read(serverListViewModelProvider.notifier);
                         
-                        // Attempt 1: Immediate
+                        // Attempt 1: Immediate fetch 
                         await notifier.scanForServers(); 
-                        if (ref.read(serverListViewModelProvider).valueOrNull?.isNotEmpty ?? false) return;
-
-                        // Attempt 2: After 2s
-                        await Future.delayed(const Duration(seconds: 2));
-                        await notifier.scanForServers();
-                        if (ref.read(serverListViewModelProvider).valueOrNull?.isNotEmpty ?? false) return;
-
-                        // Attempt 3: After 5s (Total)
-                        if (mounted) {
-                           await Future.delayed(const Duration(seconds: 3));
-                           await notifier.scanForServers();
+                        
+                        // If still empty, wait 3s and try one last time (server registration might be finishing)
+                        if (ref.read(serverListViewModelProvider).valueOrNull?.isEmpty ?? true) {
+                           if (mounted) {
+                              await Future.delayed(const Duration(seconds: 3));
+                              await notifier.scanForServers();
+                           }
                         }
                       },
                     ),

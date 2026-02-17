@@ -15,16 +15,11 @@ import 'package:raidalarm/screens/legal/terms_of_service_screen.dart';
 import 'package:raidalarm/screens/raidcalculator/raidcalculator.dart';
 import 'package:raidalarm/screens/dieselcalculator/dieselcalculator.dart';
 import 'package:raidalarm/screens/teaguide/teacalculator.dart';
-
 import 'package:raidalarm/screens/matchgame/matchgame.dart';
 import 'package:raidalarm/screens/codelock/codelock.dart';
 import 'package:raidalarm/screens/pairdevices/pairdevices.dart';
 import 'package:raidalarm/widgets/main/main_scaffold.dart';
 import 'package:raidalarm/features/auth/steam_login_screen.dart';
-import 'package:raidalarm/features/automation/automation_list_screen.dart';
-import 'package:raidalarm/features/automation/rule_editor_screen.dart';
-import 'package:raidalarm/features/automation/automation_info_screen.dart';
-
 import 'package:raidalarm/screens/bugreport/bugreport.dart';
 import 'package:raidalarm/screens/criticalalertpermission/criticalalertpermission.dart';
 import 'package:raidalarm/screens/notifypermission/notificationpermissionscreen.dart';
@@ -57,13 +52,8 @@ class AppRouter {
   static const String _pathRecoilTrainer = '/recoil-trainer';
   static const String _pathMatchGame = '/match-game';
   static const String _pathCodeRaider = '/code-raider';
-  static const String _queryFromDismissAlarm = 'dismiss-alarm';
   static const String _pathSteamLogin = '/steam-login';
   static const String _pathServerDashboardBase = '/server'; 
-  static const String _pathAutomation = 'automation';
-  static const String _pathAutomationAdd = 'add';
-  static const String _pathAutomationInfo = 'info';
-  static const String _pathBlackjack = '/blackjack';
   static const String _pathBugReport = '/bug-report';
   static const String _pathCriticalAlertPermission = '/critical-alert-permission';
   static const String _pathNotifyPermission = '/notify-permission';
@@ -71,6 +61,7 @@ class AppRouter {
   static const String _pathHowItWorks = '/how-it-works';
   static const String _pathGetStarted = '/get-started';
   static const String _pathDisclaimer = '/disclaimer';
+  static const String _queryFromDismissAlarm = 'dismiss_alarm';
 
   static final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
@@ -215,34 +206,6 @@ class AppRouter {
         name: 'steam-login',
         builder: (context, state) => const SteamLoginScreen(),
       ),
-      GoRoute(
-        path: '$_pathServerDashboardBase/:id/automation',
-        name: 'automation-list',
-        builder: (context, state) {
-          final serverId = int.parse(state.pathParameters['id']!);
-          return AutomationListScreen(serverId: serverId);
-        },
-        routes: [
-          GoRoute(
-            path: _pathAutomationAdd,
-            name: 'automation-add',
-            builder: (context, state) {
-              final serverId = int.parse(state.pathParameters['id']!);
-              final extra = state.extra as Map<String, dynamic>?;
-              return RuleEditorScreen(
-                serverId: serverId,
-                rule: extra?['rule'],
-              );
-            },
-          ),
-          GoRoute(
-            path: _pathAutomationInfo,
-            name: 'automation-info',
-            builder: (context, state) => const AutomationInfoScreen(),
-          ),
-        ],
-      ),
-
       GoRoute(
         path: _pathBugReport,
         name: 'bug-report',

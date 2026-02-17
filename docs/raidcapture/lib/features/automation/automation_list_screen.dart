@@ -5,7 +5,7 @@ import 'package:isar/isar.dart';
 import '../../data/models/automation_rule.dart';
 import '../../data/models/smart_device.dart';
 import '../../core/services/database_service.dart';
-import '../../core/theme/rust_colors.dart';
+import '../../config/rust_colors.dart';
 
 class AutomationListScreen extends ConsumerWidget {
   final int serverId;
@@ -32,24 +32,19 @@ class AutomationListScreen extends ConsumerWidget {
       ),
       body: StreamBuilder<List<AutomationRule>>(
         stream: _watchRules(dbService),
-        builder: (context, ruleSnapshot) {
-          if (!ruleSnapshot.hasData) {
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator(color: RustColors.primary));
           }
 
-          final rules = ruleSnapshot.data!;
+          final rules = snapshot.data!;
           if (rules.isEmpty) return _buildEmptyState(context);
 
-          // Watch device names continuously
-          return StreamBuilder<Map<int, String>>(
-            stream: _watchDeviceNames(dbService),
-            initialData: const {},
+          return FutureBuilder<Map<int, String>>(
+            future: _getDeviceNames(dbService),
             builder: (context, nameSnapshot) {
-               // If loading, we can still show IDs or just wait. 
-               // initialData handles the "waiting" by giving empty map.
-               final nameMap = nameSnapshot.data ?? {};
-               
-               return ListView.builder(
+              final nameMap = nameSnapshot.data ?? {};
+              return ListView.builder(
                 padding: const EdgeInsets.all(16),
                 itemCount: rules.length,
                 itemBuilder: (context, index) {
@@ -80,13 +75,10 @@ class AutomationListScreen extends ConsumerWidget {
         .watch(fireImmediately: true);
   }
 
-  Stream<Map<int, String>> _watchDeviceNames(DatabaseService dbService) async* {
+  Future<Map<int, String>> _getDeviceNames(DatabaseService dbService) async {
     final isar = await dbService.db;
-    yield* isar.smartDevices
-        .filter()
-        .serverIdEqualTo(serverId)
-        .watch(fireImmediately: true)
-        .map((devices) => {for (var d in devices) d.entityId: d.name});
+    final devices = await isar.smartDevices.filter().serverIdEqualTo(serverId).findAll();
+    return {for (var d in devices) d.entityId: d.name};
   }
 
   Widget _buildEmptyState(BuildContext context) {

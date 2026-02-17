@@ -19,7 +19,7 @@ class AutomationService {
   void watchServer(int serverId, ConnectionManager manager) {
     if (_subscriptions.containsKey(serverId)) return;
 
-
+    debugPrint("[Automation] Starting automation watcher for server $serverId");
     
     _subscriptions[serverId] = manager.messageStream.listen((message) {
       if (message.hasBroadcast() && message.broadcast.hasEntityChanged()) {
@@ -47,7 +47,7 @@ class AutomationService {
     if (rules.isEmpty) return;
 
     final newVal = change.payload.value;
-
+    debugPrint("[Automation] Entity ${change.entityId} changed to $newVal. Checking ${rules.length} rules.");
 
     for (final rule in rules) {
       bool isTriggerActive = false;
@@ -71,13 +71,13 @@ class AutomationService {
 
         // Check if threshold reached
         if (rule.currentTriggerCount >= rule.triggerCountThreshold) {
-          // Threshold reached
+          debugPrint("[Automation] Threshold reached for ${rule.name} (${rule.currentTriggerCount}/${rule.triggerCountThreshold})");
           _executeRule(rule, manager, reverse: false);
         }
       } else if (isTriggerEnded && rule.autoOff) {
         // Only reverse if we haven't hit the "persistent" threshold or if threshold is 1
         if (rule.triggerCountThreshold <= 1 || rule.currentTriggerCount < rule.triggerCountThreshold) {
-           // Trigger ended, reversing action
+           debugPrint("[Automation] Trigger ended, reversing action for ${rule.name}");
            _executeRule(rule, manager, reverse: true);
         }
       }
@@ -101,15 +101,15 @@ class AutomationService {
   }
 
   Future<void> _executeRule(AutomationRule rule, ConnectionManager manager, {bool reverse = false}) async {
-
+    debugPrint("[Automation] ${reverse ? 'Reversing' : 'Executing'} rule: ${rule.name}");
 
     if (!reverse && !_isRuleInTimeWindow(rule)) {
-       // Rule skipped: Outside of time window
+       debugPrint("[Automation] Rule ${rule.name} skipped: Outside of time window.");
        return;
     }
 
     if (!reverse && rule.playAppAlarm) {
-       // Phone Alarm Triggered
+       debugPrint("[Automation] 🚨 PHONE ALARM TRIGGERED for rule: ${rule.name}");
        // TODO: Integrate with a sound player or local notification service here
     }
 
@@ -133,7 +133,7 @@ class AutomationService {
     if (action.actionEntityId == null || action.actionValue == null) return;
     
     if (action.delaySeconds > 0 && !reverse) {
-       // Delaying action
+       debugPrint("[Automation] Delaying action for ${action.delaySeconds}s...");
        await Future.delayed(Duration(seconds: action.delaySeconds));
     }
 
@@ -162,11 +162,11 @@ class AutomationService {
           break;
         case 3: // Notify Only
           // TODO: Implement local notification trigger
-          // Notification trigger not fully implemented
+          debugPrint("[Automation] Notification trigger NOT FULLY implemented");
           break;
       }
     } catch (e) {
-      // Failed to execute action
+      debugPrint("[Automation] Failed to execute action on ${action.actionEntityId}: $e");
     }
   }
 }

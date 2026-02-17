@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../../data/models/server_info.dart';
+import '../../data/models/smart_device.dart';
 import 'database_service.dart';
 import 'package:isar/isar.dart';
 import '../../services/onesignal_service.dart';
@@ -130,8 +131,8 @@ class ApiService {
       final dbService = DatabaseService();
       final isar = await dbService.db;
       
-      final devices = await isar.smartDevices.where().findAll();
-      final servers = await isar.serverInfos.where().findAll();
+      final devices = await isar.collection<SmartDevice>().where().findAll();
+      final servers = await isar.collection<ServerInfo>().where().findAll();
       
       // Map server IDs to IP/Port
       final serverMap = {for (var s in servers) s.id: s};

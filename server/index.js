@@ -94,15 +94,19 @@ app.post('/api/sync-servers', async (req, res) => {
         const user = await db.get('SELECT id FROM users WHERE steam_id = ?', [steam_id]);
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        await db.run('DELETE FROM servers WHERE user_id = ?', [user.id]);
-
+        // Optimized: Use Transaction + ON CONFLICT (Critical Fix for Deduplication)
         for (const server of servers) {
             await db.run(`
                 INSERT INTO servers (user_id, ip, port, player_id, player_token, name)
                 VALUES (?, ?, ?, ?, ?, ?)
+                ON CONFLICT(user_id, ip, port) DO UPDATE SET
+                    player_id = excluded.player_id,
+                    player_token = excluded.player_token,
+                    name = excluded.name
             `, [user.id, server.ip, server.port, server.player_id, server.player_token, server.name]);
         }
 
+        console.log(`[API] ✅ Synced ${servers.length} servers for user ${steam_id}`);
         res.json({ success: true });
     } catch (e) {
         console.error('[API] ❌ Sync error:', e);
@@ -118,16 +122,17 @@ app.post('/api/sync-devices', async (req, res) => {
         const user = await db.get('SELECT id FROM users WHERE steam_id = ?', [steam_id]);
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        // Delete existing devices for this user
-        await db.run('DELETE FROM devices WHERE user_id = ?', [user.id]);
-
-        // Insert new devices
+        // Optimized: Use ON CONFLICT instead of DELETE ALL (Critical Fix for Deduplication)
         for (const device of devices) {
-            if (!device.server_ip || !device.server_port) continue; // Skip invalid entries
+            if (!device.server_ip || !device.server_port) continue;
 
             await db.run(`
                 INSERT INTO devices (user_id, server_ip, server_port, entity_id, entity_type, name, is_active)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(user_id, server_ip, server_port, entity_id) DO UPDATE SET
+                    entity_type = excluded.entity_type,
+                    name = excluded.name,
+                    is_active = excluded.is_active
             `, [user.id, device.server_ip, device.server_port, device.entity_id, device.entity_type, device.name, device.is_active ? 1 : 0]);
         }
 

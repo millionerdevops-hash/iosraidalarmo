@@ -11,7 +11,7 @@ class ServerDashboardViewModel extends _$ServerDashboardViewModel {
   Stream<List<SmartDevice>> build(int serverId) async* {
     final dbService = DatabaseService();
     final isar = await dbService.db;
-    final stream = isar.smartDevices
+    final stream = isar.collection<SmartDevice>()
         .filter()
         .serverIdEqualTo(serverId)
         .watch(fireImmediately: true);

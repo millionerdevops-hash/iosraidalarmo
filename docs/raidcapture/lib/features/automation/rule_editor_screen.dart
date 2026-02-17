@@ -6,7 +6,7 @@ import '../../data/models/automation_rule.dart';
 import '../../data/models/smart_device.dart';
 import '../../core/services/database_service.dart';
 import '../../core/proto/rustplus.pbenum.dart';
-import '../../core/theme/rust_colors.dart';
+import '../../config/rust_colors.dart';
 
 class RuleEditorScreen extends ConsumerStatefulWidget {
   final int serverId;
@@ -393,20 +393,12 @@ class _RuleEditorScreenState extends ConsumerState<RuleEditorScreen> {
       ..triggerCountThreshold = _threshold
       ..playAppAlarm = _playAppAlarm;
 
-    try {
-      final db = await DatabaseService().db;
-      await db.writeTxn(() async {
-        await db.automationRules.put(rule);
-      });
-      if (mounted) context.pop();
-      
-    } catch (e) {
-      if (mounted) {
-         ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text("Failed to save rule: $e"), backgroundColor: RustColors.error)
-         );
-      }
-    }
+    final db = await DatabaseService().db;
+    await db.writeTxn(() async {
+      await db.automationRules.put(rule);
+    });
+
+    if (mounted) context.pop();
   }
 
   Widget _buildAdvancedOptions() {

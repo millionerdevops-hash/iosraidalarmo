@@ -49,30 +49,48 @@ class NotificationHandler {
   static Future<void> _handleData(Map<String, dynamic>? data) async {
     if (data == null) return;
     
-    final Map<String, dynamic> normalizedData = Map.from(data);
-    if (normalizedData.containsKey('body')) {
-      try {
-        final bodyJson = jsonDecode(normalizedData['body'] as String);
-        if (bodyJson is Map<String, dynamic>) {
-          normalizedData.addAll(bodyJson);
+    debugPrint("[NotificationHandler] 📩 Received Payload: ${jsonEncode(data)}");
+
+    try {
+      final Map<String, dynamic> normalizedData = Map.from(data);
+      if (normalizedData.containsKey('body')) {
+        try {
+          final bodyJson = jsonDecode(normalizedData['body'] as String);
+          if (bodyJson is Map<String, dynamic>) {
+            normalizedData.addAll(bodyJson);
+          }
+        } catch (e) {
+          debugPrint("[NotificationHandler] ⚠️ Body parse error (non-fatal): $e");
         }
-      } catch (e) {}
-    }
-    
-    // NEW: Handle server pairing from server (Critical Fix #1)
-    if (normalizedData['type'] == 'server_pairing') {
-      await _handleServerPairing(normalizedData);
-      return;
-    }
-    
-    // Handle device pairing (Critical Fix #2 & #3)
-    if (normalizedData.containsKey('entityId') && normalizedData.containsKey('entityType')) {
-      await _handleDevicePairing(normalizedData);
-    } else if (normalizedData.containsKey('ip') && normalizedData.containsKey('playerToken')) {
-      // Legacy server pairing (if sent without type field)
-      await _handlePairingNotification(normalizedData);
-    } else if (normalizedData['type'] == 'alarm') {
-      await _handleAlarmNotification(normalizedData);
+      }
+
+      final type = normalizedData['type']?.toString();
+      debugPrint("[NotificationHandler] 🔍 Processing notification type: $type");
+
+      // 1. Handle server pairing
+      if (type == 'server_pairing') {
+        await _handleServerPairing(normalizedData);
+        return;
+      }
+      
+      // 2. Handle device pairing
+      if (type == 'device_pairing' || (normalizedData.containsKey('entityId') && normalizedData.containsKey('entityType'))) {
+        await _handleDevicePairing(normalizedData);
+        return;
+      }
+
+      // 3. Handle Alarms (Raid or Alarm)
+      if (type == 'raid' || type == 'alarm' || normalizedData['channelId'] == 'alarm') {
+        await _handleAlarmNotification(normalizedData);
+        return;
+      }
+
+      // 4. Legacy / Fallback
+      if (normalizedData.containsKey('ip') && normalizedData.containsKey('playerToken')) {
+        await _handleServerPairing(normalizedData);
+      }
+    } catch (e, stack) {
+      debugPrint("[NotificationHandler] ❌ Error in _handleData: $e\n$stack");
     }
   }
 
@@ -137,7 +155,7 @@ class NotificationHandler {
       }
 
       // 1. Check if device is already paired
-      final existingDevice = await isar.smartDevices
+      final existingDevice = await isar.collection<SmartDevice>()
           .filter()
           .serverIdEqualTo(server.id)
           .entityIdEqualTo(entityId)
@@ -149,10 +167,10 @@ class NotificationHandler {
         
         try {
           if (data.containsKey('value')) {
-            final newState = data['value'] == 'true' || data['value'] == true || data['value'] == '1';
+            final newState = data['value'].toString() == 'true' || data['value'].toString() == '1';
             await isar.writeTxn(() async {
                existingDevice.isActive = newState;
-               await isar.smartDevices.put(existingDevice);
+               await isar.collection<SmartDevice>().put(existingDevice);
             });
           }
         } catch (e) {
@@ -171,7 +189,7 @@ class NotificationHandler {
         ..name = _getDefaultNameForType(entityType);
 
       await isar.writeTxn(() async {
-        await isar.smartDevices.put(device);
+        await isar.collection<SmartDevice>().put(device);
       });
 
       debugPrint("[NotificationHandler] ✅ Device auto-paired successfully: ${device.name}");
@@ -197,7 +215,7 @@ class NotificationHandler {
        // 1. Get Server Info
        final dbService = DatabaseService();
        final isar = await dbService.db;
-       final server = await isar.serverInfos.get(serverId);
+       final server = await isar.collection<ServerInfo>().get(serverId);
        
        if (server == null) return;
 
@@ -222,14 +240,14 @@ class NotificationHandler {
              if (change.entityId == entityId) {
                 // Update Database
                 await isar.writeTxn(() async {
-                   final device = await isar.smartDevices.filter()
+                   final device = await isar.collection<SmartDevice>().filter()
                        .serverIdEqualTo(serverId)
                        .entityIdEqualTo(entityId)
                        .findFirst();
                    
                    if (device != null) {
                      device.isActive = change.payload.value;
-                     await isar.smartDevices.put(device);
+                     await isar.collection<SmartDevice>().put(device);
                      debugPrint("[NotificationHandler] ✅ Status Synced: ${device.name} is ${device.isActive ? 'ON' : 'OFF'}");
                    }
                 });
@@ -257,8 +275,8 @@ class NotificationHandler {
       final serverInfo = ServerInfo()
         ..ip = data['ip']
         ..port = data['port'].toString()
-        ..playerId = data['playerId']
-        ..playerToken = data['playerToken']
+        ..playerId = data['playerId'].toString()
+        ..playerToken = data['playerToken'].toString()
         ..name = data['name'] ?? "New Server (${data['ip']})";
 
       final dbService = DatabaseService();
@@ -277,39 +295,7 @@ class NotificationHandler {
         await isar.collection<ServerInfo>().put(serverInfo);
       });
 
-      debugPrint("[NotificationHandler] ✅ Server paired from notification: ${serverInfo.name}");
-    } catch (e) {
-      debugPrint("[NotificationHandler] ❌ Server Pairing Error: $e");
-    }
-  }
-  
-  static Future<void> _handlePairingNotification(Map<String, dynamic> data) async {
-    try {
-      final serverInfo = ServerInfo()
-        ..ip = data['ip']
-        ..port = data['port'].toString()
-        ..playerId = data['playerId']
-        ..playerToken = data['playerToken']
-        ..name = data['name'] ?? "New Server (${data['ip']})";
-
-      final dbService = DatabaseService();
-      final isar = await dbService.db;
-      
-      await isar.writeTxn(() async {
-        final existing = await isar.collection<ServerInfo>()
-            .filter()
-            .ipEqualTo(serverInfo.ip)
-            .portEqualTo(serverInfo.port)
-            .findFirst();
-            
-        if (existing != null) {
-          serverInfo.id = existing.id;
-        }
-        await isar.collection<ServerInfo>().put(serverInfo);
-      });
-
-      // Server sync removed - server handles this automatically via MCS
-      
+      debugPrint("[NotificationHandler] ✅ Server paired successfully: ${serverInfo.name}");
     } catch (e) {
       debugPrint("[NotificationHandler] ❌ Server Pairing Error: $e");
     }

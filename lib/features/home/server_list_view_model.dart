@@ -14,7 +14,7 @@ class ServerListViewModel extends _$ServerListViewModel {
   Stream<List<ServerInfo>> build() async* {
     final dbService = DatabaseService();
     final isar = await dbService.db;
-    yield* isar.serverInfos.where().watch(fireImmediately: true);
+    yield* isar.collection<ServerInfo>().where().watch(fireImmediately: true);
   }
   
   Future<void> scanForServers() async {
@@ -31,28 +31,65 @@ class ServerListViewModel extends _$ServerListViewModel {
     if (servers.isNotEmpty) {
       await isar.writeTxn(() async {
         for (final s in servers) {
-          final existing = await isar.serverInfos
+          final existing = await isar.collection<ServerInfo>()
               .filter()
               .ipEqualTo(s['ip'])
-              .portEqualTo(s['port'])
+              .portEqualTo(s['port'].toString())
               .findFirst();
 
           if (existing == null) {
             final newServer = ServerInfo()
               ..ip = s['ip']
               ..port = s['port'].toString()
-              ..playerId = s['player_id']
-              ..playerToken = s['player_token']
+              ..playerId = s['player_id'].toString()
+              ..playerToken = s['player_token'].toString()
               ..name = s['name'] ?? '${s['ip']}:${s['port']}';
-            await isar.serverInfos.put(newServer);
+            await isar.collection<ServerInfo>().put(newServer);
           } else {
              // Update if token changed
-             existing.playerToken = s['player_token'];
+             existing.playerToken = s['player_token'].toString();
              existing.name = s['name'] ?? existing.name;
-             await isar.serverInfos.put(existing);
+             await isar.collection<ServerInfo>().put(existing);
           }
         }
       });
+      
+      // NEW: Also restore paired devices for these servers to ensure full sync
+      try {
+        final devices = await ApiService.fetchPairedDevices(cred.steamId!);
+        if (devices.isNotEmpty) {
+          final serverList = await isar.collection<ServerInfo>().where().findAll();
+          final serverMap = {for (var s in serverList) "${s.ip}:${s.port}": s.id};
+          
+          await isar.writeTxn(() async {
+            for (final d in devices) {
+              final key = "${d['server_ip']}:${d['server_port']}";
+              final sId = serverMap[key];
+              if (sId != null) {
+                // Check if device already in Isar
+                final exists = await isar.collection<SmartDevice>()
+                    .filter()
+                    .serverIdEqualTo(sId)
+                    .entityIdEqualTo(d['entity_id'] as int)
+                    .findFirst();
+                
+                if (exists == null) {
+                  final newDevice = SmartDevice()
+                    ..serverId = sId
+                    ..entityId = d['entity_id'] as int
+                    ..entityType = d['entity_type'] as int
+                    ..name = d['name'] ?? "Smart Device"
+                    ..isActive = d['is_active'] == true;
+                  await isar.collection<SmartDevice>().put(newDevice);
+                }
+              }
+            }
+          });
+          debugPrint("[ServerList] ✅ Restored ${devices.length} devices from backend");
+        }
+      } catch (e) {
+        debugPrint("[ServerList] ⚠️ Device restoration failed: $e");
+      }
     }
   }
 
@@ -66,10 +103,10 @@ class ServerListViewModel extends _$ServerListViewModel {
 
     await isar.writeTxn(() async {
       // Cascade delete: Remove all devices linked to this server
-      await isar.smartDevices.filter().serverIdEqualTo(serverId).deleteAll();
+      await isar.collection<SmartDevice>().filter().serverIdEqualTo(serverId).deleteAll();
       
       // Finally delete the server itself
-      await isar.serverInfos.delete(serverId);
+      await isar.collection<ServerInfo>().delete(serverId);
     });
 
     // Valid sync request to remove from backend

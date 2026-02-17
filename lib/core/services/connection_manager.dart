@@ -44,7 +44,7 @@ class ConnectionManager {
         final isar = await dbService.db;
         await isar.writeTxn(() async {
           _serverInfo.useProxy = true;
-          await isar.serverInfos.put(_serverInfo);
+          await isar.collection<ServerInfo>().put(_serverInfo);
         });
       }
     }
