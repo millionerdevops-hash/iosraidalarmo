@@ -7,7 +7,7 @@ import 'package:isar/isar.dart';
 import '../../services/onesignal_service.dart';
 
 class ApiService {
-  static const String baseUrl = 'https://raidalarmioscuk.onrender.com';
+  static const String baseUrl = 'https://iosraidalarmo-85148614541.europe-west3.run.app';
 
   /// Wake up Render backend (free tier spins down)
   static Future<void> wakeUpBackend() async {

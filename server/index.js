@@ -220,18 +220,33 @@ app.post('/api/test-voip', async (req, res) => {
 });
 
 // Initialize and Start
-setupDb().then(database => {
-    db = database;
+const startServer = async () => {
+    try {
+        console.log('[System] 🔄 Starting server initialization...');
 
-    // Worker removed - MCS handles all notifications
-    // const { startWorker } = require('./worker');
-    // startWorker(db);
+        db = await setupDb();
+        console.log('[System] ✅ Database initialized');
 
-    app.listen(port, async () => {
-        console.log(`[Server] 🚀 Running on port ${port}`);
+        // Worker removed - MCS handles all notifications
+        // const { startWorker } = require('./worker');
+        // startWorker(db);
 
-        // Restart MCS for all users on startup
-        const users = await db.all('SELECT * FROM users');
-        users.forEach(user => startMcsForUser(user, db));
-    });
-});
+        app.listen(port, '0.0.0.0', async () => {
+            console.log(`[Server] 🚀 Running on port ${port}`);
+
+            // Restart MCS for all users on startup
+            try {
+                const users = await db.all('SELECT * FROM users');
+                console.log(`[System] 🔄 Restarting MCS for ${users.length} users...`);
+                users.forEach(user => startMcsForUser(user, db));
+            } catch (mcsError) {
+                console.error('[System] ⚠️ MCS restart error (non-fatal):', mcsError);
+            }
+        });
+    } catch (error) {
+        console.error('[System] ❌ Server Logic Failed to Start:', error);
+        process.exit(1); // Exit process to signal container failure
+    }
+};
+
+startServer();
