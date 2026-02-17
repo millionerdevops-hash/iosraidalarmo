@@ -3,8 +3,11 @@ const { open } = require('sqlite');
 const path = require('path');
 
 async function setupDb() {
+    const dbPath = process.env.DB_PATH || path.join(__dirname, 'database.sqlite');
+    console.log(`[Database] 📂 Using database at: ${dbPath}`);
+
     const db = await open({
-        filename: path.join(__dirname, 'database.sqlite'),
+        filename: dbPath,
         driver: sqlite3.Database
     });
 

@@ -16,6 +16,7 @@ import 'package:raidalarm/features/dashboard/connection_provider.dart';
 import 'package:raidalarm/data/models/smart_device.dart';
 import 'package:raidalarm/core/services/database_service.dart';
 import 'package:raidalarm/data/models/steam_credential.dart';
+import 'package:raidalarm/data/database/app_database.dart'; // Import AppDatabase
 import 'package:isar/isar.dart';
 import 'package:raidalarm/core/proto/rustplus.pb.dart' hide Color;
 import 'package:raidalarm/core/proto/rustplus.pbenum.dart';
@@ -53,13 +54,14 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
     try {
       final dbService = DatabaseService();
       final isar = await dbService.db;
+      final appDb = AppDatabase();
       
       // Check if we recently registered to avoid spamming the server
-      final lastRegTime = await isar.appSettings.get('last_registration_time');
+      final lastRegTime = await appDb.getAppSetting('last_registration_time');
       final now = DateTime.now().millisecondsSinceEpoch;
       
       // If registered in last 5 minutes, skip
-      if (lastRegTime != null && (now - int.parse(lastRegTime.value)) < 5 * 60 * 1000) {
+      if (lastRegTime != null && (now - int.parse(lastRegTime)) < 5 * 60 * 1000) {
          debugPrint("[PairDevices] ⏳ Skipping silent registration (done recently)");
          return;
       }
@@ -76,9 +78,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
            iosVoipToken: voipToken,
          );
          
-         await isar.writeTxn(() async {
-            await isar.appSettings.put(AppSetting()..key='last_registration_time'..value=now.toString());
-         });
+         await appDb.saveAppSetting('last_registration_time', now.toString());
          
          debugPrint("[PairDevices] ✅ Silent device registration complete (Active Device updated)");
       }
