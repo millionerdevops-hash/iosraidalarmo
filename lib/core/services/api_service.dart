@@ -55,7 +55,16 @@ class ApiService {
       if (response.statusCode == 200) {
         debugPrint("[ApiService] ✅ Registration successful");
       } else {
-        final errorMsg = jsonDecode(response.body)['error'] ?? 'Unknown server error';
+        final Map<String, dynamic> errorData = jsonDecode(response.body);
+        final String errorMsg = errorData['error'] ?? 'Unknown server error';
+        
+        // Handle "User already has an active client" or similar non-critical errors
+        if (errorMsg.contains("already has an active client") || 
+            response.statusCode == 409) {
+           debugPrint("[ApiService] ℹ️ User already active, treating as success.");
+           return;
+        }
+
         debugPrint("[ApiService] ❌ Registration failed: $errorMsg");
         throw errorMsg;
       }

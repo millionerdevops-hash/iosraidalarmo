@@ -7,14 +7,15 @@ import '../../data/models/server_info.dart';
 import '../../data/models/smart_device.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import '../../features/devices/device_pairing_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'database_service.dart';
 import '../../data/models/notification_data.dart';
 import '../../data/repositories/notification_repository.dart';
 import '../../data/repositories/attack_statistics_repository.dart';
 import '../../data/database/app_database.dart';
-import 'dart:async';
+import 'dart:async'; // For Completer
+import '../../core/services/connection_manager.dart'; // Import ConnectionManager
+import '../../core/proto/rustplus.pb.dart';
 
 class NotificationHandler {
   static final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
@@ -153,37 +154,94 @@ class NotificationHandler {
                      ?? await isar.collection<ServerInfo>().where().findFirst();
                      
       if (server != null) {
-         debugPrint("[NotificationHandler] 📱 Showing pairing dialog for ${server.name} (Entity: $entityId)");
-         showGeneralDialog(
-           context: context,
-           // Ensure it shows over everything
-           useRootNavigator: true, 
-           barrierDismissible: true,
-           barrierLabel: "Pair Device",
-           barrierColor: Colors.black54,
-           transitionDuration: const Duration(milliseconds: 200),
-           pageBuilder: (context, anim1, anim2) {
-                return Center(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: DevicePairingScreen(
-                      serverId: server.id,
-                      entityId: entityId,
-                      entityType: entityType,
-                    ),
-                  ),
-                );
-              },
-              transitionBuilder: (context, anim1, anim2, child) {
-                return Transform.scale(
-                  scale: Curves.easeOutBack.transform(anim1.value),
-                  child: child,
-                );
-              },
-            );
-         }
+         debugPrint("[NotificationHandler] 📱 Automating pairing for ${server.name} (Entity: $entityId)");
+         
+         final device = SmartDevice()
+           ..serverId = server.id
+           ..entityId = entityId
+           ..entityType = entityType
+           ..name = _getDefaultNameForType(entityType);
+
+         await isar.writeTxn(() async {
+           await isar.smartDevices.put(device);
+         });
+
+         debugPrint("[NotificationHandler] ✅ Device auto-paired successfully: ${device.name}");
+         
+         // Immediately fetch status if possible (fire and forget)
+         _syncDeviceStatus(server.id, entityId);
+      }
     } catch (e) {
       debugPrint("[NotificationHandler] ❌ Pairing Error: $e");
+    }
+  }
+
+  static String _getDefaultNameForType(int typeVal) {
+     // Mirroring logic from DevicePairingScreen
+     // 1: Switch, 2: Alarm
+     if (typeVal == 1) return "Smart Switch";
+     if (typeVal == 2) return "Smart Alarm";
+     return "Smart Device";
+  }
+
+  static Future<void> _syncDeviceStatus(int serverId, int entityId) async {
+    ConnectionManager? manager;
+    try {
+       // 1. Get Server Info
+       final dbService = DatabaseService();
+       final isar = await dbService.db;
+       final server = await isar.serverInfos.get(serverId);
+       
+       if (server == null) return;
+
+       debugPrint("[NotificationHandler] 🔄 Syncing status for Entity: $entityId on Server: ${server.name}...");
+
+       // 2. Create a temporary ConnectionManager
+       manager = ConnectionManager(server);
+       
+       // 3. Connect and Fetch Info
+       await manager.connect();
+       
+       // 4. Send Request (getEntityInfo)
+       // We need to listen to the stream to get the actual data update? 
+       // ConnectionManager broadcasts messages. 
+       // In this temporary context, we can listen to the stream manually.
+       
+       final completer = Completer<void>();
+       
+       final sub = manager.messageStream.listen((message) async {
+          if (message.hasBroadcast() && message.broadcast.hasEntityChanged()) {
+             final change = message.broadcast.entityChanged;
+             if (change.entityId == entityId) {
+                // Update Database
+                await isar.writeTxn(() async {
+                   final device = await isar.smartDevices.filter()
+                       .serverIdEqualTo(serverId)
+                       .entityIdEqualTo(entityId)
+                       .findFirst();
+                   
+                   if (device != null) {
+                     device.isActive = change.payload.value;
+                     await isar.smartDevices.put(device);
+                     debugPrint("[NotificationHandler] ✅ Status Synced: ${device.name} is ${device.isActive ? 'ON' : 'OFF'}");
+                   }
+                });
+                if (!completer.isCompleted) completer.complete();
+             }
+          }
+       });
+
+       // Trigger the request
+       await manager.getEntityInfo(entityId);
+       
+       // Wait for a response or timeout (short timeout since we just want a quick check)
+       await completer.future.timeout(const Duration(seconds: 3));
+       await sub.cancel();
+
+    } catch (e) {
+       debugPrint("[NotificationHandler] ⚠️ Sync warning: $e");
+    } finally {
+       manager?.disconnect();
     }
   }
   

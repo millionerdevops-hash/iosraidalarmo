@@ -53,6 +53,17 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
     try {
       final dbService = DatabaseService();
       final isar = await dbService.db;
+      
+      // Check if we recently registered to avoid spamming the server
+      final lastRegTime = await isar.appSettings.get('last_registration_time');
+      final now = DateTime.now().millisecondsSinceEpoch;
+      
+      // If registered in last 5 minutes, skip
+      if (lastRegTime != null && (now - int.parse(lastRegTime.value)) < 5 * 60 * 1000) {
+         debugPrint("[PairDevices] ⏳ Skipping silent registration (done recently)");
+         return;
+      }
+
       final cred = await isar.steamCredentials.get(1);
       
       if (cred != null && cred.steamId != null && cred.steamToken != null) {
@@ -64,6 +75,11 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
            steamToken: cred.steamToken!,
            iosVoipToken: voipToken,
          );
+         
+         await isar.writeTxn(() async {
+            await isar.appSettings.put(AppSetting()..key='last_registration_time'..value=now.toString());
+         });
+         
          debugPrint("[PairDevices] ✅ Silent device registration complete (Active Device updated)");
       }
     } catch (e) {

@@ -21,7 +21,6 @@ import 'package:raidalarm/screens/codelock/codelock.dart';
 import 'package:raidalarm/screens/pairdevices/pairdevices.dart';
 import 'package:raidalarm/widgets/main/main_scaffold.dart';
 import 'package:raidalarm/features/auth/steam_login_screen.dart';
-import 'package:raidalarm/features/devices/device_pairing_screen.dart';
 import 'package:raidalarm/features/automation/automation_list_screen.dart';
 import 'package:raidalarm/features/automation/rule_editor_screen.dart';
 import 'package:raidalarm/features/automation/automation_info_screen.dart';
@@ -64,7 +63,6 @@ class AppRouter {
   static const String _pathAutomation = 'automation';
   static const String _pathAutomationAdd = 'add';
   static const String _pathAutomationInfo = 'info';
-  static const String _pathDevicePairing = '/device-pairing';
   static const String _pathBlackjack = '/blackjack';
   static const String _pathBugReport = '/bug-report';
   static const String _pathCriticalAlertPermission = '/critical-alert-permission';
@@ -243,18 +241,6 @@ class AppRouter {
             builder: (context, state) => const AutomationInfoScreen(),
           ),
         ],
-      ),
-    GoRoute(
-        path: _pathDevicePairing,
-        name: 'device-pairing',
-        builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>;
-          return DevicePairingScreen(
-            serverId: extra['serverId'],
-            entityId: extra['entityId'],
-            entityType: extra['entityType'],
-          );
-        },
       ),
 
       GoRoute(
