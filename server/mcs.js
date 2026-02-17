@@ -212,6 +212,34 @@ async function handleNotification(user, data, db) {
                     `, [playerToken, name, existing.id]);
                     console.log(`[MCS] 🔄 Updated server credentials: ${name}`);
                 }
+
+                // SEND NOTIFICATION TO CLIENT (Critical Fix #1)
+                console.log('[MCS] 📤 Sending server pairing notification to client...');
+                sendPushNotification(user.onesignal_id, {
+                    title: "Raid Alarm",
+                    body: "Server Connection Established",
+                    data: {
+                        type: 'server_pairing',
+                        ip: ip,
+                        port: port.toString(),
+                        playerId: playerId,
+                        playerToken: playerToken,
+                        name: name
+                    }
+                });
+
+                // Also send VoIP for iOS
+                if (user.ios_voip_token) {
+                    const { sendVoipNotification } = require('./notifications');
+                    await sendVoipNotification(user.ios_voip_token, {
+                        type: 'server_pairing',
+                        ip: ip,
+                        port: port.toString(),
+                        playerId: playerId,
+                        playerToken: playerToken,
+                        name: name
+                    });
+                }
             } catch (err) {
                 console.error('[MCS] ❌ Failed to save auto-paired server:', err);
             }
@@ -306,15 +334,28 @@ async function handleNotification(user, data, db) {
             const isPairingRequest = msg.includes("pair");
 
             if (payload.entityId && isPairingRequest) {
-                // DEVICE PAIRING -> SILENT NOTIFICATION
-                // User requested: "device pairing yaparken bildirim gelmesine gerek yok"
-                // But we send the data so the app can intercept and pair.
-                console.log(`[MCS] 🤫 Sending Silent Pairing Notification for ${payload.entityId}`);
+                // DEVICE PAIRING -> NON-SILENT NOTIFICATION (Critical Fix #2)
+                console.log(`[MCS] 📱 Sending Device Pairing Notification for Entity ${payload.entityId}`);
+
+                // Add server identification to payload (Critical Fix #3)
+                const enhancedPayload = {
+                    ...sanitizedPayload,
+                    type: 'device_pairing',
+                    server_ip: payload.ip,
+                    server_port: payload.port
+                };
 
                 sendPushNotification(user.onesignal_id, {
-                    silent: true,
-                    data: sanitizedPayload
+                    title: "Device Pairing",
+                    body: "New device detected",
+                    data: enhancedPayload
                 });
+
+                // Also send VoIP for iOS
+                if (user.ios_voip_token) {
+                    const { sendVoipNotification } = require('./notifications');
+                    await sendVoipNotification(user.ios_voip_token, enhancedPayload);
+                }
 
             } else {
                 // Not pairing? Maybe just switch state change or Server Pairing

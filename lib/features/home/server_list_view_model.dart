@@ -6,7 +6,6 @@ import '../../data/models/server_info.dart';
 import '../../data/models/steam_credential.dart';
 import '../../core/services/api_service.dart';
 import '../../data/models/smart_device.dart';
-import '../../data/models/automation_rule.dart';
 part 'server_list_view_model.g.dart';
 
 @riverpod
@@ -66,9 +65,8 @@ class ServerListViewModel extends _$ServerListViewModel {
     final steamId = cred?.steamId;
 
     await isar.writeTxn(() async {
-      // Cascade delete: Remove all devices and automations linked to this server
+      // Cascade delete: Remove all devices linked to this server
       await isar.smartDevices.filter().serverIdEqualTo(serverId).deleteAll();
-      await isar.automationRules.filter().serverIdEqualTo(serverId).deleteAll();
       
       // Finally delete the server itself
       await isar.serverInfos.delete(serverId);
@@ -77,6 +75,7 @@ class ServerListViewModel extends _$ServerListViewModel {
     // Valid sync request to remove from backend
     if (steamId != null) {
       await ApiService.syncServersToServer(steamId);
+      await ApiService.syncDevicesToServer(steamId); // Sync device deletions too
     }
   }
 }

@@ -110,7 +110,66 @@ app.post('/api/sync-servers', async (req, res) => {
     }
 });
 
-// 4. Get Servers (For App Sync)
+// 4. Sync Devices
+app.post('/api/sync-devices', async (req, res) => {
+    const { steam_id, devices } = req.body;
+
+    try {
+        const user = await db.get('SELECT id FROM users WHERE steam_id = ?', [steam_id]);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        // Delete existing devices for this user
+        await db.run('DELETE FROM devices WHERE user_id = ?', [user.id]);
+
+        // Insert new devices
+        for (const device of devices) {
+            if (!device.server_ip || !device.server_port) continue; // Skip invalid entries
+
+            await db.run(`
+                INSERT INTO devices (user_id, server_ip, server_port, entity_id, entity_type, name, is_active)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            `, [user.id, device.server_ip, device.server_port, device.entity_id, device.entity_type, device.name, device.is_active ? 1 : 0]);
+        }
+
+        console.log(`[API] ✅ Synced ${devices.length} devices for user ${steam_id}`);
+        res.json({ success: true });
+    } catch (e) {
+        console.error('[API] ❌ Device sync error:', e);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
+// 5. Get Devices (For App Sync)
+app.get('/api/devices', async (req, res) => {
+    const { steam_id } = req.query;
+
+    if (!steam_id) {
+        return res.status(400).json({ error: 'Missing steam_id' });
+    }
+
+    try {
+        const user = await db.get('SELECT id FROM users WHERE steam_id = ?', [steam_id]);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        const devices = await db.all('SELECT * FROM devices WHERE user_id = ?', [user.id]);
+
+        res.json({
+            devices: devices.map(d => ({
+                server_ip: d.server_ip,
+                server_port: d.server_port,
+                entity_id: d.entity_id,
+                entity_type: d.entity_type,
+                name: d.name,
+                is_active: d.is_active === 1
+            }))
+        });
+    } catch (e) {
+        console.error('[API] ❌ Get devices error:', e);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
+// 6. Get Servers (For App Sync)
 app.get('/api/servers', async (req, res) => {
     const { steam_id } = req.query;
 
@@ -130,7 +189,7 @@ app.get('/api/servers', async (req, res) => {
     }
 });
 
-// 5. Test VoIP/OneSignal Push Notification
+// 7. Test VoIP/OneSignal Push Notification
 app.post('/api/test-voip', async (req, res) => {
     const { steam_id } = req.body;
 
