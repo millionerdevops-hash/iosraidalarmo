@@ -10,7 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
-COPY server/package.json server/package-lock.json ./
+COPY server/package.json ./
+# Delete package-lock.json if it exists (force fresh install for Linux)
+# We do this by NOT copying it, or ignoring it.
+# Better: Just copy package.json and run install
 RUN npm install
 
 # Copy source code
