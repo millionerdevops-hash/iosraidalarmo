@@ -1,14 +1,17 @@
-FROM node:18-alpine
+FROM node:18-slim
 
 WORKDIR /app
 
-# Install build dependencies for sqlite3 (native module)
-RUN apk add --no-cache python3 make g++
+# Install build dependencies for native modules
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
 COPY server/package.json server/package-lock.json ./
 RUN npm install
-# better-sqlite3 compiles automatically during install
 
 # Copy source code
 COPY server/ .
