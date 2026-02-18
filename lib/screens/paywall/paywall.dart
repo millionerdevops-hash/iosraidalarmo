@@ -86,10 +86,10 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
 
   void _setInitialSelection(List<AdaptyPaywallProduct> products) {
     if (products.isNotEmpty) {
-      if (_lifetimeProduct != null) {
-        _selectedProductId = _lifetimeProduct!.vendorProductId;
-      } else if (_monthlyProduct != null) {
-        _selectedProductId = _monthlyProduct!.vendorProductId;
+      // Find a lifetime product first as preferred default, otherwise just the first one
+      final lifetime = products.where((p) => p.subscriptionPeriod == null).firstOrNull;
+      if (lifetime != null) {
+        _selectedProductId = lifetime.vendorProductId;
       } else {
         _selectedProductId = products.first.vendorProductId;
       }
@@ -175,10 +175,15 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       
 
 
-      final hasLifetime = await ref.read(adaptyServiceProvider).hasPremiumAccess();
+      final profile = await ref.read(adaptyServiceProvider).getProfile(forceRefresh: true);
+      final hasPremium = profile.accessLevels.values.any((level) => level.isActive);
       
-      if (hasLifetime) {
-        await AppDatabase().saveAppSetting('has_lifetime', 'true');
+      if (hasPremium) {
+        // If it was a lifetime product (no subscription period), save it specifically
+        final isLifetimePurchase = product.subscriptionPeriod == null;
+        if (isLifetimePurchase) {
+          await AppDatabase().saveAppSetting('has_lifetime', 'true');
+        }
 
         if (mounted) {
           await ref.read(notificationProvider.notifier).updateLifetimeStatus(true);
@@ -247,22 +252,6 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     );
   }
 
-
-
-  AdaptyPaywallProduct? get _lifetimeProduct {
-    return _products.firstWhere(
-      (p) => !p.vendorProductId.toLowerCase().contains('monthly'),
-      orElse: () => _products.first,
-    );
-  }
-
-  AdaptyPaywallProduct? get _monthlyProduct {
-    return _products.firstWhere(
-      (p) => p.vendorProductId.toLowerCase().contains('monthly'),
-      orElse: () => _products.first,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     if (_loading) {
@@ -303,7 +292,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       (p) => p.vendorProductId == _selectedProductId,
       orElse: () => _products.first,
     );
-    final isMonthlySelected = selectedProduct.vendorProductId.toLowerCase().contains('monthly');
+    final isLifetimeSelected = selectedProduct.subscriptionPeriod == null;
 
     return PopScope(
       child: Scaffold(
@@ -410,52 +399,38 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     ScreenUtilHelper.sizedBoxHeight(32),
                     
                     // Plan selection
-                    if (_products.length >= 2) ...[
-                      if (_lifetimeProduct != null)
-                        _buildPlanCard(
-                          product: _lifetimeProduct!,
-                          title: 'paywall.plan_lifetime'.tr(),
-                          subtitle: 'paywall.plan_lifetime_subtitle'.tr(),
-                          badge: 'paywall.plan_best_value'.tr(),
-                          badgeColor: const LinearGradient(
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: _products.length,
+                      separatorBuilder: (context, index) => ScreenUtilHelper.sizedBoxHeight(8),
+                      itemBuilder: (context, index) {
+                        final product = _products[index];
+                        final isSelected = _selectedProductId == product.vendorProductId;
+                        
+                        // Determine if it's a lifetime or monthly for the label
+                        // AdaptyPaywallProduct usually has subscriptionPeriod. If null, it's often lifetime.
+                        final isLifetime = product.subscriptionPeriod == null;
+                        
+                        return _buildPlanCard(
+                          product: product,
+                          title: isLifetime ? 'paywall.plan_lifetime'.tr() : 'paywall.plan_monthly'.tr(),
+                          subtitle: isLifetime 
+                              ? 'paywall.plan_lifetime_subtitle'.tr() 
+                              : 'paywall.plan_trial'.tr(),
+                          subtitleColor: isLifetime ? null : const Color(0xFFFB923C),
+                          badge: isLifetime ? 'paywall.plan_best_value'.tr() : null,
+                          badgeColor: isLifetime ? const LinearGradient(
                             colors: [Color(0xFFDC2626), Color(0xFFEA580C)],
-                          ),
-                          isSelected: _selectedProductId == _lifetimeProduct!.vendorProductId,
+                          ) : null,
+                          isSelected: isSelected,
                           onTap: () {
                             HapticHelper.lightImpact();
-                            setState(() => _selectedProductId = _lifetimeProduct!.vendorProductId);
+                            setState(() => _selectedProductId = product.vendorProductId);
                           },
-                        ),
-                      ScreenUtilHelper.sizedBoxHeight(8),
-                      if (_monthlyProduct != null)
-                        _buildPlanCard(
-                          product: _monthlyProduct!,
-                          title: 'paywall.plan_monthly'.tr(),
-                          subtitle: 'paywall.plan_trial'.tr(),
-                          subtitleColor: const Color(0xFFFB923C),
-                          isSelected: _selectedProductId == _monthlyProduct!.vendorProductId,
-                          onTap: () {
-                            HapticHelper.lightImpact();
-                            setState(() => _selectedProductId = _monthlyProduct!.vendorProductId);
-                          },
-                        ),
-                    ] else if (_products.isNotEmpty) ...[
-                      _buildPlanCard(
-                        product: _products.first,
-                        title: _products.first.vendorProductId.toLowerCase().contains('lifetime') 
-                            ? 'paywall.plan_lifetime'.tr() 
-                            : 'paywall.plan_card.name'.tr(),
-                        subtitle: _products.first.vendorProductId.toLowerCase().contains('lifetime')
-                            ? 'paywall.plan_lifetime_subtitle'.tr()
-                            : 'paywall.plan_card.one_time'.tr(),
-                        badge: 'paywall.plan_best_value'.tr(),
-                        badgeColor: const LinearGradient(
-                          colors: [Color(0xFFDC2626), Color(0xFFEA580C)],
-                        ),
-                        isSelected: true,
-                        onTap: () {},
-                      ),
-                    ],                    
+                        );
+                      },
+                    ),
                     ScreenUtilHelper.sizedBoxHeight(24),
                     
                     // Purchase button
@@ -482,9 +457,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                     Text(
-                                    isMonthlySelected 
-                                        ? 'paywall.button_trial'.tr()
-                                        : 'paywall.button_unlock'.tr(),
+                                    isLifetimeSelected 
+                                        ? 'paywall.button_unlock'.tr()
+                                        : 'paywall.button_trial'.tr(),
                                     style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w900),
                                   ),
                                 ],
