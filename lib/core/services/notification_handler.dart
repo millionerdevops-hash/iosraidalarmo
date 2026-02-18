@@ -116,7 +116,7 @@ class NotificationHandler {
       // 3. Trigger Alarm and Fake Call (Android specific, iOS handles via AppDelegate VoIP)
       if (defaultTargetPlatform == TargetPlatform.android) {
         final settingsRepo = SettingsRepository(db);
-        final settings = await settingsRepo.getAlarmSettings();
+        final settings = await settingsRepo.loadAlarmSettings();
         
         if (settings.alarmEnabled) {
           final alarmService = AlarmService();
@@ -125,7 +125,7 @@ class NotificationHandler {
           if (settings.fakeCallEnabled) {
             await alarmService.triggerFakeCall(
               id: 'rust_alarm_${timestamp}',
-              callerName: notification.title,
+              callerName: notification.title ?? 'Alarm',
               subtitle: notification.body,
             );
           }
