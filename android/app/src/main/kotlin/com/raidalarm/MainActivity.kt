@@ -19,6 +19,7 @@ import io.flutter.plugin.common.MethodChannel
 import com.raidalarm.fake_call.FakeCallBroadcastReceiver
 import com.raidalarm.fake_call.FakeCallNotificationManager
 import com.raidalarm.AlarmSettingsHelper
+import kotlinx.coroutines.*
 
 class MainActivity: FlutterFragmentActivity() {
     private val ALARM_SERVICE_CHANNEL = "com.raidalarm/alarm_service"
@@ -166,8 +167,7 @@ class MainActivity: FlutterFragmentActivity() {
                 }
                 "startAlarm" -> {
                     try {
-                        val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
-                        scope.launch {
+                        MainScope().launch {
                             AlarmTriggerManager.triggerAlarm(this@MainActivity)
                         }
                         Log.d("MainActivity", "AlarmTriggerManager.triggerAlarm() called via MethodChannel")

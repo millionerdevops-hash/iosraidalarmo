@@ -28,7 +28,10 @@ import SQLite3
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         
-        let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
+        guard let controller = window?.rootViewController as? FlutterViewController else {
+            return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+        }
+
         methodChannel = FlutterMethodChannel(name: "com.raidalarm.voip",
                                               binaryMessenger: controller.binaryMessenger)
         
