@@ -5,7 +5,6 @@ import '../../core/services/database_service.dart';
 import '../../data/models/server_info.dart';
 import '../../data/models/steam_credential.dart';
 import '../../core/services/api_service.dart';
-import '../../data/models/smart_device.dart';
 part 'server_list_view_model.g.dart';
 
 @riverpod
@@ -54,42 +53,7 @@ class ServerListViewModel extends _$ServerListViewModel {
         }
       });
       
-      // NEW: Also restore paired devices for these servers to ensure full sync
-      try {
-        final devices = await ApiService.fetchPairedDevices(cred.steamId!);
-        if (devices.isNotEmpty) {
-          final serverList = await isar.collection<ServerInfo>().where().findAll();
-          final serverMap = {for (var s in serverList) "${s.ip}:${s.port}": s.id};
-          
-          await isar.writeTxn(() async {
-            for (final d in devices) {
-              final key = "${d['server_ip']}:${d['server_port']}";
-              final sId = serverMap[key];
-              if (sId != null) {
-                // Check if device already in Isar
-                final exists = await isar.collection<SmartDevice>()
-                    .filter()
-                    .serverIdEqualTo(sId)
-                    .entityIdEqualTo(d['entity_id'] as int)
-                    .findFirst();
-                
-                if (exists == null) {
-                  final newDevice = SmartDevice()
-                    ..serverId = sId
-                    ..entityId = d['entity_id'] as int
-                    ..entityType = d['entity_type'] as int
-                    ..name = d['name'] ?? "Smart Device"
-                    ..isActive = d['is_active'] == true;
-                  await isar.collection<SmartDevice>().put(newDevice);
-                }
-              }
-            }
-          });
-          debugPrint("[ServerList] ✅ Restored ${devices.length} devices from backend");
-        }
-      } catch (e) {
-        debugPrint("[ServerList] ⚠️ Device restoration failed: $e");
-      }
+
     }
   }
 
@@ -102,8 +66,7 @@ class ServerListViewModel extends _$ServerListViewModel {
     final steamId = cred?.steamId;
 
     await isar.writeTxn(() async {
-      // Cascade delete: Remove all devices linked to this server
-      await isar.collection<SmartDevice>().filter().serverIdEqualTo(serverId).deleteAll();
+
       
       // Finally delete the server itself
       await isar.collection<ServerInfo>().delete(serverId);
@@ -112,7 +75,6 @@ class ServerListViewModel extends _$ServerListViewModel {
     // Valid sync request to remove from backend
     if (steamId != null) {
       await ApiService.syncServersToServer(steamId);
-      await ApiService.syncDevicesToServer(steamId); // Sync device deletions too
     }
   }
 }

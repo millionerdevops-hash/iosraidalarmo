@@ -108,8 +108,7 @@ class _SteamLoginScreenState extends State<SteamLoginScreen> {
         iosVoipToken: voipToken,
       );
       
-      // 3. Sync devices to server (in case of app reinstall)
-      await ApiService.syncDevicesToServer(steamId);
+
       
       if (mounted) {
         if (widget.onSuccess != null) {

@@ -164,6 +164,18 @@ class MainActivity: FlutterFragmentActivity() {
                         Log.d("MainActivity", "result.error() called: stopAlarm")
                     }
                 }
+                "startAlarm" -> {
+                    try {
+                        val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+                        scope.launch {
+                            AlarmTriggerManager.triggerAlarm(this@MainActivity)
+                        }
+                        Log.d("MainActivity", "AlarmTriggerManager.triggerAlarm() called via MethodChannel")
+                        result.success(null)
+                    } catch (e: Exception) {
+                        result.error("START_ALARM_ERROR", e.message, null)
+                    }
+                }
                 "dismissAlarmNotification" -> {
                     try {
                         AlarmHelper.dismissAlarmNotification(this)

@@ -21,7 +21,9 @@ class AlarmService extends ChangeNotifier {
   
   static const String _methodAlarmStatusChanged = 'alarmStatusChanged';
   static const String _methodStopAlarm = 'stopAlarm';
+  static const String _methodStartAlarm = 'startAlarm';
   static const String _methodDismissAlarmNotification = 'dismissAlarmNotification';
+  static const String _methodTriggerFakeCall = 'showFakeCall'; // From setupFakeCallChannel in MainActivity.kt
   
   bool _isPlaying = false;
   
@@ -38,6 +40,33 @@ class AlarmService extends ChangeNotifier {
 
 
   
+  Future<void> triggerAlarm() async {
+    try {
+      await _channel.invokeMethod(_methodStartAlarm);
+    } catch (e) {
+      debugPrint("Error triggering alarm: $e");
+    }
+  }
+
+  Future<void> triggerFakeCall({
+    required String id,
+    required String callerName,
+    String? subtitle,
+    int? durationSeconds,
+  }) async {
+    try {
+      const fakeCallChannel = MethodChannel('com.raidalarm/fake_call');
+      await fakeCallChannel.invokeMethod('showFakeCall', {
+        'id': id,
+        'callerName': callerName,
+        'subtitle': subtitle,
+        'durationSeconds': durationSeconds,
+      });
+    } catch (e) {
+      debugPrint("Error triggering fake call: $e");
+    }
+  }
+
   Future<void> stopAlarm() async {
     try {
       _isPlaying = false;

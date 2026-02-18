@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../../data/models/server_info.dart';
-import '../../data/models/smart_device.dart';
 import 'database_service.dart';
 import 'package:isar/isar.dart';
 import '../../services/onesignal_service.dart';
@@ -125,61 +124,5 @@ class ApiService {
     }
   }
 
-  /// Sync devices to backend
-  static Future<void> syncDevicesToServer(String steamId) async {
-    try {
-      final dbService = DatabaseService();
-      final isar = await dbService.db;
-      
-      final devices = await isar.collection<SmartDevice>().where().findAll();
-      final servers = await isar.collection<ServerInfo>().where().findAll();
-      
-      // Map server IDs to IP/Port
-      final serverMap = {for (var s in servers) s.id: s};
-      
-      final deviceList = devices.map((d) {
-        final server = serverMap[d.serverId];
-        return {
-          'server_ip': server?.ip,
-          'server_port': int.tryParse(server?.port ?? '0'),
-          'entity_id': d.entityId,
-          'entity_type': d.entityType,
-          'name': d.name,
-          'is_active': d.isActive,
-        };
-      }).where((d) => d['server_ip'] != null).toList(); // Filter out devices without valid server
-      
-      final response = await http.post(
-        Uri.parse('$baseUrl/api/sync-devices'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'steam_id': steamId, 'devices': deviceList}),
-      );
-      
-      if (response.statusCode == 200) {
-        debugPrint("[ApiService] ✅ Devices synced to server");
-      }
-    } catch (e) {
-      debugPrint("[ApiService] ❌ Device sync error: $e");
-    }
-  }
 
-  /// Fetch paired devices from backend
-  static Future<List<Map<String, dynamic>>> fetchPairedDevices(String steamId) async {
-    try {
-      final response = await http.get(
-        Uri.parse('$baseUrl/api/devices?steam_id=$steamId'),
-      );
-      
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['devices'] != null) {
-          return List<Map<String, dynamic>>.from(data['devices']);
-        }
-      }
-      return [];
-    } catch (e) {
-      debugPrint("[ApiService] ❌ Fetch devices error: $e");
-      return [];
-    }
-  }
 }

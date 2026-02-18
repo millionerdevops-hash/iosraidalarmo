@@ -18,9 +18,7 @@ class ConnectionManager {
   final Map<int, Completer<AppMessage>> _pendingRequests = {};
   int _seq = 1;
 
-  // Rate Limiting: entityId -> Last request timestamp
-  final Map<int, DateTime> _lastEntityRequests = {};
-  static const _debounceDuration = Duration(milliseconds: 500);
+
 
   ConnectionManager(this._serverInfo);
 
@@ -166,44 +164,6 @@ class ConnectionManager {
       throw TimeoutException("Request timed out");
     });
   }
-
-  // --- API Methods ---
-
-  /// Toggle Smart Switch
-  Future<AppMessage> setEntityValue(int entityId, bool value) async {
-    // Spam Prevention: Check if we sent a request for this entity recently
-    final now = DateTime.now();
-    if (_lastEntityRequests.containsKey(entityId)) {
-      final diff = now.difference(_lastEntityRequests[entityId]!);
-      if (diff < _debounceDuration) {
-        // Rate limit hit
-        throw Exception("Rate limit: Please wait before toggling again.");
-      }
-    }
-    _lastEntityRequests[entityId] = now;
-
-    final req = AppRequest()
-      ..entityId = entityId
-      ..setEntityValue = (AppSetEntityValue()..value = value);
-    return sendRequest(req);
-  }
-
-  /// Convenience method to turn Smart Switch ON
-  Future<AppMessage> turnSmartSwitchOn(int entityId) => setEntityValue(entityId, true);
-
-  /// Convenience method to turn Smart Switch OFF
-  Future<AppMessage> turnSmartSwitchOff(int entityId) => setEntityValue(entityId, false);
-
-  /// Get Entity Info (Smart Switch, Alarm, Storage Monitor)
-  /// IMPORTANT: You must call this at least once for an entity to receive broadcasts
-  Future<AppMessage> getEntityInfo(int entityId) {
-    final req = AppRequest()
-      ..entityId = entityId
-      ..getEntityInfo = AppEmpty();
-    return sendRequest(req);
-  }
-
-
   /// Get Map Data (Image, Monuments)
   Future<AppMessage> getMap() {
     final req = AppRequest()..getMap = AppEmpty();

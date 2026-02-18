@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../core/router/app_router.dart';
 import 'package:isar/isar.dart';
 import '../../data/models/server_info.dart';
-import '../../data/models/smart_device.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -16,6 +15,8 @@ import '../../data/database/app_database.dart';
 import 'dart:async'; // For Completer
 import '../../core/services/connection_manager.dart'; // Import ConnectionManager
 import '../../core/proto/rustplus.pb.dart';
+import '../../data/repositories/settings_repository.dart';
+import '../../services/alarm_service.dart';
 
 class NotificationHandler {
   static final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
@@ -73,11 +74,7 @@ class NotificationHandler {
         return;
       }
       
-      // 2. Handle device pairing
-      if (type == 'device_pairing' || (normalizedData.containsKey('entityId') && normalizedData.containsKey('entityType'))) {
-        await _handleDevicePairing(normalizedData);
-        return;
-      }
+
 
       // 3. Handle Alarms (Raid or Alarm)
       if (type == 'raid' || type == 'alarm' || normalizedData['channelId'] == 'alarm') {
@@ -116,159 +113,32 @@ class NotificationHandler {
       
       await notifRepo.saveNotification(notification);
       
-      debugPrint("[NotificationHandler] ⚔️ Attack recorded & saved to history");
+      // 3. Trigger Alarm and Fake Call (Android specific, iOS handles via AppDelegate VoIP)
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        final settingsRepo = SettingsRepository(db);
+        final settings = await settingsRepo.getAlarmSettings();
+        
+        if (settings.alarmEnabled) {
+          final alarmService = AlarmService();
+          await alarmService.triggerAlarm();
+          
+          if (settings.fakeCallEnabled) {
+            await alarmService.triggerFakeCall(
+              id: 'rust_alarm_${timestamp}',
+              callerName: notification.title,
+              subtitle: notification.body,
+            );
+          }
+        }
+      }
+      
+      debugPrint("[NotificationHandler] ⚔️ Attack recorded & saved to history (Alarm triggered if Android)");
     } catch (e) {
       debugPrint("[NotificationHandler] ❌ Error handling alarm: $e");
     }
   }
   
-  static Future<void> _handleDevicePairing(Map<String, dynamic> data) async {
-    try {
-      final int entityId = int.parse(data['entityId'].toString());
-      final int entityType = int.parse(data['entityType'].toString());
-      
-      // Critical Fix #3: Use server IP/port from payload
-      final String? serverIp = data['server_ip'];
-      final String? serverPort = data['server_port']?.toString();
 
-      final dbService = DatabaseService();
-      final isar = await dbService.db;
-
-      // Find server by IP/Port from payload
-      ServerInfo? server;
-      if (serverIp != null && serverPort != null) {
-        server = await isar.collection<ServerInfo>()
-            .filter()
-            .ipEqualTo(serverIp)
-            .portEqualTo(serverPort)
-            .findFirst();
-      }
-      
-      // Fallback to selected/first server if not found
-      server ??= await isar.collection<ServerInfo>()
-          .filter().isSelectedEqualTo(true).findFirst() 
-          ?? await isar.collection<ServerInfo>().where().findFirst();
-          
-      if (server == null) {
-        debugPrint("[NotificationHandler] ❌ No server found for device pairing");
-        return;
-      }
-
-      // 1. Check if device is already paired
-      final existingDevice = await isar.collection<SmartDevice>()
-          .filter()
-          .serverIdEqualTo(server.id)
-          .entityIdEqualTo(entityId)
-          .findFirst();
-
-      if (existingDevice != null) {
-        // Device exists -> Update state silently
-        debugPrint("[NotificationHandler] 🔄 Device ${existingDevice.name} already paired. Updating state...");
-        
-        try {
-          if (data.containsKey('value')) {
-            final newState = data['value'].toString() == 'true' || data['value'].toString() == '1';
-            await isar.writeTxn(() async {
-               existingDevice.isActive = newState;
-               await isar.collection<SmartDevice>().put(existingDevice);
-            });
-          }
-        } catch (e) {
-           debugPrint("Error updating state in handler: $e");
-        }
-        return; // EXIT, do not show dialog
-      }
-
-      // 2. Not paired -> Auto-pair
-      debugPrint("[NotificationHandler] 📱 Auto-pairing device for ${server.name} (Entity: $entityId)");
-      
-      final device = SmartDevice()
-        ..serverId = server.id
-        ..entityId = entityId
-        ..entityType = entityType
-        ..name = _getDefaultNameForType(entityType);
-
-      await isar.writeTxn(() async {
-        await isar.collection<SmartDevice>().put(device);
-      });
-
-      debugPrint("[NotificationHandler] ✅ Device auto-paired successfully: ${device.name}");
-      
-      // Immediately fetch status if possible (fire and forget)
-      _syncDeviceStatus(server.id, entityId);
-    } catch (e) {
-      debugPrint("[NotificationHandler] ❌ Pairing Error: $e");
-    }
-  }
-
-  static String _getDefaultNameForType(int typeVal) {
-     // Mirroring logic from DevicePairingScreen
-     // 1: Switch, 2: Alarm
-     if (typeVal == 1) return "Smart Switch";
-     if (typeVal == 2) return "Smart Alarm";
-     return "Smart Device";
-  }
-
-  static Future<void> _syncDeviceStatus(int serverId, int entityId) async {
-    ConnectionManager? manager;
-    try {
-       // 1. Get Server Info
-       final dbService = DatabaseService();
-       final isar = await dbService.db;
-       final server = await isar.collection<ServerInfo>().get(serverId);
-       
-       if (server == null) return;
-
-       debugPrint("[NotificationHandler] 🔄 Syncing status for Entity: $entityId on Server: ${server.name}...");
-
-       // 2. Create a temporary ConnectionManager
-       manager = ConnectionManager(server);
-       
-       // 3. Connect and Fetch Info
-       await manager.connect();
-       
-       // 4. Send Request (getEntityInfo)
-       // We need to listen to the stream to get the actual data update? 
-       // ConnectionManager broadcasts messages. 
-       // In this temporary context, we can listen to the stream manually.
-       
-       final completer = Completer<void>();
-       
-       final sub = manager.messageStream.listen((message) async {
-          if (message.hasBroadcast() && message.broadcast.hasEntityChanged()) {
-             final change = message.broadcast.entityChanged;
-             if (change.entityId == entityId) {
-                // Update Database
-                await isar.writeTxn(() async {
-                   final device = await isar.collection<SmartDevice>().filter()
-                       .serverIdEqualTo(serverId)
-                       .entityIdEqualTo(entityId)
-                       .findFirst();
-                   
-                   if (device != null) {
-                     device.isActive = change.payload.value;
-                     await isar.collection<SmartDevice>().put(device);
-                     debugPrint("[NotificationHandler] ✅ Status Synced: ${device.name} is ${device.isActive ? 'ON' : 'OFF'}");
-                   }
-                });
-                if (!completer.isCompleted) completer.complete();
-             }
-          }
-       });
-
-       // Trigger the request
-       await manager.getEntityInfo(entityId);
-       
-       // Wait for a response or timeout (short timeout since we just want a quick check)
-       await completer.future.timeout(const Duration(seconds: 3));
-       await sub.cancel();
-
-    } catch (e) {
-       debugPrint("[NotificationHandler] ⚠️ Sync warning: $e");
-    } finally {
-       manager?.disconnect();
-    }
-  }
   
   static Future<void> _handleServerPairing(Map<String, dynamic> data) async {
     try {

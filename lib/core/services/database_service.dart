@@ -1,7 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../data/models/server_info.dart';
-import '../../data/models/smart_device.dart';
 import '../../data/models/steam_credential.dart';
 
 class DatabaseService {
@@ -21,7 +20,6 @@ class DatabaseService {
       [
         ServerInfoSchema,
         SteamCredentialSchema,
-        SmartDeviceSchema,
       ],
       directory: dir.path,
     );

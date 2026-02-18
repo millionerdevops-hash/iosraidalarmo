@@ -11,15 +11,10 @@ import 'package:raidalarm/features/home/server_list_view_model.dart';
 import 'package:raidalarm/data/models/server_info.dart';
 import 'package:go_router/go_router.dart';
 import 'package:raidalarm/core/services/api_service.dart';
-import 'package:raidalarm/features/dashboard/server_dashboard_view_model.dart';
-import 'package:raidalarm/features/dashboard/connection_provider.dart';
-import 'package:raidalarm/data/models/smart_device.dart';
 import 'package:raidalarm/core/services/database_service.dart';
 import 'package:raidalarm/data/models/steam_credential.dart';
 import 'package:raidalarm/data/database/app_database.dart'; // Import AppDatabase
 import 'package:isar/isar.dart';
-import 'package:raidalarm/core/proto/rustplus.pb.dart' hide Color;
-import 'package:raidalarm/core/proto/rustplus.pbenum.dart';
 import 'package:raidalarm/core/theme/rust_colors.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
 import 'package:raidalarm/services/voip_token_service.dart';
@@ -140,8 +135,6 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
                       builder: (context) {
                         if (servers.isNotEmpty) {
                            final serverInfo = servers.first;
-                           final currentServerId = serverInfo.id;
-                           final devicesAsync = ref.watch(serverDashboardViewModelProvider(currentServerId));
 
                            return Column(
                              children: [
@@ -198,27 +191,9 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
                                  ),
                                ),
                                
-                               // Device List from Dashboard Body
+                               // Only show Server Paired status, devices are handled elsewhere
                                Expanded(
-                                 child: devicesAsync.when(
-                                  data: (devices) {
-                                    if (devices.isEmpty) {
-                                      // Show Connect Devices Placeholder if no devices
-                                      return _buildConnectUI(context, isServerPaired: true);
-                                    }
-                                    return ListView.separated(
-                                      padding: EdgeInsets.all(16.w),
-                                      itemCount: devices.length,
-                                      separatorBuilder: (_, __) => SizedBox(height: 12.h),
-                                      itemBuilder: (context, index) {
-                                        final device = devices[index];
-                                        return _buildDeviceCard(context, ref, device, currentServerId);
-                                      },
-                                    );
-                                  },
-                                  loading: () => const Center(child: CircularProgressIndicator(color: Color(0xFFCE422B))),
-                                  error: (err, stack) => Center(child: Text("Error: $err", style: const TextStyle(color: RustColors.error))),
-                                ),
+                                 child: _buildConnectUI(context, isServerPaired: true),
                                ),
                              ],
                            );
@@ -250,153 +225,7 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
     );
   }
 
-  // --- Dashboard Logic Methods ---
 
-  Widget _buildDeviceCard(BuildContext context, WidgetRef ref, SmartDevice device, int serverId) {
-    Color statusColor = RustColors.textMuted;
-    String statusText = "OFF";
-    bool isActive = device.isActive;
-
-    if (isActive) {
-      statusColor = RustColors.accent; // Orange-ish for ON
-      statusText = "ON";
-    }
-
-    if (device.type == AppEntityType.Alarm) {
-       statusText = isActive ? "ALARMING" : "INACTIVE";
-       statusColor = isActive ? RustColors.error : RustColors.textMuted;
-    }
-
-    return GestureDetector(
-      onLongPress: () => _showDeleteConfirmation(context, ref, device),
-      child: Container(
-        padding: EdgeInsets.all(16.w),
-        decoration: BoxDecoration(
-          color: RustColors.surface,
-          borderRadius: BorderRadius.circular(12.r),
-          border: isActive ? Border(left: BorderSide(color: statusColor, width: 4.w)) : Border.all(color: RustColors.divider),
-        ),
-        child: Row(
-          children: [
-            // Icon
-            Container(
-               padding: EdgeInsets.all(8.w),
-               child: _getImageForType(device.type),
-            ),
-            SizedBox(width: 16.w),
-            
-            // Details
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      device.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: RustColors.textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    statusText,
-                    style: TextStyle(
-                      color: statusColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            // Action (Switch)
-            if (device.type == AppEntityType.Switch)
-              Switch(
-                value: isActive,
-                activeTrackColor: RustColors.primaryDark,
-                activeColor: RustColors.primary,
-                onChanged: (val) async {
-                   final managerAsync = ref.read(connectionManagerProvider(serverId));
-                   if (managerAsync.hasValue) {
-                     try {
-                       await managerAsync.value!.setEntityValue(device.entityId, val);
-                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${device.name} ${val ? 'ON' : 'OFF'}")));
-                     } catch (e) {
-                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $e"), backgroundColor: Colors.red));
-                     }
-                   }
-                },
-              ),
-            if (device.type == AppEntityType.StorageMonitor)
-              const Icon(Icons.chevron_right, color: RustColors.textMuted, size: 20),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _getImageForType(AppEntityType type) {
-    String assetName = 'smart-switch.png';
-    switch (type) {
-      case AppEntityType.Switch: assetName = 'smart-switch.png'; break;
-      case AppEntityType.Alarm: assetName = 'smart-alarm.png'; break;
-      default: assetName = 'smart-switch.png';
-    }
-    return Image.asset('assets/images/png/ingame/pairing/$assetName', width: 48.w, height: 48.w, errorBuilder: (c,e,s) => const Icon(LucideIcons.zap, size: 32, color: Colors.white));
-  }
-
-  void _showDeleteConfirmation(BuildContext context, WidgetRef ref, SmartDevice device) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: RustColors.surface,
-        title: const Text("Delete Device", style: TextStyle(color: RustColors.textPrimary)),
-        content: Text("Are you sure you want to delete '${device.name}'?", style: const TextStyle(color: RustColors.textSecondary)),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text("CANCEL", style: TextStyle(color: RustColors.textMuted)),
-          ),
-          TextButton(
-            onPressed: () async {
-              Navigator.pop(ctx);
-              final dbService = DatabaseService();
-              final isar = await dbService.db;
-              await isar.writeTxn(() async {
-                await isar.collection<SmartDevice>().delete(device.id);
-              });
-              
-              // NEW: Sync deletion to backend (Critical Fix #5 for Data Reliability)
-              try {
-                final cred = await isar.collection<SteamCredential>().where().findFirst();
-                if (cred != null && cred.steamId != null) {
-                   await ApiService.syncDevicesToServer(cred.steamId!);
-                }
-              } catch (e) {
-                debugPrint("[PairDevices] ⚠️ Backend sync failed after delete: $e");
-              }
-
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Deleted ${device.name}"), backgroundColor: RustColors.surface),
-                );
-              }
-            },
-            style: TextButton.styleFrom(foregroundColor: RustColors.error),
-            child: const Text("DELETE"),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildConnectUI(BuildContext context, {required bool isServerPaired}) {
     // Determine Text and Button state
@@ -405,8 +234,8 @@ class _PairDevicesScreenState extends ConsumerState<PairDevicesScreen> with Widg
     bool showButton;
 
     if (isServerPaired) {
-      title = "Connect Devices";
-      subtitle = "Connect your smart devices to start monitoring your servers.";
+      title = "Server Paired";
+      subtitle = "Your server is paired. You will receive notifications for raid events.";
       showButton = false; 
     } else if (_isLoggedIn) {
       title = "Connect Server";

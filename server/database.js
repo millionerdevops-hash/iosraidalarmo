@@ -34,19 +34,7 @@ async function setupDb() {
             UNIQUE(user_id, ip, port)
         );
 
-        CREATE TABLE IF NOT EXISTS devices (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            server_ip TEXT NOT NULL,
-            server_port INTEGER NOT NULL,
-            entity_id INTEGER NOT NULL,
-            entity_type INTEGER NOT NULL,
-            name TEXT NOT NULL,
-            is_active INTEGER DEFAULT 0,
-            created_at INTEGER DEFAULT (strftime('%s', 'now')),
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-            UNIQUE(user_id, server_ip, server_port, entity_id)
-        );
+
     `);
 
     // Wrap db to match previous API usage (async wrapper not needed for better-sqlite3 but keeps compatibility)

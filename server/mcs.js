@@ -252,9 +252,6 @@ async function handleNotification(user, data, db) {
             port: payload.port,
             playerId: payload.playerId,
             playerToken: payload.playerToken,
-            entityId: payload.entityId,
-            entityType: payload.entityType,
-            entityName: payload.entityName,
             type: payload.type,
             // Keep name but truncate if crazy long (rare)
             name: (payload.name && payload.name.length > 50) ? payload.name.substring(0, 50) + "..." : payload.name
@@ -304,98 +301,21 @@ async function handleNotification(user, data, db) {
         }
 
         // If not alarm, check if it's server/device pairing
-        if (payload.entityType != "1" && payload.entityId) {
-            // SMART DEVICE ALARM (legacy detection, keep for compatibility)
-            title = "Smart Alarm!";
-            body = `Alarm "${payload.name || 'Device'}" triggered!`;
-
-            sendPushNotification(user.onesignal_id, {
-                title,
-                body,
-                data: { ...sanitizedPayload, type: 'raid' }
-            });
-
-            // Send VoIP for iOS
-            if (user.ios_voip_token) {
-                const { sendVoipNotification } = require('./notifications');
-                await sendVoipNotification(user.ios_voip_token, {
-                    title: "Raid Alarm",
-                    body: body,
-                    type: 'raid',
-                    ...sanitizedPayload
-                });
-            }
+        // If not alarm? Just pass through (or discard if not server related)
+        if (!payload.entityId) {
+            // SERVER PAIRING (No entityId) -> Keep Visual
+            title = "Raid Alarm";
+            body = "Server Connection Established";
         } else {
-            // Info / Switch / Pairing
-
-            // Check if this is a PAIRING request (based on message content)
-            // msg usually: "Tap to pair with this device."
-            const msg = (payload.message || payload.body || "").toLowerCase();
-            const isPairingRequest = msg.includes("pair");
-
-            if (payload.entityId && isPairingRequest) {
-                // DEVICE PAIRING -> NON-SILENT NOTIFICATION (Critical Fix #2)
-                console.log(`[MCS] 📱 Sending Device Pairing Notification for Entity ${payload.entityId}`);
-
-                // Add server identification to payload (Critical Fix #3)
-                const enhancedPayload = {
-                    ...sanitizedPayload,
-                    type: 'device_pairing',
-                    server_ip: payload.ip,
-                    server_port: payload.port
-                };
-
-                // Auto-save to database (Critical Fix #4 for Data Reliability)
-                try {
-                    const entityType = payload.entityType || 1; // Default to Switch if not provided
-                    const name = payload.name || `Device ${payload.entityId}`;
-
-                    await db.run(`
-                        INSERT INTO devices (user_id, server_ip, server_port, entity_id, entity_type, name, is_active)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
-                        ON CONFLICT(user_id, server_ip, server_port, entity_id) DO UPDATE SET
-                        name = excluded.name,
-                        entity_type = excluded.entity_type
-                    `, [user.id, payload.ip, payload.port, payload.entityId, entityType, name, 0]);
-
-                    console.log(`[MCS] ✅ Auto-paired device for user ${user.steam_id}: ${name} (ID: ${payload.entityId})`);
-                } catch (e) {
-                    console.error('[MCS] ❌ Device auto-save error:', e.message);
-                }
-
-                sendPushNotification(user.onesignal_id, {
-                    title: "Device Pairing",
-                    body: "New device detected",
-                    data: enhancedPayload
-                });
-
-                // Also send VoIP for iOS
-                if (user.ios_voip_token) {
-                    const { sendVoipNotification } = require('./notifications');
-                    await sendVoipNotification(user.ios_voip_token, enhancedPayload);
-                }
-
-            } else {
-                // Not pairing? Maybe just switch state change or Server Pairing
-
-                if (!payload.entityId) {
-                    // SERVER PAIRING (No entityId) -> Keep Visual
-                    // User: "server pairing yaparken server bağlandı diye bildirim geliyo ya şimdi bu bildirim kalsın"
-                    title = "Raid Alarm";
-                    body = "Server Connection Established"; // Or "New Server Paired"
-                } else {
-                    // Switch toggle or other info?
-                    title = "Device Update";
-                    body = payload.message || "Device status changed";
-                }
-
-                sendPushNotification(user.onesignal_id, {
-                    title,
-                    body,
-                    data: sanitizedPayload
-                });
-            }
+            // Discarding device updates as they are no longer used
+            return;
         }
+
+        sendPushNotification(user.onesignal_id, {
+            title,
+            body,
+            data: sanitizedPayload
+        });
     } // End if (payload.ip && payload.playerToken)
 } // End handleNotification
 
