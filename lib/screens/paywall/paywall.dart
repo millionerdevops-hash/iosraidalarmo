@@ -87,7 +87,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   void _setInitialSelection(List<AdaptyPaywallProduct> products) {
     if (products.isNotEmpty) {
       // Find a lifetime product first as preferred default, otherwise just the first one
-      final lifetime = products.where((p) => p.subscriptionPeriod == null).firstOrNull;
+      final lifetime = products.where((p) => !p.vendorProductId.toLowerCase().contains('monthly')).firstOrNull;
       if (lifetime != null) {
         _selectedProductId = lifetime.vendorProductId;
       } else {
@@ -179,8 +179,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       final hasPremium = profile.accessLevels.values.any((level) => level.isActive);
       
       if (hasPremium) {
-        // If it was a lifetime product (no subscription period), save it specifically
-        final isLifetimePurchase = product.subscriptionPeriod == null;
+        // If it was a lifetime product (not containing 'monthly'), save it specifically
+        final isLifetimePurchase = !product.vendorProductId.toLowerCase().contains('monthly');
         if (isLifetimePurchase) {
           await AppDatabase().saveAppSetting('has_lifetime', 'true');
         }
@@ -292,7 +292,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       (p) => p.vendorProductId == _selectedProductId,
       orElse: () => _products.first,
     );
-    final isLifetimeSelected = selectedProduct.subscriptionPeriod == null;
+    final isLifetimeSelected = !selectedProduct.vendorProductId.toLowerCase().contains('monthly');
 
     return PopScope(
       child: Scaffold(
@@ -409,8 +409,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                         final isSelected = _selectedProductId == product.vendorProductId;
                         
                         // Determine if it's a lifetime or monthly for the label
-                        // AdaptyPaywallProduct usually has subscriptionPeriod. If null, it's often lifetime.
-                        final isLifetime = product.subscriptionPeriod == null;
+                        // AdaptyPaywallProduct usually has subscriptionPeriod. In 3.x, use vendorProductId check.
+                        final isLifetime = !product.vendorProductId.toLowerCase().contains('monthly');
                         
                         return _buildPlanCard(
                           product: product,
