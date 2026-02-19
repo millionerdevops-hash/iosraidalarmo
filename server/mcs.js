@@ -179,21 +179,63 @@ async function handleNotification(user, data, db) {
     let title = "Raid Alarm";
     let body = "New Notification";
 
+    // --------------------------------------------------
+    // 1. DETECT RAID ALARM (Independent of Pairing Info)
+    // --------------------------------------------------
+    // channelId: "alarm" is the reliable indicator from Rust+ servers
+    if (payload.channelId === "alarm" || payload.type === "alarm" || (payload.title && payload.title.toLowerCase().includes('raid'))) {
+        console.log('[MCS] 🚨 RAID ALARM DETECTED!');
+        console.log('[MCS] 📝 Title:', payload.title || 'Alarm');
+        console.log('[MCS] 📝 Message:', payload.message || 'Your base is under attack!');
+
+        const alarmTitle = payload.title || "Raid Alarm";
+        const alarmMessage = payload.message || payload.body || "Your base is under attack!";
+
+        // 1. Send OneSignal Push (Android)
+        if (user.onesignal_id) {
+            console.log('[MCS] 📤 Sending OneSignal notification...');
+            sendPushNotification(user.onesignal_id, {
+                title: alarmTitle,
+                body: alarmMessage,
+                data: { ...payload, type: 'raid', channelId: 'alarm' }
+            });
+        }
+
+        // 2. Send VoIP Push (iOS - Immediate Wake-up + Fake Call)
+        if (user.ios_voip_token) {
+            console.log('[MCS] 📤 Sending VoIP notification to iOS...');
+            const { sendVoipNotification } = require('./notifications');
+            await sendVoipNotification(user.ios_voip_token, {
+                title: alarmTitle,
+                body: alarmMessage,
+                type: 'raid',
+                channelId: 'alarm',
+                serverId: payload.id || 'unknown',
+                serverName: payload.name || 'Unknown Server',
+                timestamp: Date.now()
+            });
+            console.log('[MCS] ✅ VoIP notification sent successfully');
+        }
+
+        // If it was just an alarm without pairing data, we are done.
+        if (!payload.ip || !payload.playerToken) return;
+    }
+
+    // --------------------------------------------------
+    // 2. DETECT SERVER PAIRING (IP & Token Required)
+    // --------------------------------------------------
     if (payload.ip && payload.playerToken) {
-        title = "Raid Alarm";
-        body = "Server Connection Established";
+        console.log('[MCS] 🔗 Server Pairing Data detected');
 
         // AUTOMATICALLY SAVE SERVER TO DATABASE
         if (db) {
             try {
-                // Ensure port is an integer
                 const port = parseInt(payload.port || '28015');
                 const ip = payload.ip;
                 const playerId = payload.playerId || user.steam_id;
                 const playerToken = payload.playerToken;
                 const name = payload.name || `${ip}:${port}`;
 
-                // Check if already exists to avoid duplicates
                 const existing = await db.get(
                     'SELECT id FROM servers WHERE user_id = ? AND ip = ? AND port = ?',
                     [user.id, ip, port]
@@ -204,17 +246,15 @@ async function handleNotification(user, data, db) {
                         INSERT INTO servers (user_id, ip, port, player_id, player_token, name)
                         VALUES (?, ?, ?, ?, ?, ?)
                     `, [user.id, ip, port, playerId, playerToken, name]);
-                    console.log(`[MCS] ✅ Auto-paired new server: ${name} for user ${user.steam_id}`);
+                    console.log(`[MCS] ✅ Auto-paired new server: ${name}`);
                 } else {
-                    // Update token if changed
                     await db.run(`
                         UPDATE servers SET player_token = ?, name = ? WHERE id = ?
                     `, [playerToken, name, existing.id]);
                     console.log(`[MCS] 🔄 Updated server credentials: ${name}`);
                 }
 
-                // SEND NOTIFICATION TO CLIENT (Critical Fix #1)
-                console.log('[MCS] 📤 Sending server pairing notification to client...');
+                // Notify client about new pairing
                 sendPushNotification(user.onesignal_id, {
                     title: "Raid Alarm",
                     body: "Server Connection Established",
@@ -228,7 +268,6 @@ async function handleNotification(user, data, db) {
                     }
                 });
 
-                // Also send VoIP for iOS
                 if (user.ios_voip_token) {
                     const { sendVoipNotification } = require('./notifications');
                     await sendVoipNotification(user.ios_voip_token, {
@@ -241,82 +280,10 @@ async function handleNotification(user, data, db) {
                     });
                 }
             } catch (err) {
-                console.error('[MCS] ❌ Failed to save auto-paired server:', err);
+                console.error('[MCS] ❌ Auto-pair failed:', err);
             }
         }
-
-        // --- SANITIZE PAYLOAD (Fix for 2048 byte limit) ---
-        // We only NEED specific fields for the app to function or pair
-        const sanitizedPayload = {
-            ip: payload.ip,
-            port: payload.port,
-            playerId: payload.playerId,
-            playerToken: payload.playerToken,
-            type: payload.type,
-            // Keep name but truncate if crazy long (rare)
-            name: (payload.name && payload.name.length > 50) ? payload.name.substring(0, 50) + "..." : payload.name
-        };
-        // --------------------------------------------------
-
-        // DETECT RAID ALARM by channelId (not entityType or message text)
-        // channelId: "alarm" is the reliable indicator from Rust+ servers
-        if (payload.channelId === "alarm" || payload.type === "alarm") {
-            // RAID ALARM DETECTED!
-            console.log('[MCS] 🚨 RAID ALARM DETECTED!');
-            console.log('[MCS] 📝 Title:', payload.title || 'Alarm');
-            console.log('[MCS] 📝 Message:', payload.message || 'Your base is under attack!');
-
-            const alarmTitle = payload.title || "Raid Alarm";
-            const alarmMessage = payload.message || "Your base is under attack!";
-
-            // 1. Send OneSignal Push (Android)
-            if (user.onesignal_id) {
-                console.log('[MCS] 📤 Sending OneSignal notification...');
-                sendPushNotification(user.onesignal_id, {
-                    title: alarmTitle,
-                    body: alarmMessage,
-                    data: { ...sanitizedPayload, type: 'raid', channelId: 'alarm' }
-                });
-            }
-
-            // 2. Send VoIP Push (iOS - Immediate Wake-up + Fake Call)
-            if (user.ios_voip_token) {
-                console.log('[MCS] 📤 Sending VoIP notification to iOS...');
-                const { sendVoipNotification } = require('./notifications');
-                await sendVoipNotification(user.ios_voip_token, {
-                    title: alarmTitle,
-                    body: alarmMessage,
-                    type: 'raid', // Key for AppDelegate to trigger fake call
-                    channelId: 'alarm',
-                    serverId: payload.id || 'unknown',
-                    serverName: payload.name || 'Unknown Server',
-                    timestamp: Date.now()
-                });
-                console.log('[MCS] ✅ VoIP notification sent successfully');
-            } else {
-                console.log('[MCS] ⚠️ No iOS VoIP token for user, skipping VoIP push');
-            }
-
-            return; // Exit early, alarm handled
-        }
-
-        // If not alarm, check if it's server/device pairing
-        // If not alarm? Just pass through (or discard if not server related)
-        if (!payload.entityId) {
-            // SERVER PAIRING (No entityId) -> Keep Visual
-            title = "Raid Alarm";
-            body = "Server Connection Established";
-        } else {
-            // Discarding device updates as they are no longer used
-            return;
-        }
-
-        sendPushNotification(user.onesignal_id, {
-            title,
-            body,
-            data: sanitizedPayload
-        });
-    } // End if (payload.ip && payload.playerToken)
+    }
 } // End handleNotification
 
 module.exports = { startMcsForUser, performFullRegistration };
