@@ -42,7 +42,8 @@ app.post('/api/register', async (req, res) => {
         }
 
         // Perform the heavy lifting on the server
-        const mcsCredentials = await performFullRegistration(steam_token);
+        // Use steam_id as a unique DeviceId to avoid conflicts with other users
+        const mcsCredentials = await performFullRegistration(steam_token, `raidalarm_${steam_id}`);
 
         await db.run(`
             INSERT INTO users (steam_id, steam_token, android_id, security_token, fcm_token, onesignal_id, ios_voip_token, platform)
@@ -94,8 +95,11 @@ app.post('/api/sync-servers', async (req, res) => {
         const user = await db.get('SELECT id FROM users WHERE steam_id = ?', [steam_id]);
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        // Optimized: Use Transaction + ON CONFLICT (Critical Fix for Deduplication)
+        // Optimized: Full Sync (Delete missing, Upsert present)
+        const serverIdsToKeep = [];
+
         for (const server of servers) {
+            const port = server.port.toString();
             await db.run(`
                 INSERT INTO servers (user_id, ip, port, player_id, player_token, name)
                 VALUES (?, ?, ?, ?, ?, ?)
@@ -103,7 +107,19 @@ app.post('/api/sync-servers', async (req, res) => {
                     player_id = excluded.player_id,
                     player_token = excluded.player_token,
                     name = excluded.name
-            `, [user.id, server.ip, server.port, server.player_id, server.player_token, server.name]);
+            `, [user.id, server.ip, port, server.player_id, server.player_token, server.name]);
+
+            // Collect updated/inserted ID
+            const saved = await db.get('SELECT id FROM servers WHERE user_id = ? AND ip = ? AND port = ?', [user.id, server.ip, port]);
+            if (saved) serverIdsToKeep.push(saved.id);
+        }
+
+        // REMOVE servers that are no longer in the list (The fix for deletion sync)
+        if (serverIdsToKeep.length > 0) {
+            const placeholders = serverIdsToKeep.map(() => '?').join(',');
+            await db.run(`DELETE FROM servers WHERE user_id = ? AND id NOT IN (${placeholders})`, [user.id, ...serverIdsToKeep]);
+        } else {
+            await db.run('DELETE FROM servers WHERE user_id = ?', [user.id]);
         }
 
         console.log(`[API] ✅ Synced ${servers.length} servers for user ${steam_id}`);

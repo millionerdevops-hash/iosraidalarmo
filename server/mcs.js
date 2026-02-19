@@ -20,9 +20,9 @@ const RUSTPLUS_CONFIG = {
     androidPackageCert: "E28D05345FB78A7A1A63D70F4A302DBF426CA5AD"
 };
 
-async function performFullRegistration(steamToken) {
+async function performFullRegistration(steamToken, deviceId = 'rustplus.js') {
     try {
-        console.log('[Register] 📦 Starting official app emulated registration...');
+        console.log(`[Register] 📦 Starting official app emulated registration for device: ${deviceId}...`);
 
         // 1. GCM/FCM Register using @liamcottle/push-receiver (Handles checkin internally)
         let fcmCredentials;
@@ -77,7 +77,7 @@ async function performFullRegistration(steamToken) {
         // We identify as 'rustplus.js' as per documentation examples
         const fpResponse = await axios.post('https://companion-rust.facepunch.com:443/api/push/register', {
             AuthToken: steamToken,
-            DeviceId: 'rustplus.js',
+            DeviceId: deviceId,
             PushKind: 3, // FCM Push Kind
             PushToken: expoToken,
         });

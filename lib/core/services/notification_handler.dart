@@ -17,6 +17,8 @@ import '../../core/services/connection_manager.dart'; // Import ConnectionManage
 import '../../core/proto/rustplus.pb.dart';
 import '../../data/repositories/settings_repository.dart';
 import '../../services/alarm_service.dart';
+import '../../data/models/steam_credential.dart';
+import 'api_service.dart';
 
 class NotificationHandler {
   static final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
@@ -166,6 +168,12 @@ class NotificationHandler {
       });
 
       debugPrint("[NotificationHandler] ✅ Server paired successfully: ${serverInfo.name}");
+
+      // Trigger sync to server to ensure 100% consistency (The fix for "double-tracking")
+      final cred = await isar.steamCredentials.get(1);
+      if (cred != null && cred.steamId != null) {
+        await ApiService.syncServersToServer(cred.steamId!);
+      }
     } catch (e) {
       debugPrint("[NotificationHandler] ❌ Server Pairing Error: $e");
     }

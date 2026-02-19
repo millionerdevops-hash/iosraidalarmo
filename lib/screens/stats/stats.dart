@@ -12,6 +12,7 @@ import 'package:raidalarm/providers/notification_provider.dart';
 import 'package:raidalarm/services/alarm_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raidalarm/core/utils/haptic_helper.dart';
+import 'package:raidalarm/features/home/server_list_view_model.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({Key? key}) : super(key: key);
@@ -76,10 +77,14 @@ class _StatsScreenState extends ConsumerState<StatsScreen>
     
     _refreshFromSQLite();
     
-    // Listen to provider changes for real-time updates
-    // Note: With Riverpod, we can use ref.listen in build, 
-    // but for manual refresh like this, we'll keep the logic or adapt.
-    // Actually, ref.watch in build is better for most cases.
+    // Auto-restore/sync servers from backend on startup or when screen is shown
+    // This ensures that even if local data is lost, paired servers come back.
+    try {
+      final notifier = ref.read(serverListViewModelProvider.notifier);
+      notifier.scanForServers();
+    } catch (e) {
+      debugPrint("[StatsScreen] ⚠️ Initial server sync failed: $e");
+    }
   }
   
   @override
